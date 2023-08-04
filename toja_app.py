@@ -48,15 +48,16 @@ class InitializeTOJA:
             self.conn = sqlite3.connect(self.db_file_name)
             self.cursor = self.conn.cursor()
             self.cursor.execute(sql_queries.create_table)
-            self.conn.commit()
-            self.conn.close()
+        else:
+            self.conn = sqlite3.connect(self.db_file_name)
+            self.cursor = self.conn.cursor()
 
-        self.conn = sqlite3.connect(self.db_file_name)
-        self.cursor = self.conn.cursor()
+    def close_db_connections(self):
+        self.conn.close()
 
 
 class NewApplication:
-    def __init__(self, init: InitializeTOJA):
+    def __init__(self):
         print('\nEnter Application Details Below or Leave Blank\n')
         self.application_date = datetime.date.today()
         self.position_title = input('Enter the Position Title: ').lower()
@@ -74,8 +75,8 @@ class NewApplication:
         print('Paste Job Description Text and press CTRL-D or CTRL-Z when done: ')
         self.job_description_paste_text = sys.stdin.read()
 
-        self.conn = init.conn
-        self.cursor = init.cursor
+        self.conn = init_toja.conn
+        self.cursor = init_toja.cursor
 
         with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
             job_desc.write(self.job_description_paste_text)
@@ -96,14 +97,34 @@ class NewApplication:
 
         self.cursor.execute(sql_queries.create_table, data)
         self.conn.commit()
-        self.conn.close()
 
 
 if __name__ == '__main__':
     sql_queries = SqlQueries()
     init_toja = InitializeTOJA()
 
-    new_job = NewApplication(init_toja)
-    new_job.add_to_database()
+    program_run = True
+    while program_run:
+        print("\nMenu:\n"
+              "1) ADD New Job Application\n"
+              "2) UPDATE Job Application\n"
+              "3) GENERATE Job Analytics\n"
+              "4) Settings\n"
+              "5) QUIT")
+        users_menu_select = int(input("\nEnter Number: "))
 
-    print("Successfully Entered Job Application to DataBase")
+        if users_menu_select == 1:
+            new_job = NewApplication()
+            new_job.add_to_database()
+        elif users_menu_select == 2:
+            print("feature coming soon")
+        elif users_menu_select == 3:
+            print("feature coming soon")
+        elif users_menu_select == 4:
+            print("feature coming soon")
+        elif users_menu_select == 5:
+            program_run = False
+        else:
+            print("Invalid Entry")
+
+    init_toja.close_db_connections()
