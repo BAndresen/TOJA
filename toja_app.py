@@ -74,7 +74,6 @@ class NewApplication:
         self.job_description_file_name = f"{self.application_date}_{self.position_title}_{self.company}.txt"
         print('Paste Job Description Text and press CTRL-D or CTRL-Z when done: ')
         self.job_description_paste_text = sys.stdin.read()
-
         self.conn = init_toja.conn
         self.cursor = init_toja.cursor
 
@@ -95,8 +94,9 @@ class NewApplication:
             self.job_description_file_name
         )
 
-        self.cursor.execute(sql_queries.create_table, data)
+        self.cursor.execute(sql_queries.insert_new_app, data)
         self.conn.commit()
+        print(f"{self.position_title} position at {self.company} Successfully Entered")
 
 
 if __name__ == '__main__':
@@ -111,20 +111,27 @@ if __name__ == '__main__':
               "3) GENERATE Job Analytics\n"
               "4) Settings\n"
               "5) QUIT")
-        users_menu_select = int(input("\nEnter Number: "))
 
-        if users_menu_select == 1:
-            new_job = NewApplication()
-            new_job.add_to_database()
-        elif users_menu_select == 2:
-            print("feature coming soon")
-        elif users_menu_select == 3:
-            print("feature coming soon")
-        elif users_menu_select == 4:
-            print("feature coming soon")
-        elif users_menu_select == 5:
-            program_run = False
-        else:
-            print("Invalid Entry")
+        try:
+            users_menu_select = int(input("\nEnter Number: "))
+
+            if users_menu_select == 1:
+                new_job = NewApplication()
+                new_job.add_to_database()
+                sys.exit()
+
+            elif users_menu_select == 2:
+                print("feature coming soon")
+            elif users_menu_select == 3:
+                print("feature coming soon")
+            elif users_menu_select == 4:
+                print("feature coming soon")
+            elif users_menu_select == 5:
+                program_run = False
+            else:
+                print("Invalid Entry")
+
+        except ValueError:
+            print("Enter Valid Number")
 
     init_toja.close_db_connections()
