@@ -3,6 +3,7 @@ import sqlite3
 import sys
 import os
 from dataclasses import dataclass
+import tkinter
 
 
 @dataclass
@@ -43,6 +44,9 @@ class InitializeTOJA:
     def __init__(self):
         self.db_file_name = 'job_application_database.db'
 
+        # Development database
+        # self.db_file_name = 'dev_job_application_database.db'
+
         # Check if database exists, if not create
         if not os.path.exists(self.db_file_name):
             self.conn = sqlite3.connect(self.db_file_name)
@@ -56,10 +60,9 @@ class InitializeTOJA:
         self.conn.close()
 
 
-class NewApplication:
+class JobInputs:
     def __init__(self):
         print('\nEnter Application Details Below or Leave Blank\n')
-        self.application_date = datetime.date.today()
         self.position_title = input('Enter the Position Title: ').lower()
         self.company = input('Enter the Company Name: ').lower()
         self.job_location = input('Enter the Job Location: ')
@@ -71,32 +74,57 @@ class NewApplication:
         self.application_status = "submitted"
         self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
         self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
-        self.job_description_file_name = f"{self.application_date}_{self.position_title}_{self.company}.txt"
-        print('Paste Job Description Text and press CTRL-D or CTRL-Z when done: ')
-        self.job_description_paste_text = sys.stdin.read()
+
+    # with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
+    #     job_desc.write(self.job_description_paste_text)
+    #
+
+# class JobDescription
+
+
+class JobApplication:
+    def __init__(self):
+        self.application_date = datetime.date.today()
+        # self.position_title = input('Enter the Position Title: ').lower()
+        # self.company = input('Enter the Company Name: ').lower()
+        # self.job_location = input('Enter the Job Location: ')
+        # try:
+        #     self.resume_version = float(input('Enter the Resume Version: '))
+        # except ValueError:
+        #     self.resume_version = None
+        # self.application_platform = input('Enter the Application Platform: ').lower()
+        self.application_status = "submitted"
+        # self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
+        # self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
+
+        # self.job_description_file_name = f"{self.application_date}_{self.position_title}_{self.company}.txt"
+        # print('Paste Job Description Text and press CTRL-D or CTRL-Z when done: ')
+        # self.job_description_paste_text = sys.stdin.read()
+        self.job_description_file_name = "blank"
         self.conn = init_toja.conn
         self.cursor = init_toja.cursor
 
-        with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
-            job_desc.write(self.job_description_paste_text)
+
+        # with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
+        #     job_desc.write(self.job_description_paste_text)
 
     def add_to_database(self):
         data = (
             self.application_date,
-            self.position_title,
-            self.company,
-            self.job_location,
-            self.resume_version,
-            self.application_platform,
+            user_inputs.position_title,
+            user_inputs.company,
+            user_inputs.job_location,
+            user_inputs.resume_version,
+            user_inputs.application_platform,
             self.application_status,
-            self.work_type,
-            self.job_type,
+            user_inputs.work_type,
+            user_inputs.job_type,
             self.job_description_file_name
         )
 
         self.cursor.execute(sql_queries.insert_new_app, data)
         self.conn.commit()
-        print(f"{self.position_title} position at {self.company} Successfully Entered")
+        print(f"{user_inputs.position_title} position at {user_inputs.company} Successfully Entered")
 
 
 if __name__ == '__main__':
@@ -116,7 +144,8 @@ if __name__ == '__main__':
             users_menu_select = int(input("\nEnter Number: "))
 
             if users_menu_select == 1:
-                new_job = NewApplication()
+                user_inputs = JobInputs()
+                new_job = JobApplication()
                 new_job.add_to_database()
                 sys.exit()
 
