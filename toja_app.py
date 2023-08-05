@@ -75,38 +75,34 @@ class JobInputs:
         self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
         self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
 
-    # with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
-    #     job_desc.write(self.job_description_paste_text)
-    #
 
-# class JobDescription
+class JobDescriptionUI(tkinter.Tk):
+    def __init__(self):
+        super().__init__()
+        self.minsize(height=500, width=500)
+        self.paste_label = tkinter.Label(text="Paste Job Description")
+        self.paste_label.pack()
+        self.entry_box = tkinter.Text(width=50, height=30)
+        self.entry_box.pack()
+        self.submit_buttom = tkinter.Button(text="submit", command=self.submit_job_description)
+        self.submit_buttom.pack()
+        self.mainloop()
+
+    def submit_job_description(self):
+        job_descript = self.entry_box.get("1.0", "end")
+        with open(f"job_descriptions/{job_app.job_description_file_name}", "w") as job_desc:
+            job_desc.write(job_descript)
+
+        self.destroy()
 
 
 class JobApplication:
     def __init__(self):
         self.application_date = datetime.date.today()
-        # self.position_title = input('Enter the Position Title: ').lower()
-        # self.company = input('Enter the Company Name: ').lower()
-        # self.job_location = input('Enter the Job Location: ')
-        # try:
-        #     self.resume_version = float(input('Enter the Resume Version: '))
-        # except ValueError:
-        #     self.resume_version = None
-        # self.application_platform = input('Enter the Application Platform: ').lower()
         self.application_status = "submitted"
-        # self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
-        # self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
-
-        # self.job_description_file_name = f"{self.application_date}_{self.position_title}_{self.company}.txt"
-        # print('Paste Job Description Text and press CTRL-D or CTRL-Z when done: ')
-        # self.job_description_paste_text = sys.stdin.read()
-        self.job_description_file_name = "blank"
+        self.job_description_file_name = f"{self.application_date}_{user_inputs.position_title}_{user_inputs.company}.txt"
         self.conn = init_toja.conn
         self.cursor = init_toja.cursor
-
-
-        # with open(f"job_descriptions/{self.job_description_file_name}", "w") as job_desc:
-        #     job_desc.write(self.job_description_paste_text)
 
     def add_to_database(self):
         data = (
@@ -145,8 +141,9 @@ if __name__ == '__main__':
 
             if users_menu_select == 1:
                 user_inputs = JobInputs()
-                new_job = JobApplication()
-                new_job.add_to_database()
+                job_app = JobApplication()
+                job_descript_paste = JobDescriptionUI()
+                job_app.add_to_database()
                 sys.exit()
 
             elif users_menu_select == 2:
