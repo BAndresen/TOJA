@@ -42,9 +42,11 @@ class SqlQueries:
 
 class InitializeTOJA:
     def __init__(self):
+
         self.db_file_name = 'job_application_database.db'
 
         # Development database
+
         # self.db_file_name = 'dev_job_application_database.db'
 
         # Check if database exists, if not create
