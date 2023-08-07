@@ -5,6 +5,8 @@ import os
 from dataclasses import dataclass
 import tkinter
 
+from user_interface import JobInputs
+from models import JobApplication
 
 @dataclass
 class SqlQueries:
@@ -47,8 +49,8 @@ class SqlQueries:
 class InitializeTOJA:
     def __init__(self):
 
-        self.db_file_name = 'job_application_database.db'
-        self.job_description_file_directory = "../job_descriptions/"
+        self.db_file_name = 'toja/job_application_database.db'
+        self.job_description_file_directory = "C:/Users/brend/PycharmProjects/Job_Application_Tracking/toja/job_descriptions/"
 
         # Development database and job description
 
@@ -56,6 +58,7 @@ class InitializeTOJA:
         # self.job_description_file_directory = "../tests/test_job_descriptions/"
 
         # Check if database exists, if not create
+        # print(os.path.dirname(self.db_file_name))
         if not os.path.exists(self.db_file_name):
             self.conn = sqlite3.connect(self.db_file_name)
             self.cursor = self.conn.cursor()
@@ -66,50 +69,6 @@ class InitializeTOJA:
 
     def close_db_connections(self):
         self.conn.close()
-
-
-class JobInputs:
-    def __init__(self):
-        print('\nEnter Application Details Below or Leave Blank\n')
-        self.position_title = input('Enter the Position Title: ').lower()
-
-        self.company = input('Enter the Company Name: ').lower()
-        self.job_location = input('Enter the Job Location: ').lower()
-        try:
-            self.resume_version = float(input('Enter the Resume Version: '))
-        except ValueError:
-            self.resume_version = None
-        try:
-            self.salary_top = int(input('Enter the Salary Top-End Range: '))
-        except ValueError:
-            self.salary_top = None
-        try:
-            self.salary_bottom = int(input('Enter the Salary Bottom-End Range: '))
-        except ValueError:
-            self.salary_bottom = None
-
-        self.application_platform = input('Enter the Application Platform: ').lower()
-        self.application_status = "submitted"
-        self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
-        self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
-
-        self._check_null()
-
-    def _check_null(self):
-        if self.position_title == "":
-            self.position_title = None
-        if self.company == "":
-            self.company = None
-        if self.job_location == "":
-            self.job_location = None
-        if self.application_platform == "":
-            self.application_platform = None
-        if self.application_status == "":
-            self.application_status = None
-        if self.work_type == "":
-            self.work_type = None
-        if self.job_type == "":
-            self.job_type = None
 
 
 class JobDescriptionUI(tkinter.Tk):
@@ -132,34 +91,6 @@ class JobDescriptionUI(tkinter.Tk):
         self.destroy()
 
 
-class JobApplication:
-    def __init__(self):
-        self.application_date = datetime.date.today()
-        self.application_status = "submitted"
-        self.job_description_file_name = f"{self.application_date}_{user_inputs.position_title}_{user_inputs.company}.txt"
-        self.conn = init_toja.conn
-        self.cursor = init_toja.cursor
-
-    def add_to_database(self):
-        data = (
-            self.application_date,
-            user_inputs.position_title,
-            user_inputs.company,
-            user_inputs.job_location,
-            user_inputs.resume_version,
-            user_inputs.salary_top,
-            user_inputs.salary_bottom,
-            user_inputs.application_platform,
-            self.application_status,
-            user_inputs.work_type,
-            user_inputs.job_type,
-            self.job_description_file_name
-        )
-
-        self.cursor.execute(sql_queries.insert_new_app, data)
-        self.conn.commit()
-        print(f"{user_inputs.position_title} position at {user_inputs.company} Successfully Entered")
-
 
 if __name__ == '__main__':
     sql_queries = SqlQueries()
@@ -179,9 +110,9 @@ if __name__ == '__main__':
 
             if users_menu_select == 1:
                 user_inputs = JobInputs()
-                job_app = JobApplication()
+                job_app = JobApplication(init_toja,user_inputs)
                 job_descript_paste = JobDescriptionUI()
-                job_app.add_to_database()
+                job_app.add_to_database(sql_queries)
                 sys.exit()
 
             elif users_menu_select == 2:
