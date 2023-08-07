@@ -1,4 +1,4 @@
-
+import tkinter
 
 
 class JobInputs:
@@ -43,3 +43,24 @@ class JobInputs:
             self.work_type = None
         if self.job_type == "":
             self.job_type = None
+
+class JobDescriptionUI(tkinter.Tk):
+    def __init__(self, init_toja, job_app):
+        self.init_toja = init_toja
+        self.job_app = job_app
+        super().__init__()
+        self.minsize(height=500, width=500)
+        self.paste_label = tkinter.Label(text="Paste Job Description")
+        self.paste_label.pack()
+        self.entry_box = tkinter.Text(width=50, height=30)
+        self.entry_box.pack()
+        self.submit_buttom = tkinter.Button(text="submit", command=self.submit_job_description)
+        self.submit_buttom.pack()
+        self.mainloop()
+
+    def submit_job_description(self):
+        job_descript = self.entry_box.get("1.0", "end")
+        with open(f"{self.init_toja.job_description_file_directory}{self.job_app.job_description_file_name}", "w") as job_desc:
+            job_desc.write(job_descript)
+
+        self.destroy()

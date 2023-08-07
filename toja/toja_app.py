@@ -5,7 +5,7 @@ import os
 from dataclasses import dataclass
 import tkinter
 
-from user_interface import JobInputs
+from user_interface import JobInputs, JobDescriptionUI
 from models import JobApplication
 
 @dataclass
@@ -59,6 +59,7 @@ class InitializeTOJA:
 
         # Check if database exists, if not create
         # print(os.path.dirname(self.db_file_name))
+
         if not os.path.exists(self.db_file_name):
             self.conn = sqlite3.connect(self.db_file_name)
             self.cursor = self.conn.cursor()
@@ -69,27 +70,6 @@ class InitializeTOJA:
 
     def close_db_connections(self):
         self.conn.close()
-
-
-class JobDescriptionUI(tkinter.Tk):
-    def __init__(self):
-        super().__init__()
-        self.minsize(height=500, width=500)
-        self.paste_label = tkinter.Label(text="Paste Job Description")
-        self.paste_label.pack()
-        self.entry_box = tkinter.Text(width=50, height=30)
-        self.entry_box.pack()
-        self.submit_buttom = tkinter.Button(text="submit", command=self.submit_job_description)
-        self.submit_buttom.pack()
-        self.mainloop()
-
-    def submit_job_description(self):
-        job_descript = self.entry_box.get("1.0", "end")
-        with open(f"{init_toja.job_description_file_directory}{job_app.job_description_file_name}", "w") as job_desc:
-            job_desc.write(job_descript)
-
-        self.destroy()
-
 
 
 if __name__ == '__main__':
@@ -111,7 +91,7 @@ if __name__ == '__main__':
             if users_menu_select == 1:
                 user_inputs = JobInputs()
                 job_app = JobApplication(init_toja,user_inputs)
-                job_descript_paste = JobDescriptionUI()
+                job_descript_paste = JobDescriptionUI(init_toja, job_app)
                 job_app.add_to_database(sql_queries)
                 sys.exit()
 
