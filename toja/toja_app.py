@@ -1,4 +1,4 @@
-from user_interface import NewJobInputs, JobDescription
+from user_interface import NewJobInputs, JobDescription, HomeWindow
 from database import Database
 
 # Database File Path
@@ -22,6 +22,8 @@ if __name__ == '__main__':
     database = Database(DATABASE_FILE_PATH,
                         JOB_DESCRIPTION_DIRECTORY,
                         CREATE_JOB_APP_TABLE_SQL)
+    home_window = HomeWindow()
+    # home_window.mainloop()
 
     program_run = True
     while program_run:

@@ -1,4 +1,39 @@
 import tkinter
+import customtkinter
+
+
+class HomeWindow(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
+        # self.minsize(width=1000, height=700)
+        self.title("Track and Optimize your Job Application Process")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        self.stat_board_frame = customtkinter.CTkFrame(self)
+        self.stat_board_frame.grid(row=0, rowspan=2, column=1, padx=20, pady=20, sticky="nsew")
+
+        self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="stat board placeholder")
+        self.stat_label.grid(row=0, column=0, padx=150, pady=150)
+
+        self.calendar_frame = customtkinter.CTkFrame(self)
+        self.calendar_frame.grid(row=2, columnspan=2, column=0, padx=20, pady=20, sticky="nsew")
+        self.calendar_label_placeholder = (customtkinter.CTkLabel(
+            self.calendar_frame, text="calendar placeholder"))
+        self.calendar_label_placeholder.grid(row=0, column=0, padx=50, pady=50)
+
+        self.button_frame = customtkinter.CTkFrame(self)
+        self.button_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
+        self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
+        self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
+        self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
+
+        self.mainloop()
 
 
 class NewJobInputs:
@@ -42,7 +77,7 @@ class NewJobInputs:
 
 
 class JobDescription(tkinter.Tk):
-    def __init__(self, job_file_path:str, job_file_name:str):
+    def __init__(self, job_file_path: str, job_file_name: str):
         self.job_description_file_name = job_file_name
         self.job_description_file_path = job_file_path
         super().__init__()
