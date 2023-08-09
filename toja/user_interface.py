@@ -42,7 +42,7 @@ class JobInputs:
 
 
 class JobDescriptionUI(tkinter.Tk):
-    def __init__(self, job_file_path, job_file_name):
+    def __init__(self, job_file_path:str, job_file_name:str):
         self.job_description_file_name = job_file_name
         self.job_description_file_path = job_file_path
         super().__init__()
@@ -51,8 +51,8 @@ class JobDescriptionUI(tkinter.Tk):
         self.paste_label.pack()
         self.entry_box = tkinter.Text(width=50, height=30)
         self.entry_box.pack()
-        self.submit_buttom = tkinter.Button(text="submit", command=self.submit_job_description)
-        self.submit_buttom.pack()
+        self.submit_button = tkinter.Button(text="submit", command=self.submit_job_description)
+        self.submit_button.pack()
         self.mainloop()
 
     def submit_job_description(self):

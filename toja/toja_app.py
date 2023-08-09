@@ -1,10 +1,3 @@
-import datetime
-import sqlite3
-import sys
-import os
-from dataclasses import dataclass
-import tkinter
-
 from user_interface import JobInputs, JobDescriptionUI
 from database import DatabaseQuery, DatabaseConnection
 

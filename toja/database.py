@@ -1,16 +1,16 @@
 import datetime
 import os
 import sqlite3
+from user_interface import JobInputs
 
 
 def load_sql_query(file_name: str) -> str:
     with open(file_name, "r") as sql_file:
-        # print(type(sql_file.read()))
         return sql_file.read()
 
 
 class DatabaseConnection:
-    def __init__(self, db_file_path, create_table):
+    def __init__(self, db_file_path: str, create_table: str):
         self.db_file_path = db_file_path
 
         # Check if database exists, if not create
@@ -28,16 +28,14 @@ class DatabaseConnection:
 
 
 class DatabaseQuery:
-    def __init__(self, conn_database, job_description_directory):
+    def __init__(self, conn_database: DatabaseConnection, job_description_directory: str):
         self.application_date = datetime.date.today()
         self.job_description_file_directory = job_description_directory
         self.conn = conn_database.conn
         self.cursor = conn_database.cursor
-        # self.job_description_file_directory = conn_database.job_description_file_directory
         self.job_description_file_name = ''
 
-    def add_to_database(self, job_inputs, insert_job_sql):
-
+    def add_to_database(self, job_inputs: JobInputs, insert_job_sql):
         insert_new_job_application = load_sql_query(insert_job_sql)
         job_file_name = f'{self.job_description_file_name}'
         application_status = "submitted"
@@ -58,4 +56,3 @@ class DatabaseQuery:
 
         self.cursor.execute(insert_new_job_application, data)
         self.conn.commit()
-
