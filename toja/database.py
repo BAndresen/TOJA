@@ -2,7 +2,7 @@ import datetime
 import os
 import sqlite3
 
-from user_interface import JobInputs
+from user_interface import NewJobInputs
 
 
 def load_sql_query(file_name: str) -> str:
@@ -27,7 +27,7 @@ class Database:
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
 
-    def add_to_database(self, job_inputs: JobInputs, insert_job_sql):
+    def add_job(self, job_inputs: NewJobInputs, insert_job_sql):
         insert_new_job_application = load_sql_query(insert_job_sql)
         job_file_name = f'{self.job_description_file_name}'
         application_status = "submitted"

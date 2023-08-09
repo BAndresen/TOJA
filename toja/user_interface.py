@@ -1,7 +1,7 @@
 import tkinter
 
 
-class JobInputs:
+class NewJobInputs:
     def __init__(self):
         print('\nEnter Application Details Below or Leave Blank\n')
         self.position_title = input('Enter the Position Title: ').lower()
@@ -41,7 +41,7 @@ class JobInputs:
             self.job_type = None
 
 
-class JobDescriptionUI(tkinter.Tk):
+class JobDescription(tkinter.Tk):
     def __init__(self, job_file_path:str, job_file_name:str):
         self.job_description_file_name = job_file_name
         self.job_description_file_path = job_file_path
