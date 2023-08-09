@@ -1,0 +1,61 @@
+<mxfile host="Electron" modified="2023-08-09T17:43:51.554Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="xKYacrwj-3UoTlUCO3v9" version="21.6.5" type="device">
+  <diagram name="Page-1" id="MpakCN_pfMvbRkEpYFvm">
+    <mxGraphModel dx="1418" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r7F6SXgEm5jG33hjnai6-1" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="770" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-2" value="Add New Application" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="170" y="520" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="410" y="140" width="355" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-4" value="Toja" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="130" y="310" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-7" value="Application Submitted this week" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="445" y="240" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-8" value="Weekly Submittion Best" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="455" y="290" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-10" value="Weeks in a Row Submition Goal Met" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="340" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-11" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.star;fillColor=#0080f0;strokeColor=none;sketch=0;" parent="1" vertex="1">
+          <mxGeometry x="629" y="358" width="12" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-12" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.star;fillColor=#0080f0;strokeColor=none;sketch=0;" parent="1" vertex="1">
+          <mxGeometry x="658" y="358" width="12" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-13" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.star;fillColor=#0080f0;strokeColor=none;sketch=0;" parent="1" vertex="1">
+          <mxGeometry x="689" y="358" width="12" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-14" value="progress bar" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="620" y="240" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-15" value="" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0.3;" parent="1" vertex="1">
+          <mxGeometry x="140" y="160" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-16" value="narrative dialogue" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="170" y="180" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-17" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="600" width="596" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-18" value="Github Style calendar&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="330" y="655" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-21" value="Update Application" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="368" y="520" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="r7F6SXgEm5jG33hjnai6-22" value="Analytics" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="565" y="520" width="140" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
