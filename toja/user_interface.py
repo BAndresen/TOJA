@@ -5,7 +5,6 @@ class JobInputs:
     def __init__(self):
         print('\nEnter Application Details Below or Leave Blank\n')
         self.position_title = input('Enter the Position Title: ').lower()
-
         self.company = input('Enter the Company Name: ').lower()
         self.job_location = input('Enter the Job Location: ').lower()
         try:
@@ -20,15 +19,14 @@ class JobInputs:
             self.salary_bottom = int(input('Enter the Salary Bottom-End Range: '))
         except ValueError:
             self.salary_bottom = None
-
         self.application_platform = input('Enter the Application Platform: ').lower()
-        self.application_status = "submitted"
         self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
         self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
 
         self._check_null()
 
     def _check_null(self):
+        """Convert empty strings to NULL"""
         if self.position_title == "":
             self.position_title = None
         if self.company == "":
@@ -37,17 +35,16 @@ class JobInputs:
             self.job_location = None
         if self.application_platform == "":
             self.application_platform = None
-        if self.application_status == "":
-            self.application_status = None
         if self.work_type == "":
             self.work_type = None
         if self.job_type == "":
             self.job_type = None
 
+
 class JobDescriptionUI(tkinter.Tk):
-    def __init__(self, init_toja, job_app):
-        self.init_toja = init_toja
-        self.job_app = job_app
+    def __init__(self, job_file_path, job_file_name):
+        self.job_description_file_name = job_file_name
+        self.job_description_file_path = job_file_path
         super().__init__()
         self.minsize(height=500, width=500)
         self.paste_label = tkinter.Label(text="Paste Job Description")
@@ -59,8 +56,8 @@ class JobDescriptionUI(tkinter.Tk):
         self.mainloop()
 
     def submit_job_description(self):
-        job_descript = self.entry_box.get("1.0", "end")
-        with open(f"{self.init_toja.job_description_file_directory}{self.job_app.job_description_file_name}", "w") as job_desc:
-            job_desc.write(job_descript)
+        job_description = self.entry_box.get("1.0", "end")
+        with open(f"{self.job_description_file_path}{self.job_description_file_name}", "w") as file:
+            file.write(job_description)
 
         self.destroy()
