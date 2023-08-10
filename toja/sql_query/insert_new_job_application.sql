@@ -1,4 +1,4 @@
-INSERT INTO job_application (
+INSERT INTO jobs_applied(
     application_date,
     position_title,
     company,

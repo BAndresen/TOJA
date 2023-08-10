@@ -53,5 +53,11 @@ class Database:
         self.cursor.execute(insert_new_job_application, data)
         self.conn.commit()
 
+    def select_all_jobs_applied(self, insert_sql_job):
+        select_all_jobs_sql = load_sql_query(insert_sql_job)
+        self.cursor.execute(select_all_jobs_sql)
+        query_data = self.cursor.fetchall()
+        return query_data
+
     def close_db_connections(self):
         self.conn.close()

@@ -1,7 +1,9 @@
 import customtkinter
+from CTkListbox.ctk_listbox import *
+
 from dataclasses import dataclass
 from datetime import datetime
-from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL
+from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL, SELECT_ALL_JOBS_APPLIED
 from database import Database
 
 
@@ -22,6 +24,7 @@ class Job:
 
 class HomeWindow:
     def __init__(self, root: customtkinter.CTk, job: Job, database: Database):
+        self.search_box = None
         self.job = job
         self.database = database
         self.root = root
@@ -53,6 +56,19 @@ class HomeWindow:
         self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
         self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
+        self._populate_jobs_applied_listbox()
+
+    def _populate_jobs_applied_listbox(self):
+        query_data = self.database.select_all_jobs_applied(SELECT_ALL_JOBS_APPLIED)
+        self.search_box = CTkListbox(self.root, width=500)
+        self.search_box.grid(column=0, row=0, padx=20, pady=20)
+        index = 0
+        for query in query_data:
+            dirty_query = str(query)
+            clean_query = dirty_query.replace("'", '')
+            clean_query = clean_query.strip("()")
+            self.search_box.insert(index, str(clean_query))
+            index += 1
 
     def open_new_jobs(self):
         NewJobInputs(self.root, self.job, self.database)
@@ -122,7 +138,7 @@ class NewJobInputs:
                                                      text='Job Type (full-time, part-time, contract, freelance)')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        submit_button = customtkinter.CTkButton(self.main_frame, text="Submit", command=self.submit_button)
+        submit_button = customtkinter.CTkButton(self.main_frame, text="Job Description", command=self.submit_button)
         submit_button.grid(row=10, column=1, padx=20, pady=20)
 
     def submit_button(self):
