@@ -189,7 +189,7 @@ class NewJobInputs:
 
     def submit_job_description(self):
         job_description = self.jd_entry_box.get("1.0", "end")
-        with open(f"{self.database.job_description_file_directory}{self.database.job_description_file_name}",
+        with open(f"{self.database.job_description_file_directory}/{self.database.job_description_file_name}",
                   "w") as file:
             file.write(job_description)
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-
+from pathlib import Path
 import datetime
 import os
 import sqlite3
@@ -15,7 +15,7 @@ def load_sql_query(file_name: str) -> str:
 
 
 class Database:
-    def __init__(self, db_file_path: str, job_description_directory: str, create_table):
+    def __init__(self, db_file_path: Path, job_description_directory: Path, create_table):
         self.application_date = datetime.date.today()
         self.job_description_file_directory = job_description_directory
         self.job_description_file_name = ''
