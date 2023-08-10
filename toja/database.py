@@ -33,16 +33,16 @@ class Database:
         application_status = "submitted"
         data = (
             self.application_date,
-            job_inputs.position_title,
-            job_inputs.company,
-            job_inputs.job_location,
-            job_inputs.resume_version,
-            job_inputs.salary_top,
-            job_inputs.salary_bottom,
-            job_inputs.application_platform,
+            job_inputs.position_title_entry.get(),
+            job_inputs.company_name_entry.get(),
+            job_inputs.job_location_entry.get(),
+            job_inputs.resume_version_entry.get(),
+            job_inputs.salary_top_entry.get(),
+            job_inputs.salary_bottom_entry.get(),
+            job_inputs.app_platform_entry.get(),
             application_status,
-            job_inputs.work_type,
-            job_inputs.job_type,
+            job_inputs.location_type_entry.get(),
+            job_inputs.job_type_entry.get(),
             job_file_name
         )
 

@@ -1,79 +1,141 @@
+import datetime
 import tkinter
 import customtkinter
+# from toja_app import database
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
 
 
-class HomeWindow(customtkinter.CTk):
-    def __init__(self):
-        super().__init__()
+@dataclass
+class Job:
+    application_date = datetime,
+    position_title_entry = str,
+    company_name_entry = str,
+    job_location_entry = str,
+    resume_version_entry = float,
+    salary_top_entry = int,
+    salary_bottom_entry = int,
+    app_platform_entry = str,
+    application_status = "Submitted",
+    location_type_entry = str,
+    job_type_entry = str,
+    # job_file_name = str,
+
+
+def open_new_jobs(root: customtkinter, job: Job):
+    NewJobInputs(root, job)
+
+
+class HomeWindow:
+    def __init__(self, root: customtkinter.CTk, job: Job):
+        self.job = job
+        # super().__init__()
         # self.minsize(width=1000, height=700)
-        self.title("Track and Optimize your Job Application Process")
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure(0, weight=1)
+        self.root = root
+        self.root.title("Track and Optimize your Job Application Process")
+        self.root.grid_columnconfigure(0, weight=1)
+        self.root.grid_columnconfigure(1, weight=1)
+        self.root.grid_rowconfigure(0, weight=1)
 
-        self.stat_board_frame = customtkinter.CTkFrame(self)
+        self.stat_board_frame = customtkinter.CTkFrame(self.root)
         self.stat_board_frame.grid(row=0, rowspan=2, column=1, padx=20, pady=20, sticky="nsew")
 
         self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="stat board placeholder")
         self.stat_label.grid(row=0, column=0, padx=150, pady=150)
 
-        self.calendar_frame = customtkinter.CTkFrame(self)
+        self.calendar_frame = customtkinter.CTkFrame(self.root)
         self.calendar_frame.grid(row=2, columnspan=2, column=0, padx=20, pady=20, sticky="nsew")
         self.calendar_label_placeholder = (customtkinter.CTkLabel(
             self.calendar_frame, text="calendar placeholder"))
         self.calendar_label_placeholder.grid(row=0, column=0, padx=50, pady=50)
 
-        self.button_frame = customtkinter.CTkFrame(self)
+        self.button_frame = customtkinter.CTkFrame(self.root)
         self.button_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add",
+                                                      command=lambda: open_new_jobs(self.root, self.job))
         self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
         self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
         self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
 
-        self.mainloop()
-
 
 class NewJobInputs:
-    def __init__(self):
-        print('\nEnter Application Details Below or Leave Blank\n')
-        self.position_title = input('Enter the Position Title: ').lower()
-        self.company = input('Enter the Company Name: ').lower()
-        self.job_location = input('Enter the Job Location: ').lower()
-        try:
-            self.resume_version = float(input('Enter the Resume Version: '))
-        except ValueError:
-            self.resume_version = None
-        try:
-            self.salary_top = int(input('Enter the Salary Top-End Range: '))
-        except ValueError:
-            self.salary_top = None
-        try:
-            self.salary_bottom = int(input('Enter the Salary Bottom-End Range: '))
-        except ValueError:
-            self.salary_bottom = None
-        self.application_platform = input('Enter the Application Platform: ').lower()
-        self.work_type = input('Location Type (remote,hybrid,onsite): ').lower()
-        self.job_type = input('Job Type (full-time, part-time, contract, freelance): ').lower()
+    def __init__(self, home_window: HomeWindow, job:Job):
+        self.job = job
+        super().__init__()
+        self.window = customtkinter.CTkToplevel(home_window)
+        self.window.attributes('-topmost', True)
+        self.window.title("Add Job Application Process")
+        self.window.grid_columnconfigure(0, weight=1)
+        self.window.grid_columnconfigure(1, weight=1)
+        self.window.grid_rowconfigure(0, weight=1)
 
-        self._check_null()
+        self.main_frame = customtkinter.CTkFrame(self.window)
+        self.main_frame.grid(row=0, column=1, padx=50, pady=50, sticky="nsew")
 
-    def _check_null(self):
-        """Convert empty strings to NULL"""
-        if self.position_title == "":
-            self.position_title = None
-        if self.company == "":
-            self.company = None
-        if self.job_location == "":
-            self.job_location = None
-        if self.application_platform == "":
-            self.application_platform = None
-        if self.work_type == "":
-            self.work_type = None
-        if self.job_type == "":
-            self.job_type = None
+        self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
+        self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=20)
+        self.position_title_label = customtkinter.CTkLabel(self.main_frame, text='Position Title')
+        self.position_title_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.company_name_entry = customtkinter.CTkEntry(self.main_frame)
+        self.company_name_entry.grid(row=1, column=1, padx=(5, 20), pady=20)
+        self.company_name_label = customtkinter.CTkLabel(self.main_frame, text='Company Name')
+        self.company_name_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.job_location_entry = customtkinter.CTkEntry(self.main_frame)
+        self.job_location_entry.grid(row=2, column=1, padx=(5, 20), pady=20)
+        self.job_location_label = customtkinter.CTkLabel(self.main_frame, text='Job Location')
+        self.job_location_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.resume_version_entry = customtkinter.CTkEntry(self.main_frame)
+        self.resume_version_entry.grid(row=3, column=1, padx=(5, 20), pady=20)
+        self.resume_version_label = customtkinter.CTkLabel(self.main_frame, text='Resume Version')
+        self.resume_version_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.salary_top_entry = customtkinter.CTkEntry(self.main_frame)
+        self.salary_top_entry.grid(row=4, column=1, padx=(5, 20), pady=20)
+        self.salary_top_label = customtkinter.CTkLabel(self.main_frame, text='Salary Top-End Range')
+        self.salary_top_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.salary_bottom_entry = customtkinter.CTkEntry(self.main_frame)
+        self.salary_bottom_entry.grid(row=5, column=1, padx=(5, 20), pady=20)
+        self.salary_bottom_label = customtkinter.CTkLabel(self.main_frame, text='Salary Bottom-End Range')
+        self.salary_bottom_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.app_platform_entry = customtkinter.CTkEntry(self.main_frame)
+        self.app_platform_entry.grid(row=6, column=1, padx=(5, 20), pady=20)
+        self.app_platform_label = customtkinter.CTkLabel(self.main_frame, text='Application Platform')
+        self.app_platform_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.location_type_entry = customtkinter.CTkEntry(self.main_frame)
+        self.location_type_entry.grid(row=7, column=1, padx=(5, 20), pady=20)
+        self.location_type_label = customtkinter.CTkLabel(self.main_frame, text='Location Type (remote,hybrid,onsite)')
+        self.location_type_label.grid(row=7, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.job_type_entry = customtkinter.CTkEntry(self.main_frame)
+        self.job_type_entry.grid(row=9, column=1, padx=(5, 20), pady=20)
+        self.job_type_label = customtkinter.CTkLabel(self.main_frame,
+                                                     text='Job Type (full-time, part-time, contract, freelance)')
+        self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        submit_button = customtkinter.CTkButton(self.main_frame, text="Submit", command=self.submit_button)
+        submit_button.grid(row=10, column=1, padx=20, pady=20)
+
+    def submit_button(self):
+        self.job.position_title_entry = self.position_title_entry
+        self.job.company_name_entry = self.company_name_entry
+        self.job.job_location_entry = self.job_location_entry
+        self.job.resume_version_entry = self.resume_version_entry
+        self.job.salary_top_entry = self.salary_top_entry
+        self.job.salary_bottom_entry = self.salary_bottom_entry
+        self.job.app_platform_entry = self.app_platform_entry
+        self.job.location_type_entry = self.location_type_entry
+        self.job.job_type_entry = self.job_type_entry
+        self.window.destroy()
 
 
 class JobDescription(tkinter.Tk):
