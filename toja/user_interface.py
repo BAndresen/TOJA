@@ -6,30 +6,34 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from views.sql_file_path import INSERT_NEW_JOB_APP_SQL
+from database import Database, load_sql_query
+
 
 @dataclass
 class Job:
     application_date = datetime,
-    position_title_entry = str,
-    company_name_entry = str,
-    job_location_entry = str,
-    resume_version_entry = float,
-    salary_top_entry = int,
-    salary_bottom_entry = int,
-    app_platform_entry = str,
-    application_status = "Submitted",
-    location_type_entry = str,
-    job_type_entry = str,
+    position_title = str,
+    company_name = str,
+    job_location = str,
+    resume_version = float,
+    salary_top = int,
+    salary_bottom = int,
+    app_platform = str,
+    application_status = str,
+    location_type = str,
+    job_type = str,
     # job_file_name = str,
 
 
-def open_new_jobs(root: customtkinter, job: Job):
-    NewJobInputs(root, job)
+def open_new_jobs(root: customtkinter, job: Job, database: Database):
+    NewJobInputs(root, job, database)
 
 
 class HomeWindow:
-    def __init__(self, root: customtkinter.CTk, job: Job):
+    def __init__(self, root: customtkinter.CTk, job: Job, database: Database):
         self.job = job
+        self.database = database
         # super().__init__()
         # self.minsize(width=1000, height=700)
         self.root = root
@@ -54,7 +58,7 @@ class HomeWindow:
         self.button_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add",
-                                                      command=lambda: open_new_jobs(self.root, self.job))
+                                                      command=lambda: open_new_jobs(self.root, self.job, self.database))
         self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
         self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
@@ -63,8 +67,9 @@ class HomeWindow:
 
 
 class NewJobInputs:
-    def __init__(self, home_window: HomeWindow, job:Job):
+    def __init__(self, home_window: HomeWindow, job: Job, database: Database):
         self.job = job
+        self.database = database
         super().__init__()
         self.window = customtkinter.CTkToplevel(home_window)
         self.window.attributes('-topmost', True)
@@ -126,15 +131,17 @@ class NewJobInputs:
         submit_button.grid(row=10, column=1, padx=20, pady=20)
 
     def submit_button(self):
-        self.job.position_title_entry = self.position_title_entry
-        self.job.company_name_entry = self.company_name_entry
-        self.job.job_location_entry = self.job_location_entry
-        self.job.resume_version_entry = self.resume_version_entry
-        self.job.salary_top_entry = self.salary_top_entry
-        self.job.salary_bottom_entry = self.salary_bottom_entry
-        self.job.app_platform_entry = self.app_platform_entry
-        self.job.location_type_entry = self.location_type_entry
-        self.job.job_type_entry = self.job_type_entry
+        self.job.position_title = self.position_title_entry.get()
+        self.job.company_name = self.company_name_entry.get()
+        self.job.job_location = self.job_location_entry.get()
+        self.job.resume_version = self.resume_version_entry.get()
+        self.job.salary_top = self.salary_top_entry.get()
+        self.job.salary_bottom = self.salary_bottom_entry.get()
+        self.job.app_platform = self.app_platform_entry.get()
+        self.job.location_type = self.location_type_entry.get()
+        self.job.job_type = self.job_type_entry.get()
+
+        self.database.add_job(self.job, INSERT_NEW_JOB_APP_SQL)
         self.window.destroy()
 
 

@@ -1,8 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 import datetime
 import os
 import sqlite3
 
-from user_interface import NewJobInputs
+if TYPE_CHECKING:
+    from user_interface import Job
 
 
 def load_sql_query(file_name: str) -> str:
@@ -27,22 +31,22 @@ class Database:
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
 
-    def add_job(self, job_inputs: NewJobInputs, insert_job_sql):
+    def add_job(self, job: Job, insert_job_sql):
         insert_new_job_application = load_sql_query(insert_job_sql)
         job_file_name = f'{self.job_description_file_name}'
         application_status = "submitted"
         data = (
             self.application_date,
-            job_inputs.position_title_entry.get(),
-            job_inputs.company_name_entry.get(),
-            job_inputs.job_location_entry.get(),
-            job_inputs.resume_version_entry.get(),
-            job_inputs.salary_top_entry.get(),
-            job_inputs.salary_bottom_entry.get(),
-            job_inputs.app_platform_entry.get(),
+            job.position_title,
+            job.company_name,
+            job.job_location,
+            job.resume_version,
+            job.salary_top,
+            job.salary_bottom,
+            job.app_platform,
             application_status,
-            job_inputs.location_type_entry.get(),
-            job_inputs.job_type_entry.get(),
+            job.location_type,
+            job.job_type,
             job_file_name
         )
 
