@@ -1,14 +1,8 @@
-import datetime
-import tkinter
 import customtkinter
-# from toja_app import database
 from dataclasses import dataclass
 from datetime import datetime
-from pathlib import Path
-import os
-
 from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL
-from database import Database, load_sql_query
+from database import Database
 
 
 @dataclass
@@ -24,19 +18,12 @@ class Job:
     application_status = str,
     location_type = str,
     job_type = str,
-    # job_file_name = str,
-
-
-# def jd_open(root: customtkinter, job: Job, database: Database):
-#     JobDescription(root, job, database)
 
 
 class HomeWindow:
     def __init__(self, root: customtkinter.CTk, job: Job, database: Database):
         self.job = job
         self.database = database
-        # super().__init__()
-        # self.minsize(width=1000, height=700)
         self.root = root
         self.root.title("Track and Optimize your Job Application Process")
         self.root.grid_columnconfigure(0, weight=1)
@@ -68,7 +55,7 @@ class HomeWindow:
         self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
 
     def open_new_jobs(self):
-        aj_window = NewJobInputs(self.root, self.job, self.database)
+        NewJobInputs(self.root, self.job, self.database)
 
 
 class NewJobInputs:
@@ -78,13 +65,9 @@ class NewJobInputs:
         self.jd_main_frame = None
         self.job = job
         self.database = database
-        # self.home_window = home_window
-        # self.home_window.lower()
         super().__init__()
         self.aj_window = customtkinter.CTkToplevel(home_window)
-        # self.aj_window.attributes('-topmost', True)
         self.aj_window.grab_set()
-        # self.aj_window.lift()
         self.aj_window.title("Add Job Application Process")
         self.aj_window.grid_columnconfigure(0, weight=1)
         self.aj_window.grid_columnconfigure(1, weight=1)
@@ -142,10 +125,6 @@ class NewJobInputs:
         submit_button = customtkinter.CTkButton(self.main_frame, text="Submit", command=self.submit_button)
         submit_button.grid(row=10, column=1, padx=20, pady=20)
 
-        # jd_button = customtkinter.CTkButton(self.main_frame, text="Job Description",
-        #                                     command=self.job_description)
-        # jd_button.grid(row=10, column=0, padx=20, pady=20)
-
     def submit_button(self):
         self.job.position_title = self.position_title_entry.get()
         self.job.company_name = self.company_name_entry.get()
@@ -166,15 +145,10 @@ class NewJobInputs:
         self.jd_window = customtkinter.CTkToplevel(self.aj_window)
         self.jd_window.title("Job Description")
         self.jd_window.grab_set()
-
-        # self.job_description_file_name = job_file_name
-        # self.job_description_file_path = job_file_path
-
         self.jd_window.minsize(height=500, width=500)
         self.jd_main_frame = customtkinter.CTkFrame(self.jd_window)
         self.jd_main_frame.grid(row=0, column=0, padx=50, pady=50)
-        # paste_label = tkinter.Label(jd_window, text="Paste Job Description")
-        # paste_label.grid(row=0, column=0)
+
         self.jd_entry_box = customtkinter.CTkTextbox(self.jd_main_frame,
                                                      width=550,
                                                      height=300)
@@ -190,7 +164,8 @@ class NewJobInputs:
 
     def submit_job_description(self):
         job_description = self.jd_entry_box.get("1.0", "end")
-        with open(f"{self.database.job_description_file_directory}{self.database.job_description_file_name}", "w") as file:
+        with open(f"{self.database.job_description_file_directory}{self.database.job_description_file_name}",
+                  "w") as file:
             file.write(job_description)
 
         self.database.add_job(self.job, INSERT_NEW_JOB_APP_SQL)

@@ -1,6 +1,6 @@
 import customtkinter
 
-from user_interface import NewJobInputs, HomeWindow, Job
+from user_interface import HomeWindow, Job
 from database import Database
 from sql_query.sql_file_path import CREATE_JOB_APP_TABLE_SQL
 
