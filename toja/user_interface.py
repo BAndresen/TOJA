@@ -51,14 +51,22 @@ class HomeWindow:
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add",
                                                       command=self.open_new_jobs)
 
-        self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.new_job_button.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
-        self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
+        self.new_job_button.grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
-        self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
-        self._populate_jobs_applied_listbox()
+        self.new_job_button.grid(row=1, column=2, padx=20, pady=10, sticky="nsew")
 
-    def _populate_jobs_applied_listbox(self):
+        self.refresh_button = customtkinter.CTkButton(self.button_frame, text="Refresh",
+                                                      command=self.populate_jobs_applied_listbox)
+        self.refresh_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
+
+        self.populate_jobs_applied_listbox()
+
+    # def refresh_listbox(self):
+    #     self.populate_jobs_applied_listbox()
+
+    def populate_jobs_applied_listbox(self):
         query_data = self.database.select_all_jobs_applied(SELECT_ALL_JOBS_APPLIED)
         self.search_box = CTkListbox(self.root, width=500)
         self.search_box.grid(column=0, row=0, padx=20, pady=20)
@@ -81,8 +89,9 @@ class NewJobInputs:
         self.jd_main_frame = None
         self.job = job
         self.database = database
+        self.home_window = home_window
         super().__init__()
-        self.aj_window = customtkinter.CTkToplevel(home_window)
+        self.aj_window = customtkinter.CTkToplevel(self.home_window)
         self.aj_window.grab_set()
         self.aj_window.title("Add Job Application Process")
         self.aj_window.grid_columnconfigure(0, weight=1)
@@ -93,47 +102,47 @@ class NewJobInputs:
         self.main_frame.grid(row=0, column=1, padx=50, pady=50, sticky="nsew")
 
         self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
-        self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=20)
+        self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.position_title_label = customtkinter.CTkLabel(self.main_frame, text='Position Title')
         self.position_title_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.company_name_entry = customtkinter.CTkEntry(self.main_frame)
-        self.company_name_entry.grid(row=1, column=1, padx=(5, 20), pady=20)
+        self.company_name_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.company_name_label = customtkinter.CTkLabel(self.main_frame, text='Company Name')
         self.company_name_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.job_location_entry = customtkinter.CTkEntry(self.main_frame)
-        self.job_location_entry.grid(row=2, column=1, padx=(5, 20), pady=20)
+        self.job_location_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
         self.job_location_label = customtkinter.CTkLabel(self.main_frame, text='Job Location')
         self.job_location_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.resume_version_entry = customtkinter.CTkEntry(self.main_frame)
-        self.resume_version_entry.grid(row=3, column=1, padx=(5, 20), pady=20)
+        self.resume_version_entry.grid(row=3, column=1, padx=(5, 20), pady=10)
         self.resume_version_label = customtkinter.CTkLabel(self.main_frame, text='Resume Version')
         self.resume_version_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.salary_top_entry = customtkinter.CTkEntry(self.main_frame)
-        self.salary_top_entry.grid(row=4, column=1, padx=(5, 20), pady=20)
+        self.salary_top_entry.grid(row=4, column=1, padx=(5, 20), pady=10)
         self.salary_top_label = customtkinter.CTkLabel(self.main_frame, text='Salary Top-End Range')
         self.salary_top_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.salary_bottom_entry = customtkinter.CTkEntry(self.main_frame)
-        self.salary_bottom_entry.grid(row=5, column=1, padx=(5, 20), pady=20)
+        self.salary_bottom_entry.grid(row=5, column=1, padx=(5, 20), pady=10)
         self.salary_bottom_label = customtkinter.CTkLabel(self.main_frame, text='Salary Bottom-End Range')
         self.salary_bottom_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.app_platform_entry = customtkinter.CTkEntry(self.main_frame)
-        self.app_platform_entry.grid(row=6, column=1, padx=(5, 20), pady=20)
+        self.app_platform_entry.grid(row=6, column=1, padx=(5, 20), pady=10)
         self.app_platform_label = customtkinter.CTkLabel(self.main_frame, text='Application Platform')
         self.app_platform_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.location_type_entry = customtkinter.CTkEntry(self.main_frame)
-        self.location_type_entry.grid(row=7, column=1, padx=(5, 20), pady=20)
+        self.location_type_entry.grid(row=7, column=1, padx=(5, 20), pady=10)
         self.location_type_label = customtkinter.CTkLabel(self.main_frame, text='Location Type (remote,hybrid,onsite)')
         self.location_type_label.grid(row=7, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.job_type_entry = customtkinter.CTkEntry(self.main_frame)
-        self.job_type_entry.grid(row=9, column=1, padx=(5, 20), pady=20)
+        self.job_type_entry.grid(row=9, column=1, padx=(5, 20), pady=10)
         self.job_type_label = customtkinter.CTkLabel(self.main_frame,
                                                      text='Job Type (full-time, part-time, contract, freelance)')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=10, sticky="e")
