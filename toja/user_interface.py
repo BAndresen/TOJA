@@ -5,6 +5,7 @@ import customtkinter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+import os
 
 from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL
 from database import Database, load_sql_query
@@ -58,7 +59,7 @@ class HomeWindow:
         self.button_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add",
-                                                      command= self.open_new_jobs)
+                                                      command=self.open_new_jobs)
 
         self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
@@ -72,6 +73,9 @@ class HomeWindow:
 
 class NewJobInputs:
     def __init__(self, home_window: customtkinter.CTk, job: Job, database: Database):
+        self.jd_entry_box = None
+        self.jd_window = None
+        self.jd_main_frame = None
         self.job = job
         self.database = database
         # self.home_window = home_window
@@ -138,9 +142,9 @@ class NewJobInputs:
         submit_button = customtkinter.CTkButton(self.main_frame, text="Submit", command=self.submit_button)
         submit_button.grid(row=10, column=1, padx=20, pady=20)
 
-        jd_button = customtkinter.CTkButton(self.main_frame, text="Job Description",
-                                            command=self.job_description)
-        jd_button.grid(row=10, column=0, padx=20, pady=20)
+        # jd_button = customtkinter.CTkButton(self.main_frame, text="Job Description",
+        #                                     command=self.job_description)
+        # jd_button.grid(row=10, column=0, padx=20, pady=20)
 
     def submit_button(self):
         self.job.position_title = self.position_title_entry.get()
@@ -152,30 +156,43 @@ class NewJobInputs:
         self.job.app_platform = self.app_platform_entry.get()
         self.job.location_type = self.location_type_entry.get()
         self.job.job_type = self.job_type_entry.get()
+        self.database.job_description_file_name = (f'{self.database.application_date}_'
+                                                   f'{self.job.position_title}_'
+                                                   f'{self.job.company_name}.txt')
 
-        self.database.add_job(self.job, INSERT_NEW_JOB_APP_SQL)
-        self.aj_window.destroy()
+        self.job_description()
 
     def job_description(self):
-        jd_window = customtkinter.CTkToplevel(self.aj_window)
-        jd_window.grab_set()
-        # jd_window.lift()
+        self.jd_window = customtkinter.CTkToplevel(self.aj_window)
+        self.jd_window.title("Job Description")
+        self.jd_window.grab_set()
+
         # self.job_description_file_name = job_file_name
         # self.job_description_file_path = job_file_path
 
-        jd_window.minsize(height=500, width=500)
-        paste_label = tkinter.Label(jd_window, text="Paste Job Description")
-        paste_label.grid(row=0, column=0)
-        entry_box = tkinter.Text(jd_window, width=50, height=30)
-        entry_box.grid(row=0, column=0)
-        submit_button = tkinter.Button(jd_window, text="submit",
-                                            # command=self.submit_job_description
-                                            )
+        self.jd_window.minsize(height=500, width=500)
+        self.jd_main_frame = customtkinter.CTkFrame(self.jd_window)
+        self.jd_main_frame.grid(row=0, column=0, padx=50, pady=50)
+        # paste_label = tkinter.Label(jd_window, text="Paste Job Description")
+        # paste_label.grid(row=0, column=0)
+        self.jd_entry_box = customtkinter.CTkTextbox(self.jd_main_frame,
+                                                     width=550,
+                                                     height=300)
+        self.jd_entry_box.grid(row=0, column=0)
+
+        sub_button_frame = customtkinter.CTkFrame(self.jd_window)
+        sub_button_frame.grid(row=1, column=0)
+
+        submit_button = customtkinter.CTkButton(sub_button_frame, text="submit",
+                                                command=self.submit_job_description
+                                                )
         submit_button.grid(row=0, column=0)
 
-    # def submit_job_description(self):
-    #     job_description = self.entry_box.get("1.0", "end")
-    #     with open(f"{self.job_description_file_path}{self.job_description_file_name}", "w") as file:
-    #         file.write(job_description)
-    #
-    #     self.jd_window.destroy()
+    def submit_job_description(self):
+        job_description = self.jd_entry_box.get("1.0", "end")
+        with open(f"{self.database.job_description_file_directory}{self.database.job_description_file_name}", "w") as file:
+            file.write(job_description)
+
+        self.database.add_job(self.job, INSERT_NEW_JOB_APP_SQL)
+        self.jd_window.destroy()
+        self.aj_window.destroy()
