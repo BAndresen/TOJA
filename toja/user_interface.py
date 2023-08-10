@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from views.sql_file_path import INSERT_NEW_JOB_APP_SQL
+from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL
 from database import Database, load_sql_query
 
 
@@ -26,8 +26,8 @@ class Job:
     # job_file_name = str,
 
 
-def open_new_jobs(root: customtkinter, job: Job, database: Database):
-    NewJobInputs(root, job, database)
+# def jd_open(root: customtkinter, job: Job, database: Database):
+#     JobDescription(root, job, database)
 
 
 class HomeWindow:
@@ -58,27 +58,35 @@ class HomeWindow:
         self.button_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add",
-                                                      command=lambda: open_new_jobs(self.root, self.job, self.database))
+                                                      command= self.open_new_jobs)
+
         self.new_job_button.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Update")
         self.new_job_button.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
         self.new_job_button.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
 
+    def open_new_jobs(self):
+        aj_window = NewJobInputs(self.root, self.job, self.database)
+
 
 class NewJobInputs:
-    def __init__(self, home_window: HomeWindow, job: Job, database: Database):
+    def __init__(self, home_window: customtkinter.CTk, job: Job, database: Database):
         self.job = job
         self.database = database
+        # self.home_window = home_window
+        # self.home_window.lower()
         super().__init__()
-        self.window = customtkinter.CTkToplevel(home_window)
-        self.window.attributes('-topmost', True)
-        self.window.title("Add Job Application Process")
-        self.window.grid_columnconfigure(0, weight=1)
-        self.window.grid_columnconfigure(1, weight=1)
-        self.window.grid_rowconfigure(0, weight=1)
+        self.aj_window = customtkinter.CTkToplevel(home_window)
+        # self.aj_window.attributes('-topmost', True)
+        self.aj_window.grab_set()
+        # self.aj_window.lift()
+        self.aj_window.title("Add Job Application Process")
+        self.aj_window.grid_columnconfigure(0, weight=1)
+        self.aj_window.grid_columnconfigure(1, weight=1)
+        self.aj_window.grid_rowconfigure(0, weight=1)
 
-        self.main_frame = customtkinter.CTkFrame(self.window)
+        self.main_frame = customtkinter.CTkFrame(self.aj_window)
         self.main_frame.grid(row=0, column=1, padx=50, pady=50, sticky="nsew")
 
         self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
@@ -130,6 +138,10 @@ class NewJobInputs:
         submit_button = customtkinter.CTkButton(self.main_frame, text="Submit", command=self.submit_button)
         submit_button.grid(row=10, column=1, padx=20, pady=20)
 
+        jd_button = customtkinter.CTkButton(self.main_frame, text="Job Description",
+                                            command=self.job_description)
+        jd_button.grid(row=10, column=0, padx=20, pady=20)
+
     def submit_button(self):
         self.job.position_title = self.position_title_entry.get()
         self.job.company_name = self.company_name_entry.get()
@@ -142,26 +154,28 @@ class NewJobInputs:
         self.job.job_type = self.job_type_entry.get()
 
         self.database.add_job(self.job, INSERT_NEW_JOB_APP_SQL)
-        self.window.destroy()
+        self.aj_window.destroy()
 
+    def job_description(self):
+        jd_window = customtkinter.CTkToplevel(self.aj_window)
+        jd_window.grab_set()
+        # jd_window.lift()
+        # self.job_description_file_name = job_file_name
+        # self.job_description_file_path = job_file_path
 
-class JobDescription(tkinter.Tk):
-    def __init__(self, job_file_path: str, job_file_name: str):
-        self.job_description_file_name = job_file_name
-        self.job_description_file_path = job_file_path
-        super().__init__()
-        self.minsize(height=500, width=500)
-        self.paste_label = tkinter.Label(text="Paste Job Description")
-        self.paste_label.pack()
-        self.entry_box = tkinter.Text(width=50, height=30)
-        self.entry_box.pack()
-        self.submit_button = tkinter.Button(text="submit", command=self.submit_job_description)
-        self.submit_button.pack()
-        self.mainloop()
+        jd_window.minsize(height=500, width=500)
+        paste_label = tkinter.Label(jd_window, text="Paste Job Description")
+        paste_label.grid(row=0, column=0)
+        entry_box = tkinter.Text(jd_window, width=50, height=30)
+        entry_box.grid(row=0, column=0)
+        submit_button = tkinter.Button(jd_window, text="submit",
+                                            # command=self.submit_job_description
+                                            )
+        submit_button.grid(row=0, column=0)
 
-    def submit_job_description(self):
-        job_description = self.entry_box.get("1.0", "end")
-        with open(f"{self.job_description_file_path}{self.job_description_file_name}", "w") as file:
-            file.write(job_description)
-
-        self.destroy()
+    # def submit_job_description(self):
+    #     job_description = self.entry_box.get("1.0", "end")
+    #     with open(f"{self.job_description_file_path}{self.job_description_file_name}", "w") as file:
+    #         file.write(job_description)
+    #
+    #     self.jd_window.destroy()
