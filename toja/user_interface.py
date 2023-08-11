@@ -65,13 +65,15 @@ class HomeWindow:
 
     def populate_jobs_applied_listbox(self):
         query_data = self.database.select_all_jobs_applied(SELECT_ALL_JOBS_APPLIED)
-        self.search_box = CTkListbox(self.root, width=500)
+        self.search_box = CTkListbox(self.root, width=700, height=400)
         self.search_box.grid(column=0, row=0, padx=20, pady=20)
         index = 0
         for query in query_data:
             dirty_query = str(query)
             clean_query = dirty_query.replace("'", '')
             clean_query = clean_query.strip("()")
+            clean_query = clean_query.replace(",", "  |  ")
+            clean_query = clean_query.title()
             self.search_box.insert(index, str(clean_query))
             index += 1
 

@@ -1,6 +1,8 @@
 SELECT
     id,
     application_date,
+    company,
     position_title,
-    company
+    application_status
+
 FROM jobs_applied
