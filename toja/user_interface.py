@@ -63,9 +63,6 @@ class HomeWindow:
 
         self.populate_jobs_applied_listbox()
 
-    # def refresh_listbox(self):
-    #     self.populate_jobs_applied_listbox()
-
     def populate_jobs_applied_listbox(self):
         query_data = self.database.select_all_jobs_applied(SELECT_ALL_JOBS_APPLIED)
         self.search_box = CTkListbox(self.root, width=500)

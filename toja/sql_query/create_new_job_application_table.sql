@@ -1,5 +1,5 @@
 CREATE TABLE jobs_applied (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     application_date TEXT DEFAULT NULL,
     position_title TEXT DEFAULT NULL,
     company TEXT DEFAULT NULL,
