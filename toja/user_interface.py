@@ -24,6 +24,7 @@ class Job:
 
 class HomeWindow:
     def __init__(self, root: customtkinter.CTk, job: Job, database: Database):
+        self.id = None
         self.search_box = None
         self.job = job
         self.database = database
@@ -69,16 +70,40 @@ class HomeWindow:
         self.search_box.grid(column=0, row=0, padx=20, pady=20)
         index = 0
         for query in query_data:
-            dirty_query = str(query)
-            clean_query = dirty_query.replace("'", '')
-            clean_query = clean_query.strip("()")
-            clean_query = clean_query.replace(",", "  |  ")
-            clean_query = clean_query.title()
-            self.search_box.insert(index, str(clean_query))
+            clean_query = self._clean_search_box_jobs(query)
+            self.search_box.insert(index, clean_query)
             index += 1
+        self.search_box.bind('<Double-Button-1>', self.get_id_double_click)
+
+    def _clean_search_box_jobs(self, query: str) -> str:
+        dirty_query = str(query)
+        clean_query = dirty_query.replace("'", '')
+        clean_query = clean_query.strip("()")
+        clean_query = clean_query.replace(",", "  |  ")
+        clean_query = clean_query.title()
+        return clean_query
+
+    def get_id_double_click(self, event) -> int:
+        # return id for sql query
+        selected_item = self.search_box.get(self.search_box.curselection())
+        selected_id = selected_item.split("|")
+        self.id = (int(selected_id[0]))
+        JobSelect(self.root, self.job, self.database)
+        return self.id
 
     def open_new_jobs(self):
         NewJobInputs(self.root, self.job, self.database)
+
+
+class JobSelect:
+    def __init__(self, home_window: customtkinter.CTk, job: Job, database: Database):
+        self.js_window = customtkinter.CTkToplevel(home_window)
+        self.js_window.grab_set()
+        self.js_window.title("Job")
+        # self.js_window.grid_columnconfigure(0, weight=1)
+        # self.js_window.grid_columnconfigure(1, weight=1)
+        # self.js_window.grid_rowconfigure(0, weight=1)
+
 
 
 class NewJobInputs:
@@ -89,7 +114,7 @@ class NewJobInputs:
         self.job = job
         self.database = database
         self.home_window = home_window
-        super().__init__()
+        # super().__init__()
         self.aj_window = customtkinter.CTkToplevel(self.home_window)
         self.aj_window.grab_set()
         self.aj_window.title("Add Job Application Process")
