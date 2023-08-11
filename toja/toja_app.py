@@ -16,7 +16,7 @@ def run_toja_app():
                         CREATE_JOB_APP_TABLE_SQL)
     job = Job()
     root = customtkinter.CTk()
-    home_window = HomeWindow(root, job, database)
+    HomeWindow(root, job, database)
     root.mainloop()
     database.close_db_connections()
 

@@ -20,9 +20,13 @@ class Job:
     application_status = str,
     location_type = str,
     job_type = str,
+    job_description_file = str
+
+    def __init__(self):
+        self.all_job_list = None
 
     def get_all(self) -> list:
-        all_job_list = [
+        self.all_job_list = [
             self.application_date,
             self.position_title,
             self.company_name,
@@ -35,7 +39,7 @@ class Job:
             self.location_type,
             self.job_type
         ]
-        return all_job_list
+        return self.all_job_list
 
 
 class HomeWindow:
@@ -117,6 +121,7 @@ class JobSelect:
         self.js_window.grab_set()
         self.js_window.title("Job")
         self.id = id
+        self.job = job
 
         query = '''
         SELECT *
@@ -138,7 +143,7 @@ class JobSelect:
             job.application_status = res[9]
             job.location_type = res[10]
             job.job_type = res[11]
-            job.job_description_file_pat = res[12]
+            job.job_description_file = res[12]
 
         self.main_frame = customtkinter.CTkFrame(self.js_window)
         self.main_frame.grid(row=0, column=0, padx=20, pady=20)
@@ -171,10 +176,19 @@ class JobSelect:
             info_label.grid(row=j_info_index, column=1, padx=(20, 5), pady=5, sticky="w")
             j_info_index += 1
 
+        self.jd_frame = customtkinter.CTkFrame(self.js_window)
+        self.jd_frame.grid(row=1,column=0, padx=20, pady=20)
+
+        # self.jd_get_button = customtkinter.CTkButton(self.js_window, text="Job Description", command=self.open_jd)
+        # self.jd_get_button.grid(row=1, column=0)
+
+    # def open_jd(self):
+    #     print(self.job.job_description_file)
+    #     with open(f'{JOB_DESCRIPTION_DIRECTORY}/{self.job.job_description_file}, )
+
     # TODO allow user to edit info
 
     # TODO Insert update Job into database
-
 
 
 class NewJobInputs:
