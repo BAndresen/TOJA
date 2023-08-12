@@ -78,9 +78,9 @@ class HomeWindow:
         self.analyze_job_button = customtkinter.CTkButton(self.button_frame, text="Analyze")
         self.analyze_job_button.grid(row=1, column=2, padx=20, pady=10, sticky="nsew")
 
-        self.refresh_button = customtkinter.CTkButton(self.button_frame, text="Refresh",
-                                                      command=self.populate_jobs_applied_listbox)
-        self.refresh_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
+        # self.refresh_button = customtkinter.CTkButton(self.button_frame, text="Refresh",
+        #                                               command=self.populate_jobs_applied_listbox)
+        # self.refresh_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
         self.populate_jobs_applied_listbox()
 
@@ -108,14 +108,14 @@ class HomeWindow:
         selected_item = self.search_box.get(self.search_box.curselection())
         selected_id = selected_item.split("|")
         self.id = (int(selected_id[0]))
-        JobSelect(home_window=self.root, job=self.job, database=self.database, id=self.id)
+        JobProfile(home_window=self.root, job=self.job, database=self.database, id=self.id)
         return self.id
 
     def open_new_jobs(self):
-        NewJobInputs(self.root, self.job, self.database)
+        NewJob(self.root, self.job, self.database)
 
 
-class JobSelect:
+class JobProfile:
     def __init__(self, home_window: customtkinter.CTk, job: Job, database: Database, id: int):
         self.js_window = customtkinter.CTkToplevel(home_window)
         self.js_window.grab_set()
@@ -132,34 +132,34 @@ class JobSelect:
         results = database.cursor.fetchall()
 
         for res in results:
-            job.application_date = res[1]
-            job.position_title = res[2]
-            job.company_name = res[3],
-            job.job_location = res[4]
-            job.resume_version = res[5]
-            job.salary_top = res[6]
-            job.salary_bottom = res[7]
-            job.app_platform = res[8]
-            job.application_status = res[9]
-            job.location_type = res[10]
-            job.job_type = res[11]
-            job.job_description_file = res[12]
+            self.job.application_date = res[1]
+            self.job.position_title = res[2]
+            self.job.company_name = res[3],
+            self.job.job_location = res[4]
+            self.job.resume_version = res[5]
+            self.job.salary_top = res[6]
+            self.job.salary_bottom = res[7]
+            self.job.app_platform = res[8]
+            self.job.application_status = res[9]
+            self.job.location_type = res[10]
+            self.job.job_type = res[11]
+            self.job.job_description_file = res[12]
 
         self.main_frame = customtkinter.CTkFrame(self.js_window)
         self.main_frame.grid(row=0, column=0, padx=20, pady=20)
 
         job_labels = [
-            'application_date',
-            'position_title',
-            'company ',
-            'job_location',
-            'resume_version',
-            'salary_top',
-            'salary_bottom',
-            'application_platform',
-            'application_status',
-            'work_type ',
-            'job_type ']
+            'Application Date',
+            'Position Title',
+            'Company ',
+            'Job Location',
+            'Resume Version',
+            'Salary Top',
+            'Salary Bottom',
+            'Application Platform',
+            'Application Status',
+            'Work Type ',
+            'Job Type ']
 
         label_index = 0
         self.job_label_list = []
@@ -191,7 +191,7 @@ class JobSelect:
     # TODO Insert update Job into database
 
 
-class NewJobInputs:
+class NewJob:
     def __init__(self, home_window: customtkinter.CTk, job: Job, database: Database):
         self.jd_entry_box = None
         self.jd_window = None
