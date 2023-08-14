@@ -1,8 +1,8 @@
 import customtkinter
 
-from view import HomeWindow, Job
+from view import HomeWindow
 from model import Database
-from sql_query.sql_file_path import CREATE_JOB_APP_TABLE_SQL
+from controller import Controller
 from pathlib import Path
 
 BASE_DIRECTORY = Path(__file__).resolve().parent
@@ -11,12 +11,10 @@ JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY], 'job_descriptions')
 
 
 def run_toja_app():
-    database = Database(DATABASE_FILE_PATH,
-                        JOB_DESCRIPTION_DIRECTORY,
-                        CREATE_JOB_APP_TABLE_SQL)
-    job = Job()
+    database = Database(DATABASE_FILE_PATH)
     root = customtkinter.CTk()
-    HomeWindow(root, job, database)
+    view = HomeWindow(root)
+    Controller(view, database)
     root.mainloop()
     database.close_db_connections()
 
