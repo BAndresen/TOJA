@@ -5,7 +5,7 @@ import os
 import sqlite3
 
 if TYPE_CHECKING:
-    from user_interface import Job
+    from view import Job
     from pathlib import Path
 
 

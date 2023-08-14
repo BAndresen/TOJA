@@ -4,7 +4,7 @@ from CTkListbox.ctk_listbox import *
 from dataclasses import dataclass
 from datetime import datetime
 from sql_query.sql_file_path import INSERT_NEW_JOB_APP_SQL, SELECT_ALL_JOBS_APPLIED
-from database import Database
+from model import Database
 
 
 @dataclass
