@@ -6,8 +6,9 @@ class HomeWindow:
     def __init__(self, root: customtkinter.CTk):
         # Configure Window
         self.root = root
+        self.frame = "home"
         self.root.title("Track and Optimize your Job Application Process")
-        self.root.geometry('1200x600')
+        self.root.geometry('1200x650')
         # self.root.grid_columnconfigure(0, weight=1)
         self.root.grid_columnconfigure(1, weight=1)
         self.root.grid_rowconfigure(0, weight=1)
@@ -42,12 +43,12 @@ class HomeWindow:
 
         # Home Frame
         self.home_frame = customtkinter.CTkFrame(self.root)
-        self.home_frame.grid(row=0, column=1, sticky = "nsew")
+        self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_frame.grid_columnconfigure(0, weight=1)
 
         # Job ListBox
         self.job_list_box = CTkListbox(self.home_frame)
-        self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky= 'nsew')
+        self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)
@@ -68,6 +69,29 @@ class HomeWindow:
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
         self.new_job_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
+        # --------------- Event -------------- #
+
+        self.event_frame = customtkinter.CTkFrame(self.root, fg_color="transparent")
+        self.event_frame.grid_columnconfigure(0, weight=1)
+
+        # Recent Events
+        self.recent_events_frame = customtkinter.CTkFrame(self.event_frame)
+        self.recent_events_frame.grid_columnconfigure(0, weight=1)
+        self.recent_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.recent_events_label = customtkinter.CTkLabel(self.recent_events_frame, text="Recent Events")
+        self.recent_events_label.grid(row=0, column=0)
+        self.recent_events_listbox = CTkListbox(self.recent_events_frame)
+        self.recent_events_listbox.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+
+        # Upcoming Events
+        self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame)
+        self.upcoming_events_frame.grid_columnconfigure(0, weight=1)
+
+        self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Recent Events")
+        self.upcoming_events_label.grid(row=0, column=0)
+        self.upcoming_events_listbox = CTkListbox(self.upcoming_events_frame)
+        self.upcoming_events_listbox.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
 class JobProfile:
     def __init__(self, root: customtkinter.CTk):
