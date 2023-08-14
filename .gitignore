@@ -7,6 +7,6 @@
 /toja/job_apply_launch.bat
 /toja/job_descriptions/
 /toja_back_up.ffs_batch
-/tests/test_job_application_database.db
+/tests/test_database/test_job_application_database.db
 /tests/test_job_descriptions/
 /project_notes/
