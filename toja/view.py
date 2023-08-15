@@ -1,9 +1,11 @@
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
+from controller import Controller
 
 
 class HomeWindow:
-    def __init__(self, root: customtkinter.CTk):
+    def __init__(self, root):
+
         # Configure Window
         self.root = root
         self.frame = "home"
@@ -66,7 +68,7 @@ class HomeWindow:
         # Add New Job Button
         self.button_frame = customtkinter.CTkFrame(self.home_frame)
         self.button_frame.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add", command=self.open_new_job)
         self.new_job_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
         # --------------- Event -------------- #
@@ -93,26 +95,37 @@ class HomeWindow:
         self.upcoming_events_listbox = CTkListbox(self.upcoming_events_frame)
         self.upcoming_events_listbox.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
-class JobProfile:
-    def __init__(self, root: customtkinter.CTk):
-        self.js_window = customtkinter.CTkToplevel(root)
-        self.js_window.grab_set()
-        self.js_window.title("Job")
+        # --------------- Analytics -------------- #
+
+        self.analytics_frame = customtkinter.CTkFrame(self.root, fg_color="transparent")
+        self.analytics_frame.grid_columnconfigure(0, weight=1)
+
+        # Keywords
+        self.keywords_frame = customtkinter.CTkFrame(self.analytics_frame)
+        self.keywords_frame.grid_columnconfigure(0, weight=1)
+        self.keywords_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.keywords_label = customtkinter.CTkLabel(self.keywords_frame, text="Keywords")
+        self.keywords_label.grid(row=0, column=0)
+
+        # Resume
+        self.resume_frame = customtkinter.CTkFrame(self.analytics_frame)
+        self.resume_frame.grid_columnconfigure(0, weight=1)
+        self.resume_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.resume_label = customtkinter.CTkLabel(self.resume_frame, text="Resume")
+        self.resume_label.grid(row=0, column=0)
+
+    def open_new_job(self):
+        NewJob(customtkinter.CTkToplevel(self.root))
 
 
 class NewJob:
-    def __init__(self, root: customtkinter.CTk):
-        self.jd_entry_box = None
-        self.jd_window = None
-        self.jd_main_frame = None
-        self.root = root
-        # super().__init__()
-        self.aj_window = customtkinter.CTkToplevel(self.root)
+    def __init__(self, top_level: customtkinter.CTkToplevel):
+        self.aj_window = top_level
         self.aj_window.grab_set()
-        self.aj_window.title("Add Job Application Process")
-        self.aj_window.grid_columnconfigure(0, weight=1)
-        self.aj_window.grid_columnconfigure(1, weight=1)
-        self.aj_window.grid_rowconfigure(0, weight=1)
+        # self.title("Add Job")
+        # self.grid_columnconfigure(0, weight=1)
+        # self.grid_columnconfigure(1, weight=1)
+        # self.grid_rowconfigure(0, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.aj_window)
         self.main_frame.grid(row=0, column=1, padx=50, pady=50, sticky="nsew")
@@ -163,5 +176,21 @@ class NewJob:
                                                      text='Job Type (full-time, part-time, contract, freelance)')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Job Description")
-        self.submit_button.grid(row=10, column=1, padx=20, pady=20)
+        self.job_description_label = customtkinter.CTkLabel(self.main_frame, text='Job Description')
+        self.job_description_label.grid(row=10, column=0)
+
+        self.job_description = customtkinter.CTkTextbox(self.main_frame)
+        self.job_description.grid(row=11, column=0, columnspan=2, sticky='ew')
+
+        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit")
+        self.submit_button.grid(row=12, column=1, padx=20, pady=20)
+
+
+class JobProfile:
+    def __init__(self, root):
+        self.root = root
+        self.js_window = customtkinter.CTkToplevel(self.root)
+        self.js_window.grab_set()
+        self.js_window.title("Job")
+
+

@@ -13,10 +13,10 @@ JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY], 'job_descriptions')
 def run_toja_app():
     database = Database(DATABASE_FILE_PATH)
     root = customtkinter.CTk()
-    view = HomeWindow(root)
-    Controller(view, database)
-    root.mainloop()
+    home_window = HomeWindow(root)
+    Controller(home_window, database)
     database.close_db_connections()
+    root.mainloop()
 
 
 if __name__ == '__main__':
