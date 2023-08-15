@@ -16,6 +16,9 @@ def home_view_listbox(cursor: sqlite3.Cursor) -> list:
     return results
 
 
+
+
+
 def create_toja_database(cursor: sqlite3.Cursor) -> None:
     # Create the user table
     cursor.execute('''

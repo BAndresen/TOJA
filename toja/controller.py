@@ -1,11 +1,9 @@
-
 from view import HomeView, NewJob, JobProfile
 from model import Model
 
 
 class Controller:
     def __init__(self, view: HomeView, model: Model):
-
         self.new_job = None
         self.view = view
         self.model = model
@@ -27,7 +25,10 @@ class Controller:
 
     def open_job_profile(self, event):
         job_id = (event.split())[0]
-        self.job_profile = JobProfile(self.view,job_id)
+        self.job_profile = JobProfile(self.view, job_id)
+        results = self.model.get_job_data(job_id)
+
+        self.job_profile.company_name_user.configure(text=results[0])
 
     def run(self):
         self.view.mainloop()
@@ -53,7 +54,3 @@ class Controller:
 
     def submit_data(self):
         print('submit_data')
-
-
-
-

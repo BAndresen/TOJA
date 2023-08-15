@@ -198,25 +198,27 @@ class JobProfile:
         self.company_frame = customtkinter.CTkFrame(self.jp_frame)
         self.company_frame.grid(row=0, column=0, padx=20, pady=20)
         self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company Name")
-        self.company_name.grid(row=0, column=0,padx=20, pady=10)
+        self.company_name.grid(row=0, column=0, padx=20, pady=10)
+        self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='')
+        self.company_name_user.grid(row=0, column=1, padx=10)
         self.company_web = customtkinter.CTkLabel(self.company_frame, text="Website")
-        self.company_web.grid(row=1, column=0,padx=20, pady=10)
+        self.company_web.grid(row=1, column=0, padx=20, pady=10)
 
         # job info
         self.job_info_frame = customtkinter.CTkFrame(self.jp_frame)
         self.job_info_frame.grid(row=1, column=0, padx=20, pady=20)
         self.position = customtkinter.CTkLabel(self.job_info_frame, text="Position")
-        self.position.grid(row=0, column=0,padx=20, pady=10)
+        self.position.grid(row=0, column=0, padx=20, pady=10)
         self.work_type = customtkinter.CTkLabel(self.job_info_frame, text="Work Type")
-        self.work_type.grid(row=1, column=0,padx=20, pady=10)
+        self.work_type.grid(row=1, column=0, padx=20, pady=10)
         self.location = customtkinter.CTkLabel(self.job_info_frame, text="Location")
-        self.location.grid(row=2, column=0,padx=20, pady=10)
+        self.location.grid(row=2, column=0, padx=20, pady=10)
         self.salary_top = customtkinter.CTkLabel(self.job_info_frame, text="Salary Top")
-        self.salary_top.grid(row=3, column=0,padx=20, pady=10)
+        self.salary_top.grid(row=3, column=0, padx=20, pady=10)
         self.salary_bottom = customtkinter.CTkLabel(self.job_info_frame, text="Salary Bottom")
-        self.salary_bottom.grid(row=4, column=0,padx=20, pady=10)
+        self.salary_bottom.grid(row=4, column=0, padx=20, pady=10)
         self.salary_type = customtkinter.CTkLabel(self.job_info_frame, text="Salary Type")
-        self.salary_type.grid(row=5, column=0,padx=20, pady=10)
+        self.salary_type.grid(row=5, column=0, padx=20, pady=10)
 
         # contact
         self.contact_frame = customtkinter.CTkFrame(self.jp_frame)
@@ -226,7 +228,7 @@ class JobProfile:
 
         # keywords
         self.keyword_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.keyword_frame.grid(row=0, column=2,rowspan=2, padx=20, pady=20)
+        self.keyword_frame.grid(row=0, column=2, rowspan=2, padx=20, pady=20)
         self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords")
         self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
 
@@ -243,10 +245,8 @@ class JobProfile:
 
         # buttons
         self.update_button = customtkinter.CTkButton(self.jp_frame, text="Update")
-        self.update_button.grid(row=2,column=2, pady=5)
+        self.update_button.grid(row=2, column=2, pady=5)
         self.delete_button = customtkinter.CTkButton(self.jp_frame, text="Delete")
         self.delete_button.grid(row=3, column=2, pady=5)
 
         # self.jp_window.mainloop()
-
-
