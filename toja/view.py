@@ -184,7 +184,7 @@ class NewJob:
 
 
 class JobProfile:
-    def __init__(self, root):
+    def __init__(self, root, job_id):
         self.root = root
         self.js_window = customtkinter.CTkToplevel(self.root)
         self.js_window.grab_set()
