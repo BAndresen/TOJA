@@ -6,7 +6,7 @@ from controller import Controller
 from pathlib import Path
 
 BASE_DIRECTORY = Path(__file__).resolve().parent
-DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database/job_application_database.db'])
+DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database/toja_database.db'])
 JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY], 'job_descriptions')
 
 

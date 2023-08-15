@@ -23,9 +23,7 @@ class Controller:
     def update_home_listbox(self):
         home_listbox = self.model.get_all()
         for item in home_listbox:
-            self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]} | {item[3]}")
-
-        print((home_listbox))
+            self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
     def open_job_profile(self, event):
         job_id = (event.split())[0]

@@ -5,35 +5,35 @@ import datetime
 import os
 import sqlite3
 
-from sql_query import select_home_view_listbox
+from sql_query import create_toja_database, add_sample_data, home_view_listbox
 
 if TYPE_CHECKING:
     from pathlib import Path
 
 
 class Model:
-    def __init__(self, db_file_path: Path):
-        # self.home_listbox = None
-        self.today = datetime.date.today()
+    def __init__(self, db_file_path: Path, sample_data=False):
         self.db_file_path = db_file_path
 
         # Check if database exists, if not create
         if not os.path.exists(self.db_file_path):
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
+            self.create_database()
         else:
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
 
-    def create_table(self):
-        pass
+        self.sample_data = sample_data
+        if sample_data:
+            add_sample_data(self.cursor, self.conn)
+
+    def create_database(self):
+        create_toja_database(self.cursor)
 
     def get_all(self):
-        self.cursor.execute(select_home_view_listbox)
-        home_listbox = self.cursor.fetchall()
+        home_listbox = home_view_listbox(self.cursor)
         return home_listbox
-
 
     def close_db_connections(self):
         self.conn.close()
-
