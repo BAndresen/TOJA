@@ -1,7 +1,7 @@
 import customtkinter
 
-from view import HomeWindow
-from model import Database
+from view import HomeView
+from model import Model
 from controller import Controller
 from pathlib import Path
 
@@ -10,13 +10,11 @@ DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database/job_application_database.d
 JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY], 'job_descriptions')
 
 
-def run_toja_app():
-    database = Database(DATABASE_FILE_PATH)
-    root = customtkinter.CTk()
-    home_window = HomeWindow(root)
-    Controller(home_window, database)
-    database.close_db_connections()
-    root.mainloop()
+def run_toja_app() -> None:
+    model = Model(DATABASE_FILE_PATH)
+    view = HomeView()
+    controller = Controller(view, model)
+    controller.run()
 
 
 if __name__ == '__main__':

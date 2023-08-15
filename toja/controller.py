@@ -1,26 +1,24 @@
-from __future__ import annotations
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from view import HomeWindow
-
-
-# from view import HomeWindow, NewJob
-from model import Database
+from view import HomeView, NewJob
+from model import Model
 
 
 class Controller:
-    def __init__(self, root:HomeWindow, database: Database):
-        self.add_job_description = None
-        self.add_new_job = None
-        self.view = root
-        self.database = database
+    def __init__(self, view: HomeView, model: Model):
+
+        self.new_job = None
+        self.view = view
+        self.database = model
 
         # frames
         self.view.events_button.configure(command=self.event_frame_button)
         self.view.home_button.configure(command=self.home_frame_button)
         self.view.analytics_button.configure(command=self.analytics_frame_button)
-        # self.view.submit_button.configure(command=self.submit_new_job)
+
+        self.view.new_job_button.configure(command=self.submit_button)
+
+    def run(self):
+        self.view.mainloop()
 
     def event_frame_button(self):
         self.view.home_frame.grid_forget()
@@ -37,10 +35,13 @@ class Controller:
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid(row=0, column=1, sticky="nsew")
 
-    def submit_new_job(self):
-        # self.new_job.root.destroy()
-        print("submit")
+    def submit_button(self):
+        self.new_job = NewJob(self.view)
+        self.new_job.submit_button.configure(command=self.submit_data)
 
-        pass
+    def submit_data(self):
+        print('submit_data')
+
+
 
 

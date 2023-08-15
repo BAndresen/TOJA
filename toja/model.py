@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-class Database:
+class Model:
     def __init__(self, db_file_path: Path):
         self.today = datetime.date.today()
         self.db_file_path = db_file_path
@@ -27,3 +27,4 @@ class Database:
 
     def close_db_connections(self):
         self.conn.close()
+

@@ -1,22 +1,20 @@
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
-from controller import Controller
 
 
-class HomeWindow:
-    def __init__(self, root):
+class HomeView(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
 
         # Configure Window
-        self.root = root
         self.frame = "home"
-        self.root.title("Track and Optimize your Job Application Process")
-        self.root.geometry('1200x650')
-        # self.root.grid_columnconfigure(0, weight=1)
-        self.root.grid_columnconfigure(1, weight=1)
-        self.root.grid_rowconfigure(0, weight=1)
+        self.title("Track and Optimize your Job Application Process")
+        self.geometry('1200x650')
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
         # Right Side Navigation Frame
-        self.navigation_frame = customtkinter.CTkFrame(self.root, fg_color="black")
+        self.navigation_frame = customtkinter.CTkFrame(self, fg_color="black")
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
         self.home_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
@@ -44,7 +42,7 @@ class HomeWindow:
         self.events_button.grid(row=2, column=0)
 
         # Home Frame
-        self.home_frame = customtkinter.CTkFrame(self.root)
+        self.home_frame = customtkinter.CTkFrame(self)
         self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_frame.grid_columnconfigure(0, weight=1)
 
@@ -68,12 +66,12 @@ class HomeWindow:
         # Add New Job Button
         self.button_frame = customtkinter.CTkFrame(self.home_frame)
         self.button_frame.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add", command=self.open_new_job)
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
         self.new_job_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
         # --------------- Event -------------- #
 
-        self.event_frame = customtkinter.CTkFrame(self.root, fg_color="transparent")
+        self.event_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.event_frame.grid_columnconfigure(0, weight=1)
 
         # Recent Events
@@ -97,7 +95,7 @@ class HomeWindow:
 
         # --------------- Analytics -------------- #
 
-        self.analytics_frame = customtkinter.CTkFrame(self.root, fg_color="transparent")
+        self.analytics_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.analytics_frame.grid_columnconfigure(0, weight=1)
 
         # Keywords
@@ -114,13 +112,11 @@ class HomeWindow:
         self.resume_label = customtkinter.CTkLabel(self.resume_frame, text="Resume")
         self.resume_label.grid(row=0, column=0)
 
-    def open_new_job(self):
-        NewJob(customtkinter.CTkToplevel(self.root))
-
 
 class NewJob:
-    def __init__(self, top_level: customtkinter.CTkToplevel):
-        self.aj_window = top_level
+    def __init__(self, root):
+        self.root = root
+        self.aj_window = customtkinter.CTkToplevel(root)
         self.aj_window.grab_set()
         # self.title("Add Job")
         # self.grid_columnconfigure(0, weight=1)
@@ -167,7 +163,8 @@ class NewJob:
 
         self.location_type_entry = customtkinter.CTkEntry(self.main_frame)
         self.location_type_entry.grid(row=7, column=1, padx=(5, 20), pady=10)
-        self.location_type_label = customtkinter.CTkLabel(self.main_frame, text='Location Type (remote,hybrid,onsite)')
+        self.location_type_label = customtkinter.CTkLabel(self.main_frame,
+                                                          text='Location Type (remote,hybrid,onsite)')
         self.location_type_label.grid(row=7, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.job_type_entry = customtkinter.CTkEntry(self.main_frame)
@@ -192,5 +189,3 @@ class JobProfile:
         self.js_window = customtkinter.CTkToplevel(self.root)
         self.js_window.grab_set()
         self.js_window.title("Job")
-
-

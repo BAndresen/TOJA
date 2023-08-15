@@ -1,5 +1,5 @@
 import unittest
-from toja.model import Database
+from toja.model import Model
 
 TEST_DATABASE_FILE_PATH = \
     '/tests/test_database/test_job_application_database.db'
