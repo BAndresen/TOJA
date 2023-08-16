@@ -128,49 +128,58 @@ class NewJob:
 
         self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
         self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
-        self.position_title_label = customtkinter.CTkLabel(self.main_frame, text='Position Title')
+        self.position_title_label = customtkinter.CTkLabel(self.main_frame, text='Position')
         self.position_title_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.company_name_entry = customtkinter.CTkEntry(self.main_frame)
         self.company_name_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
-        self.company_name_label = customtkinter.CTkLabel(self.main_frame, text='Company Name')
+        self.company_name_label = customtkinter.CTkLabel(self.main_frame, text='Company')
         self.company_name_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
 
+        self.company_website_entry = customtkinter.CTkEntry(self.main_frame)
+        self.company_website_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
+        self.company_website_label = customtkinter.CTkLabel(self.main_frame, text='Website')
+        self.company_website_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
+
         self.job_location_entry = customtkinter.CTkEntry(self.main_frame)
-        self.job_location_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
-        self.job_location_label = customtkinter.CTkLabel(self.main_frame, text='Job Location')
-        self.job_location_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.job_location_entry.grid(row=3, column=1, padx=(5, 20), pady=10)
+        self.job_location_label = customtkinter.CTkLabel(self.main_frame, text='Location')
+        self.job_location_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.resume_version_entry = customtkinter.CTkEntry(self.main_frame)
-        self.resume_version_entry.grid(row=3, column=1, padx=(5, 20), pady=10)
+        self.resume_version_entry.grid(row=4, column=1, padx=(5, 20), pady=10)
         self.resume_version_label = customtkinter.CTkLabel(self.main_frame, text='Resume Version')
-        self.resume_version_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.resume_version_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.salary_top_entry = customtkinter.CTkEntry(self.main_frame)
-        self.salary_top_entry.grid(row=4, column=1, padx=(5, 20), pady=10)
-        self.salary_top_label = customtkinter.CTkLabel(self.main_frame, text='Salary Top-End Range')
-        self.salary_top_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.salary_top_entry.grid(row=5, column=1, padx=(5, 20), pady=10)
+        self.salary_top_label = customtkinter.CTkLabel(self.main_frame, text='Salary Top-End')
+        self.salary_top_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.salary_bottom_entry = customtkinter.CTkEntry(self.main_frame)
-        self.salary_bottom_entry.grid(row=5, column=1, padx=(5, 20), pady=10)
-        self.salary_bottom_label = customtkinter.CTkLabel(self.main_frame, text='Salary Bottom-End Range')
-        self.salary_bottom_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.salary_bottom_entry.grid(row=6, column=1, padx=(5, 20), pady=10)
+        self.salary_bottom_label = customtkinter.CTkLabel(self.main_frame, text='Salary Bottom-End')
+        self.salary_bottom_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.app_platform_entry = customtkinter.CTkEntry(self.main_frame)
-        self.app_platform_entry.grid(row=6, column=1, padx=(5, 20), pady=10)
-        self.app_platform_label = customtkinter.CTkLabel(self.main_frame, text='Application Platform')
-        self.app_platform_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.salary_type_entry = customtkinter.CTkComboBox(self.main_frame,
+                                                           values=['Annual', 'Monthly', 'Hourly', 'Contract', 'None'])
+        self.salary_type_entry.grid(row=7, column=1, padx=(5, 20), pady=10)
+        self.salary_type_label = customtkinter.CTkLabel(self.main_frame, text='Salary Type')
+        self.salary_type_label.grid(row=7, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.location_type_entry = customtkinter.CTkEntry(self.main_frame)
-        self.location_type_entry.grid(row=7, column=1, padx=(5, 20), pady=10)
+        self.location_type_entry = customtkinter.CTkComboBox(self.main_frame,
+                                                             values=['Remote', 'Hybrid', 'Onsite', 'None'])
+        self.location_type_entry.grid(row=8, column=1, padx=(5, 20), pady=10)
         self.location_type_label = customtkinter.CTkLabel(self.main_frame,
-                                                          text='Location Type (remote,hybrid,onsite)')
-        self.location_type_label.grid(row=7, column=0, padx=(20, 5), pady=10, sticky="e")
+                                                          text='Work Type')
+        self.location_type_label.grid(row=8, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.job_type_entry = customtkinter.CTkEntry(self.main_frame)
+        self.job_type_entry = customtkinter.CTkComboBox(self.main_frame,
+                                                        values=['Full-Time', 'Part-Time', 'Contract', 'Freelance',
+                                                                'None'])
         self.job_type_entry.grid(row=9, column=1, padx=(5, 20), pady=10)
         self.job_type_label = customtkinter.CTkLabel(self.main_frame,
-                                                     text='Job Type (full-time, part-time, contract, freelance)')
+                                                     text='Commitment')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.job_description_label = customtkinter.CTkLabel(self.main_frame, text='Job Description')
@@ -197,28 +206,52 @@ class JobProfile:
         # company website
         self.company_frame = customtkinter.CTkFrame(self.jp_frame)
         self.company_frame.grid(row=0, column=0, padx=20, pady=20)
-        self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company Name")
+        self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company")
         self.company_name.grid(row=0, column=0, padx=20, pady=10)
         self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='')
         self.company_name_user.grid(row=0, column=1, padx=10)
         self.company_web = customtkinter.CTkLabel(self.company_frame, text="Website")
         self.company_web.grid(row=1, column=0, padx=20, pady=10)
+        self.company_web_user = customtkinter.CTkLabel(self.company_frame, text='')
+        self.company_web_user.grid(row=1, column=1, padx=20, pady=10)
 
         # job info
         self.job_info_frame = customtkinter.CTkFrame(self.jp_frame)
         self.job_info_frame.grid(row=1, column=0, padx=20, pady=20)
         self.position = customtkinter.CTkLabel(self.job_info_frame, text="Position")
         self.position.grid(row=0, column=0, padx=20, pady=10)
-        self.work_type = customtkinter.CTkLabel(self.job_info_frame, text="Work Type")
-        self.work_type.grid(row=1, column=0, padx=20, pady=10)
+        self.position_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.position_user.grid(row=0, column=1, padx=20, pady=10)
+
         self.location = customtkinter.CTkLabel(self.job_info_frame, text="Location")
-        self.location.grid(row=2, column=0, padx=20, pady=10)
+        self.location.grid(row=1, column=0, padx=20, pady=10)
+        self.location_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.location_user.grid(row=1, column=1, padx=20, pady=10)
+
+        self.commitment = customtkinter.CTkLabel(self.job_info_frame, text="Commitment")
+        self.commitment.grid(row=2, column=0, padx=20, pady=10)
+        self.commitment_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.commitment_user.grid(row=2, column=1, padx=20, pady=10)
+
+        self.work_type = customtkinter.CTkLabel(self.job_info_frame, text="Work Type")
+        self.work_type.grid(row=3, column=0, padx=20, pady=10)
+        self.work_type_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.work_type_user.grid(row=3, column=1, padx=20, pady=10)
+
         self.salary_top = customtkinter.CTkLabel(self.job_info_frame, text="Salary Top")
-        self.salary_top.grid(row=3, column=0, padx=20, pady=10)
+        self.salary_top.grid(row=4, column=0, padx=20, pady=10)
+        self.salary_top_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.salary_top_user.grid(row=4, column=1, padx=20, pady=10)
+
         self.salary_bottom = customtkinter.CTkLabel(self.job_info_frame, text="Salary Bottom")
-        self.salary_bottom.grid(row=4, column=0, padx=20, pady=10)
+        self.salary_bottom.grid(row=5, column=0, padx=20, pady=10)
+        self.salary_bottom_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.salary_bottom_user.grid(row=5, column=1, padx=20, pady=10)
+
         self.salary_type = customtkinter.CTkLabel(self.job_info_frame, text="Salary Type")
-        self.salary_type.grid(row=5, column=0, padx=20, pady=10)
+        self.salary_type.grid(row=6, column=0, padx=20, pady=10)
+        self.salary_type_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.salary_type_user.grid(row=6, column=1, padx=20, pady=10)
 
         # contact
         self.contact_frame = customtkinter.CTkFrame(self.jp_frame)
