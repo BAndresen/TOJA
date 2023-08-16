@@ -52,7 +52,6 @@ def create_toja_database(cursor: sqlite3.Cursor) -> None:
             event_id INTEGER PRIMARY KEY AUTOINCREMENT,
             date DATE,
             time DATE,
-            platform TEXT,
             note TEXT,
             status_id INTEGER NOT NULL,
             contact_id INTEGER,
@@ -131,23 +130,22 @@ def add_job(cursor: sqlite3.Cursor, conn: sqlite3.connect, position: str, compan
     conn.commit()
 
 
-def add_event(cursor: sqlite3.Cursor, conn: sqlite3.connect, date: str, time: str, platform: str,
+def add_event(cursor: sqlite3.Cursor, conn: sqlite3.connect, date: str, time: str,
               note: Union[str, None],
               status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
     query = '''
     INSERT INTO event(
         date,
         time,
-        platform,
         note,
         status_id,
         contact_id,
         job_id,
         user_id
         )
-    VALUES (?,?,?,?,?,?,?,?)
+    VALUES (?,?,?,?,?,?,?)
     '''
-    insert = (date, time, platform, note, status_id, contact_id, job_id, user_id)
+    insert = (date, time, note, status_id, contact_id, job_id, user_id)
     cursor.execute(query, insert)
     conn.commit()
 
@@ -219,10 +217,10 @@ def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_job(cursor, conn, "DevOps Engineer", "Cloud Innovations", "www.cloudinnovations.com", "Austin", "Full-time",
             "Engineering", 130000, 100000, "Annual", 1, "devops_engineer_description.pdf", 1)
 
-    add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True), 'likedin', None, 1, None, 1, 1)
-    add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True), 'indeed', None, 2, None, 2, 1)
-    add_event(cursor, conn, date_change(4, day=True), date_change(3, hour=True), 'likedin', None, 3, None, 3, 1)
-    add_event(cursor, conn, date_change(5, day=True, add=True), date_change(1, hour=True), 'likedin', None, 4, None, 4,
+    add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True),  None, 1, None, 1, 1)
+    add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True),  None, 2, None, 2, 1)
+    add_event(cursor, conn, date_change(4, day=True), date_change(3, hour=True),  None, 3, None, 3, 1)
+    add_event(cursor, conn, date_change(5, day=True, add=True), date_change(1, hour=True), None, 4, None, 4,
               1)
 
     add_contact(cursor, conn, "John", "Smith", "john.smith@example.com", "123-456-7890", "Hiring Manager", 1, 1)
