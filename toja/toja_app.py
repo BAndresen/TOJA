@@ -1,4 +1,3 @@
-import customtkinter
 
 from view import HomeView
 from model import Model

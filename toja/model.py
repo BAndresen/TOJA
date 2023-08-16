@@ -1,7 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-import datetime
 import os
 import sqlite3
 
@@ -9,6 +8,7 @@ from sql_query import create_toja_database, add_sample_data, home_view_listbox
 
 if TYPE_CHECKING:
     from pathlib import Path
+
 
 class Model:
     def __init__(self, db_file_path: Path, sample_data=False):
@@ -34,7 +34,7 @@ class Model:
     def close_db_connections(self):
         self.conn.close()
 
-    def get_job_data(self, job_id: int):
+    def get_job_data(self, job_id: str) -> tuple:
         query = '''
          SELECT
              company,
@@ -53,7 +53,7 @@ class Model:
         results = self.cursor.fetchall()
         return results[0]
 
-    def delete_job(self, job_id: int):
+    def delete_job(self, job_id: str) -> None:
         query = '''
         DELETE
         FROM job
@@ -65,7 +65,7 @@ class Model:
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,
                     salary_top: int, salary_bottom: int,
-                    salary_type: str, resume:float, job_description_file: str, user_id: int):
+                    salary_type: str, resume: float, job_description_file: str, user_id: int) -> None:
         query = '''
         INSERT INTO job(
              position,
@@ -89,16 +89,3 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
-#
-# self.new_job.position_title_entry.get(),
-# self.new_job.company_name_entry.get(),
-# self.new_job.company_website_entry.get(),
-# self.new_job.job_location_entry.get(),
-# self.new_job.job_type_entry.get(),
-# self.new_job.location_type_entry.get(),
-# self.new_job.salary_top_entry.get(),
-# self.new_job.salary_bottom_entry.get(),
-# self.new_job.salary_type_entry.get(),
-# self.new_job.resume_version_entry.get(),
-# f'{datetime.today()}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
-# 1

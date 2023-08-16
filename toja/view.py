@@ -193,7 +193,7 @@ class NewJob:
 
 
 class JobProfile:
-    def __init__(self, root, job_id):
+    def __init__(self, root):
         self.root = root
         self.jp_window = customtkinter.CTkToplevel(root)
 

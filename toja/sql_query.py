@@ -16,9 +16,6 @@ def home_view_listbox(cursor: sqlite3.Cursor) -> list:
     return results
 
 
-
-
-
 def create_toja_database(cursor: sqlite3.Cursor) -> None:
     # Create the user table
     cursor.execute('''
@@ -110,7 +107,7 @@ def add_user(cursor: sqlite3.Cursor, conn: sqlite3.connect, name: str, points: i
 def add_job(cursor: sqlite3.Cursor, conn: sqlite3.connect, position: str, company: str, website: str, location: str,
             commitment: str, work_type: str, salary_top: int, salary_bottom: int,
             salary_type: str,
-            resume_version: float, job_description_file: str, user_id: int):
+            resume_version: float, job_description_file: str, user_id: int) -> None:
     query = '''
     INSERT INTO job(
         position,
@@ -207,7 +204,7 @@ def add_status(cursor: sqlite3.Cursor, conn: sqlite3.connect, status: str, point
     conn.commit()
 
 
-def add_sample_data(cursor, conn):
+def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_user(cursor, conn, "brendan", 0)
 
     add_job(cursor, conn, "Software Engineer", "Tech Innovators", "www.techinnovators.com", "San Francisco",
@@ -224,7 +221,8 @@ def add_sample_data(cursor, conn):
     add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True), 'likedin', None, 1, None, 1, 1)
     add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True), 'indeed', None, 2, None, 2, 1)
     add_event(cursor, conn, date_change(4, day=True), date_change(3, hour=True), 'likedin', None, 3, None, 3, 1)
-    add_event(cursor, conn, date_change(5, day=True, add=True), date_change(1, hour=True), 'likedin', None, 4, None, 4, 1)
+    add_event(cursor, conn, date_change(5, day=True, add=True), date_change(1, hour=True), 'likedin', None, 4, None, 4,
+              1)
 
     add_contact(cursor, conn, "John", "Smith", "john.smith@example.com", "123-456-7890", "Hiring Manager", 1, 1)
     add_contact(cursor, conn, "Jane", "Doe", "jane.doe@example.com", "987-654-3210", "Recruitment Lead", 2, 1)

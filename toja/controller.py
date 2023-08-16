@@ -26,9 +26,9 @@ class Controller:
         for item in home_listbox:
             self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
-    def open_job_profile(self, event):
+    def open_job_profile(self, event: str) -> None:
         self.job_id = (event.split())[0]
-        self.job_profile = JobProfile(self.view, self.job_id)
+        self.job_profile = JobProfile(self.view)
         results = self.model.get_job_data(self.job_id)
         self.job_profile.delete_button.configure(command=self.delete)
 
