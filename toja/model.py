@@ -46,3 +46,13 @@ class Model:
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
         return results[0]
+
+    def delete_job(self, job_id: int):
+        query = '''
+        DELETE
+        FROM job
+        WHERE job_id = ?
+        '''
+        self.cursor.execute(query,(job_id,))
+        self.conn.commit()
+

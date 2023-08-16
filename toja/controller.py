@@ -19,16 +19,23 @@ class Controller:
         self.update_home_listbox()
 
     def update_home_listbox(self):
+        self.view.job_list_box.delete("all")
         home_listbox = self.model.get_all()
         for item in home_listbox:
             self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
     def open_job_profile(self, event):
-        job_id = (event.split())[0]
-        self.job_profile = JobProfile(self.view, job_id)
-        results = self.model.get_job_data(job_id)
+        self.job_id = (event.split())[0]
+        self.job_profile = JobProfile(self.view, self.job_id)
+        results = self.model.get_job_data(self.job_id)
+        self.job_profile.delete_button.configure(command=self.delete)
 
         self.job_profile.company_name_user.configure(text=results[0])
+
+    def delete(self):
+        self.model.delete_job(self.job_id)
+        self.job_profile.jp_window.destroy()
+        self.update_home_listbox()
 
     def run(self):
         self.view.mainloop()
