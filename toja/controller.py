@@ -1,4 +1,4 @@
-from view import HomeView, NewJob, JobProfile
+from view import HomeView, NewJob, JobProfile, NewEvent
 from model import Model
 from datetime import datetime
 
@@ -67,7 +67,13 @@ class Controller:
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view)
-        self.new_job.submit_button.configure(command=self.submit_new_job)
+        # self.new_job.submit_button.configure(command=self.submit_new_job)
+        self.new_job.submit_button.configure(command=self.open_new_event)
+
+    def open_new_event(self):
+        self.new_job.aj_window.destroy()
+        self.open_new_event = NewEvent(self.view)
+
 
     def submit_new_job(self):
         self.model.add_new_job(

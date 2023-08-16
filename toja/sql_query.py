@@ -153,7 +153,8 @@ def add_event(cursor: sqlite3.Cursor, conn: sqlite3.connect, date: str, time: st
 
 
 def date_change(unit: int, day=False, hour=False, add=False) -> str:
-    """Change time by day or hour by unit. default subtract, add=True to add"""
+    """Change day or hour by unit. default subtract, add=True to add unit time.
+    Used to insert relevant datetime values into new sample database"""
     previous_time = None
     current_time = datetime.datetime.now()
     if day:
