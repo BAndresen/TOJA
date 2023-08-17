@@ -1,5 +1,5 @@
 
-from view import HomeView
+from toja.views.home_view import HomeView
 from model import Model
 from controller import Controller
 from pathlib import Path

@@ -1,4 +1,8 @@
-from view import HomeView, NewJob, JobProfile, NewEvent
+# from toja.views.view import HomeView, NewJob, JobProfile, NewEvent
+from views.new_job import NewJob
+from views.job_profile import JobProfile
+from views.home_view import HomeView
+from views.new_event import NewEvent
 from model import Model
 from datetime import datetime
 
