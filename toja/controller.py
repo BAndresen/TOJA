@@ -1,3 +1,4 @@
+import tkinter
 from datetime import datetime
 
 from views.new_job import NewJob
@@ -25,13 +26,21 @@ class Controller:
         self.update_home_listbox()
 
     def update_home_listbox(self):
+
         self.view.job_list_box.delete("all")
+
+        # self.view.job_list_box.delete(0,tkinter.END)
+
         home_listbox = self.model.get_all()
         for item in home_listbox:
             self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
+            # self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")
 
-    def open_job_profile(self, event: str) -> None:
-        self.job_id = (event.split())[0]
+    def open_job_profile(self, event: tkinter.Event) -> None:
+        # event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()[0]))
+
+        event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
+        self.job_id = (event_str.split())[0]
         self.job_profile = JobProfile(self.view)
         results = self.model.get_job_data(self.job_id)
         self.job_profile.delete_button.configure(command=self.delete)

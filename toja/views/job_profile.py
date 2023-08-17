@@ -83,8 +83,8 @@ class JobProfile:
         self.job_description_label = customtkinter.CTkLabel(self.job_tabview.tab("Description"), text="Description")
         self.job_description_label.grid(row=0, column=0)
 
-        self.event_label = CTkListbox(self.job_tabview.tab("Event"))
-        self.event_label.grid(row=0, column=0)
+        # self.event_label = CTkListbox(self.jp_frame)
+        # self.event_label.grid(row=0, column=0)
 
         # buttons
         self.update_button = customtkinter.CTkButton(self.jp_frame, text="Update")
