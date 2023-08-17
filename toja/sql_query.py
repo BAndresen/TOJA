@@ -234,3 +234,7 @@ def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_status(cursor, conn, "submit_form", 3)
     add_status(cursor, conn, "interview", 10)
     add_status(cursor, conn, "offer", 50)
+    add_status(cursor, conn, "offer_accepted", 50)
+    add_status(cursor, conn, "meeting", 50)
+
+

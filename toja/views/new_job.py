@@ -12,7 +12,7 @@ class NewJob:
         # self.grid_rowconfigure(0, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.aj_window)
-        self.main_frame.grid(row=0, column=1, padx=50, pady=50, sticky="nsew")
+        self.main_frame.grid(row=0, column=0, padx=50, pady=50, sticky="nsew")
 
         self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
         self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=2)
@@ -76,5 +76,39 @@ class NewJob:
         self.job_description = customtkinter.CTkTextbox(self.main_frame)
         self.job_description.grid(row=11, column=0, columnspan=2, sticky='ew')
 
-        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Next")
+        self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
+        self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
+
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
+                                                                                    'prospect',
+                                                                                    'submit_form',
+                                                                                    'interview',
+                                                                                    'meeting',
+                                                                                    'offer',
+                                                                                    'offer_accepted'], width=150)
+        self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
+        self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
+        self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
+        self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
+        self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')
+        self.day_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.time_entry = customtkinter.CTkEntry(self.event_info_frame)
+        self.time_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
+        self.time_label = customtkinter.CTkLabel(self.event_info_frame, text='Time')
+        self.time_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.contact_entry = customtkinter.CTkComboBox(self.event_info_frame, values=["None"], width=150)
+        self.contact_entry.grid(row=3, column=1, padx=(5, 20), pady=10)
+        self.contact_label = customtkinter.CTkLabel(self.event_info_frame, text='Contact')
+        self.contact_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.note_entry = customtkinter.CTkTextbox(self.event_info_frame)
+        self.note_entry.grid(row=4, column=1, padx=(5, 20), pady=10)
+        self.note_label = customtkinter.CTkLabel(self.event_info_frame, text='Notes')
+        self.note_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
+
+        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit")
         self.submit_button.grid(row=12, column=1, padx=20, pady=20)

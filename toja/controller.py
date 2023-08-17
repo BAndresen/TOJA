@@ -1,10 +1,10 @@
-# from toja.views.view import HomeView, NewJob, JobProfile, NewEvent
+from datetime import datetime
+
 from views.new_job import NewJob
 from views.job_profile import JobProfile
 from views.home_view import HomeView
 from views.new_event import NewEvent
 from model import Model
-from datetime import datetime
 
 
 class Controller:
@@ -72,7 +72,7 @@ class Controller:
     def open_job_submit(self):
         self.new_job = NewJob(self.view)
         # self.new_job.submit_button.configure(command=self.submit_new_job)
-        self.new_job.submit_button.configure(command=self.open_new_event)
+        self.new_job.submit_button.configure(command=self.submit_new_job)
 
     def open_new_event(self):
         self.new_job.aj_window.destroy()
@@ -92,7 +92,12 @@ class Controller:
             self.new_job.salary_type_entry.get(),
             self.new_job.resume_version_entry.get(),
             f'{self.today}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
-            1
+            1,
+            self.new_job.day_entry.get(),
+            self.new_job.time_entry.get(),
+            self.new_job.note_entry.get("1.0","end-1c"),
+            self.new_job.event_entry.get(),
+            None,
         )
         self.update_home_listbox()
         self.new_job.aj_window.destroy()

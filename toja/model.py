@@ -1,6 +1,5 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
-
+from typing import TYPE_CHECKING, Union
 import os
 import sqlite3
 
@@ -65,7 +64,8 @@ class Model:
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,
                     salary_top: int, salary_bottom: int,
-                    salary_type: str, resume: float, job_description_file: str, user_id: int) -> None:
+                    salary_type: str, resume: float, job_description_file: str, user_id: int,
+                    date, time, note, status, contact_id) -> None:
         query = '''
         INSERT INTO job(
              position,
@@ -86,6 +86,66 @@ class Model:
         insert = (
             position, company, website, location, commitment, work_type, salary_top, salary_bottom, salary_type,
             resume, job_description_file, user_id)
+
+        self.cursor.execute(query, insert)
+
+        # add to event table
+        job_id = self.cursor.lastrowid
+        status_id = self.get_status_id(status)[0][0]
+
+        query_event = '''
+        INSERT INTO event(
+            date,
+            time,
+            note,
+            status_id,
+            contact_id,
+            job_id,
+            user_id
+            )
+        VALUES (?,?,?,?,?,?,?)
+        '''
+        insert_event = (date, time, note, status_id, contact_id, job_id, user_id)
+        self.cursor.execute(query_event, insert_event)
+        self.conn.commit()
+
+        self.conn.commit()
+
+    def add_event(self, date: str, time: str,
+                  note: Union[str, None],
+                  status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
+        query = '''
+        INSERT INTO event(
+            date,
+            time,
+            note,
+            status_id,
+            contact_id,
+            job_id,
+            user_id
+            )
+        VALUES (?,?,?,?,?,?,?)
+        '''
+        insert = (date, time, note, status_id, contact_id, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
 
+    def get_status_id(self, status: str):
+        query = '''
+        SELECT status_id
+        FROM status
+        WHERE status = ?'''
+        print(status)
+
+        self.cursor.execute(query, (status,))
+        results = self.cursor.fetchall()
+        print(results)
+        print(type(results))
+        return results
+
+    def get_job_id_event(self):
+        query = '''
+        SELECT job_id
+        FROM job
+        LIMIT 1
+        '''
