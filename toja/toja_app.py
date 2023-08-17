@@ -15,6 +15,5 @@ def run_toja_app() -> None:
     controller = Controller(view, model)
     controller.run()
 
-
 if __name__ == '__main__':
     run_toja_app()

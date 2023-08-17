@@ -26,19 +26,15 @@ class Controller:
         self.update_home_listbox()
 
     def update_home_listbox(self):
-
-        self.view.job_list_box.delete("all")
-
-        # self.view.job_list_box.delete(0,tkinter.END)
+        # self.view.job_list_box.delete("all")  # ------ CTKlisbox
+        self.view.job_list_box.delete(0, tkinter.END)  # -------tkinter Listbox
 
         home_listbox = self.model.get_all()
         for item in home_listbox:
-            self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
-            # self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")
+            # self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")  # ------ CTKlisbox
+            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}") # ----- tkinter Listbox
 
     def open_job_profile(self, event: tkinter.Event) -> None:
-        # event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()[0]))
-
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         self.job_profile = JobProfile(self.view)
@@ -80,13 +76,11 @@ class Controller:
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view)
-        # self.new_job.submit_button.configure(command=self.submit_new_job)
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
     def open_new_event(self):
         self.new_job.aj_window.destroy()
         self.open_new_event = NewEvent(self.view)
-
 
     def submit_new_job(self):
         self.model.add_new_job(
@@ -104,7 +98,7 @@ class Controller:
             1,
             self.new_job.day_entry.get(),
             self.new_job.time_entry.get(),
-            self.new_job.note_entry.get("1.0","end-1c"),
+            self.new_job.note_entry.get("1.0", "end-1c"),
             self.new_job.event_entry.get(),
             None,
         )

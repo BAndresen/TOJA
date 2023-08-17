@@ -76,12 +76,12 @@ class JobProfile:
         self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
 
         # description
-        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=400)
-        self.job_tabview.grid(row=4, column=0, columnspan=3, padx=20, pady=20)
-        self.job_tabview.add("Description")
-        self.job_tabview.add("Event")
-        self.job_description_label = customtkinter.CTkLabel(self.job_tabview.tab("Description"), text="Description")
-        self.job_description_label.grid(row=0, column=0)
+        # self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=400)
+        # self.job_tabview.grid(row=4, column=0, columnspan=3, padx=20, pady=20)
+        # self.job_tabview.add("Description")
+        # self.job_tabview.add("Event")
+        # self.job_description_label = customtkinter.CTkLabel(self.job_tabview.tab("Description"), text="Description")
+        # self.job_description_label.grid(row=0, column=0)
 
         # self.event_label = CTkListbox(self.jp_frame)
         # self.event_label.grid(row=0, column=0)

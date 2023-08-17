@@ -49,8 +49,9 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid_columnconfigure(0, weight=1)
 
         # Job ListBox
-        self.job_list_box = CTkListbox(self.home_frame)
-        # self.job_list_box = tkinter.Listbox(self.home_frame)
+        # self.job_list_box = CTkListbox(self.home_frame)  # -------- CTKListbox
+        self.job_list_box = tkinter.Listbox(self.home_frame)  # --------- tkinter.Listbox
+
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
 
         # Motivational Stats Board
@@ -83,8 +84,6 @@ class HomeView(customtkinter.CTk):
         self.recent_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.recent_events_label = customtkinter.CTkLabel(self.recent_events_frame, text="Recent Events")
         self.recent_events_label.grid(row=0, column=0)
-        # self.recent_events_listbox = CTkListbox(self.recent_events_frame)
-        # self.recent_events_listbox.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame)
@@ -93,8 +92,6 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Recent Events")
         self.upcoming_events_label.grid(row=0, column=0)
-        # self.upcoming_events_listbox = CTkListbox(self.upcoming_events_frame)
-        # self.upcoming_events_listbox.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         # --------------- Analytics -------------- #
 
