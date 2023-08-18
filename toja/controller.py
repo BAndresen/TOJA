@@ -1,6 +1,7 @@
 import tkinter
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 from views.new_job import NewJob
 from views.job_profile import JobProfile
@@ -86,9 +87,15 @@ class Controller:
         self.open_new_event = NewEvent(self.view)
 
     def submit_new_job(self):
+        self.company = self.new_job.company_name_entry.get()
+        self.position = self.new_job.position_title_entry.get()
+        self.job_file = f'{self.today}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
+        job_text = self.new_job.job_description_textbox.get("1.0", "end-1c")
+        self.job_file = self.check_job_file(self.job_file, job_text)
+
         self.model.add_new_job(
-            self.new_job.position_title_entry.get(),
-            self.new_job.company_name_entry.get(),
+            self.position,
+            self.company,
             self.new_job.company_website_entry.get(),
             self.new_job.job_location_entry.get(),
             self.new_job.job_type_entry.get(),
@@ -97,7 +104,7 @@ class Controller:
             self.new_job.salary_bottom_entry.get(),
             self.new_job.salary_type_entry.get(),
             self.new_job.resume_version_entry.get(),
-            f'{self.today}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
+            self.job_file,
             1,
             self.new_job.day_entry.get(),
             self.new_job.time_entry.get(),
@@ -105,14 +112,20 @@ class Controller:
             self.new_job.event_entry.get(),
             None,
         )
-        self.save_job_description()
+        if self.job_file:
+            self.save_job_description(job_text)
+
         self.update_home_listbox()
         self.new_job.aj_window.destroy()
 
-    def save_job_description(self):
-        job_text = self.new_job.job_description_textbox.get("1.0", "end-1c")
+    def check_job_file(self, job_file, job_text) -> Union[str, None]:
+        if job_text == "":
+            return None
+        else:
+            return job_file[0]
+
+    def save_job_description(self, job_text):
         job_file_path = (f'{self.job_description_location}\\{self.today}_{self.new_job.company_name_entry.get()}_'
                          f'{self.new_job.position_title_entry.get()}.txt')
-        print(job_file_path)
         with open(job_file_path, 'w') as file:
             file.write(job_text)
