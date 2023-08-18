@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Union
 import os
 import sqlite3
 
-from sql_query import create_toja_database, add_sample_data, home_view_listbox
+from sql_query import create_toja_database, add_sample_data
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -28,8 +28,20 @@ class Model:
             add_sample_data(self.cursor, self.conn)
 
     def get_all(self):
-        home_listbox = home_view_listbox(self.cursor)
+        home_listbox = self.home_view_listbox()
         return home_listbox
+
+    def home_view_listbox(self) -> list:
+        query = '''
+        SELECT
+            job_id,
+            company,
+            position
+        FROM job
+        '''
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        return results
 
     def close_db_connections(self):
         self.conn.close()
@@ -134,7 +146,7 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
-    def get_status_id(self, status: str):
+    def get_status_id(self, status: str) -> list:
         query = '''
         SELECT status_id
         FROM status
@@ -144,18 +156,27 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_job_id_event(self):
-        query = '''
-        SELECT job_id
-        FROM job
-        LIMIT 1
-        '''
-
     def open_job_description(self, job_file: Path) -> str:
         with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
             results = file.read()
         return results
 
-    def save_job_description(self, job_file, job_text):
-        with open(job_file, 'w') as file:
+    def save_job_description(self, job_file: str, job_text: str) -> None:
+
+        with open(f'{self.job_description_parent}/{job_file}', 'w') as file:
             file.write(job_text)
+
+    def get_event(self, job_id: int) -> list:
+        query = '''
+        SELECT
+            e.date,
+            e.time,
+            e.note,
+            s.status
+        FROM event e
+           JOIN status s USING(status_id)
+        WHERE e.job_id = ?
+        '''
+        self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        return results

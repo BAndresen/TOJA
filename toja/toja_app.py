@@ -10,8 +10,6 @@ DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database\\toja_database.db'])
 JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY, 'job_descriptions'])
 TEST_JOB_DESCRIPTION_DIRECTORY = Path(*[GRANDPARENT_DIRECTORY], 'tests\\test_job_descriptions')
 
-print(TEST_JOB_DESCRIPTION_DIRECTORY)
-
 
 def run_toja_app() -> None:
     model = Model(DATABASE_FILE_PATH,
