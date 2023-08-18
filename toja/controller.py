@@ -38,7 +38,7 @@ class Controller:
             # self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")  # ------ CTKlistbox
             self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")  # ----- tkinter Listbox
 
-    def open_job_profile(self) -> None:
+    def open_job_profile(self, event: tkinter.Event) -> None:
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         self.job_profile = JobProfile(self.view)
