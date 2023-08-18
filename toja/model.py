@@ -135,12 +135,9 @@ class Model:
         SELECT status_id
         FROM status
         WHERE status = ?'''
-        print(status)
 
         self.cursor.execute(query, (status,))
         results = self.cursor.fetchall()
-        print(results)
-        print(type(results))
         return results
 
     def get_job_id_event(self):

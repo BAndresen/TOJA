@@ -1,5 +1,6 @@
 import tkinter
 from datetime import datetime
+from pathlib import Path
 
 from views.new_job import NewJob
 from views.job_profile import JobProfile
@@ -9,11 +10,12 @@ from model import Model
 
 
 class Controller:
-    def __init__(self, view: HomeView, model: Model):
+    def __init__(self, view: HomeView, model: Model, job_description_location: Path):
         self.today = datetime.today().date()
         self.new_job = None
         self.view = view
         self.model = model
+        self.job_description_location = job_description_location
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -23,16 +25,17 @@ class Controller:
 
         # HomeView ListBox
         self.view.job_list_box.bind('<Double-Button-1>', self.open_job_profile)
+        self.view.job_list_box.bind('<Return>', self.open_job_profile)
         self.update_home_listbox()
 
     def update_home_listbox(self):
-        # self.view.job_list_box.delete("all")  # ------ CTKlisbox
+        # self.view.job_list_box.delete("all")  # ------ CTKlistbox
         self.view.job_list_box.delete(0, tkinter.END)  # -------tkinter Listbox
 
         home_listbox = self.model.get_all()
         for item in home_listbox:
-            # self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")  # ------ CTKlisbox
-            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}") # ----- tkinter Listbox
+            # self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")  # ------ CTKlistbox
+            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")  # ----- tkinter Listbox
 
     def open_job_profile(self, event: tkinter.Event) -> None:
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
@@ -102,5 +105,14 @@ class Controller:
             self.new_job.event_entry.get(),
             None,
         )
+        self.save_job_description()
         self.update_home_listbox()
         self.new_job.aj_window.destroy()
+
+    def save_job_description(self):
+        job_text = self.new_job.job_description_textbox.get("1.0", "end-1c")
+        job_file_path = (f'{self.job_description_location}\\{self.today}_{self.new_job.company_name_entry.get()}_'
+                         f'{self.new_job.position_title_entry.get()}.txt')
+        print(job_file_path)
+        with open(job_file_path, 'w') as file:
+            file.write(job_text)

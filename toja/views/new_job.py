@@ -73,8 +73,8 @@ class NewJob:
         self.job_description_label = customtkinter.CTkLabel(self.main_frame, text='Job Description')
         self.job_description_label.grid(row=10, column=0)
 
-        self.job_description = customtkinter.CTkTextbox(self.main_frame)
-        self.job_description.grid(row=11, column=0, columnspan=2, sticky='ew')
+        self.job_description_textbox = customtkinter.CTkTextbox(self.main_frame)
+        self.job_description_textbox.grid(row=11, column=0, columnspan=2, sticky='ew')
 
         self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
         self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
