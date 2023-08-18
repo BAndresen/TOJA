@@ -12,7 +12,7 @@ class HomeView(customtkinter.CTk):
         self.frame = "home"
         self.title("Track and Optimize your Job Application Process")
         self.geometry('1200x650')
-        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(1, weight=4)
         self.grid_rowconfigure(0, weight=1)
 
         # Right Side Navigation Frame
@@ -57,14 +57,14 @@ class HomeView(customtkinter.CTk):
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)
         self.stat_board_frame.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
-        self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="motivational design stats")
+        self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="motivational design stats (coming soon)")
         self.stat_label.grid(row=0, column=0, padx=150, pady=150)
 
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame)
         self.calendar_frame.grid(row=2, columnspan=2, column=0, padx=20, pady=20, sticky="nsew")
         self.calendar_label_placeholder = (customtkinter.CTkLabel(
-            self.calendar_frame, text="graph - days vs events"))
+            self.calendar_frame, text="graph - days vs events (coming soon)"))
         self.calendar_label_placeholder.grid(row=0, column=1, padx=50, pady=50)
 
         # Add New Job Button

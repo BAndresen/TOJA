@@ -72,19 +72,18 @@ class JobProfile:
         # keywords
         self.keyword_frame = customtkinter.CTkFrame(self.jp_frame)
         self.keyword_frame.grid(row=0, column=2, rowspan=2, padx=20, pady=20)
-        self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords")
+        self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords (coming soon)")
         self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
 
-        # description
-        # self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=400)
-        # self.job_tabview.grid(row=4, column=0, columnspan=3, padx=20, pady=20)
-        # self.job_tabview.add("Description")
-        # self.job_tabview.add("Event")
-        # self.job_description_label = customtkinter.CTkLabel(self.job_tabview.tab("Description"), text="Description")
-        # self.job_description_label.grid(row=0, column=0)
+        #description
+        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=400)
+        self.job_tabview.grid(row=4, column=0, columnspan=3, padx=20, pady=20)
+        self.job_tabview.add("Description")
+        self.job_tabview.add("Event")
+        self.job_description_label = customtkinter.CTkLabel(self.job_tabview.tab("Description"), text="Description")
+        self.job_description_label.grid(row=0, column=0)
 
-        # self.event_label = CTkListbox(self.jp_frame)
-        # self.event_label.grid(row=0, column=0)
+
 
         # buttons
         self.update_button = customtkinter.CTkButton(self.jp_frame, text="Update")
