@@ -10,8 +10,9 @@ if TYPE_CHECKING:
 
 
 class Model:
-    def __init__(self, db_file_path: Path, sample_data=False):
+    def __init__(self, db_file_path: Path, job_description: Path, sample_data=False):
         self.db_file_path = db_file_path
+        self.job_description_parent = job_description
 
         # Check if database exists, if not create
         if not os.path.exists(self.db_file_path):
@@ -44,7 +45,10 @@ class Model:
              work_type,
              salary_top,
              salary_bottom,
-             salary_type
+             salary_type,
+             resume_version,
+             job_description_file
+             
          FROM job
          WHERE job_id = ?
          '''
@@ -146,3 +150,12 @@ class Model:
         FROM job
         LIMIT 1
         '''
+
+    def open_job_description(self, job_file: Path) -> str:
+        with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
+            results = file.read()
+        return results
+
+    def save_job_description(self, job_file, job_text):
+        with open(job_file, 'w') as file:
+            file.write(job_text)

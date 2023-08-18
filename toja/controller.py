@@ -11,12 +11,11 @@ from model import Model
 
 
 class Controller:
-    def __init__(self, view: HomeView, model: Model, job_description_location: Path):
+    def __init__(self, view: HomeView, model: Model):
         self.today = datetime.today().date()
         self.new_job = None
         self.view = view
         self.model = model
-        self.job_description_location = job_description_location
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -43,6 +42,7 @@ class Controller:
         self.job_id = (event_str.split())[0]
         self.job_profile = JobProfile(self.view)
         results = self.model.get_job_data(self.job_id)
+        print(results)
         self.job_profile.delete_button.configure(command=self.delete)
 
         self.job_profile.company_name_user.configure(text=results[0])
@@ -54,6 +54,10 @@ class Controller:
         self.job_profile.salary_top_user.configure(text=results[6])
         self.job_profile.salary_bottom_user.configure(text=results[7])
         self.job_profile.salary_type_user.configure(text=results[8])
+        self.job_profile.resume_user.configure(text=results[9])
+
+        self.job_profile.job_description_label.configure(text=self.model.open_job_description(results[10]))
+
 
     def delete(self):
         self.model.delete_job(self.job_id)
@@ -113,7 +117,7 @@ class Controller:
             None,
         )
         if self.job_file:
-            self.save_job_description(job_text)
+            self.model.save_job_description(self.job_file,job_text)
 
         self.update_home_listbox()
         self.new_job.aj_window.destroy()
@@ -124,8 +128,7 @@ class Controller:
         else:
             return job_file[0]
 
-    def save_job_description(self, job_text):
-        job_file_path = (f'{self.job_description_location}\\{self.today}_{self.new_job.company_name_entry.get()}_'
-                         f'{self.new_job.position_title_entry.get()}.txt')
-        with open(job_file_path, 'w') as file:
-            file.write(job_text)
+
+    # def load_job_description(self, job_file:Path):
+    #     results = self.job_profile.job_description_label.configure(text=self.model.open_job_description(job_file))
+    #     return results

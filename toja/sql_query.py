@@ -207,15 +207,15 @@ def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_user(cursor, conn, "brendan", 0)
 
     add_job(cursor, conn, "Software Engineer", "Tech Innovators", "www.techinnovators.com", "San Francisco",
-            "Full-time", "Engineering", 120000, 95000, "Annual", 2, "software_engineer_description.pdf", 1),
+            "Full-time", "Engineering", 120000, 95000, "Annual", 2, "software_engineer_description.txt", 1),
     add_job(cursor, conn, "Data Analyst", "Data Insights Inc.", "www.datainsights.com", "New York", "Part-time",
-            "Data Science", 90000, 70000, "Annual", 1, "data_analyst_description.pdf", 1),
+            "Data Science", 90000, 70000, "Annual", 1, "data_analyst_description.txt", 1),
     add_job(cursor, conn, "Web Developer", "Web Solutions Ltd.", "www.websolutions.com", "London", "Full-time",
-            "Development", 110000, 85000, "Annual", 1, "web_developer_description.pdf", 1),
+            "Development", 110000, 85000, "Annual", 1, "web_developer_description.txt", 1),
     add_job(cursor, conn, "UX Designer", "UserXperience Labs", "www.uxlabs.com", "Seattle", "Full-time", "Design",
-            100000, 80000, "Annual", 2, "ux_designer_description.pdf", 1),
+            100000, 80000, "Annual", 2, "ux_designer_description.txt", 1),
     add_job(cursor, conn, "DevOps Engineer", "Cloud Innovations", "www.cloudinnovations.com", "Austin", "Full-time",
-            "Engineering", 130000, 100000, "Annual", 1, "devops_engineer_description.pdf", 1)
+            "Engineering", 130000, 100000, "Annual", 1, "devops_engineer_description.txt", 1)
 
     add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True),  None, 1, None, 1, 1)
     add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True),  None, 2, None, 2, 1)

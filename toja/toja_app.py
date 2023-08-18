@@ -5,14 +5,22 @@ from model import Model
 from controller import Controller
 
 BASE_DIRECTORY = Path(__file__).resolve().parent
+GRANDPARENT_DIRECTORY = Path(BASE_DIRECTORY).resolve().parent
 DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database\\toja_database.db'])
-JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY], 'job_descriptions')
+JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY, 'job_descriptions'])
+TEST_JOB_DESCRIPTION_DIRECTORY = Path(*[GRANDPARENT_DIRECTORY], 'tests\\test_job_descriptions')
+
+print(TEST_JOB_DESCRIPTION_DIRECTORY)
 
 
 def run_toja_app() -> None:
-    model = Model(DATABASE_FILE_PATH, sample_data=True)  # sample_data=True to add sample data
+    model = Model(DATABASE_FILE_PATH,
+                  TEST_JOB_DESCRIPTION_DIRECTORY)
+    # JOB_DESCRIPTION_DIRECTORY)
+    # sample_data=True to add sample data
+
     view = HomeView()
-    controller = Controller(view, model, JOB_DESCRIPTION_DIRECTORY)
+    controller = Controller(view, model)
     controller.run()
 
 
