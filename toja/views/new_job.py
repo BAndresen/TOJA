@@ -100,15 +100,10 @@ class NewJob:
         self.time_label = customtkinter.CTkLabel(self.event_info_frame, text='Time')
         self.time_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.contact_entry = customtkinter.CTkComboBox(self.event_info_frame, values=["None"], width=150)
-        self.contact_entry.grid(row=3, column=1, padx=(5, 20), pady=10)
-        self.contact_label = customtkinter.CTkLabel(self.event_info_frame, text='Contact')
-        self.contact_label.grid(row=3, column=0, padx=(20, 5), pady=10, sticky="e")
-
         self.note_entry = customtkinter.CTkTextbox(self.event_info_frame)
-        self.note_entry.grid(row=4, column=1, padx=(5, 20), pady=10)
+        self.note_entry.grid(row=6, column=1, padx=(5, 20), pady=10)
         self.note_label = customtkinter.CTkLabel(self.event_info_frame, text='Notes')
-        self.note_label.grid(row=4, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.note_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit")
         self.submit_button.grid(row=12, column=1, padx=20, pady=20)
