@@ -70,17 +70,20 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.resume_user.grid(row=7, column=1, padx=20, pady=2)
 
+        # self.contact_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)
+        # self.contact_tabview.grid(row=1, column=1, columnspan=2, padx=20, pady=20)
+        # self.contact_tabview.add('Contacts')
+        # self.contact_tabview.add('Contacts')
         # contact
-        self.contact_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.contact_frame.grid(row=1, column=1)
-        self.contact_label = customtkinter.CTkLabel(self.contact_frame, text="Contacts")
-        self.contact_label.grid(row=0, column=0, padx=20, pady=20)
+        # self.contact_frame = customtkinter.CTkFrame(self.contact_tabview.tab())
+        # self.contact_frame.grid(row=1, column=1)
 
-        # keywords
-        self.keyword_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.keyword_frame.grid(row=0, column=1, rowspan=2, padx=20, pady=20)
-        self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords (coming soon)")
-        self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
+
+        # # keywords
+        # self.keyword_frame = customtkinter.CTkFrame(self.jp_frame)
+        # self.keyword_frame.grid(row=0, column=2, rowspan=1, padx=20, pady=20)
+        # self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords (coming soon)")
+        # self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
 
         # buttons
         self.update_button = customtkinter.CTkButton(self.jp_frame, text="Update")
@@ -92,11 +95,17 @@ class JobProfile:
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)
         self.job_tabview.grid(row=4, column=0, columnspan=3, padx=20, pady=20)
         self.job_tabview.add("Description")
-        self.job_tabview.add("Event")
+        self.job_tabview.add("Events")
+        self.job_tabview.add('Contacts')
+        self.job_tabview.add('Key Words')
+
         self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=702,
                                                                        height=300)
-        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Event'), width=120, height=19, bg="gray30")
-        self.event_scroll.grid(row=0, column=0)
-        self.job_description_scroll.grid(row=0, column=0)
+        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=120, height=19, bg="gray30",fg="gray70")
+        self.event_scroll.grid(row=0, column=0,padx=10, pady=10)
+        self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
         self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
         self.job_description_label.grid(row=0, column=0)
+
+        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), bg='gray30', width=120, height=19, fg="gray70")
+        self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)

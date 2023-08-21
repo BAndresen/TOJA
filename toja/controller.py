@@ -58,6 +58,8 @@ class Controller:
 
         self.job_profile.job_description_label.configure(text=self.model.open_job_description(results[10]))
         self.update_event_listbox()
+        self.update_contact_listbox()
+
 
 
     def delete(self):
@@ -135,3 +137,8 @@ class Controller:
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
+    def update_contact_listbox(self):
+        self.job_profile.contact_listbox.delete(0,tkinter.END)
+        contacts = self.model.get_contacts(self.job_id)
+        for item in contacts:
+            self.job_profile.contact_listbox.insert(tkinter.END, f'{item[0]} {item[1]} | {item[2]} | {item[3]} | {item[4]}')

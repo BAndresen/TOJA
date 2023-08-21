@@ -180,3 +180,19 @@ class Model:
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
         return results
+
+    def get_contacts(self, job_id: int) -> list:
+        query = '''
+        SELECT 
+            first_name,
+            last_name,
+            email,
+            phone,
+            position
+        FROM contact
+        WHERE job_id = ?
+        '''
+        self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        return results
+
