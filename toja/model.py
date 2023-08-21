@@ -156,6 +156,16 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
+    # def get_contact_id(self, contact: str) -> list:
+    #     query = '''
+    #     SELECT status_id
+    #     FROM status
+    #     WHERE status = ?'''
+    #
+    #     self.cursor.execute(query, (status,))
+    #     results = self.cursor.fetchall()
+    #     return results
+
     def open_job_description(self, job_file: Path) -> str:
         with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
             results = file.read()
@@ -184,6 +194,7 @@ class Model:
     def get_contacts(self, job_id: int) -> list:
         query = '''
         SELECT 
+            contact_id,
             first_name,
             last_name,
             email,

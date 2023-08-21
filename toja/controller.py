@@ -1,3 +1,4 @@
+import customtkinter
 import tkinter
 from datetime import datetime
 from pathlib import Path
@@ -46,6 +47,7 @@ class Controller:
         results = self.model.get_job_data(self.job_id)
         self.job_profile.delete_button.configure(command=self.delete)
         self.job_profile.new_contact_button.configure(command=self.add_contact)
+        self.job_profile.new_event_button.configure(command=self.open_new_event)
 
         self.job_profile.company_name_user.configure(text=results[0])
         self.job_profile.company_web_user.configure(text=results[1])
@@ -64,7 +66,7 @@ class Controller:
 
     def add_contact(self):
         self.contact = NewContact(self.view)
-        self.contact.submit_contact_button.configure(command= self.insert_contact)
+        self.contact.submit_contact_button.configure(command=self.insert_contact)
 
     def insert_contact(self):
         self.model.add_contact(
@@ -107,8 +109,28 @@ class Controller:
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
     def open_new_event(self):
-        self.new_job.aj_window.destroy()
-        self.open_new_event = NewEvent(self.view)
+        self.new_event = NewEvent(self.view)
+        contacts = self.model.get_contacts(self.job_id)
+        contact_list = []
+        for contact in contacts:
+            contact_list.append(f'{contact[0]}| {contact[1]} {contact[1]}')
+        self.new_event.contact_entry.configure(values=contact_list)
+        self.new_event.submit_event_button.configure(command=self.submit_new_event)
+
+    def submit_new_event(self):
+        contact_id = (self.new_event.contact_entry.get().split("|")[0])
+        status_id = self.model.get_status_id(self.new_event.event_entry.get())[0][0]
+
+        self.model.add_event(
+            self.new_event.day_entry.get(),
+            self.new_event.time_entry.get(),
+            self.new_event.note_entry.get("1.0", "end-1c"),
+            status_id,
+            contact_id,
+            self.job_id,
+            1)
+        self.update_event_listbox()
+        self.new_event.event_window.destroy()
 
     def submit_new_job(self):
         self.company = self.new_job.company_name_entry.get()
@@ -136,7 +158,7 @@ class Controller:
             None,
         )
         if self.job_file:
-            self.model.save_job_description(self.job_file,job_text)
+            self.model.save_job_description(self.job_file, job_text)
 
         self.update_home_listbox()
         self.new_job.aj_window.destroy()
@@ -152,10 +174,12 @@ class Controller:
 
         event_listbox = self.model.get_event(self.job_id)
         for item in event_listbox:
-            self.job_profile.event_scroll.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
+            self.job_profile.event_scroll.insert(tkinter.END,
+                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
     def update_contact_listbox(self):
-        self.job_profile.contact_listbox.delete(0,tkinter.END)
+        self.job_profile.contact_listbox.delete(0, tkinter.END)
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
-            self.job_profile.contact_listbox.insert(tkinter.END, f'{item[0]} {item[1]} | {item[2]} | {item[3]} | {item[4]}')
+            self.job_profile.contact_listbox.insert(tkinter.END,
+                                                    f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')

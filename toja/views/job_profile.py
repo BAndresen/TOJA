@@ -79,6 +79,8 @@ class JobProfile:
         self.delete_button.grid(row=2, column=1, pady=5, padx=10)
         self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="New Contact")
         self.new_contact_button.grid(row=3, column=1, pady=5, padx=10)
+        self.new_event_button = customtkinter.CTkButton(self.button_frame, text="New Event")
+        self.new_event_button.grid(row=4, column=1, pady=5, padx=10)
 
         # description
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)
