@@ -17,7 +17,7 @@ class JobProfile:
         self.jp_frame.grid(row=0, column=0, padx=20, pady=20)
         # company website
         self.company_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.company_frame.grid(row=0, column=0, padx=20, pady=20)
+        self.company_frame.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
         self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company")
         self.company_name.grid(row=0, column=0, padx=20, pady=2)
         self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='')
@@ -70,26 +70,15 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.resume_user.grid(row=7, column=1, padx=20, pady=2)
 
-        # self.contact_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)
-        # self.contact_tabview.grid(row=1, column=1, columnspan=2, padx=20, pady=20)
-        # self.contact_tabview.add('Contacts')
-        # self.contact_tabview.add('Contacts')
-        # contact
-        # self.contact_frame = customtkinter.CTkFrame(self.contact_tabview.tab())
-        # self.contact_frame.grid(row=1, column=1)
-
-
-        # # keywords
-        # self.keyword_frame = customtkinter.CTkFrame(self.jp_frame)
-        # self.keyword_frame.grid(row=0, column=2, rowspan=1, padx=20, pady=20)
-        # self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text="Keywords (coming soon)")
-        # self.keyword_label.grid(row=0, column=0, padx=20, pady=20)
-
         # buttons
-        self.update_button = customtkinter.CTkButton(self.jp_frame, text="Update")
-        self.update_button.grid(row=2, column=2, pady=5)
-        self.delete_button = customtkinter.CTkButton(self.jp_frame, text="Delete")
-        self.delete_button.grid(row=3, column=2, pady=5)
+        self.button_frame = customtkinter.CTkFrame(self.jp_frame)
+        self.button_frame.grid(row=1, column=1)
+        self.update_button = customtkinter.CTkButton(self.button_frame, text="Edit")
+        self.update_button.grid(row=1, column=1, pady=5, padx=10)
+        self.delete_button = customtkinter.CTkButton(self.button_frame, text="Delete")
+        self.delete_button.grid(row=2, column=1, pady=5, padx=10)
+        self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="New Contact")
+        self.new_contact_button.grid(row=3, column=1, pady=5, padx=10)
 
         # description
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)

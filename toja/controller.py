@@ -8,6 +8,7 @@ from views.new_job import NewJob
 from views.job_profile import JobProfile
 from views.home_view import HomeView
 from views.new_event import NewEvent
+from views.new_contact import NewContact
 from model import Model
 
 
@@ -44,6 +45,7 @@ class Controller:
         self.job_profile = JobProfile(self.view)
         results = self.model.get_job_data(self.job_id)
         self.job_profile.delete_button.configure(command=self.delete)
+        self.job_profile.new_contact_button.configure(command=self.add_contact)
 
         self.job_profile.company_name_user.configure(text=results[0])
         self.job_profile.company_web_user.configure(text=results[1])
@@ -60,7 +62,22 @@ class Controller:
         self.update_event_listbox()
         self.update_contact_listbox()
 
+    def add_contact(self):
+        self.contact = NewContact(self.view)
+        self.contact.submit_contact_button.configure(command= self.insert_contact)
 
+    def insert_contact(self):
+        self.model.add_contact(
+            self.contact.first_name_entry.get(),
+            self.contact.last_name_entry.get(),
+            self.contact.email_entry.get(),
+            self.contact.phone_entry.get(),
+            self.contact.position_entry.get(),
+            self.job_id,
+            1
+        )
+        self.update_contact_listbox()
+        self.contact.contact_window.destroy()
 
     def delete(self):
         self.model.delete_job(self.job_id)

@@ -196,3 +196,20 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
+    def add_contact(self, first_name: str, last_name: str, email: str, phone: str, position: str, job_id: int,
+                    user_id: int):
+        query = '''
+        INSERT INTO contact(
+            first_name,
+            last_name,
+            email,
+            phone,
+            position,
+            job_id,
+            user_id
+            )
+        VALUES (?,?,?,?,?,?,?)
+        '''
+        insert = (first_name, last_name, email, phone, position, job_id, user_id)
+        self.cursor.execute(query, insert)
+        self.conn.commit()
