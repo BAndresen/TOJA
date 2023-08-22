@@ -225,4 +225,8 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
+    def update_database_path(self, new_db:str):
+        self.user.config['database']['database_path'] = new_db
+        with open(self.user.config_file, "w") as file:
+            self.user.config.write(file)
 

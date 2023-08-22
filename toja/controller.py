@@ -2,6 +2,7 @@ import tkinter
 from datetime import datetime
 from typing import Union
 from webbrowser import open
+from tkinter import filedialog, messagebox
 
 from views.new_job import NewJob
 from views.job_profile import JobProfile
@@ -31,12 +32,18 @@ class Controller:
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='Create New')
-        self.view.file.add_command(label='Import')
+        self.view.file.add_command(label='Import', command=self.change_database)
         self.view.file.add_command(label='Export')
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
         self.update_home_listbox()
+
+    def change_database(self):
+        db_file = filedialog.askopenfilename()
+        self.model.update_database_path(db_file)
+        tkinter.messagebox.showinfo(message='Please Restart Program')
+
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
