@@ -1,9 +1,6 @@
-from pathlib import Path
-import configparser
-
 from views.home import HomeView
-from model import Model
-from controller import Controller, Config
+from model import Model, Config
+from controller import Controller
 
 
 def run_toja_app() -> None:
@@ -11,7 +8,7 @@ def run_toja_app() -> None:
     if user.is_user_new():
         user.initialize_user()
 
-    model = Model(user.get_database(), user.get_job_description_dir())
+    model = Model(user)
     view = HomeView()
     controller = Controller(view, model)
     controller.run()

@@ -2,17 +2,17 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Union
 import os
 import sqlite3
+from pathlib import Path
 
 from sql_query import create_toja_database, add_sample_data
-
-if TYPE_CHECKING:
-    from pathlib import Path
+from config import Config
 
 
 class Model:
-    def __init__(self, db_file_path: Path, job_description: Path, sample_data=False):
-        self.db_file_path = db_file_path
-        self.job_description_parent = job_description
+    def __init__(self, user: Config, sample_data=False):
+        self.user = user
+        self.db_file_path = user.get_database()
+        self.job_description_parent = user.get_job_description_dir()
 
         # Check if database exists, if not create
         if not os.path.exists(self.db_file_path):
@@ -224,3 +224,5 @@ class Model:
         insert = (first_name, last_name, email, phone, position, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
+
+
