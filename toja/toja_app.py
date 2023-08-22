@@ -1,22 +1,17 @@
 from pathlib import Path
+import configparser
 
 from views.home import HomeView
 from model import Model
-from controller import Controller
-
-BASE_DIRECTORY = Path(__file__).resolve().parent
-GRANDPARENT_DIRECTORY = Path(BASE_DIRECTORY).resolve().parent
-DATABASE_FILE_PATH = Path(*[BASE_DIRECTORY, 'database\\toja_database.db'])
-JOB_DESCRIPTION_DIRECTORY = Path(*[BASE_DIRECTORY, 'job_descriptions'])
-TEST_JOB_DESCRIPTION_DIRECTORY = Path(*[GRANDPARENT_DIRECTORY], 'tests\\test_job_descriptions')
+from controller import Controller, Config
 
 
 def run_toja_app() -> None:
-    model = Model(DATABASE_FILE_PATH,
-                  TEST_JOB_DESCRIPTION_DIRECTORY)
-    # JOB_DESCRIPTION_DIRECTORY)
-    # sample_data=True to add sample data
+    user = Config()
+    if user.is_user_new():
+        user.initialize_user()
 
+    model = Model(user.get_database(), user.get_job_description_dir())
     view = HomeView()
     controller = Controller(view, model)
     controller.run()
