@@ -11,5 +11,6 @@
 /tests/test_job_descriptions/
 /project_notes/
 /toja/database/toja_database.db
-/toja/config.ini
+*.ini
+
 

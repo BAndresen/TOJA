@@ -3,7 +3,7 @@ from model import Model, Config
 from controller import Controller
 
 
-def run_toja_app() -> None:
+def run_toja_app():
     user = Config()
     if user.is_user_new():
         user.initialize_user()
