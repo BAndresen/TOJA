@@ -1,5 +1,3 @@
-import tkinter
-
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
 
@@ -92,11 +90,15 @@ class JobProfile:
 
         self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=702,
                                                                        height=300)
-        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=120, height=19, bg="gray30",fg="gray70")
+        self.event_scroll = CTkListbox(self.job_tabview.tab('Events'), width=700, height=294)
         self.event_scroll.grid(row=0, column=0,padx=10, pady=10)
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
         self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
         self.job_description_label.grid(row=0, column=0)
 
-        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), bg='gray30', width=120, height=19, fg="gray70")
+        self.contact_listbox = CTkListbox(self.job_tabview.tab('Contacts'), width=700, height=294)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
+        self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=702,
+                                                                       height=300)
+        self.keyword_scroll.grid(row=0, column=0, padx=10, pady=10)
+

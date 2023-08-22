@@ -1,7 +1,6 @@
-import tkinter
-
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
+from tkinter import Menu
 
 
 class HomeView(customtkinter.CTk):
@@ -25,7 +24,7 @@ class HomeView(customtkinter.CTk):
                                                    fg_color="transparent", text_color=("gray10", "gray90"),
                                                    hover_color=("gray70", "gray30"),
                                                    anchor="w")
-        self.home_button.grid(row=0, column=0)
+        self.home_button.grid(row=0, column=0, pady=(50,0))
 
         self.analytics_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
                                                         border_spacing=10,
@@ -49,8 +48,7 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid_columnconfigure(0, weight=1)
 
         # Job ListBox
-        # self.job_list_box = CTkListbox(self.home_frame)  # -------- CTKListbox
-        self.job_list_box = tkinter.Listbox(self.home_frame, bg="light grey", bd=0 )  # --------- tkinter.Listbox
+        self.job_list_box = CTkListbox(self.home_frame)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
 
@@ -111,4 +109,16 @@ class HomeView(customtkinter.CTk):
         self.resume_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.resume_label = customtkinter.CTkLabel(self.resume_frame, text="Resume")
         self.resume_label.grid(row=0, column=0)
+
+        # -------------- File Menu -------------- #
+        self.menubar = Menu(self)
+        # --- Adding File Menu and commands
+        self.file = Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label='File', menu=self.file)
+
+        self.help_ = Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label='Help', menu=self.help_)
+
+        # --- Display Menu
+        self.config(menu=self.menubar)
 

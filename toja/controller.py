@@ -1,13 +1,11 @@
-import customtkinter
 import tkinter
 from datetime import datetime
-from pathlib import Path
 from typing import Union
-import os
+from webbrowser import open
 
 from views.new_job import NewJob
 from views.job_profile import JobProfile
-from views.home_view import HomeView
+from views.home import HomeView
 from views.new_event import NewEvent
 from views.new_contact import NewContact
 from model import Model
@@ -29,16 +27,26 @@ class Controller:
         # HomeView ListBox
         self.view.job_list_box.bind('<Double-Button-1>', self.open_job_profile)
         self.view.job_list_box.bind('<Return>', self.open_job_profile)
+
+        # file menu
+        self.view.help_.add_command(label='About Toja', command=self.about_page)
+        self.view.file.add_command(label='Create New')
+        self.view.file.add_command(label='Import')
+        self.view.file.add_command(label='Export')
+        self.view.file.add_separator()
+        self.view.file.add_command(label='Exit', command=self.view.destroy)
+
         self.update_home_listbox()
 
+    def about_page(self):
+        open('https://github.com/BAndresen/TOJA')
+
     def update_home_listbox(self):
-        # self.view.job_list_box.delete("all")  # ------ CTKlistbox
-        self.view.job_list_box.delete(0, tkinter.END)  # -------tkinter Listbox
+        self.view.job_list_box.delete("all")
 
         home_listbox = self.model.get_all()
         for item in home_listbox:
-            # self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")  # ------ CTKlistbox
-            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")  # ----- tkinter Listbox
+            self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
     def open_job_profile(self, event: tkinter.Event) -> None:
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
@@ -113,7 +121,7 @@ class Controller:
         contacts = self.model.get_contacts(self.job_id)
         contact_list = []
         for contact in contacts:
-            contact_list.append(f'{contact[0]}| {contact[1]} {contact[1]}')
+            contact_list.append(f'{contact[0]}| {contact[1]} {contact[2]}')
         self.new_event.contact_entry.configure(values=contact_list)
         self.new_event.submit_event_button.configure(command=self.submit_new_event)
 
@@ -170,16 +178,17 @@ class Controller:
             return job_file[0]
 
     def update_event_listbox(self):
-        self.job_profile.event_scroll.delete(0, tkinter.END)
+        self.job_profile.event_scroll.delete("all")
 
         event_listbox = self.model.get_event(self.job_id)
         for item in event_listbox:
-            self.job_profile.event_scroll.insert(tkinter.END,
+            self.job_profile.event_scroll.insert('END',
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
     def update_contact_listbox(self):
-        self.job_profile.contact_listbox.delete(0, tkinter.END)
+        self.job_profile.contact_listbox.delete("all")
+
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
-            self.job_profile.contact_listbox.insert(tkinter.END,
+            self.job_profile.contact_listbox.insert('END',
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')

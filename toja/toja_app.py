@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from views.home_view import HomeView
+from views.home import HomeView
 from model import Model
 from controller import Controller
 
