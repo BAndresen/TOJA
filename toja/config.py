@@ -12,11 +12,11 @@ class Config:
         self.database = self.config['database']['database_path']
         self.job_description_dir = self.config['database']['job_description_dir']
 
-    def is_user_new(self):
+    def is_user_new(self) -> bool:
         if self.config['user'].getboolean('new_user'):
             return True
 
-    def initialize_user(self):
+    def initialize_user(self) -> None:
         database = f'{self.base_dir}\\database\\toja_database.db'
         job_description = f'{self.base_dir}\\job_description'
         self.config['database']['job_description_dir'] = job_description
@@ -30,8 +30,8 @@ class Config:
         self.database = self.config['database']['database_path']
         self.job_description_dir = self.config['database']['job_description_dir']
 
-    def get_database(self):
+    def get_database(self) -> Path:
         return Path(self.database)
 
-    def get_job_description_dir(self):
+    def get_job_description_dir(self) -> Path:
         return Path(self.job_description_dir)

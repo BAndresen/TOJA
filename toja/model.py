@@ -4,7 +4,7 @@ import os
 import sqlite3
 from pathlib import Path
 
-from sql_query import create_toja_database, add_sample_data
+from create_database import create_toja_database, add_sample_data
 from config import Config
 
 
