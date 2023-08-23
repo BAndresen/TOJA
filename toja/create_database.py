@@ -3,7 +3,7 @@ import datetime
 from typing import Union
 
 
-def create_toja_database(cursor: sqlite3.Cursor) -> None:
+def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
     # Create the user table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS user (
@@ -75,6 +75,33 @@ def create_toja_database(cursor: sqlite3.Cursor) -> None:
             FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
         )
     ''')
+
+    insert_queries = [
+        "INSERT INTO status(status_id, status, points) VALUES(1, 'prospect', 1);",
+        "INSERT INTO status(status_id, status, points) VALUES(2, 'applied', 2);",
+        "INSERT INTO status(status_id, status, points) VALUES(3, 'submit_form', 2);",
+        "INSERT INTO status(status_id, status, points) VALUES(4, 'interview', 20);",
+        "INSERT INTO status(status_id, status, points) VALUES(5, 'offer', 100);",
+        "INSERT INTO status(status_id, status, points) VALUES(6, 'offer_accepted', 1000);",
+        "INSERT INTO status(status_id, status, points) VALUES(7, 'meeting', 5);"
+    ]
+
+    for query in insert_queries:
+        cursor.execute(query)
+    conn.commit()
+
+
+# def add_status(cursor: sqlite3.Cursor, conn: sqlite3.connect, status: str, points: int) -> None:
+#     query = '''
+#     INSERT INTO status(
+#     status,
+#     points
+#     )
+#     VALUES (?,?)
+#     '''
+#     insert = (status, points)
+#     cursor.execute(query, insert)
+#     conn.commit()
 
 
 def add_user(cursor: sqlite3.Cursor, conn: sqlite3.connect, name: str, points: int) -> None:
@@ -177,19 +204,6 @@ def add_contact(cursor: sqlite3.Cursor, conn: sqlite3.connect, first_name: str, 
     conn.commit()
 
 
-def add_status(cursor: sqlite3.Cursor, conn: sqlite3.connect, status: str, points: int) -> None:
-    query = '''
-    INSERT INTO status(
-    status,
-    points
-    )
-    VALUES (?,?)
-    '''
-    insert = (status, points)
-    cursor.execute(query, insert)
-    conn.commit()
-
-
 def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_user(cursor, conn, "brendan", 0)
 
@@ -204,9 +218,9 @@ def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
     add_job(cursor, conn, "DevOps Engineer", "Cloud Innovations", "www.cloudinnovations.com", "Austin", "Full-time",
             "Engineering", 130000, 100000, "Annual", 1, "devops_engineer_description.txt", 1)
 
-    add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True),  None, 1, 1, 1, 1)
-    add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True),  None, 2, 2, 2, 1)
-    add_event(cursor, conn, date_change(4, day=True), date_change(3, hour=True),  None, 3, 3, 3, 1)
+    add_event(cursor, conn, date_change(1, day=True), date_change(1, hour=True), None, 1, 1, 1, 1)
+    add_event(cursor, conn, date_change(3, day=True), date_change(5, hour=True), None, 2, 2, 2, 1)
+    add_event(cursor, conn, date_change(4, day=True), date_change(3, hour=True), None, 3, 3, 3, 1)
     add_event(cursor, conn, date_change(5, day=True, add=True), date_change(1, hour=True), None, 4, 4, 4,
               1)
 
@@ -216,12 +230,3 @@ def add_sample_data(cursor: sqlite3.Cursor, conn: sqlite3.connect):
                 3, 1)
     add_contact(cursor, conn, "Sarah", "Williams", "sarah.williams@example.com", "222-333-4444", "HR Manager", 4, 1)
     add_contact(cursor, conn, "David", "Brown", "david.brown@example.com", "111-222-3333", "Head of HR", 4, 1)
-    add_status(cursor, conn, "prospect", 1)
-    add_status(cursor, conn, "applied", 2)
-    add_status(cursor, conn, "submit_form", 3)
-    add_status(cursor, conn, "interview", 10)
-    add_status(cursor, conn, "offer", 50)
-    add_status(cursor, conn, "offer_accepted", 50)
-    add_status(cursor, conn, "meeting", 50)
-
-

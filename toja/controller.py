@@ -188,16 +188,22 @@ class Controller:
         self.job_profile.event_scroll.delete("all")
 
         event_listbox = self.model.get_event(self.job_id)
+        print(self.job_id)
+        print(event_listbox)
         for item in event_listbox:
             self.job_profile.event_scroll.insert('END',
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
     def update_contact_listbox(self):
         self.job_profile.contact_listbox.delete("all")
-
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert('END',
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
-
+    # def update_home_listbox(self):
+    #     self.view.job_list_box.delete("all")
+    #
+    #     home_listbox = self.model.get_all()
+    #     for item in home_listbox:
+    #         self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")

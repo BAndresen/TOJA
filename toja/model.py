@@ -18,7 +18,9 @@ class Model:
         if not os.path.exists(self.db_file_path):
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
-            create_toja_database(self.cursor)
+            create_toja_database(self.cursor, self.conn)
+            # add_status_items(self.cursor)
+
         else:
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
@@ -154,6 +156,7 @@ class Model:
 
         self.cursor.execute(query, (status,))
         results = self.cursor.fetchall()
+        print(results)
         return results
 
     # def get_contact_id(self, contact: str) -> list:
