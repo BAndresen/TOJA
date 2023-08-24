@@ -12,3 +12,5 @@
 /project_notes/
 /toja/database/toja_database.db
 /toja/database/sample_database.db
+/playground.py
+/toja/database/toja_database_old.db
