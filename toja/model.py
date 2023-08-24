@@ -19,7 +19,6 @@ class Model:
             self.conn = sqlite3.connect(self.db_file_path)
             self.cursor = self.conn.cursor()
             create_toja_database(self.cursor, self.conn)
-            # add_status_items(self.cursor)
 
         else:
             self.conn = sqlite3.connect(self.db_file_path)
@@ -158,16 +157,6 @@ class Model:
         results = self.cursor.fetchall()
         print(results)
         return results
-
-    # def get_contact_id(self, contact: str) -> list:
-    #     query = '''
-    #     SELECT status_id
-    #     FROM status
-    #     WHERE status = ?'''
-    #
-    #     self.cursor.execute(query, (status,))
-    #     results = self.cursor.fetchall()
-    #     return results
 
     def open_job_description(self, job_file: Path) -> str:
         with open(f'{self.job_description_parent}\\{job_file}', "r") as file:

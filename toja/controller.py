@@ -43,7 +43,6 @@ class Controller:
         self.model.update_database_path(db_file)
         tkinter.messagebox.showinfo(message='Please Restart Program')
 
-
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
 
@@ -74,7 +73,11 @@ class Controller:
         self.job_profile.salary_type_user.configure(text=results[8])
         self.job_profile.resume_user.configure(text=results[9])
 
-        self.job_profile.job_description_label.configure(text=self.model.open_job_description(results[10]))
+        if results[10]:  # return blank if file is NULL
+            self.job_profile.job_description_label.configure(text=self.model.open_job_description(results[10]))
+        else:
+            self.job_profile.job_description_label.configure(text='')
+
         self.update_event_listbox()
         self.update_contact_listbox()
 
@@ -188,8 +191,6 @@ class Controller:
         self.job_profile.event_scroll.delete("all")
 
         event_listbox = self.model.get_event(self.job_id)
-        print(self.job_id)
-        print(event_listbox)
         for item in event_listbox:
             self.job_profile.event_scroll.insert('END',
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
@@ -201,9 +202,3 @@ class Controller:
             self.job_profile.contact_listbox.insert('END',
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
-    # def update_home_listbox(self):
-    #     self.view.job_list_box.delete("all")
-    #
-    #     home_listbox = self.model.get_all()
-    #     for item in home_listbox:
-    #         self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")

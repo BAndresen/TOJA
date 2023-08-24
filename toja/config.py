@@ -5,7 +5,6 @@ from pathlib import Path
 class Config:
     def __init__(self):
         self.base_dir = Path(__file__).resolve().parent
-        # self.grandparent_dir = Path(self.base_dir).resolve().parent
         self.config = configparser.ConfigParser()
         self.config_file = f'{self.base_dir}\\config.ini'
         self.config.read(self.config_file)
@@ -22,7 +21,6 @@ class Config:
         self.config['database']['job_description_dir'] = job_description
         self.config['database']['database_path'] = database
         self.config['user']['base_dir'] = str(self.base_dir)
-        # self.config['user']['grandparent_dir'] = str(self.grandparent_dir)
         new_user = False
         self.config.set('user', 'new_user', str(new_user))
         with open(self.config_file, "w") as file:
