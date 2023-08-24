@@ -40,8 +40,9 @@ class Controller:
 
     def change_database(self):
         db_file = filedialog.askopenfilename()
-        self.model.update_database_path(db_file)
-        tkinter.messagebox.showinfo(message='Please Restart Program')
+        if db_file:
+            self.model.update_database_path(db_file)
+            tkinter.messagebox.showinfo(message='Please Restart Program')
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
