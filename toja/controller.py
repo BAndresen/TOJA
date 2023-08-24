@@ -96,9 +96,10 @@ class Controller:
         self.contact.contact_window.destroy()
 
     def delete(self):
-        self.model.delete_job(self.job_id)
-        self.job_profile.jp_window.destroy()
-        self.update_home_listbox()
+        if messagebox.askyesno(message=f'Are you sure you want to delete?'):
+            self.model.delete_job(self.job_id)
+            self.job_profile.jp_window.destroy()
+            self.update_home_listbox()
 
     def run(self):
         self.view.mainloop()
