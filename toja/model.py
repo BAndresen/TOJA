@@ -155,10 +155,9 @@ class Model:
 
         self.cursor.execute(query, (status,))
         results = self.cursor.fetchall()
-        print(results)
         return results
 
-    def open_job_description(self, job_file: Path) -> str:
+    def open_job_description(self, job_file: Union[Path,tuple[str]]) -> str:
         with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
             results = file.read()
         return results
@@ -180,6 +179,20 @@ class Model:
         WHERE e.job_id = ?
         '''
         self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        return results
+
+    def get_all_event(self) -> list:
+        query = '''
+        SELECT
+            e.date,
+            e.time,
+            e.note,
+            s.status
+        FROM event e
+           JOIN status s USING(status_id)
+        '''
+        self.cursor.execute(query)
         results = self.cursor.fetchall()
         return results
 
@@ -230,7 +243,3 @@ class Model:
         '''
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
-
-
-
-

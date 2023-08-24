@@ -41,6 +41,7 @@ class Controller:
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
         self.update_home_listbox()
+        self.update_home_event_listbox()
 
     def change_database(self):
         db_file = filedialog.askopenfilename()
@@ -107,11 +108,6 @@ class Controller:
         self.edit.resume_version_entry.configure(placeholder_text=self.jp_results[9])
         self.edit.salary_top_entry.configure(placeholder_text=self.jp_results[6])
         self.edit.salary_bottom_entry.configure(placeholder_text=self.jp_results[7])
-
-        # if self.jp_results[10]:  # return blank if file is NULL
-        #     self.edit.job_description_label_edit.configure(text=self.model.open_job_description(self.jp_results[10]))
-        # else:
-        #     self.edit.job_description_label_edit.configure(text='')
 
     def submit_job_edit(self):
         entry_list = {
@@ -244,6 +240,14 @@ class Controller:
             self.job_profile.event_scroll.insert('END',
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
+    def update_home_event_listbox(self):
+        self.view.recent_events_listbox.delete('all')
+
+        event_listbox = self.model.get_all_event()
+        for item in event_listbox:
+            self.view.recent_events_listbox.insert('END',
+                                                   f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
+
     def update_contact_listbox(self):
         self.job_profile.contact_listbox.delete("all")
         contacts = self.model.get_contacts(self.job_id)
@@ -254,7 +258,6 @@ class Controller:
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
             full_job_path = Path(*[self.model.job_description_parent, self.jp_results[10]])
-            print(full_job_path)
             user_platform = self.model.user.get_users_system()
 
             if user_platform == 'Windows':
