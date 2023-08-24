@@ -12,6 +12,7 @@ from views.home import HomeView
 from views.new_event import NewEvent
 from views.new_contact import NewContact
 from views.edit_job import EditJob
+from views.job_description import JobDescription
 from model import Model
 
 
@@ -35,7 +36,7 @@ class Controller:
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='Create New')
-        self.view.file.add_command(label='Import', command=self.change_database)
+        self.view.file.add_command(label='Change Database', command=self.change_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
@@ -264,6 +265,21 @@ class Controller:
                 subprocess.run(['xdg-open', full_job_path], check=True)
             else:
                 print("Unsupported operating system.")
+        else:
+            self.new_job_description = JobDescription(self.view)
+            self.new_job_description.submit_job_description.configure(command=self.save_job_description)
 
+    def save_job_description(self):
+        self.job_file_only = f'{self.today}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
+        job_text = self.new_job_description.job_description_textbox_only.get("1.0", "end-1c")
+        self.job_file_only = self.check_job_file(self.job_file_only, job_text)
+        if self.job_file_only:
+            self.model.save_job_description(self.job_file_only, job_text)
 
+        self.new_job_description.jd_window.destroy()
 
+        self.model.update_job(self.job_id, 'job_description_file', self.job_file_only)
+        self.update_job_description()
+
+    def update_job_description(self):
+        self.job_profile.job_description_label.configure(text=self.model.open_job_description(self.job_file_only))
