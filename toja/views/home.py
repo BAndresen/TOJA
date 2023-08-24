@@ -1,3 +1,5 @@
+import tkinter
+
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
 from tkinter import Menu
@@ -48,7 +50,7 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid_columnconfigure(0, weight=1)
 
         # Job ListBox
-        self.job_list_box = CTkListbox(self.home_frame)
+        self.job_list_box = tkinter.Listbox(self.home_frame)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
 
@@ -82,7 +84,7 @@ class HomeView(customtkinter.CTk):
         self.recent_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.recent_events_label = customtkinter.CTkLabel(self.recent_events_frame, text="Recent Events")
         self.recent_events_label.grid(row=0, column=0)
-        self.recent_events_listbox = CTkListbox(self.recent_events_frame)
+        self.recent_events_listbox = tkinter.Listbox(self.recent_events_frame)
         self.recent_events_listbox.grid(row=1, column=0, sticky = 'nsew')
 
         # Upcoming Events

@@ -1,3 +1,5 @@
+import tkinter
+
 import customtkinter
 from CTkListbox.ctk_listbox import CTkListbox
 
@@ -10,9 +12,12 @@ class JobProfile:
         self.jp_window.grab_set()
         self.jp_window.title("Job")
 
+        self.jp_window.grid_columnconfigure(0, weight=1)
+
         # job_profile
         self.jp_frame = customtkinter.CTkFrame(self.jp_window)
-        self.jp_frame.grid(row=0, column=0, padx=20, pady=20)
+        self.jp_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
+        self.jp_frame.grid_columnconfigure(0, weight=1)
         # company website
         self.company_frame = customtkinter.CTkFrame(self.jp_frame)
         self.company_frame.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
@@ -92,13 +97,13 @@ class JobProfile:
 
         self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=702,
                                                                        height=300)
-        self.event_scroll = CTkListbox(self.job_tabview.tab('Events'), width=700, height=294)
+        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=120, height=19)
         self.event_scroll.grid(row=0, column=0,padx=10, pady=10)
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
         self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
         self.job_description_label.grid(row=0, column=0)
 
-        self.contact_listbox = CTkListbox(self.job_tabview.tab('Contacts'), width=700, height=294)
+        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), width=120, height=19)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
         self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=702,
                                                                        height=300)

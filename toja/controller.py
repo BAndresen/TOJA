@@ -53,11 +53,11 @@ class Controller:
         open('https://github.com/BAndresen/TOJA')
 
     def update_home_listbox(self):
-        self.view.job_list_box.delete("all")
+        self.view.job_list_box.delete('0','end')
 
         home_listbox = self.model.get_all()
         for item in home_listbox:
-            self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
+            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")
 
     def double_click_job(self, event):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
@@ -233,26 +233,26 @@ class Controller:
             return job_file[0]
 
     def update_event_listbox(self):
-        self.job_profile.event_scroll.delete("all")
+        self.job_profile.event_scroll.delete('0', 'end')
 
         event_listbox = self.model.get_event(self.job_id)
         for item in event_listbox:
-            self.job_profile.event_scroll.insert('END',
+            self.job_profile.event_scroll.insert(tkinter.END,
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
     def update_home_event_listbox(self):
-        self.view.recent_events_listbox.delete('all')
+        self.view.recent_events_listbox.delete('0', 'end')
 
         event_listbox = self.model.get_all_event()
         for item in event_listbox:
-            self.view.recent_events_listbox.insert('END',
+            self.view.recent_events_listbox.insert(tkinter.END,
                                                    f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
 
     def update_contact_listbox(self):
-        self.job_profile.contact_listbox.delete("all")
+        self.job_profile.contact_listbox.delete('0', 'end')
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
-            self.job_profile.contact_listbox.insert('END',
+            self.job_profile.contact_listbox.insert(tkinter.END,
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
     def edit_job_description(self):
