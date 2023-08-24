@@ -3,6 +3,8 @@ from datetime import datetime
 from typing import Union
 from webbrowser import open
 from tkinter import filedialog, messagebox
+import subprocess
+from pathlib import Path
 
 from views.new_job import NewJob
 from views.job_profile import JobProfile
@@ -55,7 +57,7 @@ class Controller:
         for item in home_listbox:
             self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
-    def double_click_job(self,event):
+    def double_click_job(self, event):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         self.open_job_profile()
@@ -68,6 +70,7 @@ class Controller:
         self.job_profile.new_contact_button.configure(command=self.add_contact)
         self.job_profile.new_event_button.configure(command=self.open_new_event)
         self.job_profile.edit_button.configure(command=self.edit_job)
+        self.job_profile.edit_job_button.configure(command=self.edit_job_description)
 
         self.job_profile.company_name_user.configure(text=self.jp_results[0])
         self.job_profile.company_web_user.configure(text=self.jp_results[1])
@@ -118,16 +121,16 @@ class Controller:
             'resume_version': self.edit.resume_version_entry,
             'salary_top': self.edit.salary_top_entry,
             'salary_bottom': self.edit.salary_bottom_entry,
+            'salary_type': self.edit.salary_type_entry,
+            'work_type': self.edit.location_type_entry,
+            'commitment': self.edit.job_type_entry,
         }
         for key, value in entry_list.items():
             if value.get():
-                print(value.get())
-                print(key)
-                print('true')
-                print(self.job_id)
                 self.model.update_job(self.job_id, key, value.get())
 
         self.job_profile.jp_window.destroy()
+        self.edit.ej_window.destroy()
         self.open_job_profile()
 
     def insert_contact(self):
@@ -144,7 +147,7 @@ class Controller:
         self.contact.contact_window.destroy()
 
     def delete(self):
-        if messagebox.askyesno(message=f'Are you sure you want to delete?'):
+        if messagebox.askyesno(self.job_profile.jp_window, message=f'Are you sure you want to delete?'):
             self.model.delete_job(self.job_id)
             self.job_profile.jp_window.destroy()
             self.update_home_listbox()
@@ -246,3 +249,21 @@ class Controller:
         for item in contacts:
             self.job_profile.contact_listbox.insert('END',
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+
+    def edit_job_description(self):
+        if self.jp_results[10]:  # return blank if file is NULL
+            full_job_path = Path(*[self.model.job_description_parent, self.jp_results[10]])
+            print(full_job_path)
+            user_platform = self.model.user.get_users_system()
+
+            if user_platform == 'Windows':
+                subprocess.run(['start', '', full_job_path], shell=True, check=True)
+            elif user_platform == 'Darwin':  # macOS
+                subprocess.run(['open', full_job_path], check=True)
+            elif user_platform == 'Linux':
+                subprocess.run(['xdg-open', full_job_path], check=True)
+            else:
+                print("Unsupported operating system.")
+
+
+

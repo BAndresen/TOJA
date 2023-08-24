@@ -230,3 +230,7 @@ class Model:
         '''
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
+
+
+
+

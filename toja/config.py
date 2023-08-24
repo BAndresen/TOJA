@@ -1,9 +1,11 @@
 import configparser
 from pathlib import Path
+import platform
 
 
 class Config:
     def __init__(self):
+        self.system_platform = None
         self.base_dir = Path(__file__).resolve().parent
         self.config = configparser.ConfigParser()
         self.config_file = f'{self.base_dir}\\config.ini'
@@ -33,3 +35,7 @@ class Config:
 
     def get_job_description_dir(self) -> Path:
         return Path(self.job_description_dir)
+
+    def get_users_system(self):
+        self.system_platform = platform.system()
+        return self.system_platform
