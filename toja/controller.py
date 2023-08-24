@@ -33,7 +33,6 @@ class Controller:
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='Create New')
         self.view.file.add_command(label='Import', command=self.change_database)
-        self.view.file.add_command(label='Export')
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
