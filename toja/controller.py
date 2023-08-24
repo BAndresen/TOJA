@@ -9,6 +9,7 @@ from views.job_profile import JobProfile
 from views.home import HomeView
 from views.new_event import NewEvent
 from views.new_contact import NewContact
+from views.edit_job import EditJob
 from model import Model
 
 
@@ -58,24 +59,25 @@ class Controller:
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         self.job_profile = JobProfile(self.view)
-        results = self.model.get_job_data(self.job_id)
+        self.jp_results = self.model.get_job_data(self.job_id)
         self.job_profile.delete_button.configure(command=self.delete)
         self.job_profile.new_contact_button.configure(command=self.add_contact)
         self.job_profile.new_event_button.configure(command=self.open_new_event)
+        self.job_profile.edit_button.configure(command=self.edit_job)
 
-        self.job_profile.company_name_user.configure(text=results[0])
-        self.job_profile.company_web_user.configure(text=results[1])
-        self.job_profile.position_user.configure(text=results[2])
-        self.job_profile.location_user.configure(text=results[3])
-        self.job_profile.commitment_user.configure(text=results[4])
-        self.job_profile.work_type_user.configure(text=results[5])
-        self.job_profile.salary_top_user.configure(text=results[6])
-        self.job_profile.salary_bottom_user.configure(text=results[7])
-        self.job_profile.salary_type_user.configure(text=results[8])
-        self.job_profile.resume_user.configure(text=results[9])
+        self.job_profile.company_name_user.configure(text=self.jp_results[0])
+        self.job_profile.company_web_user.configure(text=self.jp_results[1])
+        self.job_profile.position_user.configure(text=self.jp_results[2])
+        self.job_profile.location_user.configure(text=self.jp_results[3])
+        self.job_profile.commitment_user.configure(text=self.jp_results[4])
+        self.job_profile.work_type_user.configure(text=self.jp_results[5])
+        self.job_profile.salary_top_user.configure(text=self.jp_results[6])
+        self.job_profile.salary_bottom_user.configure(text=self.jp_results[7])
+        self.job_profile.salary_type_user.configure(text=self.jp_results[8])
+        self.job_profile.resume_user.configure(text=self.jp_results[9])
 
-        if results[10]:  # return blank if file is NULL
-            self.job_profile.job_description_label.configure(text=self.model.open_job_description(results[10]))
+        if self.jp_results[10]:  # return blank if file is NULL
+            self.job_profile.job_description_label.configure(text=self.model.open_job_description(self.jp_results[10]))
         else:
             self.job_profile.job_description_label.configure(text='')
 
@@ -85,6 +87,21 @@ class Controller:
     def add_contact(self):
         self.contact = NewContact(self.view)
         self.contact.submit_contact_button.configure(command=self.insert_contact)
+
+    def edit_job(self):
+        self.edit = EditJob(self.view)
+        self.edit.position_title_entry.configure(placeholder_text=self.jp_results[0])
+        self.edit.company_name_entry.configure(placeholder_text=self.jp_results[1])
+        self.edit.company_website_entry.configure(placeholder_text=self.jp_results[2])
+        self.edit.job_location_entry.configure(placeholder_text=self.jp_results[3])
+        self.edit.resume_version_entry.configure(placeholder_text=self.jp_results[9])
+        self.edit.salary_top_entry.configure(placeholder_text=self.jp_results[6])
+        self.edit.salary_bottom_entry.configure(placeholder_text=self.jp_results[7])
+
+        if self.jp_results[10]:  # return blank if file is NULL
+            self.edit.job_description_label_edit.configure(text=self.model.open_job_description(self.jp_results[10]))
+        else:
+            self.edit.job_description_label_edit.configure(text='')
 
     def insert_contact(self):
         self.model.add_contact(

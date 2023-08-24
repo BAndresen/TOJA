@@ -1,12 +1,12 @@
 import customtkinter
 
 
-class NewJob:
+class EditJob:
     def __init__(self, root):
         self.root = root
         self.aj_window = customtkinter.CTkToplevel(root)
         self.aj_window.grab_set()
-        self.aj_window.title("Add Job")
+        self.aj_window.title("Edit Job")
         # self.grid_columnconfigure(0, weight=1)
         # self.grid_columnconfigure(1, weight=1)
         # self.grid_rowconfigure(0, weight=1)
@@ -70,40 +70,19 @@ class NewJob:
                                                      text='Commitment')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=2, sticky="e")
 
-        self.job_description_label = customtkinter.CTkLabel(self.main_frame, text='Job Description')
-        self.job_description_label.grid(row=10, column=0)
 
-        self.job_description_textbox = customtkinter.CTkTextbox(self.main_frame)
-        self.job_description_textbox.grid(row=11, column=0, columnspan=2, sticky='ew')
 
-        self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
-        self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
+        # self.job_description_textbox = customtkinter.CTkTextbox(self.main_frame)
+        # self.job_description_textbox.grid(row=11, column=0, columnspan=2, sticky='ew')
+        self.job_frame = customtkinter.CTkFrame(self.aj_window)
+        self.job_frame.grid(row=1,column=0)
+        self.job_description_label = customtkinter.CTkLabel(self.job_frame, text='Job Description')
+        self.job_description_label.grid(row=0, column=0)
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
-                                                                                    'prospect',
-                                                                                    'submit_form',
-                                                                                    'interview',
-                                                                                    'meeting',
-                                                                                    'offer',
-                                                                                    'offer_accepted'], width=150)
-        self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
-        self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
-        self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_frame, width=702,
+                                                                       height=300)
+        self.job_description_scroll.grid(row=1, column=0, padx=10, pady=10)
+        self.job_description_label_edit = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
+        self.job_description_label_edit.grid(row=0, column=0)
 
-        self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
-        self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
-        self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')
-        self.day_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.time_entry = customtkinter.CTkEntry(self.event_info_frame)
-        self.time_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
-        self.time_label = customtkinter.CTkLabel(self.event_info_frame, text='Time')
-        self.time_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")
-
-        self.note_entry = customtkinter.CTkTextbox(self.event_info_frame)
-        self.note_entry.grid(row=6, column=1, padx=(5, 20), pady=10)
-        self.note_label = customtkinter.CTkLabel(self.event_info_frame, text='Notes')
-        self.note_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
-
-        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit")
-        self.submit_button.grid(row=12, column=1, padx=20, pady=20)
