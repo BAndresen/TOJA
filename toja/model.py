@@ -217,8 +217,16 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
-    def update_database_path(self, new_db:str):
+    def update_database_path(self, new_db: str):
         self.user.config['database']['database_path'] = new_db
         with open(self.user.config_file, "w") as file:
             self.user.config.write(file)
 
+    def update_job(self, job_id: int, column_name: str, update_value: str):
+        query = f'''
+        UPDATE job
+        SET {column_name} = ?
+        WHERE job_id = ?
+        '''
+        self.cursor.execute(query, (update_value, job_id))
+        self.conn.commit()

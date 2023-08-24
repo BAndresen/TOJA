@@ -27,8 +27,8 @@ class Controller:
         self.view.new_job_button.configure(command=self.open_job_submit)
 
         # HomeView ListBox
-        self.view.job_list_box.bind('<Double-Button-1>', self.open_job_profile)
-        self.view.job_list_box.bind('<Return>', self.open_job_profile)
+        self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
+        self.view.job_list_box.bind('<Return>', self.double_click_job)
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
@@ -55,11 +55,15 @@ class Controller:
         for item in home_listbox:
             self.view.job_list_box.insert("END", f"{item[0]} | {item[1]} | {item[2]}")
 
-    def open_job_profile(self, event: tkinter.Event) -> None:
+    def double_click_job(self,event):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
+        self.open_job_profile()
+
+    def open_job_profile(self) -> None:
         self.job_profile = JobProfile(self.view)
         self.jp_results = self.model.get_job_data(self.job_id)
+
         self.job_profile.delete_button.configure(command=self.delete)
         self.job_profile.new_contact_button.configure(command=self.add_contact)
         self.job_profile.new_event_button.configure(command=self.open_new_event)
@@ -90,6 +94,8 @@ class Controller:
 
     def edit_job(self):
         self.edit = EditJob(self.view)
+        self.edit.submit_edit_button.configure(command=self.submit_job_edit)
+
         self.edit.position_title_entry.configure(placeholder_text=self.jp_results[0])
         self.edit.company_name_entry.configure(placeholder_text=self.jp_results[1])
         self.edit.company_website_entry.configure(placeholder_text=self.jp_results[2])
@@ -98,10 +104,31 @@ class Controller:
         self.edit.salary_top_entry.configure(placeholder_text=self.jp_results[6])
         self.edit.salary_bottom_entry.configure(placeholder_text=self.jp_results[7])
 
-        if self.jp_results[10]:  # return blank if file is NULL
-            self.edit.job_description_label_edit.configure(text=self.model.open_job_description(self.jp_results[10]))
-        else:
-            self.edit.job_description_label_edit.configure(text='')
+        # if self.jp_results[10]:  # return blank if file is NULL
+        #     self.edit.job_description_label_edit.configure(text=self.model.open_job_description(self.jp_results[10]))
+        # else:
+        #     self.edit.job_description_label_edit.configure(text='')
+
+    def submit_job_edit(self):
+        entry_list = {
+            'position': self.edit.position_title_entry,
+            'company': self.edit.company_name_entry,
+            'website': self.edit.company_website_entry,
+            'location': self.edit.job_location_entry,
+            'resume_version': self.edit.resume_version_entry,
+            'salary_top': self.edit.salary_top_entry,
+            'salary_bottom': self.edit.salary_bottom_entry,
+        }
+        for key, value in entry_list.items():
+            if value.get():
+                print(value.get())
+                print(key)
+                print('true')
+                print(self.job_id)
+                self.model.update_job(self.job_id, key, value.get())
+
+        self.job_profile.jp_window.destroy()
+        self.open_job_profile()
 
     def insert_contact(self):
         self.model.add_contact(
@@ -219,4 +246,3 @@ class Controller:
         for item in contacts:
             self.job_profile.contact_listbox.insert('END',
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
-
