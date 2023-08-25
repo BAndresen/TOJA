@@ -1,8 +1,31 @@
 import unittest
-from toja.model import Model
+import sqlite3
+from unittest import mock
 
-TEST_DATABASE_FILE_PATH = \
-    '/tests/test_database/test_job_application_database.db'
+from toja.create_database import create_toja_database
 
-TEST_JOB_DESCRIPTION_DIRECTORY = \
-    'C:/Users/brend/PycharmProjects/Job_Application_Tracking/tests/test_job_descriptions/'
+
+class TestDatabase(unittest.TestCase):
+
+    def setUp(self):
+        self.conn = sqlite3.connect(':memory:')
+        self.cursor = self.conn.cursor()
+
+        create_toja_database(self.cursor,self.conn)
+
+    def test_status(self):
+        self.cursor.execute('''
+        SELECT status
+        FROM status
+        WHERE status_id = 2
+        ''')
+        results = self.cursor.fetchall()
+        self.assertEqual(results[0][0],'applied')
+
+    def tearDown(self) -> None:
+        self.conn.close()
+
+
+if __name__ == '__main__':
+    unittest.main()
+
