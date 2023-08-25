@@ -1,3 +1,4 @@
+import customtkinter
 import tkinter
 from datetime import datetime
 from typing import Union
@@ -35,7 +36,7 @@ class Controller:
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
-        self.view.file.add_command(label='Create New')
+        # self.view.file.add_command(label='Create New')
         self.view.file.add_command(label='Change Database', command=self.change_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
@@ -101,9 +102,9 @@ class Controller:
         self.edit = EditJob(self.view)
         self.edit.submit_edit_button.configure(command=self.submit_job_edit)
 
-        self.edit.position_title_entry.configure(placeholder_text=self.jp_results[0])
-        self.edit.company_name_entry.configure(placeholder_text=self.jp_results[1])
-        self.edit.company_website_entry.configure(placeholder_text=self.jp_results[2])
+        self.edit.position_title_entry.configure(placeholder_text=self.jp_results[2])
+        self.edit.company_name_entry.configure(placeholder_text=self.jp_results[0])
+        self.edit.company_website_entry.configure(placeholder_text=self.jp_results[1])
         self.edit.job_location_entry.configure(placeholder_text=self.jp_results[3])
         self.edit.resume_version_entry.configure(placeholder_text=self.jp_results[9])
         self.edit.salary_top_entry.configure(placeholder_text=self.jp_results[6])
@@ -171,9 +172,18 @@ class Controller:
         self.new_job = NewJob(self.view)
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
+        current_time = datetime.today().time().strftime('%I:%M%p')
+        self.current_time = customtkinter.StringVar()
+        self.current_time.set(current_time)
+        self.new_job.time_entry.configure(textvariable=self.current_time)
+
     def open_new_event(self):
+        current_time = datetime.today().time().strftime('%I:%M%p')
+        self.current_time = customtkinter.StringVar()
+        self.current_time.set(current_time)
         self.new_event = NewEvent(self.view)
         contacts = self.model.get_contacts(self.job_id)
+        self.new_event.time_entry.configure(textvariable=self.current_time)
         contact_list = []
         for contact in contacts:
             contact_list.append(f'{contact[0]}| {contact[1]} {contact[2]}')

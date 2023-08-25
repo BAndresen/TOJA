@@ -1,4 +1,5 @@
 import customtkinter
+from tkcalendar import DateEntry
 
 
 class NewJob:
@@ -74,7 +75,7 @@ class NewJob:
         self.job_description_label.grid(row=10, column=0)
 
         self.job_description_textbox = customtkinter.CTkTextbox(self.main_frame)
-        self.job_description_textbox.grid(row=11, column=0, columnspan=2, sticky='ew')
+        self.job_description_textbox.grid(row=11, column=0, columnspan=2, sticky='ew', padx=20, pady=20)
 
         self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
         self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
@@ -85,17 +86,17 @@ class NewJob:
                                                                                     'interview',
                                                                                     'meeting',
                                                                                     'offer',
-                                                                                    'offer_accepted'], width=150)
+                                                                                    'offer_accepted'], width=125)
         self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
+        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "11"))
         self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')
         self.day_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.time_entry = customtkinter.CTkEntry(self.event_info_frame)
+        self.time_entry = customtkinter.CTkEntry(self.event_info_frame, width=125)
         self.time_entry.grid(row=2, column=1, padx=(5, 20), pady=10)
         self.time_label = customtkinter.CTkLabel(self.event_info_frame, text='Time')
         self.time_label.grid(row=2, column=0, padx=(20, 5), pady=10, sticky="e")

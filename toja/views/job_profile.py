@@ -95,15 +95,15 @@ class JobProfile:
         self.job_tabview.add('Contacts')
         self.job_tabview.add('Key Words')
 
-        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=702,
+        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=701,
                                                                        height=300)
-        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=120, height=19)
+        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=103, height=19,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
         self.event_scroll.grid(row=0, column=0,padx=10, pady=10)
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
         self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
         self.job_description_label.grid(row=0, column=0)
 
-        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), width=120, height=19)
+        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), width=103, height=19,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
         self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=702,
                                                                        height=300)

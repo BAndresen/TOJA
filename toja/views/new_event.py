@@ -1,4 +1,5 @@
 import customtkinter
+from tkcalendar import DateEntry
 
 
 class NewEvent:
@@ -18,13 +19,15 @@ class NewEvent:
                                                                                     'interview',
                                                                                     'meeting',
                                                                                     'offer',
-                                                                                    'offer_accepted'], width=150)
+                                                                                    'offer_accepted'], width=140)
         self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
+        # self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
+        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "12"))
         self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
+
         self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')
         self.day_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
 
