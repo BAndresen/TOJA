@@ -158,13 +158,18 @@ class Model:
         return results
 
     def open_job_description(self, job_file: Union[Path,tuple[str]]) -> str:
-        with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
-            results = file.read()
+        try:
+            with open(f'{self.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
+                results = file.read()
+        except UnicodeDecodeError:
+            with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
+                results = file.read()
+
         return results
 
     def save_job_description(self, job_file: str, job_text: str) -> None:
 
-        with open(f'{self.job_description_parent}/{job_file}', 'w') as file:
+        with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
             file.write(job_text)
 
     def get_event(self, job_id: int) -> list:
