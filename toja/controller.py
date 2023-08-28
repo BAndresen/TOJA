@@ -65,16 +65,8 @@ class Controller:
         self.job_id = (event_str.split())[0]
         self.open_job_profile()
 
-    def open_job_profile(self) -> None:
-        self.job_profile = JobProfile(self.view)
+    def update_job_profile(self):
         self.jp_results = self.model.get_job_data(self.job_id)
-
-        self.job_profile.delete_button.configure(command=self.delete)
-        self.job_profile.new_contact_button.configure(command=self.add_contact)
-        self.job_profile.new_event_button.configure(command=self.open_new_event)
-        self.job_profile.edit_button.configure(command=self.edit_job)
-        self.job_profile.edit_job_button.configure(command=self.edit_job_description)
-
         self.job_profile.company_name_user.configure(text=self.jp_results[0])
         self.job_profile.company_web_user.configure(text=self.jp_results[1])
         self.job_profile.position_user.configure(text=self.jp_results[2])
@@ -91,6 +83,14 @@ class Controller:
         else:
             self.job_profile.job_description_label.configure(text='')
 
+    def open_job_profile(self) -> None:
+        self.job_profile = JobProfile(self.view)
+        self.job_profile.delete_button.configure(command=self.delete)
+        self.job_profile.new_contact_button.configure(command=self.add_contact)
+        self.job_profile.new_event_button.configure(command=self.open_new_event)
+        self.job_profile.edit_button.configure(command=self.edit_job)
+        self.job_profile.edit_job_button.configure(command=self.edit_job_description)
+        self.update_job_profile()
         self.update_event_listbox()
         self.update_contact_listbox()
 
@@ -127,9 +127,8 @@ class Controller:
             if value.get():
                 self.model.update_job(self.job_id, key, value.get())
 
-        self.job_profile.jp_window.destroy()
         self.edit.ej_window.destroy()
-        self.open_job_profile()
+        self.update_job_profile()
 
     def insert_contact(self):
         self.model.add_contact(
