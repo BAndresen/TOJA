@@ -129,6 +129,7 @@ class Controller:
 
         self.edit.ej_window.destroy()
         self.update_job_profile()
+        self.update_home_listbox()
 
     def insert_contact(self):
         self.model.add_contact(
