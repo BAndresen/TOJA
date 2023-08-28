@@ -47,13 +47,18 @@ class Controller:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_database)
 
+        self.database = self.model.user.database_name
+
         self.update_home_listbox()
         self.update_home_event_listbox()
 
     def set_database(self):
         if self.welcome_window.radio_var.get():
-            self.database_name = self.welcome_window.database_name_entry.get()
-            print(self.database_name)
+            self.database = f'{self.welcome_window.database_name_entry.get()}.db'
+        else:
+            self.database = 'sample_data.db'
+        self.model.user.set_database_name(self.database)
+
 
     def change_database(self):
         db_file = filedialog.askopenfilename()
