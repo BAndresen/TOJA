@@ -1,7 +1,6 @@
 import tkinter
 
 import customtkinter
-from CTkListbox.ctk_listbox import CTkListbox
 from tkinter import Menu
 
 

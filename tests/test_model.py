@@ -22,6 +22,8 @@ class TestDatabase(unittest.TestCase):
         results = self.cursor.fetchall()
         self.assertEqual(results[0][0],'applied')
 
+
+
     def tearDown(self) -> None:
         self.conn.close()
 
