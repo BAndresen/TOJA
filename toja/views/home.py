@@ -1,5 +1,4 @@
 import tkinter
-
 import customtkinter
 from tkinter import Menu
 

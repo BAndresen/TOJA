@@ -14,15 +14,17 @@ from views.new_event import NewEvent
 from views.new_contact import NewContact
 from views.edit_job import EditJob
 from views.job_description import JobDescription
+from views.welcome_user import WelcomeUser
 from model import Model
 
 
 class Controller:
-    def __init__(self, view: HomeView, model: Model):
+    def __init__(self, view: HomeView, model: Model, new_user: bool = False):
         self.today = datetime.today().date()
         self.new_job = None
         self.view = view
         self.model = model
+        self.new_user = new_user
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -41,8 +43,17 @@ class Controller:
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
+        if new_user:
+            self.welcome_window = WelcomeUser(self.view)
+            self.welcome_window.start_button.configure(command=self.set_database)
+
         self.update_home_listbox()
         self.update_home_event_listbox()
+
+    def set_database(self):
+        if self.welcome_window.radio_var.get():
+            self.database_name = self.welcome_window.database_name_entry.get()
+            print(self.database_name)
 
     def change_database(self):
         db_file = filedialog.askopenfilename()
