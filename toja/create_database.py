@@ -6,9 +6,9 @@ from typing import Union
 def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
     # Create the user table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS user (
-            user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT NOT NULL,
+        CREATE TABLE IF NOT EXISTS database (
+            db_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
             total_points INTEGER DEFAULT 0
         )
     ''')
@@ -28,8 +28,8 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
             salary_type TEXT,
             resume_version TEXT,
             job_description_file TEXT,
-            user_id INTEGER NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+            db_id INTEGER NOT NULL,
+            FOREIGN KEY (db_id) REFERENCES database(db_id) ON DELETE CASCADE ON UPDATE CASCADE
         )
     ''')
 
@@ -43,9 +43,9 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
             status_id INTEGER NOT NULL,
             contact_id INTEGER,
             job_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL,
+            db_id INTEGER NOT NULL,
             FOREIGN KEY (job_id) REFERENCES job(job_id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (db_id) REFERENCES database(db_id) ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (status_id) REFERENCES status(status_id) ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (contact_id) REFERENCES contact(contact_id) ON DELETE CASCADE ON UPDATE CASCADE
         )
@@ -70,9 +70,9 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
             phone TEXT,
             position TEXT,
             job_id INTEGER NOT NULL,
-            user_id INTEGER NOT NULL,
+            db_id INTEGER NOT NULL,
             FOREIGN KEY (job_id) REFERENCES job(job_id) ON DELETE CASCADE ON UPDATE CASCADE
-            FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (db_id) REFERENCES database(db_id) ON DELETE CASCADE ON UPDATE CASCADE
         )
     ''')
 
@@ -134,7 +134,7 @@ def add_job(cursor: sqlite3.Cursor, conn: sqlite3.connect, position: str, compan
         salary_type,
         resume_version,
         job_description_file,
-        user_id
+        db_id
         )
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
     '''
@@ -155,7 +155,7 @@ def add_event(cursor: sqlite3.Cursor, conn: sqlite3.connect, date: str, time: st
         status_id,
         contact_id,
         job_id,
-        user_id
+        db_id
         )
     VALUES (?,?,?,?,?,?,?)
     '''
@@ -195,7 +195,7 @@ def add_contact(cursor: sqlite3.Cursor, conn: sqlite3.connect, first_name: str, 
         phone,
         position,
         job_id,
-        user_id
+        db_id
         )
     VALUES (?,?,?,?,?,?,?)
     '''
