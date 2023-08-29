@@ -16,6 +16,7 @@ from views.edit_job import EditJob
 from views.job_description import JobDescription
 from views.welcome_user import WelcomeUser
 from views.user_database_select import UserSelect
+from views.new_user import CreateUser
 from model import Model
 
 
@@ -81,7 +82,8 @@ class Controller:
         open('https://github.com/BAndresen/TOJA')
 
     def create_user(self):
-        pass
+        create_user = CreateUser(self.view)
+
 
 
     def update_home_listbox(self):
