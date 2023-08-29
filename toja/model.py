@@ -29,9 +29,7 @@ class Model:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
             create_toja_database(self.cursor, self.conn)
-            print(get_file_from_path(db_path))
-            self.insert_user_db(get_file_from_path(db_path),0)
-
+            # self.insert_user_db(self.user.user_db_name,0)
         else:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()

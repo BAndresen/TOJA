@@ -45,21 +45,24 @@ class Controller:
 
         if new_user:
             self.welcome_window = WelcomeUser(self.view)
-            self.welcome_window.start_button.configure(command=self.set_database)
+            self.welcome_window.start_button.configure(command=self.set_user)
 
-        self.database = self.model.user.database_path
+        self.user_db = self.model.user.database_path
 
         self.update_home_listbox()
         self.update_home_event_listbox()
 
-    def set_database(self):
+    def set_user(self):
         if self.welcome_window.radio_var.get():
-            self.database = f'{self.welcome_window.database_name_entry.get()}.db'
+            self.user_db = self.welcome_window.database_name_entry.get()
         else:
-            self.database = 'sample_database.db'
-        self.model.user.set_database_name(self.database)
-        new_db_path = Path(self.model.user.database_path)
-        self.model.connect_database(new_db_path)
+            self.user_db = 'sample_data'
+        self.model.user.set_database_name(self.user_db)
+        self.model.user.user_db_name = self.user_db
+        self.model.insert_user_db(self.model.user.user_db_name, 0)
+
+        # new_db_path = Path(self.model.user.database_path)
+        # self.model.connect_database(new_db_path)
         self.welcome_window.welcome_window.destroy()
         self.update_home_listbox()
 
@@ -76,7 +79,7 @@ class Controller:
         open('https://github.com/BAndresen/TOJA')
 
     def update_home_listbox(self):
-        self.view.job_list_box.delete('0','end')
+        self.view.job_list_box.delete('0', 'end')
 
         home_listbox = self.model.get_all()
         for item in home_listbox:

@@ -12,13 +12,14 @@ class Config:
         self.config.read(self.config_file)
         self.job_description_dir = self.config['database']['job_description_dir']
         self.database_path = self.config['database']['database_path']
+        self.user_db_name = self.config['database']['current_database']
 
     def is_user_new(self) -> bool:
         if self.config['user'].getboolean('new_user'):
             return True
 
     def initialize_user(self) -> None:
-        self.database_path = f'{self.base_dir}\\database\\sample_database.db'
+        self.database_path = f'{self.base_dir}\\database\\toja_database.db'
         job_description = f'{self.base_dir}\\job_descriptions'
         self.config['database']['job_description_dir'] = job_description
         self.config['user']['base_dir'] = str(self.base_dir)
@@ -30,9 +31,7 @@ class Config:
         self.job_description_dir = self.config['database']['job_description_dir']
 
     def set_database_name(self, db_name):
-        dp_path = f'{self.base_dir}\\database\\{db_name}'
-        self.config['database']['database_path'] = dp_path
-        self.database_path = dp_path
+        self.config['database']['current_database'] = db_name
         with open(self.config_file, "w") as file:
             self.config.write(file)
 
