@@ -47,7 +47,7 @@ class Controller:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_database)
 
-        self.database = self.model.user.database_name
+        self.database = self.model.user.database_path
 
         self.update_home_listbox()
         self.update_home_event_listbox()
@@ -58,12 +58,15 @@ class Controller:
         else:
             self.database = 'sample_data.db'
         self.model.user.set_database_name(self.database)
-
+        new_db_path = Path(self.model.user.database_path)
+        self.model.connect_database(new_db_path)
+        self.welcome_window.welcome_window.destroy()
+        self.update_home_listbox()
 
     def change_database(self):
         db_file = filedialog.askopenfilename()
         if db_file:
-            self.model.update_database_path(db_file)
+            self.model.update_database_path(Path(db_file))
             tkinter.messagebox.showinfo(message='Please Restart Program')
 
     def about_page(self):
