@@ -53,8 +53,8 @@ class Controller:
             self.user_name = self.model.user.user_db_name
             self.user_id = self.model.get_user(self.user_name)
 
-        self.update_home_listbox()
-        self.update_home_event_listbox()
+            self.update_home_listbox()
+            self.update_home_event_listbox()
 
     def set_user(self):
         if self.welcome_window.radio_var.get():
@@ -71,25 +71,26 @@ class Controller:
     def change_database(self):
         user_select = UserSelect(self.view)
         self.model.get_all_users()
-        # db_file = filedialog.askopenfilename()
-        # if db_file:
-        #     db_path = Path(db_file)
-        #     self.model.update_database_path(db_path)
-        #     self.model.connect_database(db_path)
-        #     self.update_home_listbox()
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
 
     def create_user(self):
-        create_user = CreateUser(self.view)
+        self.add_user = CreateUser(self.view)
+        self.add_user.create_button.configure(command=self.submit_new_user)
 
-
+    def submit_new_user(self):
+        new_database_name = self.add_user.database_name_entry.get()
+        self.model.user.set_database_name(new_database_name)
+        self.model.insert_user_db(new_database_name, 0)
+        self.add_user.window.destroy()
+        self.update_home_listbox()
 
     def update_home_listbox(self):
+        self.current_user = self.model.get_user(self.model.user.user_db_name)
         self.view.job_list_box.delete('0', 'end')
 
-        home_listbox = self.model.get_all()
+        home_listbox = self.model.get_home_view_listbox(self.current_user)
         for item in home_listbox:
             self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")
 
@@ -172,7 +173,7 @@ class Controller:
             self.contact.phone_entry.get(),
             self.contact.position_entry.get(),
             self.job_id,
-            1
+            self.current_user
         )
         self.update_contact_listbox()
         self.contact.contact_window.destroy()
@@ -234,7 +235,7 @@ class Controller:
             status_id,
             contact_id,
             self.job_id,
-            1)
+            self.current_user)
         self.update_event_listbox()
         self.new_event.event_window.destroy()
 
@@ -256,7 +257,7 @@ class Controller:
             self.new_job.salary_type_entry.get(),
             self.new_job.resume_version_entry.get(),
             self.job_file,
-            1,
+            self.current_user,
             self.new_job.day_entry.get(),
             self.new_job.time_entry.get(),
             self.new_job.note_entry.get("1.0", "end-1c"),

@@ -34,6 +34,7 @@ class Config:
         self.config['database']['current_database'] = db_name
         with open(self.config_file, "w") as file:
             self.config.write(file)
+        self.user_db_name = db_name
 
     def get_database(self) -> Path:
         return Path(self.database_path)
