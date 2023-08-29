@@ -6,7 +6,7 @@ from typing import Union
 def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
     # Create the user table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS database (
+        CREATE TABLE IF NOT EXISTS user (
             user_id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             total_points INTEGER DEFAULT 0
@@ -107,7 +107,7 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
 def add_user(cursor: sqlite3.Cursor, conn: sqlite3.connect, name: str, points: int) -> None:
     query = '''
     INSERT INTO user(
-    first_name,
+    name,
     total_points
     )
     VALUES (?,?)

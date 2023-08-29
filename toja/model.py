@@ -34,7 +34,7 @@ class Model:
     def get_user(self, user_name: str) -> int:
         query = '''
         SELECT user_id
-        FROM database
+        FROM user
         WHERE name = ?
         '''
         self.cursor.execute(query, (user_name,))
@@ -44,7 +44,7 @@ class Model:
     def get_all_users(self) -> list:
         query = '''
         SELECT name
-        FROM database
+        FROM user
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
@@ -52,7 +52,7 @@ class Model:
 
     def insert_user_db(self, db_name: str, points: int):
         query = '''
-        INSERT INTO database(
+        INSERT INTO user(
         name,
         total_points
         )
