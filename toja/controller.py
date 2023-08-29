@@ -15,6 +15,7 @@ from views.new_contact import NewContact
 from views.edit_job import EditJob
 from views.job_description import JobDescription
 from views.welcome_user import WelcomeUser
+from views.user_database_select import UserSelect
 from model import Model
 
 
@@ -38,7 +39,7 @@ class Controller:
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
-        # self.view.file.add_command(label='Create New')
+        self.view.file.add_command(label='Create New', command=self.create_user)
         self.view.file.add_command(label='Change Database', command=self.change_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
@@ -46,8 +47,10 @@ class Controller:
         if new_user:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_user)
-
-        self.user_db = self.model.user.database_path
+        else:
+            self.user_db = self.model.user.database_path
+            self.user_name = self.model.user.user_db_name
+            self.user_id = self.model.get_user(self.user_name)
 
         self.update_home_listbox()
         self.update_home_event_listbox()
@@ -60,23 +63,26 @@ class Controller:
         self.model.user.set_database_name(self.user_db)
         self.model.user.user_db_name = self.user_db
         self.model.insert_user_db(self.model.user.user_db_name, 0)
-
-        # new_db_path = Path(self.model.user.database_path)
-        # self.model.connect_database(new_db_path)
+        self.user_name = self.model.get_user(self.model.user.user_db_name)
         self.welcome_window.welcome_window.destroy()
         self.update_home_listbox()
 
     def change_database(self):
-        db_file = filedialog.askopenfilename()
-        if db_file:
-            db_path = Path(db_file)
-            self.model.update_database_path(db_path)
-            self.model.connect_database(db_path)
-            self.update_home_listbox()
-            # tkinter.messagebox.showinfo(message='Please Restart Program')
+        user_select = UserSelect(self.view)
+        self.model.get_all_users()
+        # db_file = filedialog.askopenfilename()
+        # if db_file:
+        #     db_path = Path(db_file)
+        #     self.model.update_database_path(db_path)
+        #     self.model.connect_database(db_path)
+        #     self.update_home_listbox()
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
+
+    def create_user(self):
+        pass
+
 
     def update_home_listbox(self):
         self.view.job_list_box.delete('0', 'end')

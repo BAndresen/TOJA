@@ -14,6 +14,7 @@ class Model:
         self.user = user
         self.db_file_path = user.get_database()
         self.job_description_parent = user.get_job_description_dir()
+        self.user_name = user.user_db_name
 
         self.connect_database(self.db_file_path)
         self.sample_data = sample_data
@@ -33,6 +34,26 @@ class Model:
         else:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
+
+    def get_user(self, user_name: str) -> int:
+        query = '''
+        SELECT db_id
+        FROM database
+        WHERE name = ?
+        '''
+        self.cursor.execute(query, (user_name,))
+        results = self.cursor.fetchall()
+        return results[0][0]
+
+    def get_all_users(self) -> list:
+        query = '''
+        SELECT name
+        FROM database
+        '''
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        print(results)
+        return results
 
     def insert_user_db(self, db_name: str, points: int):
         query = '''
