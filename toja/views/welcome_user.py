@@ -20,11 +20,11 @@ class WelcomeUser:
         self.radiobutton_frame = customtkinter.CTkFrame(self.welcome_frame)
         self.radiobutton_frame.grid(row=1, column=0, padx=(20, 20), pady=20, sticky="nsew")
         self.radio_var = tkinter.IntVar(value=0)
-        self.label_radio_group = customtkinter.CTkLabel(master=self.radiobutton_frame, text="Would you like to create a new database or use sample data?")
+        self.label_radio_group = customtkinter.CTkLabel(master=self.radiobutton_frame, text="Would you like to create a new user or try a sample user?")
         self.label_radio_group.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
-        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=0, text="Sample Data")
+        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=0, text="Sample User")
         self.radio_button_1.grid(row=1, column=1, pady=10, padx=20, sticky="n")
-        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=1, text='Start New')
+        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var, value=1, text='New User')
         self.radio_button_2.grid(row=2, column=1, pady=10, padx=20, sticky="n")
 
         self.radio_button_2.bind('<Button-1>', self.start_new)
@@ -37,7 +37,7 @@ class WelcomeUser:
         self.start_button.grid(pady=(19, 20))
         self.database_name_entry = customtkinter.CTkEntry(self.welcome_frame)
         self.database_name_entry.grid(row=2, column=0, padx=10, pady=9)
-        self.database_name_label = customtkinter.CTkLabel(self.welcome_frame, text="Database Name:")
+        self.database_name_label = customtkinter.CTkLabel(self.welcome_frame, text="Username:")
         self.database_name_label.grid(row=2, column=0,padx=(40,0), pady=9, sticky="w")
 
     def destroy(self, event):

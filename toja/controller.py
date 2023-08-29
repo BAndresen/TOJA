@@ -191,6 +191,7 @@ class Controller:
 
     def delete(self):
         if messagebox.askyesno(self.job_profile.jp_window, message=f'Are you sure you want to delete?'):
+            self.model.delete_job_txt_file(self.job_id)
             self.model.delete_job(self.job_id)
             self.job_profile.jp_window.destroy()
             self.update_home_listbox()
@@ -253,7 +254,7 @@ class Controller:
     def submit_new_job(self):
         self.company = self.new_job.company_name_entry.get()
         self.position = self.new_job.position_title_entry.get()
-        self.job_file = f'{self.today}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
+        self.job_file = f'{self.model.user.user_name}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
         job_text = self.new_job.job_description_textbox.get("1.0", "end-1c")
         self.job_file = self.check_job_file(self.job_file, job_text)
         self.model.add_new_job(
@@ -328,7 +329,7 @@ class Controller:
             self.new_job_description.submit_job_description.configure(command=self.save_job_description)
 
     def save_job_description(self):
-        self.job_file_only = f'{self.today}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
+        self.job_file_only = f'{self.model.user.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
         job_text = self.new_job_description.job_description_textbox_only.get("1.0", "end-1c")
         self.job_file_only = self.check_job_file(self.job_file_only, job_text)
         if self.job_file_only:

@@ -109,6 +109,18 @@ class Model:
         self.cursor.execute(query, (job_id,))
         self.conn.commit()
 
+    def delete_job_txt_file(self, job_id: str) -> None:
+        query = '''
+        SELECT job_description_file
+        FROM job
+        WHERE job_id = ?
+        '''
+        self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        delete_path = Path(*[self.job_description_parent, results[0][0]])
+        if os.path.exists(delete_path):
+            os.remove(delete_path)
+
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,
                     salary_top: int, salary_bottom: int,
