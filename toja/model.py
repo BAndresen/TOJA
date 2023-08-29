@@ -14,7 +14,7 @@ class Model:
         self.user = user
         self.db_file_path = user.get_database()
         self.job_description_parent = user.get_job_description_dir()
-        self.user_name = user.user_db_name
+        self.user_name = user.user_name
 
         self.connect_database(self.db_file_path)
         self.sample_data = sample_data
@@ -33,7 +33,7 @@ class Model:
 
     def get_user(self, user_name: str) -> int:
         query = '''
-        SELECT db_id
+        SELECT user_id
         FROM database
         WHERE name = ?
         '''
@@ -62,16 +62,16 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
-    def get_home_view_listbox(self, db_id) -> list:
+    def get_home_view_listbox(self, user_id) -> list:
         query = '''
         SELECT
             job_id,
             company,
             position
         FROM job
-        WHERE db_id = ?
+        WHERE user_id = ?
         '''
-        self.cursor.execute(query, (db_id,))
+        self.cursor.execute(query, (user_id,))
         results = self.cursor.fetchall()
         return results
 
@@ -112,7 +112,7 @@ class Model:
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,
                     salary_top: int, salary_bottom: int,
-                    salary_type: str, resume: float, job_description_file: str, db_id: int,
+                    salary_type: str, resume: float, job_description_file: str, user_id: int,
                     date, time, note, status, contact_id) -> None:
         query = '''
         INSERT INTO job(
@@ -127,13 +127,13 @@ class Model:
              salary_type,
              resume_version,
              job_description_file,
-             db_id
+             user_id
         )
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
         '''
         insert = (
             position, company, website, location, commitment, work_type, salary_top, salary_bottom, salary_type,
-            resume, job_description_file, db_id)
+            resume, job_description_file, user_id)
 
         self.cursor.execute(query, insert)
 
@@ -149,11 +149,11 @@ class Model:
             status_id,
             contact_id,
             job_id,
-            db_id
+            user_id
             )
         VALUES (?,?,?,?,?,?,?)
         '''
-        insert_event = (date, time, note, status_id, contact_id, job_id, db_id)
+        insert_event = (date, time, note, status_id, contact_id, job_id, user_id)
         self.cursor.execute(query_event, insert_event)
         self.conn.commit()
 
@@ -161,7 +161,7 @@ class Model:
 
     def add_event(self, date: str, time: str,
                   note: Union[str, None],
-                  status_id: int, contact_id: Union[int, None], job_id: int, db_id: int) -> None:
+                  status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
         query = '''
         INSERT INTO event(
             date,
@@ -170,11 +170,11 @@ class Model:
             status_id,
             contact_id,
             job_id,
-            db_id
+            user_id
             )
         VALUES (?,?,?,?,?,?,?)
         '''
-        insert = (date, time, note, status_id, contact_id, job_id, db_id)
+        insert = (date, time, note, status_id, contact_id, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
 
@@ -249,7 +249,7 @@ class Model:
         return results
 
     def add_contact(self, first_name: str, last_name: str, email: str, phone: str, position: str, job_id: int,
-                    db_id: int):
+                    user_id: int):
         query = '''
         INSERT INTO contact(
             first_name,
@@ -258,11 +258,11 @@ class Model:
             phone,
             position,
             job_id,
-            db_id
+            user_id
             )
         VALUES (?,?,?,?,?,?,?)
         '''
-        insert = (first_name, last_name, email, phone, position, job_id, db_id)
+        insert = (first_name, last_name, email, phone, position, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
 

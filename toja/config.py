@@ -12,7 +12,7 @@ class Config:
         self.config.read(self.config_file)
         self.job_description_dir = self.config['database']['job_description_dir']
         self.database_path = self.config['database']['database_path']
-        self.user_db_name = self.config['database']['current_database']
+        self.user_name = self.config['user']['name']
 
     def is_user_new(self) -> bool:
         if self.config['user'].getboolean('new_user'):
@@ -30,11 +30,11 @@ class Config:
             self.config.write(file)
         self.job_description_dir = self.config['database']['job_description_dir']
 
-    def set_database_name(self, db_name):
-        self.config['database']['current_database'] = db_name
+    def set_database_name(self, user_name):
+        self.config['user']['name'] = user_name
         with open(self.config_file, "w") as file:
             self.config.write(file)
-        self.user_db_name = db_name
+        self.user_name = user_name
 
     def get_database(self) -> Path:
         return Path(self.database_path)
