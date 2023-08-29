@@ -21,10 +21,6 @@ class Model:
         if sample_data:
             add_sample_data(self.cursor, self.conn)
 
-    # def get_all(self):
-    #     home_listbox = self.get_home_view_listbox()
-    #     return home_listbox
-
     def connect_database(self, db_path):
         if not os.path.exists(db_path):
             self.conn = sqlite3.connect(db_path)
@@ -52,7 +48,6 @@ class Model:
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
-        print(results)
         return results
 
     def insert_user_db(self, db_name: str, points: int):
@@ -78,8 +73,6 @@ class Model:
         '''
         self.cursor.execute(query, (db_id,))
         results = self.cursor.fetchall()
-        print(db_id)
-        print(results)
         return results
 
     def close_db_connections(self):

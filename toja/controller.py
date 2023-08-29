@@ -69,8 +69,19 @@ class Controller:
         self.update_home_listbox()
 
     def change_database(self):
-        user_select = UserSelect(self.view)
-        self.model.get_all_users()
+        self.user_select = UserSelect(self.view)
+        self.user_select.submit_button.configure(command=self.switch_users)
+        clean_list = []
+        res = (self.model.get_all_users())
+        for db in res:
+            clean_list.append(db[0])
+        self.user_select.user_entry.configure(values=clean_list)
+
+    def switch_users(self):
+        new_database_name = self.user_select.user_entry.get()
+        self.model.user.set_database_name(new_database_name)
+        self.user_select.user_window.destroy()
+        self.update_home_listbox()
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
