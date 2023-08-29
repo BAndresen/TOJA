@@ -33,6 +33,17 @@ class Model:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
 
+    def insert_user_db(self, db_name: str, points: int):
+        query = '''
+        INSERT INTO database(
+        name,
+        total_points
+        )
+        VALUES (?,?)
+        '''
+        insert = (db_name, points)
+        self.cursor.execute(query, insert)
+        self.conn.commit()
 
     def home_view_listbox(self) -> list:
         query = '''
@@ -159,7 +170,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def open_job_description(self, job_file: Union[Path,tuple[str]]) -> str:
+    def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
         try:
             with open(f'{self.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
                 results = file.read()

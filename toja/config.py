@@ -10,7 +10,6 @@ class Config:
         self.config = configparser.ConfigParser()
         self.config_file = f'{self.base_dir}\\config.ini'
         self.config.read(self.config_file)
-        # self.database = self.config['database']['database_dir']
         self.job_description_dir = self.config['database']['job_description_dir']
         self.database_path = self.config['database']['database_path']
 
@@ -38,7 +37,6 @@ class Config:
             self.config.write(file)
 
     def get_database(self) -> Path:
-        print(Path(self.database_path))
         return Path(self.database_path)
 
     def get_job_description_dir(self) -> Path:

@@ -13,6 +13,7 @@ def run_toja_app():
     model = Model(user)
     view = HomeView()
     if new_user:
+        # welcome_window, user can select sample data or create new database
         controller = Controller(view, model, new_user=True)
     else:
         controller = Controller(view, model)
