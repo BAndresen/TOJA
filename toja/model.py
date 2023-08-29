@@ -6,6 +6,7 @@ from pathlib import Path
 
 from create_database import create_toja_database, add_sample_data
 from config import Config
+from utils import get_file_from_path
 
 
 class Model:
@@ -28,6 +29,8 @@ class Model:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
             create_toja_database(self.cursor, self.conn)
+            print(get_file_from_path(db_path))
+            self.insert_user_db(get_file_from_path(db_path),0)
 
         else:
             self.conn = sqlite3.connect(db_path)
