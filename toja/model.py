@@ -4,13 +4,14 @@ import os
 import sqlite3
 from pathlib import Path
 
-from create_database import create_toja_database, add_sample_data
+from create_database import create_toja_database
 from config import Config
 from utils import get_file_from_path
+from database.sample_data import sample_data
 
 
 class Model:
-    def __init__(self, user: Config, sample_data=False):
+    def __init__(self, user: Config):
         self.user = user
         self.db_file_path = user.get_database()
         self.job_description_parent = user.get_job_description_dir()
@@ -18,18 +19,18 @@ class Model:
 
         self.connect_database(self.db_file_path)
         self.sample_data = sample_data
-        if sample_data:
-            add_sample_data(self.cursor, self.conn)
 
     def connect_database(self, db_path):
         if not os.path.exists(db_path):
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
             create_toja_database(self.cursor, self.conn)
-            # self.insert_user_db(self.user.user_db_name,0)
         else:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
+
+    def set_sample_data(self):
+        sample_data(self.cursor, self.conn)
 
     def get_user(self, user_name: str) -> int:
         query = '''
