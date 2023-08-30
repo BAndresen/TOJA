@@ -1,0 +1,30 @@
+About Us:
+Greetings, Adventurous Coders! At CodeCraft, we are not just a company, we are a guild of mystical Backend Sorcerers weaving spells with code. We seek a Backend Sorcerer who can cast magical spells through code, turning data into pure digital gold.
+
+Responsibilities:
+
+    Collaborate with fellow Sorcerers to create powerful incantations known as APIs for our digital realms.
+    Conjure up and maintain databases, ensuring they remain protected from the lurking bugs and glitches.
+    Wave your wand (keyboard) to craft algorithms that can decipher even the trickiest of puzzles.
+    Transform mere requirements into enchanted software solutions, ensuring they work seamlessly.
+    Work your magic to ensure the server realm remains responsive, scalable, and always ready for quests.
+
+Qualifications:
+
+    Mastery of ancient spells such as Python, Java, or Ruby, preferably learned from the scrolls of the Coding Academies.
+    Proficiency in casting SQL and NoSQL spells, creating databases that could make Merlin envious.
+    Experience in crafting spells for RESTful APIs, so that communication between realms is smooth and spellbinding.
+    A sense of humor that rivals the Trickster spirits, because who said coding can't be fun?
+    A portfolio of spells (projects) that showcase your sorcery skills, making dragons roar in awe.
+
+Perks and Benefits:
+
+    A treasure chest filled with gold coins (salary) within the magical range mentioned above.
+    An enchanted workstation amidst the mystic energy of our San Francisco guild.
+    A chance to collaborate with a fellowship of diverse, fun-loving sorcerers.
+    Opportunities to attend magical conferences and continue honing your skills.
+    Flexible dress code - robes, armor, or a mix of both - we respect your unique style!
+
+If you are ready to embrace the magic of coding and turn lines of text into enchanted software, join us at CodeCraft! Your journey awaits. Apply now at www.codecraft.com/careers.
+
+P.S. If you can conjure up a debugging spell, we'll offer you a crown made of code! 🧙‍♂️✨

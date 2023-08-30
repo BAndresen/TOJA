@@ -60,7 +60,7 @@ class Controller:
         if self.welcome_window.radio_var.get():
             self.user_db = self.welcome_window.database_name_entry.get()
         else:
-            self.user_db = 'sample_data'
+            self.user_db = 'sample'
             self.model.set_sample_data()
         self.model.user.set_database_name(self.user_db)
         self.model.user.user_name = self.user_db

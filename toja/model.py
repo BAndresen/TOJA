@@ -6,7 +6,6 @@ from pathlib import Path
 
 from config import Config
 from database.create_database import create_toja_database
-from database.sample_data import sample_data
 
 
 class Model:
@@ -17,7 +16,6 @@ class Model:
         self.user_name = user.user_name
 
         self.connect_database(self.db_file_path)
-        self.sample_data = sample_data
 
     def connect_database(self, db_path):
         if not os.path.exists(db_path):
@@ -29,7 +27,9 @@ class Model:
             self.cursor = self.conn.cursor()
 
     def set_sample_data(self):
-        sample_data(self.cursor, self.conn)
+        with open('toja/database/sample_data.sql','r') as file:
+            sql_query = file.read()
+        self.cursor.execute(sql_query)
 
     def get_user(self, user_name: str) -> int:
         query = '''
