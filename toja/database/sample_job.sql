@@ -1,8 +1,7 @@
-INSERT INTO job (
+INSERT INTO job(
     position, company, website, location, commitment, work_type,
     salary_top, salary_bottom, salary_type, resume_version,
-    job_description_file, user_id
-)
+    job_description_file, user_id)
 VALUES
     ('Software Engineer', 'TechCo', 'www.techco.com', 'San Francisco, CA', 'Full-Time', 'Onsite', 120000, 90000, 'Annual', '1.1', 'sample_TechCo_Software Engineer.txt', 1),
     ('Data Scientist', 'DataTech', 'www.datatech.com', 'New York, NY', 'Part-Time', 'Remote', 95000, 75000, 'Annual', '1.2', 'sample_DataTech_Data Scientist.txt', 1),
@@ -19,3 +18,4 @@ VALUES
     ('Full Stack Developer', 'WebWizards', 'www.webwizards.com', 'Seattle, WA', 'Full-Time', 'Hybrid', 120000, 95000, 'Annual', '1.1', 'sample_WebWizards_Full Stack Developer.txt', 1),
     ('Cloud Architect', 'CloudSolutions', 'www.cloudsolutions.com', 'Austin, TX', 'Full-Time', 'Onsite', 140000, 110000, 'Annual', '1.2', 'sample_CloudSolutions_Cloud Architect.txt', 1),
     ('UI Designer', 'PixelPerfect', 'www.pixelperfect.com', 'Los Angeles, CA', 'Contract', 'Remote', 87000, 67000, 'Annual', '1.1', 'sample_PixelPerfect_UI Designer.txt', 1);
+

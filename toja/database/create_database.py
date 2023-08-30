@@ -1,10 +1,7 @@
 import sqlite3
-import datetime
-from typing import Union
 
 
 def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
-    # Create the user table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS user (
             user_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,7 +10,6 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
         )
     ''')
 
-    # Create the job table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS job (
             job_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,7 +29,6 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
         )
     ''')
 
-    # Create the event table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS event (
             event_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,7 +46,6 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
         )
     ''')
 
-    # Create the status table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS status (
             status_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,7 +54,6 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
         )
     ''')
 
-    # Create the contact table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS contact (
             contact_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -89,17 +82,4 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
     for query in insert_queries:
         cursor.execute(query)
     conn.commit()
-
-
-# def add_status(cursor: sqlite3.Cursor, conn: sqlite3.connect, status: str, points: int) -> None:
-#     query = '''
-#     INSERT INTO status(
-#     status,
-#     points
-#     )
-#     VALUES (?,?)
-#     '''
-#     insert = (status, points)
-#     cursor.execute(query, insert)
-#     conn.commit()
 

@@ -27,7 +27,10 @@ class Model:
             self.cursor = self.conn.cursor()
 
     def set_sample_data(self):
-        with open('toja/database/sample_data.sql','r') as file:
+        with open('toja/database/sample_job.sql', 'r') as file:
+            sql_query = file.read()
+        self.cursor.execute(sql_query)
+        with open('toja/database/sample_contact.sql', 'r') as file:
             sql_query = file.read()
         self.cursor.execute(sql_query)
 

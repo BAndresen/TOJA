@@ -1,7 +1,7 @@
 import tkinter
 import customtkinter
 
-WELCOME_MESSAGE = "Welcome To TOJA! Let's Track and Optimize your Job Application Process"
+WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Application Process"
 
 
 class WelcomeUser:
