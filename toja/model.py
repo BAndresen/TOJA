@@ -6,6 +6,8 @@ from pathlib import Path
 
 from config import Config
 from database.create_database import create_toja_database
+from database.sample_event import events_applied, insert_future_events, insert_past_events
+from database.sample_event import event_applied_notes, events_past_notes, events_future_notes
 
 
 class Model:
@@ -33,6 +35,32 @@ class Model:
         with open('toja/database/sample_contact.sql', 'r') as file:
             sql_query = file.read()
         self.cursor.execute(sql_query)
+        self._add_dynamic_sample_events(events_applied(event_applied_notes))
+        self._add_dynamic_sample_events(insert_past_events(events_past_notes))
+        self._add_dynamic_sample_events(insert_future_events(events_future_notes))
+        self._null_empty_events()
+
+    def _add_dynamic_sample_events(self, event_insert: list):
+        # allow for dynamic dates
+        for event in event_insert:
+            query = f'''
+            INSERT INTO event (date,time,note,status_id,contact_id,job_id,user_id)
+            VALUES ({event})
+            '''
+            self.cursor.execute(query)
+            self.conn.commit()
+
+    def _null_empty_events(self):
+        query = '''
+            UPDATE event
+        SET note = NULLIF(note, ''),
+            contact_id = NULLIF(contact_id, 0),
+            job_id = NULLIF(job_id, 0)
+        WHERE
+            note = '' OR contact_id = 0 OR job_id = 0
+        '''
+        self.cursor.execute(query)
+        self.conn.commit()
 
     def get_user(self, user_name: str) -> int:
         query = '''
@@ -228,6 +256,7 @@ class Model:
         FROM event e
            JOIN status s USING(status_id)
         WHERE e.job_id = ?
+        ORDER BY e.date
         '''
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
