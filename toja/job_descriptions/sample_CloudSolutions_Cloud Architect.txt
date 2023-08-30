@@ -3,35 +3,35 @@ Welcome to CloudSolutions, where we part the digital skies and weave ethereal so
 
 Responsibilities:
 
-    Summon and architect cloud infrastructures that dance gracefully across AWS, Azure, and Google Cloud like nimble spirits.
-    Work with development teams to integrate cloud enchantments, ensuring applications soar to new heights of performance.
-    Craft spells of scalability and elasticity, ensuring digital creations can stretch to the farthest corners of the digital realm.
-    Collaborate with fellow sorcerers to balance cost-effective solutions and tech sorcery to conjure optimal cloud strategies.
-    Cast spells of disaster recovery and resilience, ensuring your cloud creations are impervious to digital tempests.
+Summon and architect cloud infrastructures that dance gracefully across AWS, Azure, and Google Cloud like nimble spirits.
+Work with development teams to integrate cloud enchantments, ensuring applications soar to new heights of performance.
+Craft spells of scalability and elasticity, ensuring digital creations can stretch to the farthest corners of the digital realm.
+Collaborate with fellow sorcerers to balance cost-effective solutions and tech sorcery to conjure optimal cloud strategies.
+Cast spells of disaster recovery and resilience, ensuring your cloud creations are impervious to digital tempests.
 
 Qualifications:
 
-    A degree in Computer Science, Cloud Sorcery, or a related field, bestowing upon you the title of Cloud Conjurer.
-    Proficiency in cloud platforms like AWS, Azure, or Google Cloud, enabling you to command cloud resources with finesse.
-    A mastery of containers and orchestration spells like Docker and Kubernetes, orchestrating cloud symphonies with ease.
-    An understanding of spells of security and compliance, ensuring your cloud creations are protected from digital specters.
-    A sense of humor that rivals the cosmic comedies, because even cloud sorcery needs a little laughter.
+A degree in Computer Science, Cloud Sorcery, or a related field, bestowing upon you the title of Cloud Conjurer.
+Proficiency in cloud platforms like AWS, Azure, or Google Cloud, enabling you to command cloud resources with finesse.
+A mastery of containers and orchestration spells like Docker and Kubernetes, orchestrating cloud symphonies with ease.
+An understanding of spells of security and compliance, ensuring your cloud creations are protected from digital specters.
+A sense of humor that rivals the cosmic comedies, because even cloud sorcery needs a little laughter.
 
 Keywords and Technologies:
 
-    Cloud Architecture, AWS, Azure, Google Cloud
-    Scalability, Elasticity, Disaster Recovery
-    Containers, Docker, Kubernetes, Orchestration
-    Security Spells, Compliance Magic
-    Collaboration, Innovation, Humor
+Cloud Architecture, AWS, Azure, Google Cloud
+Scalability, Elasticity, Disaster Recovery
+Containers, Docker, Kubernetes, Orchestration
+Security Spells, Compliance Magic
+Collaboration, Innovation, Humor
 
 Perks and Benefits:
 
-    Unlimited skies of compensation ranging from $110,000 to $140,000, a reward for guiding code to the celestial cloud realm.
-    A work arrangement that immerses you in the heart of enchantment – Austin, TX.
-    A guild of cloud conjurers, collaborating to summon digital solutions from the ether.
-    Opportunities for continuous learning and skill enhancement, because cloud magic is ever-evolving.
-    An environment that celebrates innovation, creativity, and the wonder of cloud sorcery.
+Unlimited skies of compensation ranging from $110,000 to $140,000, a reward for guiding code to the celestial cloud realm.
+A work arrangement that immerses you in the heart of enchantment – Austin, TX.
+A guild of cloud conjurers, collaborating to summon digital solutions from the ether.
+Opportunities for continuous learning and skill enhancement, because cloud magic is ever-evolving.
+An environment that celebrates innovation, creativity, and the wonder of cloud sorcery.
 
 If you're ready to command the skies, shape cloud solutions, and infuse code with the power of the digital heavens, join us at CloudSolutions! Apply now at www.cloudsolutions.com/careers and be part of a journey where code floats on the winds of cloud enchantment.
 

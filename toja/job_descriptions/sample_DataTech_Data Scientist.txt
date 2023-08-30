@@ -3,26 +3,26 @@ DataTech is a pioneering data-driven company that leverages cutting-edge technol
 
 Responsibilities:
 
-    Analyze large datasets to uncover actionable insights, trends, and patterns.
-    Develop and deploy machine learning models to solve real-world business challenges.
-    Collaborate with cross-functional teams to identify data requirements and drive data-driven solutions.
-    Visualize data findings and communicate results effectively to both technical and non-technical stakeholders.
-    Stay updated with the latest advancements in data science, implementing best practices and methodologies.
+Analyze large datasets to uncover actionable insights, trends, and patterns.
+Develop and deploy machine learning models to solve real-world business challenges.
+Collaborate with cross-functional teams to identify data requirements and drive data-driven solutions.
+Visualize data findings and communicate results effectively to both technical and non-technical stakeholders.
+Stay updated with the latest advancements in data science, implementing best practices and methodologies.
 
 Qualifications:
 
-    Master's or Ph.D. in Data Science, Statistics, Computer Science, or a related field (or equivalent experience).
-    Proficiency in data manipulation and analysis using tools such as Python, R, or SQL.
-    Experience in machine learning techniques, including classification, regression, clustering, and deep learning.
-    Strong problem-solving skills and a passion for working with complex datasets.
-    Excellent communication skills, with the ability to translate technical findings into actionable insights.
+Master's or Ph.D. in Data Science, Statistics, Computer Science, or a related field (or equivalent experience).
+Proficiency in data manipulation and analysis using tools such as Python, R, or SQL.
+Experience in machine learning techniques, including classification, regression, clustering, and deep learning.
+Strong problem-solving skills and a passion for working with complex datasets.
+Excellent communication skills, with the ability to translate technical findings into actionable insights.
 
 Perks and Benefits:
 
-    Competitive compensation and benefits package.
-    Opportunity to work remotely, promoting a healthy work-life balance.
-    Access to cutting-edge tools and technologies to support your data science projects.
-    Professional development opportunities and continued learning in a dynamic field.
-    Collaborative and diverse work environment that fosters creativity and innovation.
+Competitive compensation and benefits package.
+Opportunity to work remotely, promoting a healthy work-life balance.
+Access to cutting-edge tools and technologies to support your data science projects.
+Professional development opportunities and continued learning in a dynamic field.
+Collaborative and diverse work environment that fosters creativity and innovation.
 
 If you're excited about making an impact through data-driven insights and innovation, DataTech welcomes you to join our team! Shape the future of data science with us. Apply now at www.datatech.com/careers.

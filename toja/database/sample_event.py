@@ -36,7 +36,7 @@ events_past_notes = {
         'Excited to about the offer for the QA Tester role.'],
 
     'rejected': [
-        "Unfortunately, didn't make it past the final round of interviews.",
+        "Unfortunately, didn't make it.",
         'Received rejection email for the position.',
         'Not discouraged by rejection; continuing job search.'],
 }

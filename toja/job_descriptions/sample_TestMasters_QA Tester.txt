@@ -3,27 +3,27 @@ Greetings, Brave Adventurer! Within the realm of TestMasters, we embark on epic 
 
 Responsibilities:
 
-    Embark on daring expeditions to navigate uncharted code, vanquishing glitches and anomalies with your trusty bug-slaying tools.
-    Collaborate with a fellowship of developers, designers, and fellow adventurers to ensure the quality and resilience of digital creations.
-    Utilize your meticulous attention to detail to uncover hidden treasures of defects, ensuring software meets the highest standards.
-    Brave the unpredictable landscape of software environments, stress-testing applications to ensure they survive the harshest quests.
-    Return with tales of your conquests, relaying your findings to the guild to ensure future expeditions benefit from your wisdom.
+Embark on daring expeditions to navigate uncharted code, vanquishing glitches and anomalies with your trusty bug-slaying tools.
+Collaborate with a fellowship of developers, designers, and fellow adventurers to ensure the quality and resilience of digital creations.
+Utilize your meticulous attention to detail to uncover hidden treasures of defects, ensuring software meets the highest standards.
+Brave the unpredictable landscape of software environments, stress-testing applications to ensure they survive the harshest quests.
+Return with tales of your conquests, relaying your findings to the guild to ensure future expeditions benefit from your wisdom.
 
 Qualifications:
 
-    A heart of adventure, guided by a passion for diving deep into the realms of code to uncover hidden secrets.
-    Keen senses and an eye for detail, capable of spotting even the tiniest bug lurking in the darkest corners of code dungeons.
-    A flair for communication, sharing your findings and insights with fellow adventurers and code mages alike.
-    Familiarity with QA tools and strategies, equipping you for battles against the relentless hordes of software defects.
-    An insatiable hunger for growth and learning, as you traverse ever-changing landscapes of technology.
+A heart of adventure, guided by a passion for diving deep into the realms of code to uncover hidden secrets.
+Keen senses and an eye for detail, capable of spotting even the tiniest bug lurking in the darkest corners of code dungeons.
+A flair for communication, sharing your findings and insights with fellow adventurers and code mages alike.
+Familiarity with QA tools and strategies, equipping you for battles against the relentless hordes of software defects.
+An insatiable hunger for growth and learning, as you traverse ever-changing landscapes of technology.
 
 Perks and Benefits:
 
-    Quest rewards in the form of a treasure chest filled with gold coins (salary) within the stated range.
-    Onsite expeditions in the bustling Quest Hub of Austin, TX, surrounded by like-minded adventurers.
-    The camaraderie of a diverse guild of testers, each bringing their unique strengths to the party.
-    Opportunities for skill enhancement and leveling up through continuous training and professional development.
-    The satisfaction of knowing that your efforts contribute to digital realms that stand unshaken against the tests of time.
+Quest rewards in the form of a treasure chest filled with gold coins (salary) within the stated range.
+Onsite expeditions in the bustling Quest Hub of Austin, TX, surrounded by like-minded adventurers.
+The camaraderie of a diverse guild of testers, each bringing their unique strengths to the party.
+Opportunities for skill enhancement and leveling up through continuous training and professional development.
+The satisfaction of knowing that your efforts contribute to digital realms that stand unshaken against the tests of time.
 
 Answer the call to adventure and embark on a journey with the TestMasters Guild! Apply now at www.testmasters.com/careers and be part of a quest that ensures the stability and success of digital realms.
 

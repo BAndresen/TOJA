@@ -99,7 +99,7 @@ class JobProfile:
         self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=103, height=19,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
         self.event_scroll.grid(row=0, column=0,padx=10, pady=10)
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
-        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
+        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700, anchor="e", justify='left')
         self.job_description_label.grid(row=0, column=0)
 
         self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), width=103, height=19,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)

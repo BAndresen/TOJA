@@ -3,34 +3,34 @@ Welcome to the mystical domain of WebWizards, where we conjure digital spells th
 
 Responsibilities:
 
-    Conjure user interfaces with the power of HTML, CSS, and JavaScript, creating enchanting experiences that captivate users.
-    Work your magic in the backend realm using languages like Python, Ruby, or Node.js to weave server-side spells.
-    Collaborate with fellow sorcerers across the realms, as you gather requirements and bring digital visions to life.
-    Shape databases and wield SQL spells, ensuring data flows seamlessly and securely through the digital ether.
-    Troubleshoot and debug with the finesse of a potion master, ensuring spells work flawlessly in every browser and device.
+Conjure user interfaces with the power of HTML, CSS, and JavaScript, creating enchanting experiences that captivate users.
+Work your magic in the backend realm using languages like Python, Ruby, or Node.js to weave server-side spells.
+Collaborate with fellow sorcerers across the realms, as you gather requirements and bring digital visions to life.
+Shape databases and wield SQL spells, ensuring data flows seamlessly and securely through the digital ether.
+Troubleshoot and debug with the finesse of a potion master, ensuring spells work flawlessly in every browser and device.
 
 Qualifications:
 
-    An enchanting degree in Computer Science, Software Engineering, or a related field, granting you the title of Full Stack Sorcerer.
-    Proficiency in the languages of both realms: JavaScript, Python, Ruby, Node.js – transforming code into digital potions.
-    A knack for brewing frontend magic using HTML, CSS, and JavaScript, summoning user interfaces that bewitch and beguile.
-    Familiarity with backend spellbooks like Express, Flask, or Ruby on Rails, crafting server-side sorcery with ease.
-    A sense of humor that rivals the trickster spirits, because who said coding can't be fun?
+An enchanting degree in Computer Science, Software Engineering, or a related field, granting you the title of Full Stack Sorcerer.
+Proficiency in the languages of both realms: JavaScript, Python, Ruby, Node.js – transforming code into digital potions.
+A knack for brewing frontend magic using HTML, CSS, and JavaScript, summoning user interfaces that bewitch and beguile.
+Familiarity with backend spellbooks like Express, Flask, or Ruby on Rails, crafting server-side sorcery with ease.
+A sense of humor that rivals the trickster spirits, because who said coding can't be fun?
 
 Keywords and Technologies:
 
-    Full Stack Development, HTML, CSS, JavaScript, Python, Ruby, Node.js
-    Frontend Magic, Backend Sorcery, SQL Spells
-    Collaboration, Troubleshooting, Debugging
-    Creative Coding, Humor, Enchantment
+Full Stack Development, HTML, CSS, JavaScript, Python, Ruby, Node.js
+Frontend Magic, Backend Sorcery, SQL Spells
+Collaboration, Troubleshooting, Debugging
+Creative Coding, Humor, Enchantment
 
 Perks and Benefits:
 
-    Spellbinding compensation ranging from $95,000 to $120,000, reflecting your mastery in both frontend and backend realms.
-    A hybrid work arrangement, allowing you to summon code from anywhere – your den, a café, or atop a mystical mountain.
-    A guild of fellow sorcerers, united by their love for crafting digital spells and laughter.
-    Opportunities for continuous learning and skill enhancement, keeping you at the peak of code magic.
-    An environment that encourages creativity, innovation, and the joy of conjuring digital wonders.
+Spellbinding compensation ranging from $95,000 to $120,000, reflecting your mastery in both frontend and backend realms.
+A hybrid work arrangement, allowing you to summon code from anywhere – your den, a café, or atop a mystical mountain.
+A guild of fellow sorcerers, united by their love for crafting digital spells and laughter.
+Opportunities for continuous learning and skill enhancement, keeping you at the peak of code magic.
+An environment that encourages creativity, innovation, and the joy of conjuring digital wonders.
 
 If you're ready to enchant the web, craft code potions, and laugh in the face of coding challenges, join us at WebWizards! Apply now at www.webwizards.com/careers and become part of a quest where code becomes pure magic.
 

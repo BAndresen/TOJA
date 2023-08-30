@@ -3,26 +3,26 @@ At WebSolutions, we're dedicated to creating user-centered digital experiences t
 
 Responsibilities:
 
-    Collaborate with design and backend teams to implement responsive and visually appealing web applications.
-    Develop and maintain reusable frontend components, ensuring consistency across projects.
-    Optimize web applications for speed and performance, while maintaining high-quality user experiences.
-    Stay updated with the latest frontend technologies, implementing modern tools and best practices.
-    Participate in code reviews, providing valuable insights to enhance code quality.
+Collaborate with design and backend teams to implement responsive and visually appealing web applications.
+Develop and maintain reusable frontend components, ensuring consistency across projects.
+Optimize web applications for speed and performance, while maintaining high-quality user experiences.
+Stay updated with the latest frontend technologies, implementing modern tools and best practices.
+Participate in code reviews, providing valuable insights to enhance code quality.
 
 Qualifications:
 
-    Bachelor's degree in Computer Science, Web Development, or a related field (or equivalent experience).
-    Proficiency in HTML, CSS, and JavaScript, with a strong understanding of frontend frameworks like React or Vue.
-    Experience in responsive design and cross-browser compatibility.
-    Familiarity with version control systems like Git.
-    Strong problem-solving skills and a passion for creating exceptional user interfaces.
+Bachelor's degree in Computer Science, Web Development, or a related field (or equivalent experience).
+Proficiency in HTML, CSS, and JavaScript, with a strong understanding of frontend frameworks like React or Vue.
+Experience in responsive design and cross-browser compatibility.
+Familiarity with version control systems like Git.
+Strong problem-solving skills and a passion for creating exceptional user interfaces.
 
 Perks and Benefits:
 
-    Competitive salary and comprehensive benefits package.
-    Flexible work arrangement with a combination of onsite and remote work options.
-    Opportunity to work in a collaborative and creative environment.
-    Professional growth and development opportunities, including attending tech conferences.
-    Convenient location in the heart of Seattle with access to modern facilities.
+Competitive salary and comprehensive benefits package.
+Flexible work arrangement with a combination of onsite and remote work options.
+Opportunity to work in a collaborative and creative environment.
+Professional growth and development opportunities, including attending tech conferences.
+Convenient location in the heart of Seattle with access to modern facilities.
 
 If you're passionate about crafting user-centric web experiences and contributing to impactful projects, WebSolutions invites you to join our team! Help us shape the digital landscape. Apply now at www.websolutions.com/careers.

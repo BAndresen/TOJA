@@ -3,26 +3,26 @@ TechCo is a cutting-edge technology company dedicated to pushing the boundaries 
 
 Responsibilities:
 
-    Collaborate with cross-functional teams to design, develop, and implement high-quality software applications.
-    Write clean, efficient, and maintainable code following best practices and coding standards.
-    Participate in code reviews, offering valuable insights and suggestions for improvement.
-    Troubleshoot and debug software issues, identifying and resolving technical challenges.
-    Stay updated with the latest industry trends and technologies, continuously enhancing your skills.
+Collaborate with cross-functional teams to design, develop, and implement high-quality software applications.
+Write clean, efficient, and maintainable code following best practices and coding standards.
+Participate in code reviews, offering valuable insights and suggestions for improvement.
+Troubleshoot and debug software issues, identifying and resolving technical challenges.
+Stay updated with the latest industry trends and technologies, continuously enhancing your skills.
 
 Qualifications:
 
-    Bachelor's degree in Computer Science, Engineering, or a related field (or equivalent practical experience).
-    Proven experience in software development using languages such as Python, Java, or C++.
-    Familiarity with software engineering principles, design patterns, and development methodologies.
-    Strong problem-solving skills and attention to detail.
-    Excellent communication and teamwork abilities.
+Bachelor's degree in Computer Science, Engineering, or a related field (or equivalent practical experience).
+Proven experience in software development using languages such as Python, Java, or C++.
+Familiarity with software engineering principles, design patterns, and development methodologies.
+Strong problem-solving skills and attention to detail.
+Excellent communication and teamwork abilities.
 
 Perks and Benefits:
 
-    Competitive salary and comprehensive benefits package.
-    Opportunity to work in a collaborative and innovative environment.
-    Professional growth and development opportunities.
-    Flexible working hours and a supportive work-life balance.
-    Convenient location in the heart of San Francisco with access to top-notch facilities.
+Competitive salary and comprehensive benefits package.
+Opportunity to work in a collaborative and innovative environment.
+Professional growth and development opportunities.
+Flexible working hours and a supportive work-life balance.
+Convenient location in the heart of San Francisco with access to top-notch facilities.
 
 If you're passionate about technology and eager to contribute to groundbreaking projects, TechCo is the place for you! Join us in shaping the future of software engineering. Apply now at www.techco.com/careers.

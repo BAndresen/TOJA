@@ -3,27 +3,27 @@ CloudOps is a leading provider of cloud infrastructure solutions, powering busin
 
 Responsibilities:
 
-    Collaborate with development teams to design, implement, and manage continuous integration and continuous deployment pipelines.
-    Automate deployment, scaling, and management of cloud resources using industry-leading tools.
-    Monitor system performance, troubleshoot issues, and ensure high availability and security.
-    Implement best practices for configuration management, infrastructure as code, and version control.
-    Stay up-to-date with the latest DevOps trends and technologies, suggesting improvements to enhance our processes.
+Collaborate with development teams to design, implement, and manage continuous integration and continuous deployment pipelines.
+Automate deployment, scaling, and management of cloud resources using industry-leading tools.
+Monitor system performance, troubleshoot issues, and ensure high availability and security.
+Implement best practices for configuration management, infrastructure as code, and version control.
+Stay up-to-date with the latest DevOps trends and technologies, suggesting improvements to enhance our processes.
 
 Qualifications:
 
-    Bachelor's degree in Computer Science, Engineering, or a related field (or equivalent experience).
-    Proven experience in DevOps practices and methodologies.
-    Proficiency with cloud platforms like AWS, Azure, or Google Cloud.
-    Strong scripting skills in languages like Python, Bash, or PowerShell.
-    Familiarity with containerization and orchestration tools such as Docker and Kubernetes.
-    Excellent problem-solving skills and a proactive attitude towards ensuring system reliability.
+Bachelor's degree in Computer Science, Engineering, or a related field (or equivalent experience).
+Proven experience in DevOps practices and methodologies.
+Proficiency with cloud platforms like AWS, Azure, or Google Cloud.
+Strong scripting skills in languages like Python, Bash, or PowerShell.
+Familiarity with containerization and orchestration tools such as Docker and Kubernetes.
+Excellent problem-solving skills and a proactive attitude towards ensuring system reliability.
 
 Perks and Benefits:
 
-    Competitive compensation package with attractive annual salary.
-    Opportunity to work onsite in a collaborative and dynamic environment.
-    Professional growth opportunities, including training and certifications in cutting-edge technologies.
-    Access to modern tools and infrastructure to support your DevOps initiatives.
-    Convenient location in Austin, TX, surrounded by a thriving tech community.
+Competitive compensation package with attractive annual salary.
+Opportunity to work onsite in a collaborative and dynamic environment.
+Professional growth opportunities, including training and certifications in cutting-edge technologies.
+Access to modern tools and infrastructure to support your DevOps initiatives.
+Convenient location in Austin, TX, surrounded by a thriving tech community.
 
 If you're passionate about streamlining operations, enhancing system reliability, and contributing to the future of cloud technology, CloudOps welcomes you to join our team! Be a part of our journey towards innovation. Apply now at www.cloudops.com/careers.
