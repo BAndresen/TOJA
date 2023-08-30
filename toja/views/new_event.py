@@ -13,13 +13,15 @@ class NewEvent:
         self.event_info_frame = customtkinter.CTkFrame(self.event_window)
         self.event_info_frame.grid(row=0, column=0, padx=20, pady=20)
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['follow_up',
                                                                                     'prospect',
-                                                                                    'submit_form',
-                                                                                    'interview',
+                                                                                    'applied',
                                                                                     'meeting',
+                                                                                    'attend_event',
+                                                                                    'interview',
                                                                                     'offer',
-                                                                                    'offer_accepted'], width=140)
+                                                                                    'offer_accepted',
+                                                                                    'rejected', ], width=140)
         self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
