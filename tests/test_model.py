@@ -1,8 +1,7 @@
 import unittest
 import sqlite3
-from unittest import mock
 
-from toja.create_database import create_toja_database
+from toja.database.create_database import create_toja_database
 
 
 class TestDatabase(unittest.TestCase):

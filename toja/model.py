@@ -4,9 +4,8 @@ import os
 import sqlite3
 from pathlib import Path
 
-from create_database import create_toja_database
 from config import Config
-from utils import get_file_from_path
+from database.create_database import create_toja_database
 from database.sample_data import sample_data
 
 
