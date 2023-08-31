@@ -30,7 +30,7 @@ class Config:
             self.config.write(file)
         self.job_description_dir = self.config['database']['job_description_dir']
 
-    def set_database_name(self, user_name):
+    def set_database_name(self, user_name: str):
         self.config['user']['name'] = user_name
         with open(self.config_file, "w") as file:
             self.config.write(file)
@@ -42,6 +42,6 @@ class Config:
     def get_job_description_dir(self) -> Path:
         return Path(self.job_description_dir)
 
-    def get_users_system(self):
+    def get_users_system(self) -> str:
         self.system_platform = platform.system()
         return self.system_platform

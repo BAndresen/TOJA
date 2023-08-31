@@ -26,8 +26,8 @@ class NewEvent:
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        # self.day_entry = customtkinter.CTkEntry(self.event_info_frame)
-        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "12"))
+        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "12"),
+                                   date_pattern="yyyy-mm-dd")
         self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
 
         self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')

@@ -93,7 +93,8 @@ class NewJob:
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "11"))
+        self.day_entry = DateEntry(self.event_info_frame, selectmode='day', font=("roboto", "11"),
+                                   date_pattern="yyyy-mm-dd")
         self.day_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.day_label = customtkinter.CTkLabel(self.event_info_frame, text='Day')
         self.day_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")

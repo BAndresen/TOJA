@@ -24,7 +24,7 @@ class HomeView(customtkinter.CTk):
                                                    fg_color="transparent", text_color=("gray10", "gray90"),
                                                    hover_color=("gray70", "gray30"),
                                                    anchor="w")
-        self.home_button.grid(row=0, column=0, pady=(50,0))
+        self.home_button.grid(row=0, column=0, pady=(50, 0))
 
         self.analytics_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
                                                         border_spacing=10,
@@ -48,7 +48,8 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid_columnconfigure(0, weight=1)
 
         # Job ListBox
-        self.job_list_box = tkinter.Listbox(self.home_frame, font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
+        self.job_list_box = tkinter.Listbox(self.home_frame, font=('roboto, 10'), bg='grey20', fg='grey90',
+                                            borderwidth=0)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
 
@@ -82,8 +83,9 @@ class HomeView(customtkinter.CTk):
         self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events")
         self.past_events_label.grid(row=0, column=0)
-        self.past_events_listbox = tkinter.Listbox(self.past_events_frame,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
-        self.past_events_listbox.grid(row=1, column=0, sticky = 'nsew')
+        self.past_events_listbox = tkinter.Listbox(self.past_events_frame, font=('roboto, 10'), bg='grey20',
+                                                   fg='grey90', borderwidth=0)
+        self.past_events_listbox.grid(row=1, column=0, sticky='nsew')
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame)
@@ -92,8 +94,9 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events")
         self.upcoming_events_label.grid(row=0, column=0)
-        self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
-        self.upcoming_events_listbox.grid(row=1, column=0, sticky = 'nsew')
+        self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame, font=('roboto, 10'), bg='grey20',
+                                                       fg='grey90', borderwidth=0)
+        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew')
 
         # --------------- Analytics -------------- #
 
@@ -125,4 +128,3 @@ class HomeView(customtkinter.CTk):
 
         # --- Display Menu
         self.config(menu=self.menubar)
-

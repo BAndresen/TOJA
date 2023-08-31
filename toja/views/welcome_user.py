@@ -35,14 +35,14 @@ class WelcomeUser:
 
     def start_new(self, event):
         self.start_button.grid(pady=(19, 20))
-        self.database_name_entry = customtkinter.CTkEntry(self.welcome_frame)
-        self.database_name_entry.grid(row=2, column=0, padx=10, pady=9)
+        self.name_entry = customtkinter.CTkEntry(self.welcome_frame)
+        self.name_entry.grid(row=2, column=0, padx=10, pady=9)
         self.database_name_label = customtkinter.CTkLabel(self.welcome_frame, text="Username:")
         self.database_name_label.grid(row=2, column=0,padx=(40,0), pady=9, sticky="w")
 
     def destroy(self, event):
         self.database_name_label.destroy()
-        self.database_name_entry.destroy()
+        self.name_entry.destroy()
         self.start_button.grid(pady=(65,20))
 
 

@@ -17,7 +17,6 @@ class Model:
         self.db_file_path = user.get_database()
         self.job_description_parent = user.get_job_description_dir()
         self.user_name = user.user_name
-
         self.connect_database(self.db_file_path)
 
     def connect_database(self, db_path):
@@ -63,7 +62,7 @@ class Model:
         self.cursor.execute(query)
         self.conn.commit()
 
-    def get_user(self, user_name: str) -> int:
+    def get_user_id(self, user_name: Union[str,int]) -> int:
         query = '''
         SELECT user_id
         FROM user
@@ -263,12 +262,11 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_all_event(self, future=False) -> list:
+    def get_all_event(self, user: int, future=False) -> list:
         today = datetime.today().strftime('%Y-%m-%d')
-        symbol = '<'
+        symbol = '<='
         if future:
             symbol = '>'
-
         query = f'''
         SELECT
             e.date,
@@ -277,10 +275,9 @@ class Model:
             s.status
         FROM event e
            JOIN status s USING(status_id)
-        WHERE e.date {symbol} '{today}'
+        WHERE e.date {symbol} '{today}' AND e.user_id = {user}
         ORDER BY e.date
         '''
-
         self.cursor.execute(query)
         results = self.cursor.fetchall()
         return results

@@ -49,24 +49,20 @@ class Controller:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
-            self.user_db = self.model.user.database_path
-            self.user_name = self.model.user.user_name
-            self.user_id = self.model.get_user(self.user_name)
-
+            self.user_id = self.model.get_user_id(self.model.user_name)
             self.update_home_listbox()
             self.update_home_event_listbox()
 
     def set_user(self):
         if self.welcome_window.radio_var.get():
-            self.user_db = self.welcome_window.database_name_entry.get()
+            self.model.user_name = self.welcome_window.name_entry.get()
         else:
-            self.user_db = 'sample'
+            self.model.user_name = 'sample'
             self.model.set_sample_data()
-        self.model.user.set_database_name(self.user_db)
-        self.model.user.user_name = self.user_db
+        self.model.user.set_database_name(self.model.user_name)
         self.model.insert_user_db(self.model.user.user_name, 0)
-        self.user_name = self.model.get_user(self.model.user.user_name)
         self.welcome_window.welcome_window.destroy()
+        self.user_id = self.model.get_user_id(self.model.user_name)
         self.update_home_listbox()
         self.update_home_event_listbox()
 
@@ -80,10 +76,13 @@ class Controller:
         self.user_select.user_entry.configure(values=clean_list)
 
     def switch_users(self):
-        new_database_name = self.user_select.user_entry.get()
-        self.model.user.set_database_name(new_database_name)
+        name = self.user_select.user_entry.get()
+        self.user_name = name
+        self.user_id = self.model.get_user_id(name)
+        self.model.user.set_database_name(name)
         self.user_select.user_window.destroy()
         self.update_home_listbox()
+        self.update_home_event_listbox()
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
@@ -93,14 +92,16 @@ class Controller:
         self.add_user.create_button.configure(command=self.submit_new_user)
 
     def submit_new_user(self):
-        new_database_name = self.add_user.database_name_entry.get()
-        self.model.user.set_database_name(new_database_name)
-        self.model.insert_user_db(new_database_name, 0)
+        new_name = self.add_user.database_name_entry.get()
+        self.model.user.set_database_name(new_name)
+        self.model.insert_user_db(new_name, 0)
+        self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
         self.update_home_listbox()
+        self.update_home_event_listbox()
 
     def update_home_listbox(self):
-        self.current_user = self.model.get_user(self.model.user.user_name)
+        self.current_user = self.model.get_user_id(self.model.user.user_name)
         self.view.job_list_box.delete('0', 'end')
 
         home_listbox = self.model.get_home_view_listbox(self.current_user)
@@ -197,6 +198,7 @@ class Controller:
             self.model.delete_job(self.job_id)
             self.job_profile.jp_window.destroy()
             self.update_home_listbox()
+            self.update_home_event_listbox()
 
     def run(self):
         self.view.mainloop()
@@ -241,7 +243,6 @@ class Controller:
     def submit_new_event(self):
         contact_id = (self.new_event.contact_entry.get().split("|")[0])
         status_id = self.model.get_status_id(self.new_event.event_entry.get())[0][0]
-
         self.model.add_event(
             self.new_event.day_entry.get(),
             self.new_event.time_entry.get(),
@@ -251,6 +252,7 @@ class Controller:
             self.job_id,
             self.current_user)
         self.update_event_listbox()
+        self.update_home_event_listbox()
         self.new_event.event_window.destroy()
 
     def submit_new_job(self):
@@ -282,6 +284,7 @@ class Controller:
             self.model.save_job_description(self.job_file, job_text)
 
         self.update_home_listbox()
+        self.update_home_event_listbox()
         self.new_job.aj_window.destroy()
 
     def check_job_file(self, job_file, job_text) -> Union[str, None]:
@@ -300,12 +303,12 @@ class Controller:
 
     def update_home_event_listbox(self):
         self.view.past_events_listbox.delete('0', 'end')
-        past_event_listbox = self.model.get_all_event()
+        past_event_listbox = self.model.get_all_event(self.user_id)
         for item in past_event_listbox:
             self.view.past_events_listbox.insert(tkinter.END,
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
         self.view.upcoming_events_listbox.delete('0', 'end')
-        upcoming_event_listbox = self.model.get_all_event(future=True)
+        upcoming_event_listbox = self.model.get_all_event(self.user_id, future=True)
         for item in upcoming_event_listbox:
             self.view.upcoming_events_listbox.insert(tkinter.END,
                                                      f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
