@@ -1,11 +1,18 @@
 import tkinter
 import customtkinter
 from tkinter import Menu
+import os
+from PIL import Image
 
 
 class HomeView(customtkinter.CTk):
     def __init__(self):
         super().__init__()
+
+        # image icons
+        plus_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
+        plus_image_icon_image = customtkinter.CTkImage(Image.open(os.path.join(plus_image_path, "plus_white.png")),
+                                                  size=(20, 20))
 
         # Configure Window
         self.frame = "home"
@@ -47,30 +54,34 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_frame.grid_columnconfigure(0, weight=1)
 
+        self.job_list_frame = customtkinter.CTkFrame(self.home_frame)
+        self.job_list_frame.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky="nsew")
+        self.job_list_frame.grid_columnconfigure(0,weight=1)
+        self.job_list_frame.grid_rowconfigure(0,weight=1)
         # Job ListBox
-        self.job_list_box = tkinter.Listbox(self.home_frame, font=('roboto, 10'), bg='grey20', fg='grey90',
+        self.job_list_box = tkinter.Listbox(self.job_list_frame, font=('roboto, 10'), bg='grey20', fg='grey90',
                                             borderwidth=0)
 
-        self.job_list_box.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky='nsew')
+        self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20,5), pady=20, sticky='nsew')
+
+        # Add New Job Button
+        self.button_frame = customtkinter.CTkFrame(self.job_list_frame)
+        self.button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="", image=plus_image_icon_image, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.new_job_button.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)
-        self.stat_board_frame.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
+        self.stat_board_frame.grid(row=0, column=2, padx=20, pady=20, sticky="nsew")
         self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="motivational design stats (coming soon)")
         self.stat_label.grid(row=0, column=0, padx=150, pady=150)
 
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame)
-        self.calendar_frame.grid(row=2, columnspan=2, column=0, padx=20, pady=20, sticky="nsew")
+        self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=20, sticky="nsew")
         self.calendar_label_placeholder = (customtkinter.CTkLabel(
             self.calendar_frame, text="graph - days vs events (coming soon)"))
         self.calendar_label_placeholder.grid(row=0, column=1, padx=50, pady=50)
-
-        # Add New Job Button
-        self.button_frame = customtkinter.CTkFrame(self.home_frame)
-        self.button_frame.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="Add")
-        self.new_job_button.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
         # --------------- Event -------------- #
 
