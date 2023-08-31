@@ -76,8 +76,6 @@ class JobProfile:
         self.button_frame.grid(row=1, column=1)
         self.edit_button = customtkinter.CTkButton(self.button_frame, text="Edit")
         self.edit_button.grid(row=1, column=1, pady=5, padx=10)
-        self.delete_button = customtkinter.CTkButton(self.button_frame, text="Delete")
-        self.delete_button.grid(row=2, column=1, pady=5, padx=10)
         self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="New Contact")
         self.new_contact_button.grid(row=3, column=1, pady=5, padx=10)
         self.new_event_button = customtkinter.CTkButton(self.button_frame, text="New Event")

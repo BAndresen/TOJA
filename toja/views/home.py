@@ -10,9 +10,11 @@ class HomeView(customtkinter.CTk):
         super().__init__()
 
         # image icons
-        plus_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
-        plus_image_icon_image = customtkinter.CTkImage(Image.open(os.path.join(plus_image_path, "plus_white.png")),
+        icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
+        plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, "plus_thin_white.png")),
                                                   size=(20, 20))
+        delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, "delete_white.png")),
+                                                  size=(22, 22))
 
         # Configure Window
         self.frame = "home"
@@ -67,8 +69,11 @@ class HomeView(customtkinter.CTk):
         # Add New Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame)
         self.button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="", image=plus_image_icon_image, width=35, height=35, fg_color='grey30', hover_color='grey15')
-        self.new_job_button.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.new_job_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
+        self.delete_job_button = customtkinter.CTkButton(self.button_frame, text="", image=delete_icon, width=35, height=35,
+                                                      fg_color='grey30', hover_color='grey15')
+        self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)

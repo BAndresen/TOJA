@@ -148,9 +148,10 @@ class Model:
         '''
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
-        delete_path = Path(*[self.job_description_parent, results[0][0]])
-        if os.path.exists(delete_path):
-            os.remove(delete_path)
+        if results[0][0]:
+            delete_path = Path(*[self.job_description_parent, results[0][0]])
+            if os.path.exists(delete_path):
+                os.remove(delete_path)
 
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,

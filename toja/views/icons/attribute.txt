@@ -1,4 +1,13 @@
-plus icon
+plus icon thick
 https://www.flaticon.com/free-icons/plus
+Plus icons created by srip
+
+plus icon thin
+https://www.flaticon.com/free-icons/plus
+Plus icons created by Fuzzee
+
+delete icon
+https://www.flaticon.com/free-icons/delete
+Delete icons created by Ilham Fitrotul Hayat
 
 

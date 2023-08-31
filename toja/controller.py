@@ -33,6 +33,7 @@ class Controller:
         self.view.home_button.configure(command=self.home_frame_button)
         self.view.analytics_button.configure(command=self.analytics_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
+        self.view.delete_job_button.configure(command=self.delete)
 
         # HomeView ListBox
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -113,6 +114,7 @@ class Controller:
         self.job_id = (event_str.split())[0]
         self.open_job_profile()
 
+
     def update_job_profile(self):
         self.jp_results = self.model.get_job_data(self.job_id)
         self.job_profile.company_name_user.configure(text=self.jp_results[0])
@@ -133,7 +135,6 @@ class Controller:
 
     def open_job_profile(self) -> None:
         self.job_profile = JobProfile(self.view)
-        self.job_profile.delete_button.configure(command=self.delete)
         self.job_profile.new_contact_button.configure(command=self.add_contact)
         self.job_profile.new_event_button.configure(command=self.open_new_event)
         self.job_profile.edit_button.configure(command=self.edit_job)
@@ -147,7 +148,7 @@ class Controller:
         self.contact.submit_contact_button.configure(command=self.insert_contact)
 
     def edit_job(self):
-        self.edit = EditJob(self.view)
+        self.edit = EditJob(self.view.home_frame)
         self.edit.submit_edit_button.configure(command=self.submit_job_edit)
 
         self.edit.position_title_entry.configure(placeholder_text=self.jp_results[2])
@@ -193,10 +194,11 @@ class Controller:
         self.contact.contact_window.destroy()
 
     def delete(self):
-        if messagebox.askyesno(self.job_profile.jp_window, message=f'Are you sure you want to delete?'):
+        event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
+        self.job_id = (event_str.split())[0]
+        if messagebox.askyesno("Delete Job", message=f'Are you sure you want to delete?'):
             self.model.delete_job_txt_file(self.job_id)
             self.model.delete_job(self.job_id)
-            self.job_profile.jp_window.destroy()
             self.update_home_listbox()
             self.update_home_event_listbox()
 
