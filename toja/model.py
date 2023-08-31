@@ -3,6 +3,7 @@ from typing import Union
 import os
 import sqlite3
 from pathlib import Path
+from datetime import datetime
 
 from config import Config
 from database.create_database import create_toja_database
@@ -262,8 +263,13 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_all_event(self) -> list:
-        query = '''
+    def get_all_event(self, future=False) -> list:
+        today = datetime.today().strftime('%Y-%m-%d')
+        symbol = '<'
+        if future:
+            symbol = '>'
+
+        query = f'''
         SELECT
             e.date,
             e.time,
@@ -271,7 +277,10 @@ class Model:
             s.status
         FROM event e
            JOIN status s USING(status_id)
+        WHERE e.date {symbol} '{today}'
+        ORDER BY e.date
         '''
+
         self.cursor.execute(query)
         results = self.cursor.fetchall()
         return results

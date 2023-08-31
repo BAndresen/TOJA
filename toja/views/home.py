@@ -77,21 +77,23 @@ class HomeView(customtkinter.CTk):
         self.event_frame.grid_columnconfigure(0, weight=1)
 
         # Recent Events
-        self.recent_events_frame = customtkinter.CTkFrame(self.event_frame)
-        self.recent_events_frame.grid_columnconfigure(0, weight=1)
-        self.recent_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.recent_events_label = customtkinter.CTkLabel(self.recent_events_frame, text="Recent Events")
-        self.recent_events_label.grid(row=0, column=0)
-        self.recent_events_listbox = tkinter.Listbox(self.recent_events_frame)
-        self.recent_events_listbox.grid(row=1, column=0, sticky = 'nsew')
+        self.past_events_frame = customtkinter.CTkFrame(self.event_frame)
+        self.past_events_frame.grid_columnconfigure(0, weight=1)
+        self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events")
+        self.past_events_label.grid(row=0, column=0)
+        self.past_events_listbox = tkinter.Listbox(self.past_events_frame,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
+        self.past_events_listbox.grid(row=1, column=0, sticky = 'nsew')
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame)
         self.upcoming_events_frame.grid_columnconfigure(0, weight=1)
 
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
-        self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Recent Events")
+        self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events")
         self.upcoming_events_label.grid(row=0, column=0)
+        self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,font=('roboto, 10'), bg='grey20', fg='grey90', borderwidth=0)
+        self.upcoming_events_listbox.grid(row=1, column=0, sticky = 'nsew')
 
         # --------------- Analytics -------------- #
 

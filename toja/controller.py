@@ -68,6 +68,7 @@ class Controller:
         self.user_name = self.model.get_user(self.model.user.user_name)
         self.welcome_window.welcome_window.destroy()
         self.update_home_listbox()
+        self.update_home_event_listbox()
 
     def change_database(self):
         self.user_select = UserSelect(self.view)
@@ -295,15 +296,19 @@ class Controller:
         event_listbox = self.model.get_event(self.job_id)
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END,
-                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
+                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
 
     def update_home_event_listbox(self):
-        self.view.recent_events_listbox.delete('0', 'end')
-
-        event_listbox = self.model.get_all_event()
-        for item in event_listbox:
-            self.view.recent_events_listbox.insert(tkinter.END,
-                                                   f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")  # ----- tkinter Listbox
+        self.view.past_events_listbox.delete('0', 'end')
+        past_event_listbox = self.model.get_all_event()
+        for item in past_event_listbox:
+            self.view.past_events_listbox.insert(tkinter.END,
+                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
+        self.view.upcoming_events_listbox.delete('0', 'end')
+        upcoming_event_listbox = self.model.get_all_event(future=True)
+        for item in upcoming_event_listbox:
+            self.view.upcoming_events_listbox.insert(tkinter.END,
+                                                     f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
 
     def update_contact_listbox(self):
         self.job_profile.contact_listbox.delete('0', 'end')

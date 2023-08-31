@@ -22,7 +22,7 @@ event_applied_notes = [
 events_past_notes = {
     'follow_up': [
         'Sent follow-up email regarding application status.',
-        'Followed up with HR after initial phone interview.',
+        'Followed up with HR.',
         'Received positive feedback during follow-up call.'],
 
     'prospect': [
@@ -125,7 +125,7 @@ def insert_future_events(event: dict) -> list:
         if key == 'meeting':
             for note in value:
                 randon_hour_unit = randrange(1, 5)
-                random_day_unit = randrange(1, 7)
+                random_day_unit = randrange(1, 10)
                 date = date_change(random_day_unit, day=True, add=True)
                 time = date_change(randon_hour_unit, hour=True)
                 contact = randrange(1, 30)
@@ -133,15 +133,15 @@ def insert_future_events(event: dict) -> list:
         if key == 'attend_event':
             for note in value:
                 randon_hour_unit = randrange(1, 5)
-                random_day_unit = randrange(1, 7)
-                date = date_change(random_day_unit, day=True)
+                random_day_unit = randrange(10, 60)
+                date = date_change(random_day_unit, day=True, add=True)
                 time = date_change(randon_hour_unit, hour=True)
                 event_list.append(f'"{date}","{time}","{note}","6",{False},{False}, "1"')
         if key == 'interview':
             for note in value:
                 randon_hour_unit = randrange(1, 5)
-                random_day_unit = randrange(1, 7)
-                date = date_change(random_day_unit, day=True)
+                random_day_unit = randrange(1, 10)
+                date = date_change(random_day_unit, day=True, add=True)
                 time = date_change(randon_hour_unit, hour=True)
                 contact = randrange(1, 30)
                 job_id = randrange(1, 15)
