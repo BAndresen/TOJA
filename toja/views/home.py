@@ -109,7 +109,7 @@ class HomeView(customtkinter.CTk):
         self.past_events_label.grid(row=0, column=0)
         self.past_events_listbox = tkinter.Listbox(self.past_events_frame, font=('roboto, 10'), bg='grey20',
                                                    fg='grey90', borderwidth=0)
-        self.past_events_listbox.grid(row=1, column=0, sticky='nsew')
+        self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame)
@@ -120,9 +120,9 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_label.grid(row=0, column=0)
         self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame, font=('roboto, 10'), bg='grey20',
                                                        fg='grey90', borderwidth=0)
-        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew')
+        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
-        # --------------- Analytics -------------- #
+        # --------------- Keywords -------------- #
 
         self.analytics_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.analytics_frame.grid_columnconfigure(0, weight=1)
@@ -145,6 +145,16 @@ class HomeView(customtkinter.CTk):
 
         self.network_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.network_frame.grid_columnconfigure(0, weight=1)
+
+        self.contacts_frame = customtkinter.CTkFrame(self.network_frame)
+        self.contacts_frame.grid_columnconfigure(0,weight=1)
+        self.contacts_frame.grid(row=0, column=0, padx= 20, pady= 20, sticky='nsew')
+
+        self.contact_label = customtkinter.CTkLabel(self.contacts_frame, text="Contacts")
+        self.contact_label.grid(row=0, column=0)
+        self.contact_listbox = tkinter.Listbox(self.contacts_frame, font=('roboto, 10'), bg='grey20',
+                                                       fg='grey90', borderwidth=0, height=15)
+        self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=10)
 
         # -------------- File Menu -------------- #
         self.menubar = Menu(self)

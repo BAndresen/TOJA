@@ -59,8 +59,12 @@ class Controller:
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
             self.user_id = self.model.get_user_id(self.model.user_name)
-            self.update_home_listbox()
-            self.update_home_event_listbox()
+            self.update_home()
+
+    def update_home(self):
+        self.update_contact_listbox_home()
+        self.update_home_listbox()
+        self.update_home_event_listbox()
 
     def set_user(self):
         if self.welcome_window.radio_var.get():
@@ -72,8 +76,7 @@ class Controller:
         self.model.insert_user_db(self.model.user.user_name, 0)
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.user_name)
-        self.update_home_listbox()
-        self.update_home_event_listbox()
+        self.update_home()
 
     def change_database(self):
         self.user_select = UserSelect(self.view)
@@ -90,8 +93,7 @@ class Controller:
         self.user_id = self.model.get_user_id(name)
         self.model.user.set_database_name(name)
         self.user_select.user_window.destroy()
-        self.update_home_listbox()
-        self.update_home_event_listbox()
+        self.update_home()
 
     def about_page(self):
         open('https://github.com/BAndresen/TOJA')
@@ -106,8 +108,7 @@ class Controller:
         self.model.insert_user_db(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
-        self.update_home_listbox()
-        self.update_home_event_listbox()
+        self.update_home()
 
     def update_home_listbox(self):
         self.current_user = self.model.get_user_id(self.model.user.user_name)
@@ -228,6 +229,7 @@ class Controller:
             self.current_user
         )
         self.update_contact_listbox()
+        self.update_contact_listbox_home()
         self.contact.contact_window.destroy()
 
     def delete(self):
@@ -238,8 +240,7 @@ class Controller:
         if messagebox.askyesno("Delete Job", message=f'Are you sure you want to delete{company}{position}?'):
             self.model.delete_job_txt_file(self.job_id)
             self.model.delete_job(self.job_id)
-            self.update_home_listbox()
-            self.update_home_event_listbox()
+            self.update_home()
 
     def run(self):
         self.view.mainloop()
@@ -301,8 +302,7 @@ class Controller:
             contact_id,
             self.job_id,
             self.current_user)
-        self.update_event_listbox()
-        self.update_home_event_listbox()
+        self.update_home()
         self.new_event.event_window.destroy()
 
     def submit_new_job(self):
@@ -332,9 +332,7 @@ class Controller:
         )
         if self.job_file:
             self.model.save_job_description(self.job_file, job_text)
-
-        self.update_home_listbox()
-        self.update_home_event_listbox()
+        self.update_home()
         self.new_job.aj_window.destroy()
 
     def check_job_file(self, job_file, job_text) -> Union[str, None]:
@@ -369,6 +367,14 @@ class Controller:
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
                                                     f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+
+    def update_contact_listbox_home(self):
+        self.view.contact_listbox.delete('0', 'end')
+        contacts = self.model.get_contacts_all(self.user_id)
+        for item in contacts:
+            self.view.contact_listbox.insert(tkinter.END,
+                                                    f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
