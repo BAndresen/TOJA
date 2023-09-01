@@ -130,13 +130,13 @@ class Model:
         results = self.cursor.fetchall()
         return results[0]
 
-    def delete_job(self, job_id: str) -> None:
-        query = '''
+    def delete_entry(self, table: str, column_id_name: str, identity: str, ) -> None:
+        query = f'''
         DELETE
-        FROM job
-        WHERE job_id = ?
+        FROM {table}
+        WHERE {column_id_name} = ?
         '''
-        self.cursor.execute(query, (job_id,))
+        self.cursor.execute(query, (identity,))
         self.conn.commit()
 
     def delete_job_txt_file(self, job_id: str) -> None:
