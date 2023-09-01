@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Union
 import os
 import sqlite3
@@ -62,7 +61,7 @@ class Model:
         self.cursor.execute(query)
         self.conn.commit()
 
-    def get_user_id(self, user_name: Union[str,int]) -> int:
+    def get_user_id(self, user_name: Union[str, int]) -> int:
         query = '''
         SELECT user_id
         FROM user
@@ -247,19 +246,38 @@ class Model:
         with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
             file.write(job_text)
 
-    def get_event(self, job_id: int) -> list:
-        query = '''
-        SELECT
-            e.date,
-            e.time,
-            e.note,
-            s.status
-        FROM event e
-           JOIN status s USING(status_id)
-        WHERE e.job_id = ?
-        ORDER BY e.date
-        '''
-        self.cursor.execute(query, (job_id,))
+    def get_event(self, identity: int, job=False, event=False) -> list[tuple]:
+        query = ''
+        if job:
+            query = '''
+            SELECT
+                e.date,
+                e.time,
+                e.note,
+                s.status
+            FROM event e
+               JOIN status s USING(status_id)
+            WHERE e.job_id = ?
+            ORDER BY e.date
+            '''
+        if event:
+            query = '''
+             SELECT
+                e.date,
+                e.time,
+                s.status,
+                j.company,
+                j.position,
+                c.first_name,
+                c.last_name,
+                e.note
+            FROM event e
+               LEFT JOIN status s USING(status_id)
+               LEFT JOIN job j USING(job_id)
+               LEFT JOIN contact c USING(contact_id)
+            WHERE e.event_id = ?
+            '''
+        self.cursor.execute(query, (identity,))
         results = self.cursor.fetchall()
         return results
 
@@ -270,6 +288,7 @@ class Model:
             symbol = '>'
         query = f'''
         SELECT
+            e.event_id,
             e.date,
             e.time,
             e.note,

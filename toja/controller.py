@@ -17,6 +17,7 @@ from views.job_description import JobDescription
 from views.welcome_user import WelcomeUser
 from views.user_database_select import UserSelect
 from views.new_user import CreateUser
+from views.event import Event
 from model import Model
 
 
@@ -35,9 +36,15 @@ class Controller:
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete)
 
-        # HomeView ListBox
+        # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
         self.view.job_list_box.bind('<Return>', self.double_click_job)
+
+        # Event Listbox Bind
+        self.view.past_events_listbox.bind('<Double-Button-1>', self.double_click_event_past)
+        self.view.past_events_listbox.bind('<Return>', self.double_click_event_past)
+        self.view.upcoming_events_listbox.bind('<Double-Button-1>', self.double_click_event_upcoming)
+        self.view.upcoming_events_listbox.bind('<Return>', self.double_click_event_upcoming)
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
@@ -113,6 +120,29 @@ class Controller:
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         self.open_job_profile()
+
+    def double_click_event_past(self, event):
+        past_event = self.view.past_events_listbox.get(self.view.past_events_listbox.curselection())
+        self.event_id = (past_event.split())[0]
+        self.open_event()
+
+    def double_click_event_upcoming(self, event):
+        upcoming_event = self.view.upcoming_events_listbox.get(self.view.upcoming_events_listbox.curselection())
+        self.event_id = (upcoming_event.split())[0]
+        self.open_event()
+
+    def open_event(self):
+        self.event = Event(self.view)
+        event_results = self.model.get_event(self.event_id, event=True)[0]
+
+        self.event.event_id.configure(text=self.event_id)
+        self.event.event_status.configure(text=event_results[2])
+        self.event.day_entry.configure(text=event_results[0])
+        self.event.time_entry.configure(text=event_results[1])
+        self.event.company_entry.configure(text=event_results[3])
+        self.event.position_entry.configure(text=event_results[4])
+        self.event.contact_entry.configure(text=f'{event_results[5]} {event_results[6]}')
+        self.event.note_entry.configure(text=event_results[7])
 
 
     def update_job_profile(self):
@@ -196,7 +226,9 @@ class Controller:
     def delete(self):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
-        if messagebox.askyesno("Delete Job", message=f'Are you sure you want to delete?'):
+        company = (event_str.split("|"))[1]
+        position = (event_str.split("|"))[2]
+        if messagebox.askyesno("Delete Job", message=f'Are you sure you want to delete{company}{position}?'):
             self.model.delete_job_txt_file(self.job_id)
             self.model.delete_job(self.job_id)
             self.update_home_listbox()
@@ -298,7 +330,7 @@ class Controller:
     def update_event_listbox(self):
         self.job_profile.event_scroll.delete('0', 'end')
 
-        event_listbox = self.model.get_event(self.job_id)
+        event_listbox = self.model.get_event(self.job_id, job=True)
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END,
                                                  f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
