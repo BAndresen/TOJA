@@ -3,6 +3,7 @@ import os
 import sqlite3
 from pathlib import Path
 from datetime import datetime
+import csv
 
 from config import Config
 from database.create_database import create_toja_database
@@ -303,7 +304,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_contacts(self, job_id: int,) -> list:
+    def get_contacts(self, job_id: int, ) -> list:
         query = '''
         SELECT 
             contact_id,
@@ -319,7 +320,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_all_contacts(self, user_id: int,) -> list:
+    def get_all_contacts(self, user_id: int, ) -> list:
         query = '''
         SELECT 
             contact_id,
@@ -382,3 +383,61 @@ class Model:
         '''
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
+
+    def export_database(self, user_id: int, path):
+        query = '''
+        SELECT *
+        FROM job
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
+        data = self.cursor.fetchall()
+        csv_job_file_path = os.path.join(path,'exported_job_data.csv')
+
+        with open(csv_job_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([description[0] for description in self.cursor.description])
+            csv_writer.writerows(data)
+
+        query = '''
+        SELECT *
+        FROM event
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
+        data = self.cursor.fetchall()
+        csv_event_file_path = os.path.join(path,'exported_event_data.csv')
+
+        with open(csv_event_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([description[0] for description in self.cursor.description])
+            csv_writer.writerows(data)
+
+        query = '''
+        SELECT *
+        FROM contact
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
+        data = self.cursor.fetchall()
+        csv_contact_file_path = os.path.join(path, 'exported_contact_data.csv')
+
+        with open(csv_contact_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([description[0] for description in self.cursor.description])
+            csv_writer.writerows(data)
+
+        query = '''
+        SELECT *
+        FROM status
+        '''
+        self.cursor.execute(query, )
+        data = self.cursor.fetchall()
+        csv_status_file_path = os.path.join(path,'exported_status_data.csv')
+
+        with open(csv_status_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([description[0] for description in self.cursor.description])
+            csv_writer.writerows(data)
+
+        self.conn.close()

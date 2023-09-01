@@ -38,7 +38,7 @@ events_past_notes = {
     'rejected': [
         "Unfortunately, didn't make it.",
         'Received rejection email for the position.',
-        'Not discouraged by rejection; continuing job search.'],
+        'Not discouraged by rejection continuing job search.'],
 }
 
 events_future_notes = {

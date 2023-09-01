@@ -57,6 +57,7 @@ class Controller:
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='New User', command=self.create_user)
         self.view.file.add_command(label='Change User', command=self.change_database)
+        self.view.file.add_command(label='Export', command=self.export_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
@@ -92,6 +93,10 @@ class Controller:
         for db in res:
             clean_list.append(db[0])
         self.user_select.user_entry.configure(values=clean_list)
+
+    def export_database(self):
+        path = filedialog.askdirectory()
+        self.model.export_database(self.user_id, path)
 
     def switch_users(self):
         name = self.user_select.user_entry.get()
