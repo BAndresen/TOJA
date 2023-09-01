@@ -74,7 +74,7 @@ class HomeView(customtkinter.CTk):
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20,5), pady=20, sticky='nsew')
 
-        # Add New Job Button
+        # Add and Delete Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame)
         self.button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
@@ -100,6 +100,14 @@ class HomeView(customtkinter.CTk):
 
         self.event_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.event_frame.grid_columnconfigure(0, weight=1)
+
+        self.event_button_frame = customtkinter.CTkFrame(self.event_frame)
+        self.event_button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
+        self.event_new_job_button = customtkinter.CTkButton(self.event_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.event_new_job_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
+        self.event_delete_job_button = customtkinter.CTkButton(self.event_button_frame, text="", image=delete_icon, width=35, height=35,
+                                                      fg_color='grey30', hover_color='grey15')
+        self.event_delete_job_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
 
         # Recent Events
         self.past_events_frame = customtkinter.CTkFrame(self.event_frame)
@@ -145,6 +153,14 @@ class HomeView(customtkinter.CTk):
 
         self.network_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.network_frame.grid_columnconfigure(0, weight=1)
+
+        self.network_button_frame = customtkinter.CTkFrame(self.network_frame)
+        self.network_button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
+        self.network_new_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.network_new_job_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
+        self.network_delete_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=delete_icon, width=35, height=35,
+                                                      fg_color='grey30', hover_color='grey15')
+        self.network_delete_job_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
 
         self.contacts_frame = customtkinter.CTkFrame(self.network_frame)
         self.contacts_frame.grid_columnconfigure(0,weight=1)
