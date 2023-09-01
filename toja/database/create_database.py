@@ -62,7 +62,7 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
             email TEXT,
             phone TEXT,
             position TEXT,
-            job_id INTEGER NOT NULL,
+            job_id INTEGER,
             user_id INTEGER NOT NULL,
             FOREIGN KEY (job_id) REFERENCES job(job_id) ON DELETE CASCADE ON UPDATE CASCADE
             FOREIGN KEY (user_id) REFERENCES database(user_id) ON DELETE CASCADE ON UPDATE CASCADE

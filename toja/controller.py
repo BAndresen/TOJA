@@ -37,6 +37,8 @@ class Controller:
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete)
 
+        self.view.network_new_contact_button.configure(command=self.add_contact_home)
+
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
         self.view.job_list_box.bind('<Return>', self.double_click_job)
@@ -152,7 +154,6 @@ class Controller:
         self.event.contact_entry.configure(text=f'{event_results[5]} {event_results[6]}')
         self.event.note_entry.configure(text=event_results[7])
 
-
     def update_job_profile(self):
         self.jp_results = self.model.get_job_data(self.job_id)
         self.job_profile.job_id_user.configure(text=self.job_id)
@@ -186,10 +187,15 @@ class Controller:
         self.contact = NewContact(self.view)
         self.contact.submit_contact_button.configure(command=self.insert_contact)
 
+    def add_contact_home(self):
+        self.contact = NewContact(self.view)
+        self.contact.job_id_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
+        self.contact.job_id_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
+        self.contact.submit_contact_button.configure(command=self.insert_contact_home)
+
     def edit_job(self):
         self.edit = EditJob(self.view.home_frame)
         self.edit.submit_edit_button.configure(command=self.submit_job_edit)
-
         self.edit.position_title_entry.configure(placeholder_text=self.jp_results[2])
         self.edit.company_name_entry.configure(placeholder_text=self.jp_results[0])
         self.edit.company_website_entry.configure(placeholder_text=self.jp_results[1])
@@ -230,6 +236,19 @@ class Controller:
             self.current_user
         )
         self.update_contact_listbox()
+        self.update_contact_listbox_home()
+        self.contact.contact_window.destroy()
+
+    def insert_contact_home(self):
+        self.model.add_contact(
+            self.contact.first_name_entry.get(),
+            self.contact.last_name_entry.get(),
+            self.contact.email_entry.get(),
+            self.contact.phone_entry.get(),
+            self.contact.position_entry.get(),
+            self.contact.job_id_entry.get(),
+            self.current_user
+        )
         self.update_contact_listbox_home()
         self.contact.contact_window.destroy()
 
@@ -367,15 +386,14 @@ class Controller:
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
-                                                    f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+                                                    f'{item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
     def update_contact_listbox_home(self):
         self.view.contact_listbox.delete('0', 'end')
         contacts = self.model.get_contacts_all(self.user_id)
         for item in contacts:
             self.view.contact_listbox.insert(tkinter.END,
-                                                    f'{item[1]} | {item[2]} | {item[3]} | {item[4]} | {item[5]}')
-
+                                                    f'{item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL

@@ -156,8 +156,8 @@ class HomeView(customtkinter.CTk):
 
         self.network_button_frame = customtkinter.CTkFrame(self.network_frame)
         self.network_button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
-        self.network_new_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
-        self.network_new_job_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
+        self.network_new_contact_button = customtkinter.CTkButton(self.network_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.network_new_contact_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
         self.network_delete_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=delete_icon, width=35, height=35,
                                                       fg_color='grey30', hover_color='grey15')
         self.network_delete_job_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
