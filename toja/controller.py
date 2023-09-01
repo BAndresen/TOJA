@@ -35,9 +35,12 @@ class Controller:
         self.view.analytics_button.configure(command=self.analytics_frame_button)
         self.view.network_button.configure(command=self.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
-        self.view.delete_job_button.configure(command=self.delete)
+        self.view.delete_job_button.configure(command=self.delete_job)
 
         self.view.network_new_contact_button.configure(command=self.add_contact_home)
+        self.view.network_delete_job_button.configure(command=self.delete_contact)
+
+        self.view.event_delete_job_button.configure(command=self.delete_event)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -252,15 +255,37 @@ class Controller:
         self.update_contact_listbox_home()
         self.contact.contact_window.destroy()
 
-    def delete(self):
+    def delete_job(self):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
         self.job_id = (event_str.split())[0]
         company = (event_str.split("|"))[1]
         position = (event_str.split("|"))[2]
         if messagebox.askyesno("Delete Job", message=f'Are you sure you want to delete{company}{position}?'):
             self.model.delete_job_txt_file(self.job_id)
-            self.model.delete_job(self.job_id)
+            self.model.delete_entry('job', 'job_id', self.job_id)
             self.update_home()
+
+    def delete_contact(self):
+
+        event_str = self.view.contact_listbox.get(self.view.contact_listbox.curselection())
+        contact_id = (event_str.split())[0]
+        name = (event_str.split("|"))[1]
+        if messagebox.askyesno("Delete Contact", message=f'Are you sure you want to delete{name}?'):
+            self.model.delete_entry('contact', 'contact_id', contact_id)
+            self.update_contact_listbox_home()
+
+    def delete_event(self):
+        past_event = self.view.past_events_listbox.curselection()
+        upcoming_event = self.view.upcoming_events_listbox.curselection()
+        event_str = ''
+        if past_event:
+            event_str = self.view.past_events_listbox.get(self.view.past_events_listbox.curselection())
+        if upcoming_event:
+            event_str = self.view.upcoming_events_listbox.get(self.view.upcoming_events_listbox.curselection())
+        event_id = (event_str.split())[0]
+        if messagebox.askyesno("Delete Contact", message=f'Are you sure you want to delete event?'):
+            self.model.delete_entry('event', 'event_id', event_id)
+            self.update_home_event_listbox()
 
     def run(self):
         self.view.mainloop()
@@ -386,14 +411,14 @@ class Controller:
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
-                                                    f'{item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+                                                    f'{item[0]} | {item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
     def update_contact_listbox_home(self):
         self.view.contact_listbox.delete('0', 'end')
         contacts = self.model.get_contacts_all(self.user_id)
         for item in contacts:
             self.view.contact_listbox.insert(tkinter.END,
-                                                    f'{item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+                                             f'{item[0]} | {item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
