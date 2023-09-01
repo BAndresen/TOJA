@@ -155,6 +155,7 @@ class Controller:
 
     def update_job_profile(self):
         self.jp_results = self.model.get_job_data(self.job_id)
+        self.job_profile.job_id_user.configure(text=self.job_id)
         self.job_profile.company_name_user.configure(text=self.jp_results[0])
         self.job_profile.company_web_user.configure(text=self.jp_results[1])
         self.job_profile.position_user.configure(text=self.jp_results[2])

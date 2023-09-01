@@ -14,7 +14,7 @@ class Event:
         self.event_info_frame.grid(row=0, column=0, padx=20, pady=20, stick='nsew')
 
         self.event_id = customtkinter.CTkLabel(self.event_info_frame, text='')
-        self.event_id.grid(row=0, column=1, padx=(5, 20), pady=5, stick='w')
+        self.event_id.grid(row=0, column=1, padx=(5, 20), pady=5, sticky='w')
         self.event_id_label = customtkinter.CTkLabel(self.event_info_frame, text='Event_ID:')
         self.event_id_label.grid(row=0, column=0, padx=(20, 5), pady=5, sticky="e")
 
