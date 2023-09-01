@@ -33,6 +33,7 @@ class Controller:
         self.view.events_button.configure(command=self.event_frame_button)
         self.view.home_button.configure(command=self.home_frame_button)
         self.view.analytics_button.configure(command=self.analytics_frame_button)
+        self.view.network_button.configure(command=self.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete)
 
@@ -246,17 +247,26 @@ class Controller:
     def event_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
+        self.view.network_frame.grid_forget()
         self.view.event_frame.grid(row=0, column=1, sticky="nsew")
 
     def home_frame_button(self):
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
+        self.view.network_frame.grid_forget()
         self.view.home_frame.grid(row=0, column=1, sticky="nsew")
 
     def analytics_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.event_frame.grid_forget()
+        self.view.network_frame.grid_forget()
         self.view.analytics_frame.grid(row=0, column=1, sticky="nsew")
+
+    def network_frame_button(self):
+        self.view.home_frame.grid_forget()
+        self.view.event_frame.grid_forget()
+        self.view.analytics_frame.grid_forget()
+        self.view.network_frame.grid(row=0, column=1, sticky="nsew")
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view)

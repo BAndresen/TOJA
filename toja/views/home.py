@@ -37,7 +37,7 @@ class HomeView(customtkinter.CTk):
 
         self.analytics_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
                                                         border_spacing=10,
-                                                        text="Analytics",
+                                                        text="Keywords",
                                                         fg_color="transparent", text_color=("gray10", "gray90"),
                                                         hover_color=("gray70", "gray30"),
                                                         anchor="w")
@@ -50,6 +50,14 @@ class HomeView(customtkinter.CTk):
                                                      hover_color=("gray70", "gray30"),
                                                      anchor="w")
         self.events_button.grid(row=2, column=0)
+
+        self.network_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
+                                                     border_spacing=10,
+                                                     text="Network",
+                                                     fg_color="transparent", text_color=("gray10", "gray90"),
+                                                     hover_color=("gray70", "gray30"),
+                                                     anchor="w")
+        self.network_button.grid(row=3, column=0)
 
         # Home Frame
         self.home_frame = customtkinter.CTkFrame(self)
@@ -132,6 +140,11 @@ class HomeView(customtkinter.CTk):
         self.resume_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.resume_label = customtkinter.CTkLabel(self.resume_frame, text="Resume")
         self.resume_label.grid(row=0, column=0)
+
+        # --------------- Network -------------- #
+
+        self.network_frame = customtkinter.CTkFrame(self, fg_color="transparent")
+        self.network_frame.grid_columnconfigure(0, weight=1)
 
         # -------------- File Menu -------------- #
         self.menubar = Menu(self)
