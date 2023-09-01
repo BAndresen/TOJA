@@ -54,6 +54,3 @@ class Event:
         self.note_entry.grid(row=0, column=1, padx=(5, 20), pady=10, stick='w')
         self.note_label = customtkinter.CTkLabel(self.note_frame, text='Notes:')
         self.note_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
-
-        # self.submit_event_button = customtkinter.CTkButton(self.event_info_frame, text="Submit")
-        # self.submit_event_button.grid(row=5, column=1, pady=5)

@@ -131,6 +131,12 @@ class Controller:
         self.event_id = (upcoming_event.split())[0]
         self.open_event()
 
+    def double_click_event_job_profile(self, event):
+        event_job = self.job_profile.event_scroll.get(self.job_profile.event_scroll.curselection())
+        self.job_profile.event_scroll.bind('<Double-Button-1>', self.double_click_event_job_profile)
+        self.event_id = (event_job.split())[0]
+        self.open_event()
+
     def open_event(self):
         self.event = Event(self.view)
         event_results = self.model.get_event(self.event_id, event=True)[0]
@@ -328,24 +334,24 @@ class Controller:
             return job_file[0]
 
     def update_event_listbox(self):
+        self.job_profile.event_scroll.bind('<Double-Button-1>', self.double_click_event_job_profile)
         self.job_profile.event_scroll.delete('0', 'end')
-
         event_listbox = self.model.get_event(self.job_id, job=True)
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END,
-                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
+                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]} ")
 
     def update_home_event_listbox(self):
         self.view.past_events_listbox.delete('0', 'end')
         past_event_listbox = self.model.get_all_event(self.user_id)
         for item in past_event_listbox:
             self.view.past_events_listbox.insert(tkinter.END,
-                                                 f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
+                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]}")
         self.view.upcoming_events_listbox.delete('0', 'end')
         upcoming_event_listbox = self.model.get_all_event(self.user_id, future=True)
         for item in upcoming_event_listbox:
             self.view.upcoming_events_listbox.insert(tkinter.END,
-                                                     f"{item[0]} | {item[1]} | {item[3]} | {item[2]}")
+                                                     f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]}")
 
     def update_contact_listbox(self):
         self.job_profile.contact_listbox.delete('0', 'end')

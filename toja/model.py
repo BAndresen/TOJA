@@ -251,6 +251,7 @@ class Model:
         if job:
             query = '''
             SELECT
+                e.event_id,
                 e.date,
                 e.time,
                 e.note,
