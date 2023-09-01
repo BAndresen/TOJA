@@ -303,7 +303,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_contacts(self, job_id: int) -> list:
+    def get_contacts(self, job_id: int,) -> list:
         query = '''
         SELECT 
             contact_id,
@@ -316,6 +316,22 @@ class Model:
         WHERE job_id = ?
         '''
         self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        return results
+
+    def get_all_contacts(self, user_id: int,) -> list:
+        query = '''
+        SELECT 
+            contact_id,
+            first_name,
+            last_name,
+            email,
+            phone,
+            position
+        FROM contact
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
         results = self.cursor.fetchall()
         return results
 

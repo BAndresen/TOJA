@@ -103,11 +103,11 @@ class HomeView(customtkinter.CTk):
 
         self.event_button_frame = customtkinter.CTkFrame(self.event_frame)
         self.event_button_frame.grid(row=0, column=1, padx=(5,20), pady=20, sticky="ne")
-        self.event_new_job_button = customtkinter.CTkButton(self.event_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
-        self.event_new_job_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
-        self.event_delete_job_button = customtkinter.CTkButton(self.event_button_frame, text="", image=delete_icon, width=35, height=35,
+        self.event_new_button = customtkinter.CTkButton(self.event_button_frame, text="", image=plus_icon, width=35, height=35, fg_color='grey30', hover_color='grey15')
+        self.event_new_button.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
+        self.event_delete_button = customtkinter.CTkButton(self.event_button_frame, text="", image=delete_icon, width=35, height=35,
                                                       fg_color='grey30', hover_color='grey15')
-        self.event_delete_job_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
+        self.event_delete_button.grid(row=1, column=0, padx=10, pady=(5,10), sticky="nsew")
 
         # Recent Events
         self.past_events_frame = customtkinter.CTkFrame(self.event_frame)

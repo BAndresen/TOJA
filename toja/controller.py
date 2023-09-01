@@ -40,7 +40,8 @@ class Controller:
         self.view.network_new_contact_button.configure(command=self.add_contact_home)
         self.view.network_delete_job_button.configure(command=self.delete_contact)
 
-        self.view.event_delete_job_button.configure(command=self.delete_event)
+        self.view.event_new_button.configure(command=self.new_event_home)
+        self.view.event_delete_button.configure(command=self.delete_event)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -349,6 +350,39 @@ class Controller:
             self.current_user)
         self.update_home()
         self.new_event.event_window.destroy()
+
+    def submit_new_event_home(self):
+        contact_id = (self.new_event.contact_entry.get().split("|")[0])
+        status_id = self.model.get_status_id(self.new_event.event_entry.get())[0][0]
+        job_id = self.new_event.job_id_entry.get()
+        if not job_id:
+            job_id = None
+
+        self.model.add_event(
+            self.new_event.day_entry.get(),
+            self.new_event.time_entry.get(),
+            self.new_event.note_entry.get("1.0", "end-1c"),
+            status_id,
+            contact_id,
+            job_id,
+            self.current_user)
+        self.update_home()
+        self.new_event.event_window.destroy()
+
+    def new_event_home(self):
+        current_time = datetime.today().time().strftime('%I:%M%p')
+        self.current_time = customtkinter.StringVar()
+        self.current_time.set(current_time)
+        self.new_event = NewEvent(self.view)
+        self.new_event.job_id_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
+        self.new_event.job_id_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
+        contacts = self.model.get_all_contacts(self.user_id)
+        self.new_event.time_entry.configure(textvariable=self.current_time)
+        contact_list = []
+        for contact in contacts:
+            contact_list.append(f'{contact[0]}| {contact[1]} {contact[2]}')
+        self.new_event.contact_entry.configure(values=contact_list)
+        self.new_event.submit_event_button.configure(command=self.submit_new_event_home)
 
     def submit_new_job(self):
         self.company = self.new_job.company_name_entry.get()
