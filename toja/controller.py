@@ -75,13 +75,15 @@ class Controller:
         self.update_points_view()
 
     def set_user(self):
+        points = 0
         if self.welcome_window.radio_var.get():
             self.model.user_name = self.welcome_window.name_entry.get()
         else:
             self.model.user_name = 'sample'
             self.model.set_sample_data()
+            points = 285
         self.model.user.set_database_name(self.model.user_name)
-        self.model.insert_user_db(self.model.user.user_name, 0)
+        self.model.insert_user_db(self.model.user.user_name, points)
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.user_name)
         self.update_home()

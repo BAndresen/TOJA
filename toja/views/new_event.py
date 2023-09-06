@@ -20,7 +20,7 @@ class NewEvent:
                                                                                     'prospect',
                                                                                     'applied',
                                                                                     'meeting',
-                                                                                    'attend_event',
+                                                                                    'workshop',
                                                                                     'interview',
                                                                                     'offer',
                                                                                     'offer_accepted',

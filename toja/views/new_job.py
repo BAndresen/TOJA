@@ -80,11 +80,11 @@ class NewJob:
         self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
         self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['prospect',
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
+                                                                                    'prospect',
                                                                                     'follow_up',
-                                                                                    'applied',
                                                                                     'meeting',
-                                                                                    'attend_event',
+                                                                                    'workshop',
                                                                                     'interview',
                                                                                     'offer',
                                                                                     'offer_accepted',

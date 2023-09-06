@@ -201,7 +201,7 @@ class Model:
         self.cursor.execute(query_event, insert_event)
         self.conn.commit()
 
-        self.conn.commit()
+        self.update_points(user_id, status_id)
 
     def add_event(self, date: str, time: str,
                   note: Union[str, None],
@@ -221,7 +221,7 @@ class Model:
         insert = (date, time, note, status_id, contact_id, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
-        self.update_points(user_id,status_id)
+        self.update_points(user_id, status_id)
 
     def update_points(self, user_id: int, status_id: int):
         query = '''
