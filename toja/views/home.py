@@ -86,8 +86,10 @@ class HomeView(customtkinter.CTk):
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)
         self.stat_board_frame.grid(row=0, column=2, padx=20, pady=20, sticky="nsew")
-        self.stat_label = customtkinter.CTkLabel(self.stat_board_frame, text="motivational design stats (coming soon)")
-        self.stat_label.grid(row=0, column=0, padx=150, pady=150)
+        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:")
+        self.total_points_label.grid(row=0, column=0, padx=(20,5), pady=20)
+        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="")
+        self.total_points.grid(row=0, column=1, padx=(5,100), pady=20)
 
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame)

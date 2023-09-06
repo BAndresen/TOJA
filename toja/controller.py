@@ -72,6 +72,7 @@ class Controller:
         self.update_contact_listbox_home()
         self.update_home_listbox()
         self.update_home_event_listbox()
+        self.update_points_view()
 
     def set_user(self):
         if self.welcome_window.radio_var.get():
@@ -354,6 +355,7 @@ class Controller:
             self.job_id,
             self.current_user)
         self.update_home()
+        self.update_event_listbox()
         self.new_event.event_window.destroy()
 
     def submit_new_event_home(self):
@@ -490,3 +492,7 @@ class Controller:
 
     def update_job_description(self):
         self.job_profile.job_description_label.configure(text=self.model.open_job_description(self.job_file_only))
+
+    def update_points_view(self):
+        total_points = self.model.get_total_points(self.user_id)
+        self.view.total_points.configure(text=total_points)
