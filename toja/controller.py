@@ -496,3 +496,7 @@ class Controller:
     def update_points_view(self):
         total_points = self.model.get_total_points(self.user_id)
         self.view.total_points.configure(text=total_points)
+        progress = total_points / 50
+        level, progress_value = divmod(progress, 1)
+        self.view.current_level.configure(text=(int(level)))
+        self.view.progress_bar.set(progress_value)

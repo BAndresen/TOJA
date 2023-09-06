@@ -86,10 +86,21 @@ class HomeView(customtkinter.CTk):
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame)
         self.stat_board_frame.grid(row=0, column=2, padx=20, pady=20, sticky="nsew")
+
         self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:")
-        self.total_points_label.grid(row=0, column=0, padx=(20,5), pady=20)
+        self.total_points_label.grid(row=0, column=0, padx=(20,5), pady=(20,5), sticky="e")
         self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="")
-        self.total_points.grid(row=0, column=1, padx=(5,100), pady=20)
+        self.total_points.grid(row=0, column=1, padx=(5,20), pady=(20,5), sticky="w")
+
+        self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level")
+        self.next_level.grid(row=1, column=0, padx=(20,5), pady=5, sticky="e")
+        self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame)
+        self.progress_bar.grid(row=1,column=1, padx=(5,20), pady=5, sticky="ew")
+
+        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:")
+        self.current_level_label.grid(row=2, column=0, padx=(20,5), pady=5, sticky="e")
+        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="")
+        self.current_level.grid(row=2, column=1, padx=(5,20), pady=5, sticky="w")
 
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame)

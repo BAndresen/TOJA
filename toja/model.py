@@ -401,14 +401,14 @@ class Model:
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
 
-    def get_total_points(self, user_id: int):
+    def get_total_points(self, user_id: int) -> int:
         query = '''
         SELECT total_points
         FROM user
         WHERE user_id = ?
         '''
         self.cursor.execute(query, (user_id,))
-        results = self.cursor.fetchall()
+        results = self.cursor.fetchall()[0][0]
         return results
 
     def export_database(self, user_id: int, path):
