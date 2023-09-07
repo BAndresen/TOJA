@@ -70,7 +70,7 @@ class HomeView(customtkinter.CTk):
         self.job_list_frame.grid_rowconfigure(0,weight=1)
         # Job ListBox
         self.job_list_box = tkinter.Listbox(self.job_list_frame, font=('roboto, 10'), bg='grey20', fg='grey90',
-                                            borderwidth=0)
+                                            borderwidth=0, height=20)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20,5), pady=20, sticky='nsew')
 

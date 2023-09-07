@@ -1,5 +1,6 @@
 import customtkinter
 from tkcalendar import DateEntry
+import tkinter
 
 
 class NewEvent:

@@ -5,10 +5,10 @@ from pathlib import Path
 from datetime import datetime
 import csv
 
-from config import Config
-from database.create_database import create_toja_database
-from database.sample_event import events_applied, insert_future_events, insert_past_events
-from database.sample_event import event_applied_notes, events_past_notes, events_future_notes
+from toja.config import Config
+from toja.database.create_database import create_toja_database
+from toja.database.sample_event import events_applied, insert_future_events, insert_past_events
+from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
 
 
 class Model:
@@ -62,7 +62,7 @@ class Model:
         self.cursor.execute(query)
         self.conn.commit()
 
-    def get_user_id(self, user_name: Union[str, int]) -> int:
+    def get_user_id(self, user_name: str) -> int:
         query = '''
         SELECT user_id
         FROM user
@@ -81,7 +81,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def insert_user_db(self, db_name: str, points: int):
+    def insert_user_db(self, user_name: str, points: int):
         query = '''
         INSERT INTO user(
         name,
@@ -89,7 +89,7 @@ class Model:
         )
         VALUES (?,?)
         '''
-        insert = (db_name, points)
+        insert = (user_name, points)
         self.cursor.execute(query, insert)
         self.conn.commit()
 
