@@ -1,6 +1,9 @@
+import random
 import unittest
 import sqlite3
 # import coverage
+from faker import Faker
+from random import randint
 from unittest.mock import Mock
 from pathlib import Path
 
@@ -23,19 +26,25 @@ class TestModel(unittest.TestCase):
         create_toja_database(self.model.cursor, self.model.conn)
 
     def test_user(self):
-        self.model.insert_user_db("User1", 25)
-        self.model.insert_user_db("User2", 65)
-        self.model.insert_user_db("User3", 110)
-        user1_id = self.model.get_user_id("User1")
-        user2_id = self.model.get_user_id("User2")
-        user3_id = self.model.get_user_id("User3")
+        # generate fake username and points
+        fake = Faker()
+        user_1 = fake.name()
+        points_1 = random.randint(0, 100)
+        user_2 = fake.name()
+        points_2 = random.randint(0, 100)
+
+        # insert users
+        self.model.insert_user_db(user_1, points_1)
+        self.model.insert_user_db(user_2, points_2)
+
+        # get user id
+        user1_id = self.model.get_user_id(user_1)
         self.assertEqual(user1_id, 1)
-        self.assertEqual(user2_id, 2)
-        self.assertEqual(user3_id, 3)
+
+        # get all users
         all_users = self.model.get_all_users()
-        self.assertEqual(all_users[0][0],'User1')
-        self.assertEqual(all_users[1][0],'User2')
-        self.assertEqual(all_users[2][0],'User3')
+        self.assertEqual(all_users[0][0], user_1)
+        self.assertEqual(all_users[1][0], user_2)
 
     def tearDown(self) -> None:
         self.model.conn.close()
@@ -43,6 +52,5 @@ class TestModel(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
 
 # coverage run -m unittest test_model.py
