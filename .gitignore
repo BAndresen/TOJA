@@ -16,3 +16,5 @@
 /toja/database/toja_database_old.db
 /run_tests.bat
 /toja/config.ini
+/tests/.coverage
+/.coverage
