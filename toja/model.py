@@ -127,19 +127,6 @@ class Model:
         results = self.cursor.fetchall()[0][0]
         return results
 
-    def get_home_view_listbox(self, user_id) -> list:
-        query = '''
-        SELECT
-            job_id,
-            company,
-            position
-        FROM job
-        WHERE user_id = ?
-        '''
-        self.cursor.execute(query, (user_id,))
-        results = self.cursor.fetchall()
-        return results
-
     def delete_entry(self, table: str, column_id_name: str, identity: str, ) -> None:
         query = f'''
         DELETE
@@ -161,6 +148,19 @@ class Model:
             delete_path = Path(*[self.job_description_parent, results[0][0]])
             if os.path.exists(delete_path):
                 os.remove(delete_path)
+
+    def get_home_view_listbox(self, user_id) -> list:
+        query = '''
+        SELECT
+            job_id,
+            company,
+            position
+        FROM job
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
+        results = self.cursor.fetchall()
+        return results
 
     def get_job_data(self, job_id: str) -> tuple:
         query = '''
@@ -243,26 +243,6 @@ class Model:
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
 
-    def add_event(self, date: str, time: str,
-                  note: Union[str, None],
-                  status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
-        query = '''
-        INSERT INTO event(
-            date,
-            time,
-            note,
-            status_id,
-            contact_id,
-            job_id,
-            user_id
-            )
-        VALUES (?,?,?,?,?,?,?)
-        '''
-        insert = (date, time, note, status_id, contact_id, job_id, user_id)
-        self.cursor.execute(query, insert)
-        self.conn.commit()
-        self.update_points(user_id, status_id)
-
     def get_status_id(self, status: str) -> list:
         query = '''
         SELECT status_id
@@ -287,6 +267,26 @@ class Model:
 
         with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
             file.write(job_text)
+
+    def add_event(self, date: str, time: str,
+                  note: Union[str, None],
+                  status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
+        query = '''
+        INSERT INTO event(
+            date,
+            time,
+            note,
+            status_id,
+            contact_id,
+            job_id,
+            user_id
+            )
+        VALUES (?,?,?,?,?,?,?)
+        '''
+        insert = (date, time, note, status_id, contact_id, job_id, user_id)
+        self.cursor.execute(query, insert)
+        self.conn.commit()
+        self.update_points(user_id, status_id)
 
     def get_event(self, identity: int, job=False, event=False) -> list[tuple]:
         query = ''
@@ -345,19 +345,23 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_contacts(self, job_id: int, ) -> list:
-        query = '''
+    def get_contacts(self, id_: int, get_contact_by_id: bool = False) -> list:
+        column_id = 'job_id'
+        if get_contact_by_id:
+            column_id = 'contact_id'
+        query = f'''
         SELECT 
             contact_id,
             first_name,
             last_name,
             email,
             phone,
-            position
+            position,
+            job_id
         FROM contact
-        WHERE job_id = ?
+        WHERE {column_id} = ?
         '''
-        self.cursor.execute(query, (job_id,))
+        self.cursor.execute(query, (id_,))
         results = self.cursor.fetchall()
         return results
 
