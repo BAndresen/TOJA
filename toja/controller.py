@@ -18,6 +18,7 @@ from views.welcome_user import WelcomeUser
 from views.user_database_select import UserSelect
 from views.new_user import CreateUser
 from views.event import Event
+from views.contact_view import Contact
 from model import Model
 
 
@@ -52,6 +53,10 @@ class Controller:
         self.view.past_events_listbox.bind('<Return>', self.double_click_event_past)
         self.view.upcoming_events_listbox.bind('<Double-Button-1>', self.double_click_event_upcoming)
         self.view.upcoming_events_listbox.bind('<Return>', self.double_click_event_upcoming)
+
+        # Contact Listbox Bind
+        self.view.contact_listbox.bind('<Double-Button-1>', self.double_click_contact)
+        self.view.contact_listbox.bind('<Return>', self.double_click_contact)
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
@@ -153,6 +158,11 @@ class Controller:
         self.event_id = (event_job.split())[0]
         self.open_event()
 
+    def double_click_contact(self, event):
+        contact = self.view.contact_listbox.get(self.view.contact_listbox.curselection())
+        self.contact_id = (contact.split())[0]
+        self.open_contact()
+
     def open_event(self):
         self.event = Event(self.view)
         event_results = self.model.get_event(self.event_id, event=True)[0]
@@ -165,6 +175,17 @@ class Controller:
         self.event.position_entry.configure(text=event_results[4])
         self.event.contact_entry.configure(text=f'{event_results[5]} {event_results[6]}')
         self.event.note_entry.configure(text=event_results[7])
+
+    def open_contact(self):
+        self.contact = Contact(self.view)
+        contact_results = self.model.get_contacts(self.contact_id, get_contact_by_id=True)[0]
+        self.contact.contact_id.configure(text=self.contact_id)
+        self.contact.first_name.configure(text=contact_results[1])
+        self.contact.last_name.configure(text=contact_results[2])
+        self.contact.email.configure(text=contact_results[3])
+        self.contact.phone.configure(text=contact_results[4])
+        self.contact.position.configure(text=contact_results[5])
+        self.contact.job_id.configure(text=contact_results[6])
 
     def update_job_profile(self):
         self.jp_results = self.model.get_job_data(self.job_id)
@@ -461,7 +482,7 @@ class Controller:
         contacts = self.model.get_all_contacts(self.user_id)
         for item in contacts:
             self.view.contact_listbox.insert(tkinter.END,
-                                             f'{item[0]} | {item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+                                             f'{item[0]} | {item[1]} {item[2]} | {item[5]}')
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
