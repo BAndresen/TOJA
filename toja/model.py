@@ -377,22 +377,6 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_contacts_all(self, user_id: int) -> list:
-        query = '''
-        SELECT 
-            contact_id,
-            first_name,
-            last_name,
-            email,
-            phone,
-            position
-        FROM contact
-        WHERE user_id = ?
-        '''
-        self.cursor.execute(query, (user_id,))
-        results = self.cursor.fetchall()
-        return results
-
     def add_contact(self, first_name: str, last_name: str, email: str, phone: str, position: str, job_id: int,
                     user_id: int):
         query = '''
@@ -410,7 +394,6 @@ class Model:
         insert = (first_name, last_name, email, phone, position, job_id, user_id)
         self.cursor.execute(query, insert)
         self.conn.commit()
-
 
     def export_database(self, user_id: int, path):
         query = '''

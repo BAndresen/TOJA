@@ -458,7 +458,7 @@ class Controller:
 
     def update_contact_listbox_home(self):
         self.view.contact_listbox.delete('0', 'end')
-        contacts = self.model.get_contacts_all(self.user_id)
+        contacts = self.model.get_all_contacts(self.user_id)
         for item in contacts:
             self.view.contact_listbox.insert(tkinter.END,
                                              f'{item[0]} | {item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
