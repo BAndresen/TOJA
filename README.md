@@ -3,7 +3,7 @@ Track &amp; Optimize your Job Application process
 
 <br>
 <div align="center">
-<img src="assets/home_screenshot.png">
+<img src="assets/home_screenshot.png" width=800>
 </div>
 <br>
 
@@ -17,7 +17,7 @@ Doing so can help to gain insights into effective strategies as well maintain a 
 Add details about a new job prospect or application
 <br>
 <div align="center">
-<img src="assets/add_job_screenshot.png">
+<img src="assets/add_job_screenshot.png" width=600>
 </div>
 <br>
 
@@ -25,33 +25,15 @@ Add details about a new job prospect or application
 Add addtional Job Information, Descriptions Events or Contacts
 <br>
 <div align="center">
-<img src="assets/job_profile_screenshot.png">
+<img src="assets/job_profile_screenshot.png" width=600>
 </div>
 <br>
 
 ### Earn Points and Level Up
 Earn points with each new event
-<br>
-<div align="center">
-<img src="assets/points_screenshot.png">
-</div>
-<br>
-
-### _Development Notes_
-_TOJA is still in the early stages of development and has limit features.  I hope to improve shortly_
 
 ### Upcoming Features
-+ Update job application Status
-+ Set application submission goals 
-+ Generate reports on job application analytics
-  + Parse verbose job descriptions to analyse common keywords
-  + Ratios:
-    + Apply : Interview
-    + Apply : Offer
-    + Jobs applied : Time (per/day, per/week, per/month)
-  + Visual graphs
-  + Job platform performance (Linkedin vs Indeed)
-  + Resume version metrics (keep track of different resume's performance to compare)
-+ Add user interface 
++ Visual Graphs integrated in UI
++ Keyword Search
 
 
