@@ -1,6 +1,12 @@
 # TOJA
 Track &amp; Optimize your Job Application process
 
+<br>
+<div align="center">
+<img src="assets/home_screenshot.png">
+</div>
+<br>
+
 ## Overview
 With the large amount of opportunities available online when applying for jobs the task can become overwhelming.
 TOJA (Track, Optimize, Job Applications) is designed to help users make the process more analytical.  Doing so can help
