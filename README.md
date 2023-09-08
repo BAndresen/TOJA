@@ -22,7 +22,7 @@ Add details about a new job prospect or application
 <br>
 
 ### Job Profile Viewer 
-Add addtional Job Information, Descriptions Events or Contacts
+Add Job Information, Descriptions, Events or Contacts
 <br>
 <div align="center">
 <img src="assets/job_profile_screenshot.png" width=600>
@@ -30,7 +30,7 @@ Add addtional Job Information, Descriptions Events or Contacts
 <br>
 
 ### Earn Points and Level Up
-Earn points with each new event
+Earn points with each new event and level up
 
 ### Upcoming Features
 + Visual Graphs integrated in UI
