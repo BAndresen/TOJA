@@ -55,8 +55,8 @@ class Controller:
         self.view.upcoming_events_listbox.bind('<Return>', self.double_click_event_upcoming)
 
         # Contact Listbox Bind
-        self.view.contact_listbox.bind('<Double-Button-1>', self.double_click_contact)
-        self.view.contact_listbox.bind('<Return>', self.double_click_contact)
+        self.view.contact_listbox.bind('<Double-Button-1>', self.double_click_contact_home)
+        self.view.contact_listbox.bind('<Return>', self.double_click_contact_home)
 
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
@@ -158,10 +158,16 @@ class Controller:
         self.event_id = (event_job.split())[0]
         self.open_event()
 
-    def double_click_contact(self, event):
+    def double_click_contact_home(self, event):
         contact = self.view.contact_listbox.get(self.view.contact_listbox.curselection())
         self.contact_id = (contact.split())[0]
         self.open_contact()
+
+    def double_click_contact(self, event):
+        contact = self.job_profile.contact_listbox.get(self.job_profile.contact_listbox.curselection())
+        self.contact_id = (contact.split())[0]
+        self.open_contact()
+
 
     def open_event(self):
         self.event = Event(self.view)
@@ -463,19 +469,20 @@ class Controller:
         past_event_listbox = self.model.get_all_event(self.user_id)
         for item in past_event_listbox:
             self.view.past_events_listbox.insert(tkinter.END,
-                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]}")
+                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]}")
         self.view.upcoming_events_listbox.delete('0', 'end')
         upcoming_event_listbox = self.model.get_all_event(self.user_id, future=True)
         for item in upcoming_event_listbox:
             self.view.upcoming_events_listbox.insert(tkinter.END,
-                                                     f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]}")
+                                                     f"{item[0]} | {item[1]} | {item[2]} | {item[4]} ")
 
     def update_contact_listbox(self):
+        self.job_profile.contact_listbox.bind('<Double-Button-1>', self.double_click_contact)
         self.job_profile.contact_listbox.delete('0', 'end')
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
-                                                    f'{item[0]} | {item[1]} {item[2]} | {item[3]} | {item[4]} | {item[5]}')
+                                                    f'{item[0]} | {item[1]} {item[2]} | {item[5]}')
 
     def update_contact_listbox_home(self):
         self.view.contact_listbox.delete('0', 'end')
