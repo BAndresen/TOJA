@@ -93,6 +93,32 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
+    def update_points(self, user_id: int, status_id: int):
+        query = '''
+        SELECT points
+        FROM status
+        WHERE status_id = ?
+        '''
+        self.cursor.execute(query, (status_id,))
+        results = self.cursor.fetchall()[0][0]
+        second_query = f'''
+        UPDATE user
+        SET total_points = total_points + {results}
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(second_query, (user_id,))
+        self.conn.commit()
+
+    def get_total_points(self, user_id: int) -> int:
+        query = '''
+        SELECT total_points
+        FROM user
+        WHERE user_id = ?
+        '''
+        self.cursor.execute(query, (user_id,))
+        results = self.cursor.fetchall()[0][0]
+        return results
+
     def get_home_view_listbox(self, user_id) -> list:
         query = '''
         SELECT
@@ -222,22 +248,6 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
         self.update_points(user_id, status_id)
-
-    def update_points(self, user_id: int, status_id: int):
-        query = '''
-        SELECT points
-        FROM status
-        WHERE status_id = ?
-        '''
-        self.cursor.execute(query, (status_id,))
-        results = self.cursor.fetchall()[0][0]
-        second_query = f'''
-        UPDATE user
-        SET total_points = total_points + {results}
-        WHERE user_id = ?
-        '''
-        self.cursor.execute(second_query, (user_id,))
-        self.conn.commit()
 
     def get_status_id(self, status: str) -> list:
         query = '''
@@ -400,16 +410,6 @@ class Model:
         '''
         self.cursor.execute(query, (update_value, job_id))
         self.conn.commit()
-
-    def get_total_points(self, user_id: int) -> int:
-        query = '''
-        SELECT total_points
-        FROM user
-        WHERE user_id = ?
-        '''
-        self.cursor.execute(query, (user_id,))
-        results = self.cursor.fetchall()[0][0]
-        return results
 
     def export_database(self, user_id: int, path):
         query = '''
