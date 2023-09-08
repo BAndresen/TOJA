@@ -28,6 +28,9 @@ class Model:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
 
+    def close_db_connections(self):
+        self.conn.close()
+
     def set_sample_data(self):
         with open('toja/database/sample_job.sql', 'r') as file:
             sql_query = file.read()
@@ -39,6 +42,11 @@ class Model:
         self._add_dynamic_sample_events(insert_past_events(events_past_notes))
         self._add_dynamic_sample_events(insert_future_events(events_future_notes))
         self._null_empty_events()
+
+    def update_database_path(self, new_db: Path):
+        self.user.config['database']['database_path'] = str(new_db)
+        with open(self.user.config_file, "w") as file:
+            self.user.config.write(file)
 
     def _add_dynamic_sample_events(self, event_insert: list):
         # allow for dynamic dates
@@ -132,31 +140,6 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def close_db_connections(self):
-        self.conn.close()
-
-    def get_job_data(self, job_id: str) -> tuple:
-        query = '''
-         SELECT
-             company,
-             website,
-             position,
-             location,
-             commitment,
-             work_type,
-             salary_top,
-             salary_bottom,
-             salary_type,
-             resume_version,
-             job_description_file
-             
-         FROM job
-         WHERE job_id = ?
-         '''
-        self.cursor.execute(query, (job_id,))
-        results = self.cursor.fetchall()
-        return results[0]
-
     def delete_entry(self, table: str, column_id_name: str, identity: str, ) -> None:
         query = f'''
         DELETE
@@ -178,6 +161,28 @@ class Model:
             delete_path = Path(*[self.job_description_parent, results[0][0]])
             if os.path.exists(delete_path):
                 os.remove(delete_path)
+
+    def get_job_data(self, job_id: str) -> tuple:
+        query = '''
+         SELECT
+             company,
+             website,
+             position,
+             location,
+             commitment,
+             work_type,
+             salary_top,
+             salary_bottom,
+             salary_type,
+             resume_version,
+             job_description_file
+
+         FROM job
+         WHERE job_id = ?
+         '''
+        self.cursor.execute(query, (job_id,))
+        results = self.cursor.fetchall()
+        return results[0]
 
     def add_new_job(self, position: str, company: str, website: str, location: str, commitment: str,
                     work_type: str,
@@ -228,6 +233,15 @@ class Model:
         self.conn.commit()
 
         self.update_points(user_id, status_id)
+
+    def update_job(self, job_id: int, column_name: str, update_value: str):
+        query = f'''
+        UPDATE job
+        SET {column_name} = ?
+        WHERE job_id = ?
+        '''
+        self.cursor.execute(query, (update_value, job_id))
+        self.conn.commit()
 
     def add_event(self, date: str, time: str,
                   note: Union[str, None],
@@ -397,19 +411,6 @@ class Model:
         self.cursor.execute(query, insert)
         self.conn.commit()
 
-    def update_database_path(self, new_db: Path):
-        self.user.config['database']['database_path'] = str(new_db)
-        with open(self.user.config_file, "w") as file:
-            self.user.config.write(file)
-
-    def update_job(self, job_id: int, column_name: str, update_value: str):
-        query = f'''
-        UPDATE job
-        SET {column_name} = ?
-        WHERE job_id = ?
-        '''
-        self.cursor.execute(query, (update_value, job_id))
-        self.conn.commit()
 
     def export_database(self, user_id: int, path):
         query = '''

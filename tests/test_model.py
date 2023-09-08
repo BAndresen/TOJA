@@ -55,9 +55,9 @@ class TestModel(unittest.TestCase):
         user_1_updated_points = self.model.get_total_points(1)
         self.assertEqual(user_1_updated_points, (user_1_points + 3))
 
-    def test_update_points(self):
-        # self.model.insert_user_db(self.user_1, self.points_1)
-        pass
+    def test_status(self):
+        results = self.model.get_status_id("applied")[0][0]
+        self.assertEqual(results,4)
 
     def tearDown(self) -> None:
         self.model.conn.close()
