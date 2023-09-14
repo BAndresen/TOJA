@@ -4,6 +4,11 @@ import sqlite3
 from pathlib import Path
 from datetime import datetime
 import csv
+import sys
+
+current_dir = os.getcwd()
+parent = os.path.dirname(current_dir)
+sys.path.append(parent)
 
 from toja.config import Config
 from toja.database.create_database import create_toja_database

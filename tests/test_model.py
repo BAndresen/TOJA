@@ -1,11 +1,16 @@
 import random
 import unittest
 import sqlite3
-# import coverage
 from faker import Faker
 from random import randint
 from unittest.mock import Mock
 from pathlib import Path
+import sys
+import os
+
+current_dir = os.getcwd()
+# parent = os.path.dirname(current_dir)
+sys.path.append(current_dir)
 
 from toja.database.create_database import create_toja_database
 from toja.model import Model
