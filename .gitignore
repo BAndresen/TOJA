@@ -18,3 +18,5 @@
 /toja/config.ini
 /tests/.coverage
 /.coverage
+*.pyc
+toja/.vscode/settings.json
