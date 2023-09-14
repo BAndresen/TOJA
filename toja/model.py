@@ -6,8 +6,8 @@ from datetime import datetime
 import csv
 import sys
 
-current_dir = os.getcwd()
-parent = os.path.dirname(current_dir)
+current_directory = os.getcwd()
+parent = os.path.dirname(current_directory)
 sys.path.append(parent)
 
 from toja.config import Config
@@ -37,10 +37,22 @@ class Model:
         self.conn.close()
 
     def set_sample_data(self):
-        with open('toja/database/sample_job.sql', 'r') as file:
+        relative_path_job = 'database/sample_job.sql'
+        relative_path_contact = 'database/sample_contact.sql'
+        file_path_job = os.path.join(current_directory, relative_path_job)
+        file_path_contact = os.path.join(current_directory, relative_path_contact)
+
+        if not os.path.exists(file_path_job):
+            relative_path_job = 'toja/database/sample_job.sql'
+            relative_path_contact = 'toja/database/sample_contact.sql'
+            file_path_job = os.path.join(current_directory, relative_path_job)
+            file_path_contact = os.path.join(current_directory, relative_path_contact)
+
+        with open(file_path_job, 'r') as file:
             sql_query = file.read()
         self.cursor.execute(sql_query)
-        with open('toja/database/sample_contact.sql', 'r') as file:
+
+        with open(file_path_contact, 'r') as file:
             sql_query = file.read()
         self.cursor.execute(sql_query)
         self._add_dynamic_sample_events(events_applied(event_applied_notes))

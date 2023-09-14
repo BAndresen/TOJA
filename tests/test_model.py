@@ -9,7 +9,6 @@ import sys
 import os
 
 current_dir = os.getcwd()
-# parent = os.path.dirname(current_dir)
 sys.path.append(current_dir)
 
 from toja.database.create_database import create_toja_database
