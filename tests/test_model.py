@@ -101,6 +101,24 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results_all[4], self.phone_2)
         self.assertEqual(results_all[5], self.job_2)
 
+    def test_delete(self):
+        fake = Faker()
+        # generate fake contact
+        self.user_1_first = fake.first_name()
+        self.user_1_last = fake.last_name()
+        self.phone_1 = fake.phone_number()
+        self.email_1 = fake.email()
+        self.job_1 = fake.job()
+
+        # add contact
+        self.model.add_contact(self.user_1_first, self.user_1_last, self.email_1, self.phone_1, self.job_1, 1, 1)
+
+        # delete contact
+        self.model.delete_entry('contact', 'contact_id', '1')
+
+        results_all = self.model.get_all_contacts(1)
+        self.assertEqual(results_all, [])
+
     def tearDown(self) -> None:
         self.model.conn.close()
 
