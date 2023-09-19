@@ -285,7 +285,7 @@ class Model:
         with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
             file.write(job_text)
 
-    def add_event(self, date: str, time: str,
+    def add_event(self, date: Union[str,datetime.date], time: str,
                   note: Union[str, None],
                   status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
         query = '''

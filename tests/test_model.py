@@ -7,6 +7,7 @@ from unittest.mock import Mock
 from pathlib import Path
 import sys
 import os
+import datetime
 
 current_dir = os.getcwd()
 sys.path.append(current_dir)
@@ -45,6 +46,11 @@ class TestModel(unittest.TestCase):
         self.email_2 = fake.email()
         self.job_2 = fake.job()
 
+        self.event_note1 = fake.paragraph(nb_sentences=1)
+        self.event_note2 = fake.paragraph(nb_sentences=1)
+
+        self.today = datetime.datetime.today()
+
     def test_user(self):
         # insert users & points
         self.model.insert_user_db(self.user_1_first, self.points_1)
@@ -71,6 +77,30 @@ class TestModel(unittest.TestCase):
     def test_status(self):
         results = self.model.get_status_id("applied")[0][0]
         self.assertEqual(results, 4)
+
+    def test_event(self):
+        self.model.add_contact(self.user_1_first, self.user_1_last, self.email_1, self.phone_1, self.job_1, 1, 1)
+
+        date = self.today.date().strftime('%Y-%m-%d')
+        time = self.today.time().strftime('%I:%M%p')
+        rand_status1 = random.randint(1, 9)
+        rand_status2 = random.randint(1, 9)
+
+        # past event
+        self.model.add_event(date, time, self.event_note1, rand_status1, None, 1, 1)
+        self.model.add_event(date, time, self.event_note2, rand_status2, 1, 1, 1)
+
+        past_events1 = self.model.get_all_event(user=1)[0]
+        self.assertEqual(past_events1[0], 1)
+        self.assertEqual(past_events1[1], date)
+        self.assertEqual(past_events1[2], time)
+        self.assertEqual(past_events1[3], self.event_note1)
+
+        past_events2 = self.model.get_all_event(user=1)[1]
+        self.assertEqual(past_events2[0], 2)
+        self.assertEqual(past_events2[1], date)
+        self.assertEqual(past_events2[2], time)
+        self.assertEqual(past_events2[3], self.event_note2)
 
     def test_contact(self):
         # add contact
