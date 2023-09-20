@@ -85,22 +85,28 @@ class TestModel(unittest.TestCase):
         time = self.today.time().strftime('%I:%M%p')
         rand_status1 = random.randint(1, 9)
         rand_status2 = random.randint(1, 9)
-
         # past event
         self.model.add_event(date, time, self.event_note1, rand_status1, None, 1, 1)
-        self.model.add_event(date, time, self.event_note2, rand_status2, 1, 1, 1)
+        self.model.add_event(date, time, self.event_note2, rand_status2, 1, 2, 1)
 
+        # test get_all_event
         past_events1 = self.model.get_all_event(user=1)[0]
         self.assertEqual(past_events1[0], 1)
         self.assertEqual(past_events1[1], date)
         self.assertEqual(past_events1[2], time)
         self.assertEqual(past_events1[3], self.event_note1)
-
         past_events2 = self.model.get_all_event(user=1)[1]
         self.assertEqual(past_events2[0], 2)
         self.assertEqual(past_events2[1], date)
         self.assertEqual(past_events2[2], time)
         self.assertEqual(past_events2[3], self.event_note2)
+
+        # test get_event
+        past_event3 = self.model.get_event(1, job=True)[0]
+        self.assertEqual(past_event3[0], 1)
+        self.assertEqual(past_event3[1],date)
+        self.assertEqual(past_event3[2],time)
+        self.assertEqual(past_event3[3], self.event_note1)
 
     def test_contact(self):
         # add contact
