@@ -32,38 +32,44 @@ class TestModel(unittest.TestCase):
 
         # generate fake user info
         fake = Faker()
-        self.user_1_first = fake.first_name()
-        self.user_1_last = fake.last_name()
+        self.name_1_first = fake.first_name()
+        self.name_1_last = fake.last_name()
         self.points_1 = random.randint(0, 100)
         self.phone_1 = fake.phone_number()
         self.email_1 = fake.email()
-        self.job_1 = fake.job()
+        self.position_1 = fake.job()
+        self.event_note1 = fake.paragraph(nb_sentences=1)
+        self.job_note1 = fake.paragraph(nb_sentences=1)
+        self.company1 = fake.company()
+        self.location1 = fake.city()
 
-        self.user_2_first = fake.first_name()
-        self.user_2_last = fake.last_name()
+        self.name_2_first = fake.first_name()
+        self.name_2_last = fake.last_name()
         self.points_2 = random.randint(0, 100)
         self.phone_2 = fake.phone_number()
         self.email_2 = fake.email()
-        self.job_2 = fake.job()
-
-        self.event_note1 = fake.paragraph(nb_sentences=1)
+        self.position_2 = fake.job()
         self.event_note2 = fake.paragraph(nb_sentences=1)
+        self.job_note2 = fake.paragraph(nb_sentences=1)
+        self.company2 = fake.company()
+        self.location2 = fake.city()
 
         self.today = datetime.datetime.today()
 
     def test_user(self):
+
         # insert users & points
-        self.model.insert_user_db(self.user_1_first, self.points_1)
-        self.model.insert_user_db(self.user_2_first, self.points_2)
+        self.model.insert_user_db(self.name_1_first, self.points_1)
+        self.model.insert_user_db(self.name_2_first, self.points_2)
 
         # get user id
-        user1_id = self.model.get_user_id(self.user_1_first)
+        user1_id = self.model.get_user_id(self.name_1_first)
         self.assertEqual(user1_id, 1)
 
         # get all users
         all_users = self.model.get_all_users()
-        self.assertEqual(all_users[0][0], self.user_1_first)
-        self.assertEqual(all_users[1][0], self.user_2_first)
+        self.assertEqual(all_users[0][0], self.name_1_first)
+        self.assertEqual(all_users[1][0], self.name_2_first)
 
         # test points
         user_1_points = self.model.get_total_points(1)
@@ -79,7 +85,7 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results, 4)
 
     def test_event(self):
-        self.model.add_contact(self.user_1_first, self.user_1_last, self.email_1, self.phone_1, self.job_1, 1, 1)
+        self.model.add_contact(self.name_1_first, self.name_1_last, self.email_1, self.phone_1, self.position_1, 1, 1)
 
         date = self.today.date().strftime('%Y-%m-%d')
         time = self.today.time().strftime('%I:%M%p')
@@ -110,30 +116,30 @@ class TestModel(unittest.TestCase):
 
     def test_contact(self):
         # add contact
-        self.model.add_contact(self.user_1_first, self.user_1_last, self.email_1, self.phone_1, self.job_1, 1, 1)
-        self.model.add_contact(self.user_2_first, self.user_2_last, self.email_2, self.phone_2, self.job_2, 2, 1)
+        self.model.add_contact(self.name_1_first, self.name_1_last, self.email_1, self.phone_1, self.position_1, 1, 1)
+        self.model.add_contact(self.name_2_first, self.name_2_last, self.email_2, self.phone_2, self.position_2, 2, 1)
 
         # get contact
         results = self.model.get_contacts(1)[0]
         self.assertEqual(results[0], 1)
-        self.assertEqual(results[1], self.user_1_first)
-        self.assertEqual(results[2], self.user_1_last)
+        self.assertEqual(results[1], self.name_1_first)
+        self.assertEqual(results[2], self.name_1_last)
         self.assertEqual(results[3], self.email_1)
         self.assertEqual(results[4], self.phone_1)
-        self.assertEqual(results[5], self.job_1)
+        self.assertEqual(results[5], self.position_1)
 
         # get all contacts
         results_all = self.model.get_all_contacts(1)[1]
         self.assertEqual(results_all[0], 2)
-        self.assertEqual(results_all[1], self.user_2_first)
-        self.assertEqual(results_all[2], self.user_2_last)
+        self.assertEqual(results_all[1], self.name_2_first)
+        self.assertEqual(results_all[2], self.name_2_last)
         self.assertEqual(results_all[3], self.email_2)
         self.assertEqual(results_all[4], self.phone_2)
-        self.assertEqual(results_all[5], self.job_2)
+        self.assertEqual(results_all[5], self.position_2)
 
     def test_delete(self):
         # test delete contact
-        self.model.add_contact(self.user_1_first, self.user_1_last, self.email_1, self.phone_1, self.job_1, 1, 1)
+        self.model.add_contact(self.name_1_first, self.name_1_last, self.email_1, self.phone_1, self.position_1, 1, 1)
         self.model.delete_entry('contact', 'contact_id', '1')
         results_all = self.model.get_all_contacts(1)
         self.assertEqual(results_all, [])
