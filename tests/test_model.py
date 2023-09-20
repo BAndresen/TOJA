@@ -16,6 +16,12 @@ from toja.database.create_database import create_toja_database
 from toja.model import Model
 from toja.model import Config
 
+EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
+WORK_TYPE = ['Remote', 'Hybrid', 'Onsite', 'None']
+SALARY_TYPE = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
+EVENT_TYPE = ['applied', 'prospect', 'follow_up', 'meeting', 'workshop', 'interview', 'offer', 'offer_accepted',
+              'rejected']
+
 
 class TestModel(unittest.TestCase):
 
@@ -30,7 +36,7 @@ class TestModel(unittest.TestCase):
         self.model.cursor = self.model.conn.cursor()
         create_toja_database(self.model.cursor, self.model.conn)
 
-        # generate fake user info
+        # generate fake info
         fake = Faker()
         self.name_1_first = fake.first_name()
         self.name_1_last = fake.last_name()
@@ -42,6 +48,12 @@ class TestModel(unittest.TestCase):
         self.job_note1 = fake.paragraph(nb_sentences=1)
         self.company1 = fake.company()
         self.location1 = fake.city()
+        self.salary_top1 = random.randint(1, 1_000_000)
+        self.salary_bottom1 = random.randint(1, self.salary_top1)
+        self.salary_type1 = random.choice(SALARY_TYPE)
+        self.event_type1 = random.choice(EVENT_TYPE)
+        self.earning_type1 = random.choice(EARNING_TYPE)
+        self.work_type1 = random.choice(WORK_TYPE)
 
         self.name_2_first = fake.first_name()
         self.name_2_last = fake.last_name()
@@ -53,11 +65,16 @@ class TestModel(unittest.TestCase):
         self.job_note2 = fake.paragraph(nb_sentences=1)
         self.company2 = fake.company()
         self.location2 = fake.city()
+        self.salary_top2 = random.randint(1, 1_000_000)
+        self.salary_bottom2 = random.randint(1, self.salary_top2)
+        self.salary_type2 = random.choice(SALARY_TYPE)
+        self.event_type2 = random.choice(EVENT_TYPE)
+        self.earning_type2 = random.choice(EARNING_TYPE)
+        self.work_type2 = random.choice(WORK_TYPE)
 
         self.today = datetime.datetime.today()
 
     def test_user(self):
-
         # insert users & points
         self.model.insert_user_db(self.name_1_first, self.points_1)
         self.model.insert_user_db(self.name_2_first, self.points_2)
@@ -110,8 +127,8 @@ class TestModel(unittest.TestCase):
         # test get_event
         past_event3 = self.model.get_event(1, job=True)[0]
         self.assertEqual(past_event3[0], 1)
-        self.assertEqual(past_event3[1],date)
-        self.assertEqual(past_event3[2],time)
+        self.assertEqual(past_event3[1], date)
+        self.assertEqual(past_event3[2], time)
         self.assertEqual(past_event3[3], self.event_note1)
 
     def test_contact(self):
