@@ -160,11 +160,17 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results_all, [])
 
     def test_job(self):
-        pass
+        fake1 = FakeData()
 
-        # self.model.add_new_job(self.position_1,self.company1,self.website1,self.location1,self.salary_type1,
-        #                        self.work_type1,self.salary_top1,self.salary_bottom1, self.earning_type1,self.resume_version1,self.fake_file_name,
-        #                        1,)
+        self.model.add_new_job(fake1.position, fake1.company, fake1.website, fake1.location, fake1.salary_type,
+                               fake1.work_type, fake1.salary_top, fake1.salary_bottom, fake1.earning_type,
+                               fake1.resume_version, fake1.fake_file_name,
+                               1, fake1.current_date, fake1.current_time, fake1.event_note, fake1.event_type, None)
+
+        results_hv = self.model.get_home_view_listbox(1)[0]
+        self.assertEqual(results_hv[0], 1)
+        self.assertEqual(results_hv[1], fake1.company)
+        self.assertEqual(results_hv[2], fake1.position)
 
     def tearDown(self) -> None:
         self.model.conn.close()
