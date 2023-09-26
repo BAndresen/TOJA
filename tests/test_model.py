@@ -161,6 +161,7 @@ class TestModel(unittest.TestCase):
 
     def test_job(self):
         fake1 = FakeData()
+        fake2 = FakeData()
 
         self.model.add_new_job(fake1.position, fake1.company, fake1.website, fake1.location, fake1.salary_type,
                                fake1.work_type, fake1.salary_top, fake1.salary_bottom, fake1.earning_type,
@@ -171,6 +172,46 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results_hv[0], 1)
         self.assertEqual(results_hv[1], fake1.company)
         self.assertEqual(results_hv[2], fake1.position)
+
+        # get job info
+        results = self.model.get_job_data(1)
+        self.assertEqual(results[0], fake1.company)
+        self.assertEqual(results[1], fake1.website)
+        self.assertEqual(results[2], fake1.position)
+        self.assertEqual(results[3], fake1.location)
+        self.assertEqual(results[4], fake1.salary_type)
+        self.assertEqual(results[5], fake1.work_type)
+        self.assertEqual(results[6], str(fake1.salary_top))
+        self.assertEqual(results[7], str(fake1.salary_bottom))
+        self.assertEqual(results[8], fake1.earning_type)
+        self.assertEqual(results[9], str(fake1.resume_version))
+        self.assertEqual(results[10], fake1.fake_file_name)
+
+        # Update Job
+        self.model.update_job(1, 'position', fake2.position)
+        self.model.update_job(1, 'company', fake2.company)
+        self.model.update_job(1, 'website', fake2.website)
+        self.model.update_job(1, 'location', fake2.location)
+        self.model.update_job(1, 'commitment', fake2.salary_type)
+        self.model.update_job(1, 'work_type', fake2.work_type)
+        self.model.update_job(1, 'salary_top', fake2.salary_top)
+        self.model.update_job(1, 'salary_bottom', fake2.salary_bottom)
+        self.model.update_job(1, 'salary_type', fake2.earning_type)
+        self.model.update_job(1, 'resume_version', fake2.resume_version)
+        self.model.update_job(1, 'job_description_file', fake2.fake_file_name)
+
+        results_updated = self.model.get_job_data(1)
+        self.assertEqual(results_updated[0], fake2.company)
+        self.assertEqual(results_updated[1], fake2.website)
+        self.assertEqual(results_updated[2], fake2.position)
+        self.assertEqual(results_updated[3], fake2.location)
+        self.assertEqual(results_updated[4], fake2.salary_type)
+        self.assertEqual(results_updated[5], fake2.work_type)
+        self.assertEqual(results_updated[6], str(fake2.salary_top))
+        self.assertEqual(results_updated[7], str(fake2.salary_bottom))
+        self.assertEqual(results_updated[8], fake2.earning_type)
+        self.assertEqual(results_updated[9], str(fake2.resume_version))
+        self.assertEqual(results_updated[10], fake2.fake_file_name)
 
     def tearDown(self) -> None:
         self.model.conn.close()

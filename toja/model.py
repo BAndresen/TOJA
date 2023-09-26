@@ -179,7 +179,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_job_data(self, job_id: str) -> tuple:
+    def get_job_data(self, job_id: Union[str,int]) -> tuple:
         query = '''
          SELECT
              company,
@@ -251,7 +251,7 @@ class Model:
 
         self.update_points(user_id, status_id)
 
-    def update_job(self, job_id: int, column_name: str, update_value: str):
+    def update_job(self, job_id: int, column_name: str, update_value: Union[str,int]):
         query = f'''
         UPDATE job
         SET {column_name} = ?
