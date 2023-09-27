@@ -448,10 +448,10 @@ class Model:
              e.event_id,
              e.date,
              e.time,
-             e.note,
              s.status,
              e.contact_id,
-             e.job_id
+             e.job_id,
+             e.note
         FROM event e
         JOIN status s USING(status_id)
         WHERE user_id = ?
