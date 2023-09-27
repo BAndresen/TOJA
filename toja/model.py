@@ -418,7 +418,19 @@ class Model:
 
     def export_database(self, user_id: int, path):
         query = '''
-        SELECT *
+        SELECT
+            job_id,
+            position,
+            company,
+            website,
+            location,
+            commitment,
+            work_type,
+            salary_top,
+            salary_bottom,
+            salary_type,
+            resume_version,
+            job_description_file
         FROM job
         WHERE user_id = ?
         '''
@@ -432,8 +444,16 @@ class Model:
             csv_writer.writerows(data)
 
         query = '''
-        SELECT *
-        FROM event
+        SELECT
+             e.event_id,
+             e.date,
+             e.time,
+             e.note,
+             s.status,
+             e.contact_id,
+             e.job_id
+        FROM event e
+        JOIN status s USING(status_id)
         WHERE user_id = ?
         '''
         self.cursor.execute(query, (user_id,))
@@ -446,7 +466,14 @@ class Model:
             csv_writer.writerows(data)
 
         query = '''
-        SELECT *
+        SELECT
+            contact_id,
+            first_name,
+            last_name,
+            email,
+            phone,
+            position,
+            job_id
         FROM contact
         WHERE user_id = ?
         '''
@@ -459,17 +486,5 @@ class Model:
             csv_writer.writerow([description[0] for description in self.cursor.description])
             csv_writer.writerows(data)
 
-        query = '''
-        SELECT *
-        FROM status
-        '''
-        self.cursor.execute(query, )
-        data = self.cursor.fetchall()
-        csv_status_file_path = os.path.join(path, 'exported_status_data.csv')
 
-        with open(csv_status_file_path, 'w', newline='') as csv_file:
-            csv_writer = csv.writer(csv_file)
-            csv_writer.writerow([description[0] for description in self.cursor.description])
-            csv_writer.writerows(data)
 
-        self.conn.close()
