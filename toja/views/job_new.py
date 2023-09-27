@@ -84,7 +84,7 @@ class NewJob:
                                                                                     'prospect',
                                                                                     'follow_up',
                                                                                     'meeting',
-                                                                                    'workshop',
+                                                                                    'networking',
                                                                                     'interview',
                                                                                     'offer',
                                                                                     'offer_accepted',

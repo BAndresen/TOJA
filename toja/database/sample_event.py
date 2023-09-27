@@ -47,7 +47,7 @@ events_future_notes = {
         'Scheduled a coffee meeting with a hiring manager.',
         'Discussed job prospects in a virtual meeting.'],
 
-    'attend_event': [
+    'networking': [
         'Attended Tech Summit to expand industry connections.',
         'Participated in a career fair to explore job options.',
         'Networking event was insightful for future opportunities.'],
@@ -130,7 +130,7 @@ def insert_future_events(event: dict) -> list:
                 time = date_change(randon_hour_unit, hour=True)
                 contact = randrange(1, 30)
                 event_list.append(f'"{date}","{time}","{note}","5","{contact}",{False}, "1"')
-        if key == 'attend_event':
+        if key == 'networking':
             for note in value:
                 randon_hour_unit = randrange(1, 5)
                 random_day_unit = randrange(10, 60)

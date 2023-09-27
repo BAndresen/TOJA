@@ -21,7 +21,7 @@ class NewEvent:
                                                                                     'prospect',
                                                                                     'applied',
                                                                                     'meeting',
-                                                                                    'workshop',
+                                                                                    'networking',
                                                                                     'interview',
                                                                                     'offer',
                                                                                     'offer_accepted',
