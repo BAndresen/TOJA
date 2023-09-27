@@ -7,16 +7,16 @@ from tkinter import filedialog, messagebox
 import subprocess
 from pathlib import Path
 
-from views.new_job import NewJob
+from views.job_new import NewJob
 from views.job_profile import JobProfile
 from views.home import HomeView
-from views.new_event import NewEvent
-from views.new_contact import NewContact
-from views.edit_job import EditJob
+from views.event_new import NewEvent
+from views.contact_new import NewContact
+from views.job_edit import EditJob
 from views.job_description import JobDescription
-from views.welcome_user import WelcomeUser
+from views.user_welcome import WelcomeUser
 from views.user_database_select import UserSelect
-from views.new_user import CreateUser
+from views.user_new import CreateUser
 from views.event import Event
 from views.contact_view import Contact
 from model import Model
