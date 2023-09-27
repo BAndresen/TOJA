@@ -1,12 +1,5 @@
 # TOJA
-Track &amp; Optimize your Job Application process
-
-## Overview
-With the large amount of opportunities available online when applying for jobs the task can become overwhelming.
-TOJA (Track, Optimize, Job Applications) is designed to help users make the process more organized and analytical.
-Doing so can help to gain insights into effective strategies as well maintain a positive mental attitude throughout the process.
-
-TOJA is a desktop application written in Python with a customtkinter user interface and sqlite database
+Track &amp; Optimize your Job Applications. Make the job hunting process more organized, analytical and modivational.
 
 <br>
 <div align="center">
@@ -14,9 +7,15 @@ TOJA is a desktop application written in Python with a customtkinter user interf
 </div>
 <br>
 
+## Why use TOJA?
++ Own your Data! None of your Job Data is shared. Everything is stored locally on your machine
++ Open Source
++ 100% Free! No Paywalls for additional Features.
+
+
 ## Description
 ### Submit Job Information
-Add details about a new job prospect or application
+Easily add details about a new job prospects or applications
 <br>
 <div align="center">
 <img src="assets/add_job_screenshot.png" width=600>
@@ -24,7 +23,7 @@ Add details about a new job prospect or application
 <br>
 
 ### Job Profile Viewer 
-View job descriptions, events or contacts for each job
+View current job descriptions, events or contacts for each job
 <br>
 <div align="center">
 <img src="assets/job_profile_screenshot.png" width=600>
@@ -32,7 +31,14 @@ View job descriptions, events or contacts for each job
 <br>
 
 ### Earn Points and Level Up
-Earn points with each new event and level up
+Get that extra boost. Earn points with each new event and level up.  
+
+### Export
+Want to showcase how organized you are at looking for a job? Export all your data in csv.
+<div align="center">
+<img src="assets/export_screen_shot.png" width=600>
+</div>
+<br>
 
 ### Upcoming Features
 + Visual Graphs integrated in UI
