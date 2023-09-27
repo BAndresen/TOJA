@@ -20,7 +20,7 @@ from toja.utils import date_change
 EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
 WORK_TYPE = ['Remote', 'Hybrid', 'Onsite', 'None']
 SALARY_TYPE = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
-EVENT_TYPE = ['applied', 'prospect', 'follow_up', 'meeting', 'workshop', 'interview', 'offer', 'offer_accepted',
+EVENT_TYPE = ['applied', 'prospect', 'follow_up', 'meeting', 'networking', 'interview', 'offer', 'offer_accepted',
               'rejected']
 
 
