@@ -19,22 +19,22 @@ class Contact:
 
         self.first_name = customtkinter.CTkLabel(self.contact_info_frame, text='')
         self.first_name.grid(row=1, column=1, padx=(5, 20), pady=5, stick='w')
-        self.first_name_label = customtkinter.CTkLabel(self.contact_info_frame, text='Event:')
+        self.first_name_label = customtkinter.CTkLabel(self.contact_info_frame, text='First Name:')
         self.first_name_label.grid(row=1, column=0, padx=(20, 5), pady=5, sticky="e")
 
         self.last_name = customtkinter.CTkLabel(self.contact_info_frame, text='')
         self.last_name.grid(row=3, column=1, padx=(5, 20), pady=5, stick='w')
-        self.last_name_label = customtkinter.CTkLabel(self.contact_info_frame, text='Day:')
+        self.last_name_label = customtkinter.CTkLabel(self.contact_info_frame, text='Last Name:')
         self.last_name_label.grid(row=3, column=0, padx=(20, 5), pady=5, sticky="e")
 
         self.email = customtkinter.CTkLabel(self.contact_info_frame, text='')
         self.email.grid(row=4, column=1, padx=(5, 20), pady=5, stick='w')
-        self.email_label = customtkinter.CTkLabel(self.contact_info_frame, text='Time:')
+        self.email_label = customtkinter.CTkLabel(self.contact_info_frame, text='Contact:')
         self.email_label.grid(row=4, column=0, padx=(20, 5), pady=5, sticky="e")
 
         self.phone = customtkinter.CTkLabel(self.contact_info_frame, text='')
         self.phone.grid(row=5, column=1, padx=(5, 20), pady=5, stick='w')
-        self.phone_label = customtkinter.CTkLabel(self.contact_info_frame, text='Company:')
+        self.phone_label = customtkinter.CTkLabel(self.contact_info_frame, text='Phone:')
         self.phone_label.grid(row=5, column=0, padx=(20, 5), pady=5, sticky="e")
 
         self.position = customtkinter.CTkLabel(self.contact_info_frame, text='')
