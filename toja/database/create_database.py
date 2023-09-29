@@ -72,13 +72,13 @@ def create_toja_database(cursor: sqlite3.Cursor, conn: sqlite3.connect) -> None:
     insert_queries = [
         "INSERT INTO status(status, points) VALUES('rejected', 1);",
         "INSERT INTO status(status, points) VALUES('prospect', 1);",
-        "INSERT INTO status(status, points) VALUES('follow_up', 2);",
+        "INSERT INTO status(status, points) VALUES('workshop', 2);",
         "INSERT INTO status(status, points) VALUES('applied', 3);",
         "INSERT INTO status(status, points) VALUES('meeting', 5);",
         "INSERT INTO status(status, points) VALUES('networking', 3);",
         "INSERT INTO status(status, points) VALUES('interview', 20);",
         "INSERT INTO status(status, points) VALUES('offer', 100);",
-        "INSERT INTO status(status, points) VALUES('offer_accepted', 1000);",
+        "INSERT INTO status(status, points) VALUES('portfolio_project', 2);",
     ]
 
     for query in insert_queries:

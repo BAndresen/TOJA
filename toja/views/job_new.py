@@ -82,12 +82,12 @@ class NewJob:
 
         self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
                                                                                     'prospect',
-                                                                                    'follow_up',
+                                                                                    'workshop',
                                                                                     'meeting',
                                                                                     'networking',
                                                                                     'interview',
                                                                                     'offer',
-                                                                                    'offer_accepted',
+                                                                                    'portfolio_project',
                                                                                     'rejected', ], width=125)
         self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')

@@ -17,14 +17,14 @@ class NewEvent:
         self.job_id_entry = customtkinter.CTkEntry(self.event_info_frame)
         self.job_id_label = customtkinter.CTkLabel(self.event_info_frame, text='Job_id')
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['follow_up',
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['workshop',
                                                                                     'prospect',
                                                                                     'applied',
                                                                                     'meeting',
                                                                                     'networking',
                                                                                     'interview',
                                                                                     'offer',
-                                                                                    'offer_accepted',
+                                                                                    'portfolio_project',
                                                                                     'rejected', ], width=140)
         self.event_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
