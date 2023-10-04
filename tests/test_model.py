@@ -16,12 +16,7 @@ from toja.database.create_database import create_toja_database
 from toja.model import Model
 from toja.model import Config
 from toja.utils import date_change
-
-EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
-WORK_TYPE = ['Remote', 'Hybrid', 'Onsite', 'None']
-SALARY_TYPE = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
-EVENT_TYPE = ['applied', 'prospect', 'workshop', 'meeting', 'networking', 'interview', 'offer', 'portfolio_project',
-              'rejected']
+import toja.constants as constant
 
 
 class FakeData:
@@ -39,10 +34,10 @@ class FakeData:
         self.location = fake.city()
         self.salary_top = random.randint(1, 1_000_000)
         self.salary_bottom = random.randint(1, self.salary_top)
-        self.salary_type = random.choice(SALARY_TYPE)
-        self.event_type = random.choice(EVENT_TYPE)
-        self.earning_type = random.choice(EARNING_TYPE)
-        self.work_type = random.choice(WORK_TYPE)
+        self.salary_type = random.choice(constant.SALARY_TYPE)
+        self.event_type = random.choice(constant.EVENT_TYPE)
+        self.earning_type = random.choice(constant.EARNING_TYPE)
+        self.work_type = random.choice(constant.WORK_TYPE)
         self.website = fake.uri()
         self.resume_version = random.randint(1, 50)
         self.fake_file_name = fake.file_path(depth=2)
