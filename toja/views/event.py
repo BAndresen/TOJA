@@ -50,7 +50,7 @@ class Event:
 
         self.note_frame = customtkinter.CTkFrame(self.event_window)
         self.note_frame.grid(row=1, column=0, padx=20, pady=20)
-        self.note_entry = customtkinter.CTkLabel(self.note_frame, text='')
+        self.note_entry = customtkinter.CTkLabel(self.note_frame, text='', wraplength=500, justify='left')
         self.note_entry.grid(row=0, column=1, padx=(5, 20), pady=10, stick='w')
         self.note_label = customtkinter.CTkLabel(self.note_frame, text='Notes:')
         self.note_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
