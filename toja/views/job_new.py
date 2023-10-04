@@ -1,6 +1,8 @@
 import customtkinter
 from tkcalendar import DateEntry
 
+import toja.constants as constant
+
 
 class NewJob:
     def __init__(self, root):
@@ -51,24 +53,22 @@ class NewJob:
         self.salary_bottom_label.grid(row=6, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.salary_type_entry = customtkinter.CTkComboBox(self.main_frame,
-                                                           values=['Annual', 'Monthly', 'Hourly', 'Contract', 'None'])
+                                                           values=constant.EARNING_TYPE)
         self.salary_type_entry.grid(row=7, column=1, padx=(5, 20), pady=2)
         self.salary_type_label = customtkinter.CTkLabel(self.main_frame, text='Salary Type')
         self.salary_type_label.grid(row=7, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.location_type_entry = customtkinter.CTkComboBox(self.main_frame,
-                                                             values=['Remote', 'Hybrid', 'Onsite', 'None'])
+                                                             values=constant.WORK_TYPE)
         self.location_type_entry.grid(row=8, column=1, padx=(5, 20), pady=2)
         self.location_type_label = customtkinter.CTkLabel(self.main_frame,
                                                           text='Work Type')
         self.location_type_label.grid(row=8, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.job_type_entry = customtkinter.CTkComboBox(self.main_frame,
-                                                        values=['Full-Time', 'Part-Time', 'Contract', 'Freelance',
-                                                                'None'])
+                                                        values=constant.SALARY_TYPE)
         self.job_type_entry.grid(row=9, column=1, padx=(5, 20), pady=2)
-        self.job_type_label = customtkinter.CTkLabel(self.main_frame,
-                                                     text='Commitment')
+        self.job_type_label = customtkinter.CTkLabel(self.main_frame, text='Commitment')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.job_description_label = customtkinter.CTkLabel(self.main_frame, text='Job Description')
@@ -80,15 +80,7 @@ class NewJob:
         self.event_info_frame = customtkinter.CTkFrame(self.aj_window)
         self.event_info_frame.grid(row=0, column=1, padx=20, pady=20)
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['applied',
-                                                                                    'prospect',
-                                                                                    'workshop',
-                                                                                    'meeting',
-                                                                                    'networking',
-                                                                                    'interview',
-                                                                                    'offer',
-                                                                                    'portfolio_project',
-                                                                                    'rejected', ], width=125)
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=constant.EVENT_TYPE, width=125)
         self.event_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")

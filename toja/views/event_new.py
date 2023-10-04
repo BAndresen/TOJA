@@ -2,6 +2,8 @@ import customtkinter
 from tkcalendar import DateEntry
 import tkinter
 
+import toja.constants as constant
+
 
 class NewEvent:
     def __init__(self, root):
@@ -17,15 +19,7 @@ class NewEvent:
         self.job_id_entry = customtkinter.CTkEntry(self.event_info_frame)
         self.job_id_label = customtkinter.CTkLabel(self.event_info_frame, text='Job_id')
 
-        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=['workshop',
-                                                                                    'prospect',
-                                                                                    'applied',
-                                                                                    'meeting',
-                                                                                    'networking',
-                                                                                    'interview',
-                                                                                    'offer',
-                                                                                    'portfolio_project',
-                                                                                    'rejected', ], width=140)
+        self.event_entry = customtkinter.CTkComboBox(self.event_info_frame, values=constant.EVENT_TYPE, width=140)
         self.event_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.event_label = customtkinter.CTkLabel(self.event_info_frame, text='Event')
         self.event_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
