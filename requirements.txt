@@ -1,5 +1,9 @@
 customtkinter==5.2.0
 darkdetect==0.8.0
+Faker==19.4.0
+Pillow==10.0.1
 python-dateutil==2.8.2
+setuptools==68.2.2
+six==1.16.0
 tkcalendar==1.6.1
 Faker==19.4.0
