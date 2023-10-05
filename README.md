@@ -62,15 +62,28 @@ Showcase how organized you are. Export all your data in csv.
 + Visual Graphs integrated in UI
 + Keyword Search
 
-### Install
+## Installation 
 
-Requirements.txt
-```
-customtkinter==5.2.0
-darkdetect==0.8.0
-tkcalendar~=1.6.1
-Pillow~=10.0.0
-Faker==19.4.0  # Used for testing
-```
+Option 1. Clone Repository and Run Python
 
++ Download Git
+https://git-scm.com/downloads
+
++ Download Python
+https://www.python.org/downloads
+
+*ensure python.exe added to PATH*
+<div align="center">
+<img src="assets/python_download_screenshot.png" width=600>
+</div>
+<br>
+
++ Open terminal and navigate to desired file directory for program
++ Use following terminal command to clone repository
+`git clone https://github.com/BAndresen/TOJA.git`
++ From terminal naviate into new TOJA directory `cd` command on windows `>>> cd toja`
++ Use following terminal command to install dependencies
+`pip install -r requirements.txt`
+
++ Open Toja application TOJA > toja > toja_app.py
 
