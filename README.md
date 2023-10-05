@@ -81,9 +81,14 @@ https://www.python.org/downloads
 + Open terminal and navigate to desired file directory for program
 + Use following terminal command to clone repository
 `git clone https://github.com/BAndresen/TOJA.git`
-+ From terminal naviate into new TOJA directory `cd` command on windows `>>> cd toja`
++ From terminal navigate into new TOJA directory `cd` command on windows `>>> cd toja`
 + Use following terminal command to install dependencies
 `pip install -r requirements.txt`
+OR optionally create a virtual environment
+  + `python -m venv venv`
+  + `venv\Scripts\activate`
+  + `pip install -r requirements.txt`
 
 + Open Toja application TOJA > toja > toja_app.py
+  + *If using a virtual environment you need to activate each time* `venv\Scripts\activate`
 
