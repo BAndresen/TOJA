@@ -546,7 +546,13 @@ class Controller:
         job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)
         keywords = KeywordExtractor()
-        print(keywords.extract_keywords(text))
+        self.extracted_keywords = keywords.extract_keywords(text)
+        self.update_jd_keyword_listbox()
+
+    def update_jd_keyword_listbox(self):
+        self.view.jd_search_listbox.delete('0', 'end')
+        for item in self.extracted_keywords:
+            self.view.jd_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
 
     def browse_resume_button(self):
         pass

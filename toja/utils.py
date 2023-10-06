@@ -71,5 +71,5 @@ def load_job_file(file_list: list, parent_directory: Union[Path,str]) -> str:
             text += job
 
         except UnicodeDecodeError:
-            print('Unicode Error')
-    return text
+            print(f'Unicode Error {files[0]}')
+    return text.lower()

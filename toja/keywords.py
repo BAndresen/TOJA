@@ -29,14 +29,14 @@ class KeywordExtractor:
             print("Downloading 'en_core_web_sm' model...")
             subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
 
-    def extract_keywords(self, text):
+    def extract_keywords(self, text) -> list:
         self.download_model()
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
-        keywords = [token.text for token in doc if token.pos_ in ["NOUN", "ADJ"]]
-        return keywords
+        results = [token.text for token in doc if token.pos_ in ["NOUN", "ADJ"]]
 
+        # Count the keywords
+        keyword_counts = Counter(results)
+        sorted_keyword_counts = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)
 
-
-
-
+        return sorted_keyword_counts[1:50]
