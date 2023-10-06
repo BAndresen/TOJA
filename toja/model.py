@@ -14,7 +14,7 @@ from toja.config import Config
 from toja.database.create_database import create_toja_database
 from toja.database.sample_event import events_applied, insert_future_events, insert_past_events
 from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
-import constants
+import toja.constants
 
 
 class Model:
