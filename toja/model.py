@@ -487,12 +487,15 @@ class Model:
             csv_writer.writerow([description[0] for description in self.cursor.description])
             csv_writer.writerows(data)
 
-    def get_filenames(self, user_id, position_title=False) -> list:
+    def get_filenames(self, user_id, job_id=None, single_job=False, position_title=False) -> list:
+        jobs = ''
+        if single_job:
+            jobs = f'AND job_id = {job_id}'
         query = f'''
         SELECT
             job_description_file
         FROM job
-        WHERE user_id = {user_id}    
+        WHERE user_id = {user_id} {jobs}    
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()

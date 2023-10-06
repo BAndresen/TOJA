@@ -541,7 +541,12 @@ class Controller:
         self.view.progress_bar.set(progress_value)
 
     def search_job_button(self):
-        list_of_jobs = self.model.get_filenames(self.user_id)
+        list_of_jobs = None
+        job_entry = self.view.job_id_entry.get()
+        if self.view.radio_var.get() == 0:
+            list_of_jobs = self.model.get_filenames(self.user_id)
+        elif self.view.radio_var.get() == 1:
+            list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
         job_description = JobDescription()
         job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)

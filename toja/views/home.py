@@ -182,11 +182,18 @@ class HomeView(customtkinter.CTk):
         self.search_by_label.grid(row=0,column=0)
         self.radio_var = tkinter.IntVar(value=0)
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=0, text="All")
-        self.radio_button_1.grid(row=1, column=0, pady=5, padx=20, sticky="n")
+        self.radio_button_1.grid(row=1, column=0, pady=5, padx=20)
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=1, text='Job ID')
-        self.radio_button_2.grid(row=2, column=0, pady=5, padx=20, sticky="n")
+        self.radio_button_2.grid(row=2, column=0, pady=5, padx=20)
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=2, text='Position')
-        self.radio_button_3.grid(row=3, column=0, pady=5, padx=20, sticky="n")
+        self.radio_button_3.grid(row=3, column=0, pady=5, padx=20)
+
+        self.radio_button_1.bind('<Button-1>', self.destroy_entry)
+        self.radio_button_2.bind('<Button-1>', self.display_job_id)
+        self.radio_button_3.bind('<Button-1>', self.display_position)
+
+        self.job_id_entry = customtkinter.CTkEntry(self.search_jd_frame)
+        self.position_entry = customtkinter.CTkEntry(self.search_jd_frame)
 
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
@@ -266,3 +273,19 @@ class HomeView(customtkinter.CTk):
 
         # --- Display Menu
         self.config(menu=self.menubar)
+
+    def display_job_id(self, event):
+
+
+        self.job_id_entry.grid(row=4, column=0, padx=10,pady=10)
+
+    def display_position(self, event):
+        self.position_entry.grid(row=4, column=0, padx=10,pady=10)
+
+    def destroy_entry(self, event):
+        self.job_id_entry.grid_forget()
+        self.position_entry.grid_forget()
+
+
+
+
