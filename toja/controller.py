@@ -6,6 +6,7 @@ from webbrowser import open
 from tkinter import filedialog, messagebox
 import subprocess
 from pathlib import Path
+import os
 
 from views.job_new import NewJob
 from views.job_profile import JobProfile
@@ -20,6 +21,9 @@ from views.user_new import CreateUser
 from views.event import Event
 from views.contact_view import Contact
 from model import Model
+from keywords import JobDescription, KeywordExtractor, Resume
+import toja.utils as utils
+import toja.constants as constants
 
 
 class Controller:
@@ -29,6 +33,9 @@ class Controller:
         self.view = view
         self.model = model
         self.new_user = new_user
+
+        self.base_directory = os.path.dirname(os.path.abspath(__file__))
+        self.job_file_directory = os.path.join(self.base_directory, constants.JOB_DESCRIPTION_DIRECTORY)
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -43,6 +50,8 @@ class Controller:
 
         self.view.event_new_button.configure(command=self.new_event_home)
         self.view.event_delete_button.configure(command=self.delete_event)
+
+        self.view.jd_search_button.configure(command=self.search_job_button)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -532,7 +541,12 @@ class Controller:
         self.view.progress_bar.set(progress_value)
 
     def search_job_button(self):
-        pass
+        list_of_jobs = self.model.get_filenames(self.user_id)
+        job_description = JobDescription()
+        job_description.num_of_jobs = len(list_of_jobs)
+        text = utils.load_job_file(list_of_jobs, self.job_file_directory)
+        keywords = KeywordExtractor()
+        print(keywords.extract_keywords(text))
 
     def browse_resume_button(self):
         pass

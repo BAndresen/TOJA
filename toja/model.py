@@ -14,6 +14,7 @@ from toja.config import Config
 from toja.database.create_database import create_toja_database
 from toja.database.sample_event import events_applied, insert_future_events, insert_past_events
 from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
+import constants
 
 
 class Model:
@@ -487,7 +488,17 @@ class Model:
             csv_writer.writerows(data)
 
     def get_filenames(self, user_id, position_title=False) -> list:
-        pass
+        query = f'''
+        SELECT
+            job_description_file
+        FROM job
+        WHERE user_id = {user_id}    
+        '''
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        return results
+
+
 
 
 

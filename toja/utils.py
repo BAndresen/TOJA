@@ -1,6 +1,7 @@
 from typing import Union
 from pathlib import Path
 import datetime
+import os
 
 
 def get_file_from_path(file_path: Union[str, Path], file_extension=False, forward_slash=False) -> str:
@@ -58,3 +59,17 @@ def date_change(unit: int, day=False, hour=False, add=False) -> str:
         else:
             previous_time = (current_time - day_change).strftime('%I:%M%p')
     return previous_time
+
+
+def load_job_file(file_list: list, parent_directory: Union[Path,str]) -> str:
+    text = ''
+    for files in file_list:
+        try:
+            file_path = os.path.join(parent_directory, files[0])
+            with open(file_path, 'r') as file:
+                job = file.read()
+            text += job
+
+        except UnicodeDecodeError:
+            print('Unicode Error')
+    return text
