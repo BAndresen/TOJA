@@ -52,6 +52,7 @@ class Controller:
         self.view.event_delete_button.configure(command=self.delete_event)
 
         self.view.jd_search_button.configure(command=self.search_job_button)
+        self.view.resume_browse_button.configure(command=self.browse_resume_button)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -176,7 +177,6 @@ class Controller:
         contact = self.job_profile.contact_listbox.get(self.job_profile.contact_listbox.curselection())
         self.contact_id = (contact.split())[0]
         self.open_contact()
-
 
     def open_event(self):
         self.event = Event(self.view)
@@ -560,7 +560,9 @@ class Controller:
             self.view.jd_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
 
     def browse_resume_button(self):
-        pass
+        resume = Resume()
+        resume.resume_path = filedialog.askopenfilename()
+        print(resume.resume_path)
 
     def search_resume_button(self):
         pass

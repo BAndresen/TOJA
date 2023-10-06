@@ -9,13 +9,14 @@ import constants
 class JobDescription:
     def __init__(self):
         self.num_of_jobs = 0
-        self.keyword = {}
+        self.keyword = []
 
 
 class Resume:
     def __init__(self):
         self.score = 0
-        self.keywords = {}
+        self.keywords = []
+        self.resume_path = None
 
 
 class KeywordExtractor:

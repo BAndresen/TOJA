@@ -219,8 +219,8 @@ class HomeView(customtkinter.CTk):
 
         self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume')
         self.upload_resume.grid(row=0, column=0, padx=10, pady=(10,0))
-        self.resume_search_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse')
-        self.resume_search_button.grid(row=1, column=0, padx=10, pady=(0,10))
+        self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse')
+        self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0,10))
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')
         self.resume_score_label.grid(row=2, column=0)
