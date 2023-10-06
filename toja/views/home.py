@@ -178,6 +178,16 @@ class HomeView(customtkinter.CTk):
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
 
+        self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:")
+        self.search_by_label.grid(row=0,column=0)
+        self.radio_var = tkinter.IntVar(value=0)
+        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=0, text="All")
+        self.radio_button_1.grid(row=1, column=0, pady=5, padx=20, sticky="n")
+        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=1, text='Job ID')
+        self.radio_button_2.grid(row=2, column=0, pady=5, padx=20, sticky="n")
+        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=2, text='Position')
+        self.radio_button_3.grid(row=3, column=0, pady=5, padx=20, sticky="n")
+
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
                                                  font=('roboto, 10'),
@@ -199,6 +209,15 @@ class HomeView(customtkinter.CTk):
 
         self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame)
         self.search_resume_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
+
+        self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume')
+        self.upload_resume.grid(row=0, column=0, padx=10, pady=(10,0))
+        self.resume_search_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse')
+        self.resume_search_button.grid(row=1, column=0, padx=10, pady=(0,10))
+
+        self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')
+        self.resume_score_label.grid(row=2, column=0)
+
 
         # list box resume
         self.resume_search_listbox = tkinter.Listbox(self.resume_frame,
