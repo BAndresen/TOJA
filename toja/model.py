@@ -486,5 +486,11 @@ class Model:
             csv_writer.writerow([description[0] for description in self.cursor.description])
             csv_writer.writerows(data)
 
+    def get_filenames(self, user_id, position_title=False) -> list:
+        pass
+
+
+
+
 
 

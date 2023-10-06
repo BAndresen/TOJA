@@ -530,3 +530,12 @@ class Controller:
         level, progress_value = divmod(progress, 1)
         self.view.current_level.configure(text=(int(level)))
         self.view.progress_bar.set(progress_value)
+
+    def search_job_button(self):
+        pass
+
+    def browse_resume_button(self):
+        pass
+
+    def search_resume_button(self):
+        pass
