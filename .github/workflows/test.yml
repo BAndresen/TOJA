@@ -16,7 +16,7 @@ jobs:
         python-version: 3.11
 
     - name: Cache Python dependencies
-      uses: 'node16'
+      uses: node16
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
