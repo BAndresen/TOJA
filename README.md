@@ -71,12 +71,12 @@ Showcase how organized you are. Export all your data in csv.
 
 ## Installation 
 
-Option 1. Clone Repository and Run Python
+**Option A** Clone Repository and Run with Python
 
-+ Download Git
+1. Download Git
 https://git-scm.com/downloads
 
-+ Download Python
+2. Download Python
 https://www.python.org/downloads
 
 *ensure python.exe added to PATH*
@@ -85,17 +85,17 @@ https://www.python.org/downloads
 </div>
 <br>
 
-+ Open terminal and navigate to desired file directory for program
-+ Use following terminal command to clone repository
+3. Open terminal and navigate to desired file directory for program
+4. Use following terminal command to clone repository
 `git clone https://github.com/BAndresen/TOJA.git`
-+ From terminal navigate into new TOJA directory `cd` command on windows `>>> cd toja`
-+ Use following terminal command to install dependencies
+5. From terminal navigate into new TOJA directory `cd` command on windows `>>> cd toja`
+6. Use following terminal command to install dependencies
 `pip install -r requirements.txt`
 OR optionally create a virtual environment
   + `python -m venv venv`
   + `venv\Scripts\activate`
   + `pip install -r requirements.txt`
 
-+ Open Toja application TOJA > toja > toja_app.py
+7. Open Toja application TOJA > toja > toja_app.py
   + *If using a virtual environment you need to activate each time* `venv\Scripts\activate`
 
