@@ -45,6 +45,14 @@ Keep track of all your past and upcoming Events
 </div>
 <br>
 
+### Keyword Search
+Use natural language processing to search for keywords within job descriptions. Scan all jobs or narrow down your search by job title or individual job.  Additionally, you can enhance your job search readiness by uploading your resume for a thorough comparison.  
+<br>
+<div align="center">
+<img src="assets/keyword_screenshot.png" width=600>
+</div>
+<br>
+
 ### Level Up
 Get that extra boost. Earn points with each new event and level up.  
 
@@ -60,7 +68,6 @@ Showcase how organized you are. Export all your data in csv.
 
 ### Upcoming Features
 + Visual Graphs integrated in UI
-+ Keyword Search
 
 ## Installation 
 
