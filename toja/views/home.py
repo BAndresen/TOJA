@@ -224,6 +224,8 @@ class HomeView(customtkinter.CTk):
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')
         self.resume_score_label.grid(row=2, column=0)
+        self.resume_score = customtkinter.CTkLabel(self.search_resume_frame, text='')
+        self.resume_score.grid(row=2, column=1)
 
 
         # list box resume

@@ -10,7 +10,7 @@ import constants
 class JobDescription:
     def __init__(self):
         self.num_of_jobs = 0
-        self.keyword = []
+        self.keywords = []
 
 
 class Resume:
@@ -48,3 +48,13 @@ class KeywordExtractor:
         page = reader.pages[0]
         self.text = page.extract_text()
         return self.text.lower()
+
+
+def resume_score(resume_keywords: list[tuple[str, int]], jd_keywords: list[tuple[str, int]], num_of_jd: int) -> float:
+    score = 0
+    for resume_words in resume_keywords:
+        for jd_words in jd_keywords:
+            if resume_words[0] == jd_words[0]:
+                score += resume_words[1]
+                score += (jd_words[1] / num_of_jd)
+    return round(score, 2)

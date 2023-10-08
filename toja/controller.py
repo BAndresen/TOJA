@@ -21,7 +21,7 @@ from views.user_new import CreateUser
 from views.event import Event
 from views.contact_view import Contact
 from model import Model
-from keywords import JobDescription, KeywordExtractor, Resume
+from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import toja.utils as utils
 import toja.constants as constants
 
@@ -548,12 +548,13 @@ class Controller:
             list_of_jobs = self.model.get_filenames(self.user_id)
         elif self.view.radio_var.get() == 1:
             list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
-        job_description = JobDescription()
-        job_description.num_of_jobs = len(list_of_jobs)
+        self.job_description = JobDescription()
+        self.job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)
         self.jd_keywords = KeywordExtractor()
         self.extracted_keywords = self.jd_keywords.extract_keywords(text)
         self.update_jd_keyword_listbox()
+        self.job_description.keywords = self.extracted_keywords
 
     def update_jd_keyword_listbox(self):
         self.view.jd_search_listbox.delete('0', 'end')
@@ -571,10 +572,14 @@ class Controller:
         self.resume.keywords = resume_extractor.extract_pdf_text(self.resume.resume_path)
         self.extracted_resume_keywords = resume_extractor.extract_keywords(self.resume.keywords)
         self.update_resume_keyword_listbox()
+        self.resume.keywords = self.extracted_resume_keywords
+        self.get_resume_score()
+
+    def get_resume_score(self):
+        score = resume_score(self.resume.keywords, self.job_description.keywords, self.job_description.num_of_jobs)
+        self.view.resume_score.configure(text=score)
 
     def update_resume_keyword_listbox(self):
-        print(self.extracted_resume_keywords)
-        print(self.extracted_keywords)
         self.view.resume_search_listbox.delete('0', 'end')
         for item in self.extracted_resume_keywords:
             self.view.resume_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
