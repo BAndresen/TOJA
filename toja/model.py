@@ -500,7 +500,6 @@ class Model:
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
-        print(results)
         return results
 
     def get_filenames_fuzzy(self, user_id, position: str, threshold: int):
@@ -513,13 +512,9 @@ class Model:
             '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
-        print(results)
-
         matching_rows = []
         for row in results:
             if fuzz.token_sort_ratio(row[0], position) >= threshold:
                 matching_rows.append(row[1])
-        print(matching_rows)
-
-        return tuple(matching_rows)
+        return matching_rows
 

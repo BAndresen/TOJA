@@ -24,15 +24,7 @@ class KeywordExtractor:
     def __init__(self):
         self.text = ''
 
-    def download_model(self):
-        try:
-            spacy.load("en_core_web_sm")
-        except OSError:
-            print("Downloading 'en_core_web_sm' model...")
-            subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-
     def extract_keywords(self, text) -> list:
-        self.download_model()
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
         results = [token.text for token in doc if token.pos_ in ["NOUN", "PROPN"]]
