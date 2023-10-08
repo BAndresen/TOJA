@@ -1,6 +1,7 @@
 import os
 import spacy
 import subprocess
+from PyPDF2 import PdfReader
 from collections import Counter
 
 import constants
@@ -34,10 +35,16 @@ class KeywordExtractor:
         self.download_model()
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
-        results = [token.text for token in doc if token.pos_ in ["NOUN", "ADJ"]]
+        results = [token.text for token in doc if token.pos_ in ["NOUN", "PROPN"]]
 
         # Count the keywords
         keyword_counts = Counter(results)
         sorted_keyword_counts = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)
 
         return sorted_keyword_counts[1:50]
+
+    def extract_pdf_text(self, file_path: str):
+        reader = PdfReader(file_path)
+        page = reader.pages[0]
+        self.text = page.extract_text()
+        return self.text.lower()

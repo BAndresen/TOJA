@@ -275,8 +275,6 @@ class HomeView(customtkinter.CTk):
         self.config(menu=self.menubar)
 
     def display_job_id(self, event):
-
-
         self.job_id_entry.grid(row=4, column=0, padx=10,pady=10)
 
     def display_position(self, event):

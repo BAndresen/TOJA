@@ -53,6 +53,7 @@ class Controller:
 
         self.view.jd_search_button.configure(command=self.search_job_button)
         self.view.resume_browse_button.configure(command=self.browse_resume_button)
+        self.view.resume_search_button.configure(command=self.search_resume_button)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -550,8 +551,8 @@ class Controller:
         job_description = JobDescription()
         job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)
-        keywords = KeywordExtractor()
-        self.extracted_keywords = keywords.extract_keywords(text)
+        self.jd_keywords = KeywordExtractor()
+        self.extracted_keywords = self.jd_keywords.extract_keywords(text)
         self.update_jd_keyword_listbox()
 
     def update_jd_keyword_listbox(self):
@@ -560,9 +561,22 @@ class Controller:
             self.view.jd_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
 
     def browse_resume_button(self):
-        resume = Resume()
-        resume.resume_path = filedialog.askopenfilename()
-        print(resume.resume_path)
+        self.resume = Resume()
+        self.resume.resume_path = filedialog.askopenfilename()
+        file_name = os.path.basename(self.resume.resume_path)
+        self.view.upload_resume.configure(text=file_name)
 
     def search_resume_button(self):
-        pass
+        resume_extractor = KeywordExtractor()
+        self.resume.keywords = resume_extractor.extract_pdf_text(self.resume.resume_path)
+        self.extracted_resume_keywords = resume_extractor.extract_keywords(self.resume.keywords)
+        self.update_resume_keyword_listbox()
+
+    def update_resume_keyword_listbox(self):
+        print(self.extracted_resume_keywords)
+        print(self.extracted_keywords)
+        self.view.resume_search_listbox.delete('0', 'end')
+        for item in self.extracted_resume_keywords:
+            self.view.resume_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
+
+

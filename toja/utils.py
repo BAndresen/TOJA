@@ -4,30 +4,6 @@ import datetime
 import os
 
 
-def get_file_from_path(file_path: Union[str, Path], file_extension=False, forward_slash=False) -> str:
-    """
-    Extracts the clean file name from the given file path.
-
-    Parameters:
-        file_path (Union[str, Path]): The path to the file from which the name needs to be extracted.
-        file_extension (bool, optional): If True, returns the full file name with extension.
-            If False (default), returns the clean file name without extension.
-        forward_slash (bool, optional): Set to True for using forward slash in the path.
-
-    Returns:
-        str: The clean file name extracted from the provided file path.
-    """
-    if not forward_slash:
-        file = str(file_path).split('\\')
-    else:
-        file = str(file_path.split('/'))
-    clean_file = file[-1]
-    if not file_extension:
-        without_file_extension = clean_file.split('.')[0]
-        clean_file = without_file_extension
-    return clean_file
-
-
 def date_change(unit: int, day=False, hour=False, add=False) -> str:
     """
     Change day or hour by unit.
@@ -61,7 +37,7 @@ def date_change(unit: int, day=False, hour=False, add=False) -> str:
     return previous_time
 
 
-def load_job_file(file_list: list, parent_directory: Union[Path,str]) -> str:
+def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
     text = ''
     for files in file_list:
         try:
