@@ -543,11 +543,14 @@ class Controller:
 
     def search_job_button(self):
         list_of_jobs = None
-        job_entry = self.view.job_id_entry.get()
         if self.view.radio_var.get() == 0:
             list_of_jobs = self.model.get_filenames(self.user_id)
         elif self.view.radio_var.get() == 1:
+            job_entry = self.view.job_id_entry.get()
             list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
+        elif self.view.radio_var.get() == 2:
+            position = self.view.position_entry.get()
+            list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position,80)
         self.job_description = JobDescription()
         self.job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)

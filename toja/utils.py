@@ -40,12 +40,16 @@ def date_change(unit: int, day=False, hour=False, add=False) -> str:
 def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
     text = ''
     for files in file_list:
+        if len(files[0]) == 1:
+            f = files
+        else:
+            f = files[0]
         try:
-            file_path = os.path.join(parent_directory, files[0])
+            file_path = os.path.join(parent_directory, f)
             with open(file_path, 'r') as file:
                 job = file.read()
             text += job
 
         except UnicodeDecodeError:
-            print(f'Unicode Error {files[0]}')
+            print(f'Unicode Error {f}')
     return text.lower()

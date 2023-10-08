@@ -5,6 +5,7 @@ from pathlib import Path
 from datetime import datetime
 import csv
 import sys
+from fuzzywuzzy import fuzz
 
 current_directory = os.getcwd()
 parent = os.path.dirname(current_directory)
@@ -180,7 +181,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_job_data(self, job_id: Union[str,int]) -> tuple:
+    def get_job_data(self, job_id: Union[str, int]) -> tuple:
         query = '''
          SELECT
              company,
@@ -252,7 +253,7 @@ class Model:
 
         self.update_points(user_id, status_id)
 
-    def update_job(self, job_id: int, column_name: str, update_value: Union[str,int]):
+    def update_job(self, job_id: int, column_name: str, update_value: Union[str, int]):
         query = f'''
         UPDATE job
         SET {column_name} = ?
@@ -286,7 +287,7 @@ class Model:
         with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
             file.write(job_text)
 
-    def add_event(self, date: Union[str,datetime.date], time: str,
+    def add_event(self, date: Union[str, datetime.date], time: str,
                   note: Union[str, None],
                   status_id: int, contact_id: Union[int, None], job_id: int, user_id: int) -> None:
         query = '''
@@ -487,7 +488,7 @@ class Model:
             csv_writer.writerow([description[0] for description in self.cursor.description])
             csv_writer.writerows(data)
 
-    def get_filenames(self, user_id, job_id=None, single_job=False, position_title=False) -> list:
+    def get_filenames(self, user_id, job_id=None, single_job=False) -> list:
         jobs = ''
         if single_job:
             jobs = f'AND job_id = {job_id}'
@@ -499,12 +500,26 @@ class Model:
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
+        print(results)
         return results
 
+    def get_filenames_fuzzy(self, user_id, position: str, threshold: int):
+        query = f'''
+            SELECT
+                position,
+                job_description_file
+            FROM job
+            WHERE user_id = {user_id}        
+            '''
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        print(results)
 
+        matching_rows = []
+        for row in results:
+            if fuzz.token_sort_ratio(row[0], position) >= threshold:
+                matching_rows.append(row[1])
+        print(matching_rows)
 
-
-
-
-
+        return tuple(matching_rows)
 
