@@ -8,9 +8,9 @@
 
 ## Why use TOJA?
 + Make the job hunting process more organized, analytical and motivational.
-+ Own your Data! None of your Job Data is shared. Everything is stored locally on your machine
++ Own your Data! Nothing is shared and everything is stored locally on your machine
 + Open Source
-+ 100% Free! No Paywalls for additional Features.
++ No Paywalls
 
 
 ## Description
@@ -46,7 +46,7 @@ Keep track of all your past and upcoming Events
 <br>
 
 ### Keyword Search
-Use natural language processing to search for keywords within job descriptions. Scan all jobs or narrow down your search by job title or individual job.  Additionally, you can enhance your job search readiness by uploading your resume for a thorough comparison.  
+Use natural language processing to search for keywords in your job database. Scan all jobs or narrow down your search by job title or individual job.  Additionally, you can upload and search your resume for a thorough comparison.  
 <br>
 <div align="center">
 <img src="assets/keyword_screenshot.png" width=600>
@@ -96,6 +96,6 @@ OR optionally create a virtual environment
   + `venv\Scripts\activate`
   + `pip install -r requirements.txt`
 
-7. Open Toja application TOJA > toja > toja_app.py
+7. Open Toja application using the terminal. While in TOJA directory use command `python toja/toja_app.py`
   + *If using a virtual environment you need to activate each time* `venv\Scripts\activate`
 
