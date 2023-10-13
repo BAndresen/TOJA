@@ -182,17 +182,18 @@ class HomeView(customtkinter.CTk):
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
-        self.search_jd_frame.grid_columnconfigure(1,weight=1)
+        # self.search_jd_frame.grid_columnconfigure(1, weight=1)
+        # self.search_jd_frame.grid_columnconfigure(0, weight=1)
 
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:")
         self.search_by_label.grid(row=0,column=0)
         self.radio_var = tkinter.IntVar(value=0)
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=0, text="All", border_width_checked=4)
-        self.radio_button_1.grid(row=1, column=0, pady=5, padx=(23,0))
+        self.radio_button_1.grid(row=1, column=0, pady=5, padx=(20,0))
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=1, text='Job ID',border_width_checked=4)
-        self.radio_button_2.grid(row=2, column=0, pady=5, padx=(23,0))
+        self.radio_button_2.grid(row=2, column=0, pady=5, padx=(20,0))
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=2, text='Position',border_width_checked=4)
-        self.radio_button_3.grid(row=3, column=0, pady=(5,43), padx=(23,0))
+        self.radio_button_3.grid(row=3, column=0, pady=(5,43), padx=(20,0))
 
         self.radio_button_1.bind('<Button-1>', self.destroy_entry)
         self.radio_button_2.bind('<Button-1>', self.display_job_id)
@@ -200,7 +201,8 @@ class HomeView(customtkinter.CTk):
 
         self.job_id_entry = customtkinter.CTkEntry(self.search_jd_frame)
         self.position_entry = customtkinter.CTkEntry(self.search_jd_frame)
-        self.threshold_entry = customtkinter.CTkEntry(self.search_jd_frame, width=40)
+        self.threshold_entry = customtkinter.CTkEntry(self.search_jd_frame, width=100)
+        self.threshold_label = customtkinter.CTkLabel(self.search_by_label,)
 
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
@@ -284,24 +286,24 @@ class HomeView(customtkinter.CTk):
         self.config(menu=self.menubar)
 
     def display_job_id(self, event):
-        self.position_entry.grid_forget()
-        self.threshold_entry.grid_forget()
+        self.position_entry.grid_remove()
+        self.threshold_entry.grid_remove()
         self.job_id_entry.grid(row=2, column=1, padx=0,pady=5,sticky='w')
         self.job_id_entry.configure(placeholder_text='Enter Job ID')
-        # self.radio_button_3.grid(pady=5)
+        self.radio_button_3.grid(pady=5)
 
     def display_position(self, event):
-        self.job_id_entry.grid_forget()
+        self.job_id_entry.grid_remove()
         self.position_entry.grid(row=3, column=1, padx=0,pady=5,sticky='w')
-        self.position_entry.configure(placeholder_text='Enter Position Title')
+        self.position_entry.configure(placeholder_text='Enter Position')
         self.threshold_entry.grid(row=4, column=1, padx=0,pady=5, sticky='w')
         self.threshold_entry.configure(placeholder_text='80')
-        # self.radio_button_3.grid(pady=5)
+        self.radio_button_3.grid(pady=5)
 
     def destroy_entry(self, event):
-        self.job_id_entry.grid_forget()
-        self.position_entry.grid_forget()
-        self.threshold_entry.grid_forget()
+        self.job_id_entry.grid_remove()
+        self.position_entry.grid_remove()
+        self.threshold_entry.grid_remove()
         self.radio_button_3.grid(pady=(5,43))
 
 

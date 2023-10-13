@@ -550,7 +550,11 @@ class Controller:
             list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
         elif self.view.radio_var.get() == 2:
             position = self.view.position_entry.get()
-            list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position,80)
+            if self.view.threshold_entry.get():
+                threshold = int(self.view.threshold_entry.get())
+            else:
+                threshold = 80
+            list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position, threshold=threshold)
         self.job_description = JobDescription()
         self.job_description.num_of_jobs = len(list_of_jobs)
         text = utils.load_job_file(list_of_jobs, self.job_file_directory)
