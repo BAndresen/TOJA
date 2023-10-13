@@ -24,7 +24,7 @@ class HomeView(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         # Right Side Navigation Frame
-        self.navigation_frame = customtkinter.CTkFrame(self, fg_color="black")
+        self.navigation_frame = customtkinter.CTkFrame(self, fg_color='gray10')
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
         self.home_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
@@ -63,6 +63,7 @@ class HomeView(customtkinter.CTk):
         self.home_frame = customtkinter.CTkFrame(self)
         self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_frame.grid_columnconfigure(0, weight=1)
+        self.home_frame.grid_rowconfigure(0, weight=1)
 
         self.job_list_frame = customtkinter.CTkFrame(self.home_frame)
         self.job_list_frame.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky="nsew")
@@ -107,9 +108,9 @@ class HomeView(customtkinter.CTk):
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame)
         self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=20, sticky="nsew")
-        self.calendar_label_placeholder = (customtkinter.CTkLabel(
-            self.calendar_frame, text="graph - days vs events (coming soon)"))
-        self.calendar_label_placeholder.grid(row=0, column=1, padx=50, pady=50)
+        # self.calendar_label_placeholder = (customtkinter.CTkLabel(
+        #     self.calendar_frame, text="graph - days vs events (coming soon)"))
+        # self.calendar_label_placeholder.grid(row=0, column=1, padx=50, pady=50)
 
         # --------------- Event -------------- #
 
