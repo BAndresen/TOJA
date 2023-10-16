@@ -1,5 +1,5 @@
 # TOJA
-### Track &amp; Optimize your Job Applications.
+### A Desktop Application to Track &amp; Optimize your Job Applications.
 
 <div align="center">
 <img src="assets/home_screenshot.png" width=800>
