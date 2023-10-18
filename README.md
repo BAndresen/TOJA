@@ -46,7 +46,7 @@ Keep track of all your past and upcoming Events
 <br>
 
 ### Keyword Search
-Use natural language processing to search for keywords in your job database. Scan all jobs or narrow down your search by job title or individual job.  Additionally, you can upload and search your resume for a thorough comparison.  
+Use natural language processing to search keywords in your job database. Scan all jobs or narrow down your search by job title or individual job.  Additionally, you can upload and search your resume for a thorough comparison.  
 <br>
 <div align="center">
 <img src="assets/keyword_screenshot.png" width=600>
