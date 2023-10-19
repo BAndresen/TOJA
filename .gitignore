@@ -20,3 +20,7 @@
 /.coverage
 *.pyc
 toja/.vscode/settings.json
+/toja/.coverage
+/toja_db_backup.ffs_batch
+/run_toja_db_backup.ffs_batch
+/.vscode/settings.json
