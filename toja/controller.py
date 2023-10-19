@@ -32,10 +32,7 @@ class Controller:
         self.new_job = None
         self.view = view
         self.model = model
-        self.new_user = new_user
-
-        self.base_directory = os.path.dirname(os.path.abspath(__file__))
-        self.job_file_directory = os.path.join(self.base_directory, constants.JOB_DESCRIPTION_DIRECTORY)
+        # self.new_user = new_user
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -81,7 +78,7 @@ class Controller:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
-            self.user_id = self.model.get_user_id(self.model.user_name)
+            self.user_id = self.model.get_user_id(self.model.user.user_name)
             self.update_home()
 
     def update_home(self):
@@ -93,15 +90,15 @@ class Controller:
     def set_user(self):
         points = 0
         if self.welcome_window.radio_var.get():
-            self.model.user_name = self.welcome_window.name_entry.get()
+            self.model.user.user_name = self.welcome_window.name_entry.get()
         else:
-            self.model.user_name = 'sample'
+            self.model.user.user_name = 'Sample'
             self.model.set_sample_data()
             points = 285
-        self.model.user.set_database_name(self.model.user_name)
+        self.model.user.set_user_name(self.model.user.user_name)
         self.model.insert_user_db(self.model.user.user_name, points)
         self.welcome_window.welcome_window.destroy()
-        self.user_id = self.model.get_user_id(self.model.user_name)
+        self.user_id = self.model.get_user_id(self.model.user.user_name)
         self.update_home()
 
     def change_database(self):
@@ -121,7 +118,7 @@ class Controller:
         name = self.user_select.user_entry.get()
         self.user_name = name
         self.user_id = self.model.get_user_id(name)
-        self.model.user.set_database_name(name)
+        self.model.user.set_user_name(name)
         self.user_select.user_window.destroy()
         self.update_home()
 
@@ -134,7 +131,7 @@ class Controller:
 
     def submit_new_user(self):
         new_name = self.add_user.database_name_entry.get()
-        self.model.user.set_database_name(new_name)
+        self.model.user.set_user_name(new_name)
         self.model.insert_user_db(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
@@ -557,7 +554,7 @@ class Controller:
             list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position, threshold=threshold)
         self.job_description = JobDescription()
         self.job_description.num_of_jobs = len(list_of_jobs)
-        text = utils.load_job_file(list_of_jobs, self.job_file_directory)
+        text = utils.load_job_file(list_of_jobs, self.model.user.job_description_parent)
         self.jd_keywords = KeywordExtractor()
         self.extracted_keywords = self.jd_keywords.extract_keywords(text)
         self.update_jd_keyword_listbox()

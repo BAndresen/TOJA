@@ -21,10 +21,7 @@ import toja.constants as constant
 class Model:
     def __init__(self, user: Config):
         self.user = user
-        self.db_file_path = user.get_database()
-        self.job_description_parent = os.path.join(self.user.base_dir,constant.JOB_DESCRIPTION_DIRECTORY)
-        self.user_name = user.user_name
-        self.connect_database(self.db_file_path)
+        self.connect_database(self.user.database_path)
 
     def connect_database(self, db_path):
         if not os.path.exists(db_path):
@@ -274,10 +271,10 @@ class Model:
 
     def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
         try:
-            with open(f'{self.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
+            with open(f'{self.user.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
                 results = file.read()
         except UnicodeDecodeError:
-            with open(f'{self.job_description_parent}\\{job_file}', "r") as file:
+            with open(f'{self.user.job_description_parent}\\{job_file}', "r") as file:
                 results = file.read()
 
         return results
