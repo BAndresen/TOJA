@@ -15,14 +15,14 @@ from toja.config import Config
 from toja.database.create_database import create_toja_database
 from toja.database.sample_event import events_applied, insert_future_events, insert_past_events
 from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
-import toja.constants
+import toja.constants as constant
 
 
 class Model:
     def __init__(self, user: Config):
         self.user = user
         self.db_file_path = user.get_database()
-        self.job_description_parent = user.get_job_description_dir()
+        self.job_description_parent = os.path.join(self.user.base_dir,constant.JOB_DESCRIPTION_DIRECTORY)
         self.user_name = user.user_name
         self.connect_database(self.db_file_path)
 
