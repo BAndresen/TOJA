@@ -3,6 +3,7 @@ import customtkinter
 from tkinter import Menu
 import os
 from PIL import Image
+from CTkToolTip import *
 
 
 class HomeView(customtkinter.CTk):
@@ -23,7 +24,7 @@ class HomeView(customtkinter.CTk):
         screen_height = self.winfo_screenheight()
         x_position = 0  # Start from the left edge
         y_position = 0  # Start from the top edge
-        self.geometry(f'{screen_width-50}x{screen_height-100}+{x_position}+{y_position}')
+        self.geometry(f'{screen_width - 50}x{screen_height - 100}+{x_position}+{y_position}')
         self.grid_columnconfigure(1, weight=4)
         self.grid_rowconfigure(0, weight=1)
 
@@ -173,12 +174,12 @@ class HomeView(customtkinter.CTk):
 
         # Job Description search
         self.jd_frame = customtkinter.CTkFrame(self.keywords_frame)
-        self.jd_frame.grid(row=1, column=0, padx=50, pady=(5,20), sticky='nsew')
+        self.jd_frame.grid(row=1, column=0, padx=50, pady=(5, 20), sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
         self.jd_search_button = customtkinter.CTkButton(self.jd_frame, text='Search')
-        self.jd_search_button.grid(row=2,column=0, pady=(0,20))
+        self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
@@ -186,14 +187,17 @@ class HomeView(customtkinter.CTk):
         # self.search_jd_frame.grid_columnconfigure(0, weight=1)
 
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:")
-        self.search_by_label.grid(row=0,column=0)
+        self.search_by_label.grid(row=0, column=0)
         self.radio_var = tkinter.IntVar(value=0)
-        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=0, text="All", border_width_checked=4)
-        self.radio_button_1.grid(row=1, column=0, pady=5, padx=(20,0))
-        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=1, text='Job ID',border_width_checked=4)
-        self.radio_button_2.grid(row=2, column=0, pady=5, padx=(20,0))
-        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var, value=2, text='Position',border_width_checked=4)
-        self.radio_button_3.grid(row=3, column=0, pady=(5,43), padx=(20,0))
+        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
+                                                           value=0, text="All", border_width_checked=4)
+        self.radio_button_1.grid(row=1, column=0, pady=5, padx=(20, 0))
+        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
+                                                           value=1, text='Job ID', border_width_checked=4)
+        self.radio_button_2.grid(row=2, column=0, pady=5, padx=(20, 0))
+        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
+                                                           value=2, text='Position', border_width_checked=4)
+        self.radio_button_3.grid(row=3, column=0, pady=(5, 43), padx=(20, 0))
 
         self.radio_button_1.bind('<Button-1>', self.destroy_entry)
         self.radio_button_2.bind('<Button-1>', self.display_job_id)
@@ -201,8 +205,14 @@ class HomeView(customtkinter.CTk):
 
         self.job_id_entry = customtkinter.CTkEntry(self.search_jd_frame)
         self.position_entry = customtkinter.CTkEntry(self.search_jd_frame)
-        self.threshold_entry = customtkinter.CTkEntry(self.search_jd_frame, width=100)
-        self.threshold_label = customtkinter.CTkLabel(self.search_by_label,)
+
+        self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value)
+        self.slider_1.set(80)
+
+        start_val = customtkinter.Variable(self,80)
+        self.threshold_entry = customtkinter.CTkEntry(self.search_jd_frame, width=40, )
+        self.threshold_label = customtkinter.CTkLabel(self.search_by_label, )
+        self.threshold_entry.configure(textvariable=start_val)
 
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
@@ -216,35 +226,34 @@ class HomeView(customtkinter.CTk):
 
         # Resume search
         self.resume_frame = customtkinter.CTkFrame(self.keywords_frame)
-        self.resume_frame.grid(row=1, column=1, padx=50, pady=(5,20), sticky='nsew')
+        self.resume_frame.grid(row=1, column=1, padx=50, pady=(5, 20), sticky='nsew')
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
 
         self.resume_search_button = customtkinter.CTkButton(self.resume_frame, text='Search')
-        self.resume_search_button.grid(row=2,column=0, pady=(0,20))
+        self.resume_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame)
         self.search_resume_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
 
         self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume')
-        self.upload_resume.grid(row=0, column=0, padx=10, pady=(10,0))
+        self.upload_resume.grid(row=0, column=0, padx=10, pady=(10, 0))
         self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse')
-        self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0,10))
+        self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0, 10))
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')
         self.resume_score_label.grid(row=2, column=0)
         self.resume_score = customtkinter.CTkLabel(self.search_resume_frame, text='')
         self.resume_score.grid(row=2, column=1)
 
-
         # list box resume
         self.resume_search_listbox = tkinter.Listbox(self.resume_frame,
-                                                 font=('roboto, 10'),
-                                                 bg='grey20',
-                                                 fg='grey90',
-                                                 borderwidth=0,
-                                                 # height=15
-                                                 )
+                                                     font=('roboto, 10'),
+                                                     bg='grey20',
+                                                     fg='grey90',
+                                                     borderwidth=0,
+                                                     # height=15
+                                                     )
         self.resume_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
 
         # --------------- Network -------------- #
@@ -288,25 +297,28 @@ class HomeView(customtkinter.CTk):
     def display_job_id(self, event):
         self.position_entry.grid_remove()
         self.threshold_entry.grid_remove()
-        self.job_id_entry.grid(row=2, column=1, padx=0,pady=5,sticky='w')
+        self.slider_1.grid_remove()
+        self.job_id_entry.grid(row=2, column=1, padx=0, sticky='w')
         self.job_id_entry.configure(placeholder_text='Enter Job ID')
-        self.radio_button_3.grid(pady=5)
+        self.radio_button_3.grid(pady=(5, 43))
 
     def display_position(self, event):
         self.job_id_entry.grid_remove()
-        self.position_entry.grid(row=3, column=1, padx=0,pady=5,sticky='w')
+        self.position_entry.grid(row=3, column=1, padx=0, sticky='w')
         self.position_entry.configure(placeholder_text='Enter Position')
-        self.threshold_entry.grid(row=4, column=1, padx=0,pady=5, sticky='w')
-        self.threshold_entry.configure(placeholder_text='80')
+        self.threshold_entry.grid(row=4, column=2, padx=0, pady=5, sticky='w')
+        self.slider_1.grid(row=4, column=1, sticky="w")
         self.radio_button_3.grid(pady=5)
 
     def destroy_entry(self, event):
         self.job_id_entry.grid_remove()
         self.position_entry.grid_remove()
         self.threshold_entry.grid_remove()
-        self.radio_button_3.grid(pady=(5,43))
+        self.slider_1.grid_remove()
+        self.radio_button_3.grid(pady=(5, 43))
 
-
-
-
-
+    def show_value(self, value):
+        # self.tooltip.configure(message=int(value))
+        # self.threshold_entry.configure(placeholder_text=int(value))
+        v = customtkinter.Variable(self, int(value))
+        self.threshold_entry.configure(textvariable=v)
