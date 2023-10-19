@@ -59,11 +59,6 @@ class Model:
         self._add_dynamic_sample_events(insert_future_events(events_future_notes))
         self._null_empty_events()
 
-    def update_database_path(self, new_db: Path):
-        self.user.config['database']['database_path'] = str(new_db)
-        with open(self.user.config_file, "w") as file:
-            self.user.config.write(file)
-
     def _add_dynamic_sample_events(self, event_insert: list):
         # allow for dynamic dates
         for event in event_insert:
