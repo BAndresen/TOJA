@@ -57,7 +57,7 @@ Use natural language processing to search keywords in your job database. Scan al
 Get that extra boost. Earn points with each new event and level up.  
 
 ### Export
-Showcase how organized you are. Export all your data in csv.
+Export all your data at anytime in csv.
 
 *All user data shown is fake sample data*
 
