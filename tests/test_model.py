@@ -3,7 +3,7 @@ import unittest
 import sqlite3
 from faker import Faker
 from random import randint
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 from pathlib import Path
 import sys
 import os
@@ -54,14 +54,17 @@ class FakeData:
 class TestModel(unittest.TestCase):
 
     def setUp(self):
-        self.user_config = Mock()
-        self.user_config.get_database.return_value = ":memory:"
-        self.base_dir = Path(__file__).resolve().parent
-        job_description = f'{self.base_dir}\\job_descriptions'
-        self.user_config.get_job_description_dir.return_value = job_description
-        self.model = Model(self.user_config)
+        # self.user_config = Config()
+        config_mock = Mock()
+        config_mock.base_dir = Path(__file__).resolve().parent
+        config_mock.job_description_parent = os.path.join(config_mock.base_dir,constant.JOB_DESCRIPTION_DIRECTORY)
+        config_mock.user_name = 'test_user'
+        config_mock.database_path = ':memory:'
+
+        self.model = Model(config_mock)
         self.model.conn = sqlite3.connect(':memory:')
         self.model.cursor = self.model.conn.cursor()
+
         create_toja_database(self.model.cursor, self.model.conn)
 
     def test_user(self):
