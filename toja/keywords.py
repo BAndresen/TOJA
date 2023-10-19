@@ -4,7 +4,7 @@ import subprocess
 from PyPDF2 import PdfReader
 from collections import Counter
 
-import constants
+import toja.constants as constant
 
 
 class JobDescription:
@@ -25,9 +25,9 @@ class KeywordExtractor:
         self.text = ''
 
     def extract_keywords(self, text) -> list:
-        nlp = spacy.load("en_core_web_sm")
+        nlp = spacy.load(constant.SPACY_NLP_MODEL)
         doc = nlp(text)
-        results = [token.text for token in doc if token.pos_ in ["NOUN", "PROPN"]]
+        results = [token.text for token in doc if token.pos_ in constant.PART_OF_SPEECH]
 
         # Count the keywords
         keyword_counts = Counter(results)

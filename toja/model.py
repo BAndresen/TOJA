@@ -336,7 +336,7 @@ class Model:
         return results
 
     def get_all_event(self, user: int, future=False) -> list:
-        today = datetime.today().strftime('%Y-%m-%d')
+        today = datetime.today().strftime(constant.CURRENT_DATE_FORMAT)
         symbol = '<='
         if future:
             symbol = '>'

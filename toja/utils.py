@@ -4,7 +4,7 @@ import datetime
 import os
 
 
-def date_change(unit: int, day=False, hour=False, add=False) -> str:
+def date_change(unit: int, day=False, hour=False, add=False, date_format = '%Y-%m-%d', time_format = '%I:%M%p') -> str:
     """
     Change day or hour by unit.
 
@@ -25,15 +25,15 @@ def date_change(unit: int, day=False, hour=False, add=False) -> str:
     if day:
         day_change = datetime.timedelta(days=unit)
         if add:
-            previous_time = (current_time + day_change).strftime('%Y-%m-%d')
+            previous_time = (current_time + day_change).strftime(date_format)
         else:
-            previous_time = (current_time - day_change).strftime('%Y-%m-%d')
+            previous_time = (current_time - day_change).strftime(date_format)
     if hour:
         day_change = datetime.timedelta(hours=unit)
         if add:
-            previous_time = (current_time + day_change).strftime('%I:%M%p')
+            previous_time = (current_time + day_change).strftime(time_format)
         else:
-            previous_time = (current_time - day_change).strftime('%I:%M%p')
+            previous_time = (current_time - day_change).strftime(time_format)
     return previous_time
 
 

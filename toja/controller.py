@@ -32,7 +32,6 @@ class Controller:
         self.new_job = None
         self.view = view
         self.model = model
-        # self.new_user = new_user
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -361,13 +360,13 @@ class Controller:
         self.new_job = NewJob(self.view)
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
-        current_time = datetime.today().time().strftime('%I:%M%p')
+        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_job.time_entry.configure(textvariable=self.current_time)
 
     def open_new_event(self):
-        current_time = datetime.today().time().strftime('%I:%M%p')
+        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_event = NewEvent(self.view)
@@ -413,7 +412,7 @@ class Controller:
         self.new_event.event_window.destroy()
 
     def new_event_home(self):
-        current_time = datetime.today().time().strftime('%I:%M%p')
+        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_event = NewEvent(self.view)
