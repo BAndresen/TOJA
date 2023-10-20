@@ -156,7 +156,7 @@ class Model:
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
         if results[0][0]:
-            delete_path = Path(*[self.job_description_parent, results[0][0]])
+            delete_path = Path(*[self.user.job_description_parent, results[0][0]])
             if os.path.exists(delete_path):
                 os.remove(delete_path)
 
@@ -275,8 +275,8 @@ class Model:
         return results
 
     def save_job_description(self, job_file: str, job_text: str) -> None:
-
-        with open(f'{self.job_description_parent}/{job_file}', 'w', encoding='utf-8') as file:
+        full_path = os.path.join(self.user.job_description_parent, job_file )
+        with open(full_path, 'w', encoding='utf-8') as file:
             file.write(job_text)
 
     def add_event(self, date: Union[str, datetime.date], time: str,
