@@ -14,7 +14,7 @@ class Config:
         self.database_path = os.path.join(self.base_dir, constant.DATABASE_DIRECTORY, constant.DATABASE_NAME)
 
         self.config = configparser.ConfigParser()
-        self.config_file = f'{self.base_dir}\\{constant.CONFIG_FILE}'
+        self.config_file = os.path.join(self.base_dir, constant.CONFIG_FILE)
         self.config.read(self.config_file)
         self.user_name = self.config['user']['name']
 

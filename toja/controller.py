@@ -138,7 +138,7 @@ class Controller:
 
     def update_home_listbox(self):
         self.current_user = self.model.get_user_id(self.model.user.user_name)
-        self.view.job_list_box.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_TEXTBOX)
+        self.view.job_list_box.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
 
         home_listbox = self.model.get_home_view_listbox(self.current_user)
         for item in home_listbox:
@@ -499,7 +499,7 @@ class Controller:
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
-            full_job_path = Path(*[self.model.job_description_parent, self.jp_results[10]])
+            full_job_path = Path(*[self.model.user.job_description_parent, self.jp_results[10]])
             user_platform = self.model.user.get_users_system()
 
             if user_platform == 'Windows':
