@@ -60,7 +60,7 @@ class Model:
         self._null_empty_events()
 
     def _add_dynamic_sample_events(self, event_insert: list):
-        # allow for dynamic dates
+        # Accounts for current date, which makes sample data more relevant to user
         for event in event_insert:
             query = f'''
             INSERT INTO event (date,time,note,status_id,contact_id,job_id,user_id)

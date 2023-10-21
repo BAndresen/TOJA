@@ -50,6 +50,11 @@ def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
                 job = file.read()
             text += job
 
-        except UnicodeDecodeError:
-            print(f'Unicode Error {f}')
+        except UnicodeDecodeError as e:
+            file_path = os.path.join(parent_directory, f)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                job = file.read()
+            text += job
+            print(f'Opened with Unicode utf-8 {f} {e}')
+
     return text.lower()

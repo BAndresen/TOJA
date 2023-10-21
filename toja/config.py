@@ -5,7 +5,7 @@ import os
 import customtkinter
 
 import toja.constants as constant
-from views.theme import Theme
+from toja.views.theme import Theme
 
 
 class Config:
@@ -20,6 +20,7 @@ class Config:
         self.config_file = os.path.join(self.base_dir, constant.CONFIG_FILE)
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
+        self.appearance_mode = self.get_appearance_mode()
         self.set_appearance_mode()
 
     def is_user_new(self) -> bool:
@@ -52,9 +53,8 @@ class Config:
         return self.config_parser['theme']['appearance_mode']
 
     def set_appearance_mode(self):
-        appearance_mode = self.get_appearance_mode()
-        customtkinter.set_appearance_mode(appearance_mode)
-        if appearance_mode == "Dark":
+        customtkinter.set_appearance_mode(self.appearance_mode)
+        if self.appearance_mode == "Dark":
             self.theme.set_dark_mode()
         else:
             self.theme.set_light_mode()

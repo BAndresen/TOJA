@@ -8,8 +8,9 @@ from CTkToolTip import *
 import toja.constants as constant
 from .theme import Theme
 
+
 class HomeView(customtkinter.CTk):
-    def __init__(self, theme):
+    def __init__(self, theme: Theme):
         super().__init__()
 
         # image icons
@@ -209,7 +210,7 @@ class HomeView(customtkinter.CTk):
         self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value)
         self.slider_1.set(80)
 
-        start_val = customtkinter.Variable(self,80)
+        start_val = customtkinter.Variable(self, 80)
         self.threshold_entry = customtkinter.CTkEntry(self.search_jd_frame, width=40, )
         self.threshold_label = customtkinter.CTkLabel(self.search_jd_frame, text="Threshold:")
         self.threshold_entry.configure(textvariable=start_val)

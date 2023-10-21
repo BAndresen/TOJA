@@ -17,7 +17,7 @@ def run_toja_app():
     model = Model(config)
     view = HomeView(theme)
     if new_user:
-        # welcome_window, config can select sample data or create new config
+        # welcome_window, user can select sample data or create new user
         controller = Controller(view, model, new_user=True)
     else:
         controller = Controller(view, model)
