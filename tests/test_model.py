@@ -218,4 +218,4 @@ class TestModel(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-# coverage run -m unittest test_model.py
+# coverage run -m unittest tests\test_model.py

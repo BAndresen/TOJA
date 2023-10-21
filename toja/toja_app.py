@@ -1,19 +1,21 @@
+import customtkinter
+
 from views.home import HomeView
 from model import Model, Config
 from controller import Controller
 
 
 def run_toja_app():
-    user = Config()
+    config = Config()
     new_user = False
-    if user.is_user_new():
-        user.initialize_user()  # stores user data in config.ini
+    if config.is_user_new():
+        config.initialize_user()  # stores config data in config.ini
         new_user = True
 
-    model = Model(user)
+    model = Model(config)
     view = HomeView()
     if new_user:
-        # welcome_window, user can select sample data or create new user
+        # welcome_window, config can select sample data or create new config
         controller = Controller(view, model, new_user=True)
     else:
         controller = Controller(view, model)

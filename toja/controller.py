@@ -23,7 +23,7 @@ from views.contact_view import Contact
 from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import toja.utils as utils
-import toja.constants as constants
+import toja.constants as constant
 
 
 class Controller:
@@ -32,6 +32,7 @@ class Controller:
         self.new_job = None
         self.view = view
         self.model = model
+        self.set_appearance_mode()
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -68,7 +69,7 @@ class Controller:
         # file menu
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='New User', command=self.create_user)
-        self.view.file.add_command(label='Change User', command=self.change_database)
+        self.view.file.add_command(label='Change User', command=self.change_user)
         self.view.file.add_command(label='Export', command=self.export_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
@@ -79,6 +80,10 @@ class Controller:
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
             self.update_home()
+
+    def set_appearance_mode(self):
+        appearance_mode = self.model.config.get_appearance_mode()
+        customtkinter.set_appearance_mode(appearance_mode)
 
     def update_home(self):
         self.update_contact_listbox_home()
@@ -91,7 +96,7 @@ class Controller:
         if self.welcome_window.radio_var.get():
             self.model.config.user_name = self.welcome_window.name_entry.get()
         else:
-            self.model.config.user_name = constants.SAMPLE_USER_NAME
+            self.model.config.user_name = constant.SAMPLE_USER_NAME
             self.model.set_sample_data()
             points = 285
         self.model.config.set_user_name(self.model.config.user_name)
@@ -100,7 +105,7 @@ class Controller:
         self.user_id = self.model.get_user_id(self.model.config.user_name)
         self.update_home()
 
-    def change_database(self):
+    def change_user(self):
         self.user_select = UserSelect(self.view)
         self.user_select.submit_button.configure(command=self.switch_users)
         clean_list = []
@@ -122,7 +127,7 @@ class Controller:
         self.update_home()
 
     def about_page(self):
-        open(constants.TOJA_GITHUB_URL)
+        open(constant.TOJA_GITHUB_URL)
 
     def create_user(self):
         self.add_user = CreateUser(self.view)
@@ -138,7 +143,7 @@ class Controller:
 
     def update_home_listbox(self):
         self.current_user = self.model.get_user_id(self.model.config.user_name)
-        self.view.job_list_box.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.job_list_box.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
 
         home_listbox = self.model.get_home_view_listbox(self.current_user)
         for item in home_listbox:
@@ -178,7 +183,6 @@ class Controller:
     def open_event(self):
         self.event = Event(self.view)
         event_results = self.model.get_event(self.event_id, event=True)[0]
-
         self.event.event_id.configure(text=self.event_id)
         self.event.event_status.configure(text=event_results[2])
         self.event.day_entry.configure(text=event_results[0])
@@ -212,7 +216,6 @@ class Controller:
         self.job_profile.salary_bottom_user.configure(text=self.jp_results[7])
         self.job_profile.salary_type_user.configure(text=self.jp_results[8])
         self.job_profile.resume_user.configure(text=self.jp_results[9])
-
         if self.jp_results[10]:  # return blank if file is NULL
             self.job_profile.job_description_label.configure(text=self.model.open_job_description(self.jp_results[10]))
         else:
@@ -308,7 +311,6 @@ class Controller:
             self.update_home()
 
     def delete_contact(self):
-
         event_str = self.view.contact_listbox.get(self.view.contact_listbox.curselection())
         contact_id = (event_str.split())[0]
         name = (event_str.split("|"))[1]
@@ -360,13 +362,13 @@ class Controller:
         self.new_job = NewJob(self.view)
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
-        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
+        current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_job.time_entry.configure(textvariable=self.current_time)
 
     def open_new_event(self):
-        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
+        current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_event = NewEvent(self.view)
@@ -384,7 +386,7 @@ class Controller:
         self.model.add_event(
             self.new_event.day_entry.get(),
             self.new_event.time_entry.get(),
-            self.new_event.note_entry.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX),
+            self.new_event.note_entry.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX),
             status_id,
             contact_id,
             self.job_id,
@@ -403,7 +405,7 @@ class Controller:
         self.model.add_event(
             self.new_event.day_entry.get(),
             self.new_event.time_entry.get(),
-            self.new_event.note_entry.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX),
+            self.new_event.note_entry.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX),
             status_id,
             contact_id,
             job_id,
@@ -412,7 +414,7 @@ class Controller:
         self.new_event.event_window.destroy()
 
     def new_event_home(self):
-        current_time = datetime.today().time().strftime(constants.CURRENT_TIME_FORMAT)
+        current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_event = NewEvent(self.view)
@@ -430,7 +432,7 @@ class Controller:
         self.company = self.new_job.company_name_entry.get()
         self.position = self.new_job.position_title_entry.get()
         self.job_file = f'{self.model.config.user_name}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
-        job_text = self.new_job.job_description_textbox.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX)
+        job_text = self.new_job.job_description_textbox.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX)
         self.job_file = self.check_job_file(self.job_file, job_text)
         self.model.add_new_job(
             self.position,
@@ -447,7 +449,7 @@ class Controller:
             self.current_user,
             self.new_job.day_entry.get(),
             self.new_job.time_entry.get(),
-            self.new_job.note_entry.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX),
+            self.new_job.note_entry.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX),
             self.new_job.event_entry.get(),
             None,
         )
@@ -464,19 +466,19 @@ class Controller:
 
     def update_event_listbox(self):
         self.job_profile.event_scroll.bind('<Double-Button-1>', self.double_click_event_job_profile)
-        self.job_profile.event_scroll.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.job_profile.event_scroll.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         event_listbox = self.model.get_event(self.job_id, job=True)
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END,
                                                  f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]} ")
 
     def update_home_event_listbox(self):
-        self.view.past_events_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.past_events_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         past_event_listbox = self.model.get_all_event(self.user_id)
         for item in past_event_listbox:
             self.view.past_events_listbox.insert(tkinter.END,
                                                  f"{item[0]} | {item[1]} | {item[2]} | {item[4]}")
-        self.view.upcoming_events_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.upcoming_events_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         upcoming_event_listbox = self.model.get_all_event(self.user_id, future=True)
         for item in upcoming_event_listbox:
             self.view.upcoming_events_listbox.insert(tkinter.END,
@@ -484,14 +486,14 @@ class Controller:
 
     def update_contact_listbox(self):
         self.job_profile.contact_listbox.bind('<Double-Button-1>', self.double_click_contact)
-        self.job_profile.contact_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.job_profile.contact_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
                                                     f'{item[0]} | {item[1]} {item[2]} | {item[5]}')
 
     def update_contact_listbox_home(self):
-        self.view.contact_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.contact_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         contacts = self.model.get_all_contacts(self.user_id)
         for item in contacts:
             self.view.contact_listbox.insert(tkinter.END,
@@ -517,7 +519,7 @@ class Controller:
     def save_job_description(self):
         self.job_file_only = f'{self.model.config.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
         job_text = self.new_job_description.job_description_textbox_only.get(
-            constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX)
+            constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX)
         self.job_file_only = self.check_job_file(self.job_file_only, job_text)
         if self.job_file_only:
             self.model.save_job_description(self.job_file_only, job_text)
@@ -563,7 +565,7 @@ class Controller:
         self.job_description.keywords = self.extracted_keywords
 
     def update_jd_keyword_listbox(self):
-        self.view.jd_search_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.jd_search_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         for item in self.extracted_keywords:
             self.view.jd_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
 
@@ -588,6 +590,6 @@ class Controller:
         self.view.resume_score.configure(text=score)
 
     def update_resume_keyword_listbox(self):
-        self.view.resume_search_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
+        self.view.resume_search_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
         for item in self.extracted_resume_keywords:
             self.view.resume_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
