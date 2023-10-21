@@ -19,9 +19,9 @@ import toja.constants as constant
 
 
 class Model:
-    def __init__(self, user: Config):
-        self.user = user
-        self.connect_database(self.user.database_path)
+    def __init__(self, config: Config):
+        self.config = config
+        self.connect_database(self.config.database_path)
 
     def connect_database(self, db_path):
         if not os.path.exists(db_path):
@@ -156,7 +156,7 @@ class Model:
         self.cursor.execute(query, (job_id,))
         results = self.cursor.fetchall()
         if results[0][0]:
-            delete_path = Path(*[self.user.job_description_parent, results[0][0]])
+            delete_path = Path(*[self.config.job_description_parent, results[0][0]])
             if os.path.exists(delete_path):
                 os.remove(delete_path)
 
@@ -266,16 +266,16 @@ class Model:
 
     def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
         try:
-            with open(f'{self.user.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
+            with open(f'{self.config.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
                 results = file.read()
         except UnicodeDecodeError:
-            with open(f'{self.user.job_description_parent}\\{job_file}', "r") as file:
+            with open(f'{self.config.job_description_parent}\\{job_file}', "r") as file:
                 results = file.read()
 
         return results
 
     def save_job_description(self, job_file: str, job_text: str) -> None:
-        full_path = os.path.join(self.user.job_description_parent, job_file )
+        full_path = os.path.join(self.config.job_description_parent, job_file)
         with open(full_path, 'w', encoding='utf-8') as file:
             file.write(job_text)
 

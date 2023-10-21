@@ -37,3 +37,9 @@ class Config:
     def get_users_system(self) -> str:
         self.system_platform = platform.system()
         return self.system_platform
+
+    def get_num_keywords(self, job_description: bool = False, resume: bool = False) -> int:
+        if job_description:
+            return int(self.config['global_settings']['num_keyword_job_description'])
+        if resume:
+            return int(self.config['global_settings']['num_keyword_resume'])

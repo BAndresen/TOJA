@@ -24,7 +24,7 @@ class KeywordExtractor:
     def __init__(self):
         self.text = ''
 
-    def extract_keywords(self, text) -> list:
+    def extract_keywords(self, text, num_keywords=50) -> list:
         nlp = spacy.load(constant.SPACY_NLP_MODEL)
         doc = nlp(text)
         results = [token.text for token in doc if token.pos_ in constant.PART_OF_SPEECH]
@@ -33,7 +33,7 @@ class KeywordExtractor:
         keyword_counts = Counter(results)
         sorted_keyword_counts = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)
 
-        return sorted_keyword_counts[1:50]
+        return sorted_keyword_counts[:num_keywords]
 
     def extract_pdf_text(self, file_path: str):
         reader = PdfReader(file_path)

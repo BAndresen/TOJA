@@ -77,7 +77,7 @@ class Controller:
             self.welcome_window = WelcomeUser(self.view)
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
-            self.user_id = self.model.get_user_id(self.model.user.user_name)
+            self.user_id = self.model.get_user_id(self.model.config.user_name)
             self.update_home()
 
     def update_home(self):
@@ -89,15 +89,15 @@ class Controller:
     def set_user(self):
         points = 0
         if self.welcome_window.radio_var.get():
-            self.model.user.user_name = self.welcome_window.name_entry.get()
+            self.model.config.user_name = self.welcome_window.name_entry.get()
         else:
-            self.model.user.user_name = constants.SAMPLE_USER_NAME
+            self.model.config.user_name = constants.SAMPLE_USER_NAME
             self.model.set_sample_data()
             points = 285
-        self.model.user.set_user_name(self.model.user.user_name)
-        self.model.insert_user_db(self.model.user.user_name, points)
+        self.model.config.set_user_name(self.model.config.user_name)
+        self.model.insert_user_db(self.model.config.user_name, points)
         self.welcome_window.welcome_window.destroy()
-        self.user_id = self.model.get_user_id(self.model.user.user_name)
+        self.user_id = self.model.get_user_id(self.model.config.user_name)
         self.update_home()
 
     def change_database(self):
@@ -117,7 +117,7 @@ class Controller:
         name = self.user_select.user_entry.get()
         self.user_name = name
         self.user_id = self.model.get_user_id(name)
-        self.model.user.set_user_name(name)
+        self.model.config.set_user_name(name)
         self.user_select.user_window.destroy()
         self.update_home()
 
@@ -130,14 +130,14 @@ class Controller:
 
     def submit_new_user(self):
         new_name = self.add_user.database_name_entry.get()
-        self.model.user.set_user_name(new_name)
+        self.model.config.set_user_name(new_name)
         self.model.insert_user_db(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
         self.update_home()
 
     def update_home_listbox(self):
-        self.current_user = self.model.get_user_id(self.model.user.user_name)
+        self.current_user = self.model.get_user_id(self.model.config.user_name)
         self.view.job_list_box.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
 
         home_listbox = self.model.get_home_view_listbox(self.current_user)
@@ -403,7 +403,7 @@ class Controller:
         self.model.add_event(
             self.new_event.day_entry.get(),
             self.new_event.time_entry.get(),
-            self.new_event.note_entry.get(constants.START_RANGE_TEXTBOX,constants.END_RANGE_TEXTBOX),
+            self.new_event.note_entry.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX),
             status_id,
             contact_id,
             job_id,
@@ -429,8 +429,8 @@ class Controller:
     def submit_new_job(self):
         self.company = self.new_job.company_name_entry.get()
         self.position = self.new_job.position_title_entry.get()
-        self.job_file = f'{self.model.user.user_name}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
-        job_text = self.new_job.job_description_textbox.get(constants.START_RANGE_TEXTBOX,constants.END_RANGE_TEXTBOX)
+        self.job_file = f'{self.model.config.user_name}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
+        job_text = self.new_job.job_description_textbox.get(constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX)
         self.job_file = self.check_job_file(self.job_file, job_text)
         self.model.add_new_job(
             self.position,
@@ -499,8 +499,8 @@ class Controller:
 
     def edit_job_description(self):
         if self.jp_results[10]:  # return blank if file is NULL
-            full_job_path = Path(*[self.model.user.job_description_parent, self.jp_results[10]])
-            user_platform = self.model.user.get_users_system()
+            full_job_path = Path(*[self.model.config.job_description_parent, self.jp_results[10]])
+            user_platform = self.model.config.get_users_system()
 
             if user_platform == 'Windows':
                 subprocess.run(['start', '', full_job_path], shell=True, check=True)
@@ -515,9 +515,9 @@ class Controller:
             self.new_job_description.submit_job_description.configure(command=self.save_job_description)
 
     def save_job_description(self):
-        self.job_file_only = f'{self.model.user.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
+        self.job_file_only = f'{self.model.config.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
         job_text = self.new_job_description.job_description_textbox_only.get(
-            constants.START_RANGE_TEXTBOX,constants.END_RANGE_TEXTBOX)
+            constants.START_RANGE_TEXTBOX, constants.END_RANGE_TEXTBOX)
         self.job_file_only = self.check_job_file(self.job_file_only, job_text)
         if self.job_file_only:
             self.model.save_job_description(self.job_file_only, job_text)
@@ -554,9 +554,11 @@ class Controller:
             list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position, threshold=threshold)
         self.job_description = JobDescription()
         self.job_description.num_of_jobs = len(list_of_jobs)
-        text = utils.load_job_file(list_of_jobs, self.model.user.job_description_parent)
+        text = utils.load_job_file(list_of_jobs, self.model.config.job_description_parent)
         self.jd_keywords = KeywordExtractor()
-        self.extracted_keywords = self.jd_keywords.extract_keywords(text)
+        self.extracted_keywords = self.jd_keywords.extract_keywords(text,
+                                                                    num_keywords=self.model.config.get_num_keywords(
+                                                                        job_description=True))
         self.update_jd_keyword_listbox()
         self.job_description.keywords = self.extracted_keywords
 
@@ -574,7 +576,9 @@ class Controller:
     def search_resume_button(self):
         resume_extractor = KeywordExtractor()
         self.resume.keywords = resume_extractor.extract_pdf_text(self.resume.resume_path)
-        self.extracted_resume_keywords = resume_extractor.extract_keywords(self.resume.keywords)
+        self.extracted_resume_keywords = resume_extractor.extract_keywords(self.resume.keywords,
+                                                                           num_keywords=self.model.config.get_num_keywords(
+                                                                               resume=True))
         self.update_resume_keyword_listbox()
         self.resume.keywords = self.extracted_resume_keywords
         self.get_resume_score()
@@ -587,5 +591,3 @@ class Controller:
         self.view.resume_search_listbox.delete(constants.START_RANGE_LISTBOX, constants.END_RANGE_LISTBOX)
         for item in self.extracted_resume_keywords:
             self.view.resume_search_listbox.insert(tkinter.END, f'{item[0]} | {item[1]} ')
-
-
