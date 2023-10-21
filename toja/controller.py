@@ -32,7 +32,6 @@ class Controller:
         self.new_job = None
         self.view = view
         self.model = model
-        self.set_appearance_mode()
 
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
@@ -80,10 +79,6 @@ class Controller:
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
             self.update_home()
-
-    def set_appearance_mode(self):
-        appearance_mode = self.model.config.get_appearance_mode()
-        customtkinter.set_appearance_mode(appearance_mode)
 
     def update_home(self):
         self.update_contact_listbox_home()

@@ -5,12 +5,15 @@ import os
 from PIL import Image
 from CTkToolTip import *
 
+import toja.constants as constant
+from .theme import Theme
 
 class HomeView(customtkinter.CTk):
-    def __init__(self):
+    def __init__(self, theme):
         super().__init__()
 
         # image icons
+        self.theme = theme
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
         plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, "plus_thin_white.png")),
                                            size=(20, 20))
@@ -29,7 +32,7 @@ class HomeView(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         # Right Side Navigation Frame
-        self.navigation_frame = customtkinter.CTkFrame(self, fg_color='gray10')
+        self.navigation_frame = customtkinter.CTkFrame(self, fg_color=theme.frame1_color)
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
         self.home_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,

@@ -29,3 +29,4 @@ PART_OF_SPEECH = ["NOUN", "PROPN"]  # https://spacy.io/usage/spacy-101#section-f
 
 CURRENT_TIME_FORMAT = '%I:%M%p'
 CURRENT_DATE_FORMAT = '%Y-%m-%d'
+

@@ -2,13 +2,16 @@ import configparser
 from pathlib import Path
 import platform
 import os
+import customtkinter
 
 import toja.constants as constant
+from views.theme import Theme
 
 
 class Config:
-    def __init__(self):
+    def __init__(self, theme: Theme):
         self.system_platform = None
+        self.theme = theme
         self.base_dir = Path(__file__).resolve().parent
         self.job_description_parent = os.path.join(self.base_dir, constant.JOB_DESCRIPTION_DIRECTORY)
         self.database_path = os.path.join(self.base_dir, constant.DATABASE_DIRECTORY, constant.DATABASE_NAME)
@@ -17,6 +20,7 @@ class Config:
         self.config_file = os.path.join(self.base_dir, constant.CONFIG_FILE)
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
+        self.set_appearance_mode()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -47,4 +51,10 @@ class Config:
     def get_appearance_mode(self) -> str:
         return self.config_parser['theme']['appearance_mode']
 
-
+    def set_appearance_mode(self):
+        appearance_mode = self.get_appearance_mode()
+        customtkinter.set_appearance_mode(appearance_mode)
+        if appearance_mode == "Dark":
+            self.theme.set_dark_mode()
+        else:
+            self.theme.set_light_mode()
