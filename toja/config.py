@@ -23,6 +23,8 @@ class Config:
         self.appearance_mode = self.get_appearance_mode()
         self.set_appearance_mode()
         self.set_font()
+        self.set_button_color()
+        self.set_accent_color()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -53,11 +55,23 @@ class Config:
     def get_appearance_mode(self) -> str:
         return self.config_parser['theme']['appearance_mode']
 
-    def get_font(self):
+    def get_font(self) -> str:
         return self.config_parser['theme']['font']
 
     def set_font(self):
         self.theme.main_font = self.get_font()
+
+    def get_button_color(self) -> str:
+        return self.config_parser['theme']['button_color']
+
+    def set_button_color(self):
+        self.theme.button_color = self.get_button_color()
+
+    def get_accent_color(self) -> str:
+        return self.config_parser['theme']['accent_color']
+
+    def set_accent_color(self):
+        self.theme.accent_color = self.get_accent_color()
 
     def set_appearance_mode(self):
         customtkinter.set_appearance_mode(self.appearance_mode)

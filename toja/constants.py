@@ -30,3 +30,17 @@ PART_OF_SPEECH = ["NOUN", "PROPN"]  # https://spacy.io/usage/spacy-101#section-f
 CURRENT_TIME_FORMAT = '%I:%M%p'
 CURRENT_DATE_FORMAT = '%Y-%m-%d'
 
+# icons
+ICON_FILE_DIRECTORY = 'icons'
+CONTACT = 'contact.png'
+CONTACT_WHITE = 'contact_white.png'
+DELETE = 'delete.png'
+DELETE_WHITE = 'delete_white.png'
+EVENT = 'event.png'
+EVENT_WHITE = 'event_white.png'
+PENCIL = 'pencil.png'
+PENCIL_WHITE = 'pencil_white.png'
+PLUS = 'plus_thin.png'
+PLUS_WHITE = 'plus_thin_white.png'
+WRITING = 'writing.png'
+WRITING_WHITE = 'writing_white.png'

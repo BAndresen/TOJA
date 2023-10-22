@@ -217,7 +217,7 @@ class Controller:
             self.job_profile.job_description_label.configure(text='')
 
     def open_job_profile(self) -> None:
-        self.job_profile = JobProfile(self.view)
+        self.job_profile = JobProfile(self.view, self.model.config.theme)
         self.job_profile.new_contact_button.configure(command=self.add_contact)
         self.job_profile.new_event_button.configure(command=self.open_new_event)
         self.job_profile.edit_button.configure(command=self.edit_job)

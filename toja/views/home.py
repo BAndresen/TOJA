@@ -15,10 +15,10 @@ class HomeView(customtkinter.CTk):
 
         # image icons
         self.theme = theme
-        icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
-        plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, "plus_thin_white.png")),
+        icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), constant.ICON_FILE_DIRECTORY)
+        plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_plus)),
                                            size=(20, 20))
-        delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, "delete_white.png")),
+        delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_delete)),
                                              size=(22, 22))
 
         # Configure Window
@@ -81,8 +81,9 @@ class HomeView(customtkinter.CTk):
         # Job ListBox
         self.job_list_box = tkinter.Listbox(self.job_list_frame,
                                             font=theme.main_font,
-                                            bg=theme.text_color,
-                                            fg=theme.listbox_bg,
+                                            fg=theme.text_color,
+                                            bg=theme.listbox_bg,
+                                            selectbackground=theme.accent_color,
                                             borderwidth=0, height=20)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=20, sticky='nsew')
@@ -90,12 +91,15 @@ class HomeView(customtkinter.CTk):
         # Add and Delete Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame)
         self.button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
-        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="", image=plus_icon, width=35, height=35,
-                                                      fg_color='grey30', hover_color='grey15')
+        self.new_job_button = customtkinter.CTkButton(self.button_frame, text="",
+                                                      image=plus_icon,
+                                                      width=35, height=35,
+                                                      fg_color=theme.button_color,
+                                                      hover_color='grey15')
         self.new_job_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
         self.delete_job_button = customtkinter.CTkButton(self.button_frame, text="", image=delete_icon, width=35,
                                                          height=35,
-                                                         fg_color='grey30', hover_color='grey15')
+                                                         fg_color=theme.button_color, hover_color='grey15')
         self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
 
         # Motivational Stats Board
@@ -129,11 +133,11 @@ class HomeView(customtkinter.CTk):
         self.event_button_frame = customtkinter.CTkFrame(self.event_frame)
         self.event_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
         self.event_new_button = customtkinter.CTkButton(self.event_button_frame, text="", image=plus_icon, width=35,
-                                                        height=35, fg_color='grey30', hover_color='grey15')
+                                                        height=35, fg_color=theme.button_color, hover_color='grey15')
         self.event_new_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
         self.event_delete_button = customtkinter.CTkButton(self.event_button_frame, text="", image=delete_icon,
                                                            width=35, height=35,
-                                                           fg_color='grey30', hover_color='grey15')
+                                                           fg_color=theme.button_color, hover_color='grey15')
         self.event_delete_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
 
         # Recent Events
@@ -144,8 +148,9 @@ class HomeView(customtkinter.CTk):
         self.past_events_label.grid(row=0, column=0)
         self.past_events_listbox = tkinter.Listbox(self.past_events_frame,
                                                    font=theme.main_font,
-                                                   bg=theme.text_color,
-                                                   fg=theme.listbox_bg,
+                                                   fg=theme.text_color,
+                                                   bg=theme.listbox_bg,
+                                                   selectbackground=theme.accent_color,
                                                    borderwidth=0)
         self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
@@ -158,8 +163,9 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_label.grid(row=0, column=0)
         self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,
                                                        font=theme.main_font,
-                                                       bg=theme.text_color,
-                                                       fg=theme.listbox_bg,
+                                                       fg=theme.text_color,
+                                                       bg=theme.listbox_bg,
+                                                       selectbackground=theme.accent_color,
                                                        borderwidth=0)
         self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
@@ -188,7 +194,9 @@ class HomeView(customtkinter.CTk):
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
-        self.jd_search_button = customtkinter.CTkButton(self.jd_frame, text='Search')
+        self.jd_search_button = customtkinter.CTkButton(self.jd_frame, text='Search',
+                                                        fg_color=theme.button_color,
+                                                        text_color=theme.text_color)
         self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
@@ -227,8 +235,9 @@ class HomeView(customtkinter.CTk):
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
                                                  font=theme.main_font,
-                                                 bg=theme.text_color,
-                                                 fg=theme.listbox_bg,
+                                                 fg=theme.text_color,
+                                                 bg=theme.listbox_bg,
+                                                 selectbackground=theme.accent_color,
                                                  borderwidth=0,
                                                  )
         self.jd_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
@@ -239,7 +248,9 @@ class HomeView(customtkinter.CTk):
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
 
-        self.resume_search_button = customtkinter.CTkButton(self.resume_frame, text='Search')
+        self.resume_search_button = customtkinter.CTkButton(self.resume_frame, text='Search',
+                                                            fg_color=theme.button_color,
+                                                            text_color=theme.text_color)
         self.resume_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame)
@@ -247,7 +258,9 @@ class HomeView(customtkinter.CTk):
 
         self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume')
         self.upload_resume.grid(row=0, column=0, padx=10, pady=(10, 0))
-        self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse')
+        self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse',
+                                                            fg_color=theme.button_color,
+                                                            text_color=theme.text_color)
         self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0, 10))
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')
@@ -258,8 +271,9 @@ class HomeView(customtkinter.CTk):
         # list box resume
         self.resume_search_listbox = tkinter.Listbox(self.resume_frame,
                                                      font=theme.main_font,
-                                                     bg=theme.text_color,
-                                                     fg=theme.listbox_bg,
+                                                     fg=theme.text_color,
+                                                     bg=theme.listbox_bg,
+                                                     selectbackground=theme.accent_color,
                                                      borderwidth=0,
                                                      # height=15
                                                      )
@@ -273,12 +287,12 @@ class HomeView(customtkinter.CTk):
         self.network_button_frame = customtkinter.CTkFrame(self.network_frame)
         self.network_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
         self.network_new_contact_button = customtkinter.CTkButton(self.network_button_frame, text="", image=plus_icon,
-                                                                  width=35, height=35, fg_color='grey30',
+                                                                  width=35, height=35, fg_color=theme.button_color,
                                                                   hover_color='grey15')
         self.network_new_contact_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
         self.network_delete_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=delete_icon,
                                                                  width=35, height=35,
-                                                                 fg_color='grey30', hover_color='grey15')
+                                                                 fg_color=theme.button_color, hover_color='grey15')
         self.network_delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
 
         self.contacts_frame = customtkinter.CTkFrame(self.network_frame)
@@ -289,8 +303,9 @@ class HomeView(customtkinter.CTk):
         self.contact_label.grid(row=0, column=0)
         self.contact_listbox = tkinter.Listbox(self.contacts_frame,
                                                font=theme.main_font,
-                                               bg=theme.text_color,
-                                               fg=theme.listbox_bg,
+                                               fg=theme.text_color,
+                                               bg=theme.listbox_bg,
+                                               selectbackground=theme.accent_color,
                                                borderwidth=0, height=15)
         self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=10)
 
