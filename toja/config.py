@@ -22,6 +22,7 @@ class Config:
         self.user_name = self.config_parser['user']['name']
         self.appearance_mode = self.get_appearance_mode()
         self.set_appearance_mode()
+        self.set_font()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -51,6 +52,12 @@ class Config:
 
     def get_appearance_mode(self) -> str:
         return self.config_parser['theme']['appearance_mode']
+
+    def get_font(self):
+        return self.config_parser['theme']['font']
+
+    def set_font(self):
+        self.theme.main_font = self.get_font()
 
     def set_appearance_mode(self):
         customtkinter.set_appearance_mode(self.appearance_mode)

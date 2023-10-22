@@ -5,7 +5,7 @@ import os
 from PIL import Image
 from CTkToolTip import *
 
-import toja.constants as constant
+import constants as constant
 from .theme import Theme
 
 
@@ -79,7 +79,10 @@ class HomeView(customtkinter.CTk):
         self.job_list_frame.grid_columnconfigure(0, weight=1)
         self.job_list_frame.grid_rowconfigure(0, weight=1)
         # Job ListBox
-        self.job_list_box = tkinter.Listbox(self.job_list_frame, font=('roboto, 10'), bg='grey20', fg='grey90',
+        self.job_list_box = tkinter.Listbox(self.job_list_frame,
+                                            font=theme.main_font,
+                                            bg=theme.text_color,
+                                            fg=theme.listbox_bg,
                                             borderwidth=0, height=20)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=20, sticky='nsew')
@@ -139,8 +142,11 @@ class HomeView(customtkinter.CTk):
         self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events")
         self.past_events_label.grid(row=0, column=0)
-        self.past_events_listbox = tkinter.Listbox(self.past_events_frame, font=('roboto, 10'), bg='grey20',
-                                                   fg='grey90', borderwidth=0)
+        self.past_events_listbox = tkinter.Listbox(self.past_events_frame,
+                                                   font=theme.main_font,
+                                                   bg=theme.text_color,
+                                                   fg=theme.listbox_bg,
+                                                   borderwidth=0)
         self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
         # Upcoming Events
@@ -150,8 +156,11 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events")
         self.upcoming_events_label.grid(row=0, column=0)
-        self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame, font=('roboto, 10'), bg='grey20',
-                                                       fg='grey90', borderwidth=0)
+        self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,
+                                                       font=theme.main_font,
+                                                       bg=theme.text_color,
+                                                       fg=theme.listbox_bg,
+                                                       borderwidth=0)
         self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
         # --------------- Keywords -------------- #
@@ -217,11 +226,10 @@ class HomeView(customtkinter.CTk):
 
         # list box job
         self.jd_search_listbox = tkinter.Listbox(self.jd_frame,
-                                                 font=('roboto, 10'),
-                                                 bg='grey20',
-                                                 fg='grey90',
+                                                 font=theme.main_font,
+                                                 bg=theme.text_color,
+                                                 fg=theme.listbox_bg,
                                                  borderwidth=0,
-                                                 # height=15
                                                  )
         self.jd_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
 
@@ -249,9 +257,9 @@ class HomeView(customtkinter.CTk):
 
         # list box resume
         self.resume_search_listbox = tkinter.Listbox(self.resume_frame,
-                                                     font=('roboto, 10'),
-                                                     bg='grey20',
-                                                     fg='grey90',
+                                                     font=theme.main_font,
+                                                     bg=theme.text_color,
+                                                     fg=theme.listbox_bg,
                                                      borderwidth=0,
                                                      # height=15
                                                      )
@@ -279,8 +287,11 @@ class HomeView(customtkinter.CTk):
 
         self.contact_label = customtkinter.CTkLabel(self.contacts_frame, text="Contacts")
         self.contact_label.grid(row=0, column=0)
-        self.contact_listbox = tkinter.Listbox(self.contacts_frame, font=('roboto, 10'), bg='grey20',
-                                               fg='grey90', borderwidth=0, height=15)
+        self.contact_listbox = tkinter.Listbox(self.contacts_frame,
+                                               font=theme.main_font,
+                                               bg=theme.text_color,
+                                               fg=theme.listbox_bg,
+                                               borderwidth=0, height=15)
         self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=10)
 
         # -------------- File Menu -------------- #

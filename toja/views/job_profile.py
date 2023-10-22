@@ -12,6 +12,14 @@ class JobProfile:
         self.jp_window.grab_set()
         self.jp_window.title("Job")
 
+        screen_width = self.jp_window.winfo_screenwidth()
+        screen_height = self.jp_window.winfo_screenheight()
+        x_position = 450  # Start from the left edge
+        y_position = 10  # Start from the top edge
+
+        self.jp_window.geometry(f'{screen_width - 1000}x{screen_height - 150}+{x_position}+{y_position}')
+
+
         self.jp_window.grid_columnconfigure(0, weight=1)
 
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icons")
@@ -113,7 +121,7 @@ class JobProfile:
 
         # description
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500)
-        self.job_tabview.grid(row=2, column=0, columnspan=3, padx=(20,5), pady=20)
+        self.job_tabview.grid(row=2, column=0, columnspan=3, padx=(20,5), pady=20, sticky='nsew')
         self.job_tabview.add("Description")
         self.job_tabview.add("Events")
         self.job_tabview.add('Contacts')
