@@ -140,6 +140,8 @@ class JobProfile:
                                             fg=theme.text_color,
                                             bg=theme.listbox_bg,
                                             selectbackground=theme.accent_color,
+                                            selectforeground=theme.text_color,
+                                            activestyle='none',
                                             borderwidth=0)
         self.event_scroll.grid(row=0, column=0, padx=10, pady=10)
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
@@ -151,6 +153,8 @@ class JobProfile:
                                                fg=theme.text_color,
                                                bg=theme.listbox_bg,
                                                selectbackground=theme.accent_color,
+                                               selectforeground=theme.text_color,
+                                               activestyle='none',
                                                borderwidth=0)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
         self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=701,

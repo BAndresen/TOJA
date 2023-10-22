@@ -84,6 +84,8 @@ class HomeView(customtkinter.CTk):
                                             fg=theme.text_color,
                                             bg=theme.listbox_bg,
                                             selectbackground=theme.accent_color,
+                                            selectforeground=theme.text_color,
+                                            activestyle='none',
                                             borderwidth=0, height=20)
 
         self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=20, sticky='nsew')
@@ -113,7 +115,7 @@ class HomeView(customtkinter.CTk):
 
         self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level")
         self.next_level.grid(row=1, column=0, padx=(20, 5), pady=5, sticky="e")
-        self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame)
+        self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame, progress_color=theme.accent_color)
         self.progress_bar.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="ew")
 
         self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:")
@@ -151,6 +153,8 @@ class HomeView(customtkinter.CTk):
                                                    fg=theme.text_color,
                                                    bg=theme.listbox_bg,
                                                    selectbackground=theme.accent_color,
+                                                   selectforeground=theme.text_color,
+                                                   activestyle='none',
                                                    borderwidth=0)
         self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
@@ -166,6 +170,8 @@ class HomeView(customtkinter.CTk):
                                                        fg=theme.text_color,
                                                        bg=theme.listbox_bg,
                                                        selectbackground=theme.accent_color,
+                                                       selectforeground=theme.text_color,
+                                                       activestyle='none',
                                                        borderwidth=0)
         self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
@@ -238,6 +244,8 @@ class HomeView(customtkinter.CTk):
                                                  fg=theme.text_color,
                                                  bg=theme.listbox_bg,
                                                  selectbackground=theme.accent_color,
+                                                 selectforeground=theme.text_color,
+                                                 activestyle='none',
                                                  borderwidth=0,
                                                  )
         self.jd_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
@@ -274,8 +282,9 @@ class HomeView(customtkinter.CTk):
                                                      fg=theme.text_color,
                                                      bg=theme.listbox_bg,
                                                      selectbackground=theme.accent_color,
+                                                     selectforeground=theme.text_color,
+                                                     activestyle='none',
                                                      borderwidth=0,
-                                                     # height=15
                                                      )
         self.resume_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
 
@@ -306,6 +315,8 @@ class HomeView(customtkinter.CTk):
                                                fg=theme.text_color,
                                                bg=theme.listbox_bg,
                                                selectbackground=theme.accent_color,
+                                               selectforeground=theme.text_color,
+                                               activestyle='none',
                                                borderwidth=0, height=15)
         self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=10)
 
