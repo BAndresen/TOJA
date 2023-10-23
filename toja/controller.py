@@ -36,7 +36,7 @@ class Controller:
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
         self.view.home_button.configure(command=self.home_frame_button)
-        self.view.keyword_button.configure(command=self.analytics_frame_button)
+        self.view.keyword_button.configure(command=self.keyword_frame_button)
         self.view.network_button.configure(command=self.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete_job)
@@ -334,33 +334,41 @@ class Controller:
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.event_frame.grid(row=0, column=1, sticky="nsew")
-        self.view.events_button.configure(fg_color=self.view.theme.accent_color)
+        self.view.events_button.configure(fg_color=self.view.theme.home_frame_selected)
         self.view.home_button.configure(fg_color='transparent')
-
+        self.view.network_button.configure(fg_color='transparent')
+        self.view.keyword_button.configure(fg_color='transparent')
 
     def home_frame_button(self):
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.home_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.home_button.configure(fg_color=self.view.theme.home_frame_selected)
         self.view.events_button.configure(fg_color='transparent')
+        self.view.network_button.configure(fg_color='transparent')
+        self.view.keyword_button.configure(fg_color='transparent')
 
-    def analytics_frame_button(self):
+    def keyword_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.event_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.analytics_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.keyword_button.configure(fg_color=self.view.theme.home_frame_selected)
         self.view.events_button.configure(fg_color='transparent')
         self.view.home_button.configure(fg_color='transparent')
-
+        self.view.network_button.configure(fg_color='transparent')
 
     def network_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.network_button.configure(fg_color=self.view.theme.home_frame_selected)
         self.view.events_button.configure(fg_color='transparent')
         self.view.home_button.configure(fg_color='transparent')
+        self.view.keyword_button.configure(fg_color='transparent')
+
 
 
 

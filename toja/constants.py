@@ -54,5 +54,10 @@ QUESTIONS_WHITE = 'question_white.png'
 VISIBLE = 'visible.png'
 VISIBLE_WHITE = 'visible_white.png'
 
+EVENT_HOME = 'event_home.png'
+EVENT_HOME_WHITE = 'event_home_white.png'
+CONTACT_HOME = 'contact_home.png'
+CONTACT_HOME_WHITE = 'contact_home_white.png'
+
 WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Application Process"
 

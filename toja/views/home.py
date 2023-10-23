@@ -25,10 +25,10 @@ class HomeView(customtkinter.CTk):
                                              size=(22, 22))
         keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_keyword)),
                                            size=(22, 22))
-        event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_event)),
-                                           size=(22, 22))
-        network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_contact)),
-                                           size=(22, 22))
+        event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_event)),
+                                            size=(22, 22))
+        network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_contact)),
+                                              size=(22, 22))
 
         # Configure Window
         self.frame = "home"
@@ -42,13 +42,14 @@ class HomeView(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         # Right Side Navigation Frame
-        self.navigation_frame = customtkinter.CTkFrame(self, fg_color=theme.frame1_color)
+        self.navigation_frame = customtkinter.CTkFrame(self, fg_color=theme.home_frame_background)
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
         self.home_button = customtkinter.CTkButton(self.navigation_frame, image=home_icon,corner_radius=0, height=40,
                                                    border_spacing=10,
                                                    text="Home",
-                                                   fg_color='grey86', text_color=("gray10", "gray90"),
+                                                   fg_color=theme.home_frame_selected,
+                                                   text_color=("gray10", "gray90"),
                                                    hover_color=("gray70", "gray30"),
                                                    anchor="w")
         self.home_button.grid(row=0, column=0, pady=(50, 0))
@@ -78,7 +79,7 @@ class HomeView(customtkinter.CTk):
         self.network_button.grid(row=3, column=0)
 
         # Home Frame
-        self.home_frame = customtkinter.CTkFrame(self)
+        self.home_frame = customtkinter.CTkFrame(self, fg_color=theme.main_frame)
         self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_frame.grid_columnconfigure(0, weight=1)
         self.home_frame.grid_rowconfigure(0, weight=1)

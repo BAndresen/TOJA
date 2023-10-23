@@ -265,11 +265,12 @@ class Model:
         return results
 
     def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
+        job_file = os.path.join(self.config.job_description_parent,job_file)
         try:
-            with open(f'{self.config.job_description_parent}\\{job_file}', "r", encoding='utf-8') as file:
+            with open(job_file, "r", encoding='utf-8') as file:
                 results = file.read()
         except UnicodeDecodeError:
-            with open(f'{self.config.job_description_parent}\\{job_file}', "r") as file:
+            with open(job_file, "r") as file:
                 results = file.read()
 
         return results

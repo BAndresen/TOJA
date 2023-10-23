@@ -91,11 +91,8 @@ class Config:
             self.theme.icon_pencil = constant.PENCIL_WHITE
             self.theme.icon_plus = constant.PLUS_WHITE
             self.theme.icon_writing = constant.WRITING_WHITE
-
-            self.theme.icon_home = constant.HOME_WHITE
-            self.theme.icon_keyword = constant.KEYWORD_WHITE
-            self.theme.icon_questions = constant.QUESTIONS_WHITE
-            self.theme.icon_visible = constant.VISIBLE_WHITE
+            self.theme.icon_questions = constant.QUESTIONS
+            self.theme.icon_visible = constant.VISIBLE
 
         elif icon_color == 'Dark':
             self.theme.icon_contact = constant.CONTACT
@@ -104,11 +101,8 @@ class Config:
             self.theme.icon_pencil = constant.PENCIL
             self.theme.icon_plus = constant.PLUS
             self.theme.icon_writing = constant.WRITING
-
-            self.theme.icon_home = constant.HOME
-            self.theme.icon_keyword = constant.KEYWORD
-            self.theme.icon_questions = constant.QUESTIONS
-            self.theme.icon_visible = constant.VISIBLE
+            self.theme.icon_questions = constant.QUESTIONS_WHITE
+            self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_appearance_mode(self):
         customtkinter.set_appearance_mode(self.appearance_mode)
@@ -118,14 +112,35 @@ class Config:
             self.set_light_mode()
     
     def set_dark_mode(self):
-        self.theme.frame1_color = 'grey15'
+        self.theme.home_frame_background = 'grey20'
         self.theme.text_color = 'grey86'
         self.theme.listbox_bg = 'grey17'
+        self.theme.home_frame_selected = 'grey14'
+
+        self.theme.main_frame = 'grey14'
+
+        self.theme.icon_home = constant.HOME_WHITE
+        self.theme.icon_keyword = constant.KEYWORD_WHITE
+        self.theme.icon_main_event = constant.EVENT_HOME_WHITE
+        self.theme.icon_main_contact = constant.CONTACT_HOME_WHITE
+
 
     def set_light_mode(self):
-        self.theme.frame1_color = 'grey90'
+        self.theme.home_frame_background = 'grey86'
         self.theme.text_color = 'grey17'
         self.theme.listbox_bg = 'grey86'
+        self.theme.home_frame_selected = 'grey92'
+
+        self.theme.main_frame = 'grey92'
+
+        self.theme.icon_home = constant.HOME
+        self.theme.icon_keyword = constant.KEYWORD
+        self.theme.icon_main_event = constant.EVENT_HOME
+        self.theme.icon_main_contact = constant.CONTACT_HOME
+
+
+
+
 
     def set_button_text_color(self, mode: str):
         if mode == 'Light':
