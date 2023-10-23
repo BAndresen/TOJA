@@ -44,3 +44,14 @@ PLUS = 'plus_thin.png'
 PLUS_WHITE = 'plus_thin_white.png'
 WRITING = 'writing.png'
 WRITING_WHITE = 'writing_white.png'
+
+HOME = 'home.png'
+HOME_WHITE = 'home_white.png'
+KEYWORD = 'keyword.png'
+KEYWORD_WHITE = 'keyword_white.png'
+QUESTIONS = 'question.png'
+QUESTIONS_WHITE = 'question_white.png'
+VISIBLE = 'visible.png'
+VISIBLE_WHITE = 'visible_white.png'
+
+

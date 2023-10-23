@@ -14,7 +14,6 @@ class HomeView(customtkinter.CTk):
         super().__init__()
 
         # image icons
-        self.theme = theme
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), constant.ICON_FILE_DIRECTORY)
         plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_plus)),
                                            size=(20, 20))
@@ -202,7 +201,7 @@ class HomeView(customtkinter.CTk):
 
         self.jd_search_button = customtkinter.CTkButton(self.jd_frame, text='Search',
                                                         fg_color=theme.button_color,
-                                                        text_color=theme.text_color)
+                                                        text_color=theme.button_text_color)
         self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
@@ -261,7 +260,7 @@ class HomeView(customtkinter.CTk):
 
         self.resume_search_button = customtkinter.CTkButton(self.resume_frame, text='Search',
                                                             fg_color=theme.button_color,
-                                                            text_color=theme.text_color)
+                                                            text_color=theme.button_text_color)
         self.resume_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame)
@@ -271,7 +270,7 @@ class HomeView(customtkinter.CTk):
         self.upload_resume.grid(row=0, column=0, padx=10, pady=(10, 0))
         self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse',
                                                             fg_color=theme.button_color,
-                                                            text_color=theme.text_color)
+                                                            text_color=theme.button_text_color)
         self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0, 10))
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:')

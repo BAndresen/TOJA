@@ -25,6 +25,7 @@ class Config:
         self.set_font()
         self.set_button_color()
         self.set_accent_color()
+        self.set_icon_color()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -72,6 +73,28 @@ class Config:
 
     def set_accent_color(self):
         self.theme.accent_color = self.get_accent_color()
+
+    def get_icon_color(self) -> str:
+        return self.config_parser['theme']['icon_color']
+
+    def set_icon_color(self):
+        icon_color = self.get_icon_color()
+        self.theme.set_button_text_color(icon_color)
+        if icon_color == 'Light':
+            self.theme.icon_contact = constant.CONTACT_WHITE
+            self.theme.icon_delete = constant.DELETE_WHITE
+            self.theme.icon_event = constant.EVENT_WHITE
+            self.theme.icon_pencil = constant.PENCIL_WHITE
+            self.theme.icon_plus = constant.PLUS_WHITE
+            self.theme.icon_writing = constant.WRITING_WHITE
+
+        elif icon_color == 'Dark':
+            self.theme.icon_contact = constant.CONTACT
+            self.theme.icon_delete = constant.DELETE
+            self.theme.icon_event = constant.EVENT
+            self.theme.icon_pencil = constant.PENCIL
+            self.theme.icon_plus = constant.PLUS
+            self.theme.icon_writing = constant.WRITING
 
     def set_appearance_mode(self):
         customtkinter.set_appearance_mode(self.appearance_mode)

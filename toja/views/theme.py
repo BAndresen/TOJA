@@ -1,4 +1,3 @@
-
 import toja.constants as constant
 
 
@@ -8,6 +7,7 @@ class Theme:
         self.text_color = ''
         self.frame1_color = ''
         self.main_font = ''
+        self.button_text_color = ''
 
         # icons
         self.icon_contact = ''
@@ -23,37 +23,26 @@ class Theme:
         # accent_color
         self.accent_color = ''
 
+        # icons
+        self.icon_contact = ''
+        self.icon_delete = ''
+        self.icon_event = ''
+        self.icon_pencil = ''
+        self.icon_plus = ''
+        self.icon_writing = ''
+
     def set_dark_mode(self):
-        self.frame1_color = 'gray20'
+        self.frame1_color = 'grey20'
         self.text_color = 'grey86'
         self.listbox_bg = 'grey17'
-        self.icon_contact = constant.CONTACT_WHITE
-        self.icon_delete = constant.DELETE_WHITE
-        self.icon_event = constant.EVENT_WHITE
-        self.icon_pencil = constant.PENCIL_WHITE
-        self.icon_plus = constant.PLUS_WHITE
-        self.icon_writing = constant.WRITING_WHITE
 
     def set_light_mode(self):
-        self.frame1_color = 'gray80'
-        self.text_color = 'gray17'
-        self.listbox_bg = 'gray86'
-        self.icon_contact = constant.CONTACT
-        self.icon_delete = constant.DELETE
-        self.icon_event = constant.EVENT
-        self.icon_pencil = constant.PENCIL
-        self.icon_plus = constant.PLUS
-        self.icon_writing = constant.WRITING
+        self.frame1_color = 'grey80'
+        self.text_color = 'grey17'
+        self.listbox_bg = 'grey86'
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def set_button_text_color(self, mode: str):
+        if mode == 'Light':
+            self.button_text_color = 'grey86'
+        elif mode == 'Dark':
+            self.button_text_color = 'grey17'
