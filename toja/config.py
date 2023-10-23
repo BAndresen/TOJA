@@ -124,7 +124,6 @@ class Config:
         self.theme.icon_main_event = constant.EVENT_HOME_WHITE
         self.theme.icon_main_contact = constant.CONTACT_HOME_WHITE
 
-
     def set_light_mode(self):
         self.theme.home_frame_background = 'grey86'
         self.theme.text_color = 'grey17'
@@ -137,10 +136,6 @@ class Config:
         self.theme.icon_keyword = constant.KEYWORD
         self.theme.icon_main_event = constant.EVENT_HOME
         self.theme.icon_main_contact = constant.CONTACT_HOME
-
-
-
-
 
     def set_button_text_color(self, mode: str):
         if mode == 'Light':
