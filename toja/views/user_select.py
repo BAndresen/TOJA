@@ -6,7 +6,7 @@ class UserSelect:
         self.root = root
 
         self.user_window = customtkinter.CTkToplevel(root)
-        self.user_window.grab_set()
+        self.user_window.attributes('-topmost','true')
         self.user_window.title("User")
 
         self.user_info_frame = customtkinter.CTkFrame(self.user_window)

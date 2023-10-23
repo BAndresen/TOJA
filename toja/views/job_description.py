@@ -6,7 +6,7 @@ class JobDescription:
         self.root = root
         self.jd_window = customtkinter.CTkToplevel(root)
 
-        self.jd_window.grab_set()
+        self.jd_window.attributes('-topmost','true')
         self.jd_window.title("Job Description")
 
         # job_profile

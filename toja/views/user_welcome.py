@@ -8,7 +8,7 @@ class WelcomeUser:
     def __init__(self, root):
         self.root = root
         self.welcome_window = customtkinter.CTkToplevel(root)
-        self.welcome_window.grab_set()
+        self.welcome_window.attributes('-topmost','true')
         self.welcome_window.title("Welcome")
 
         self.welcome_frame = customtkinter.CTkFrame(self.welcome_window)

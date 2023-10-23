@@ -16,7 +16,7 @@ from views.contact_new import NewContact
 from views.job_edit import EditJob
 from views.job_description import JobDescription
 from views.user_welcome import WelcomeUser
-from views.user_database_select import UserSelect
+from views.user_select import UserSelect
 from views.user_new import CreateUser
 from views.event import Event
 from views.contact_view import Contact

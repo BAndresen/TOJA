@@ -12,8 +12,7 @@ class JobProfile:
         self.root = root
         self.theme = theme
         self.jp_window = customtkinter.CTkToplevel(root)
-
-        self.jp_window.grab_set()
+        self.jp_window.attributes('-topmost','true')
         self.jp_window.title("Job")
 
         screen_width = self.jp_window.winfo_screenwidth()

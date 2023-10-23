@@ -6,7 +6,7 @@ class NewContact:
         self.root = root
 
         self.contact_window = customtkinter.CTkToplevel(root)
-        self.contact_window.grab_set()
+        self.contact_window.attributes('-topmost','true')
         self.contact_window.title("Contact")
         self.contact_info_frame = customtkinter.CTkFrame(self.contact_window)
         self.contact_info_frame.grid(row=0, column=0, padx=20, pady=20)

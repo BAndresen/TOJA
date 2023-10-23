@@ -214,13 +214,16 @@ class HomeView(customtkinter.CTk):
         self.search_by_label.grid(row=0, column=0)
         self.radio_var = tkinter.IntVar(value=0)
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
-                                                           value=0, text="All", border_width_checked=4)
+                                                           value=0, text="All", border_width_checked=4,
+                                                           fg_color=theme.accent_color)
         self.radio_button_1.grid(row=1, column=0, pady=5, padx=(20, 0))
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
-                                                           value=1, text='Job ID', border_width_checked=4)
+                                                           value=1, text='Job ID', border_width_checked=4,
+                                                           fg_color=theme.accent_color)
         self.radio_button_2.grid(row=2, column=0, pady=5, padx=(20, 0))
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
-                                                           value=2, text='Position', border_width_checked=4)
+                                                           value=2, text='Position', border_width_checked=4,
+                                                           fg_color=theme.accent_color)
         self.radio_button_3.grid(row=3, column=0, pady=(5, 43), padx=(20, 0))
 
         self.radio_button_1.bind('<Button-1>', self.destroy_entry)

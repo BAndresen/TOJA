@@ -8,7 +8,7 @@ class NewJob:
     def __init__(self, root):
         self.root = root
         self.aj_window = customtkinter.CTkToplevel(root)
-        self.aj_window.grab_set()
+        self.aj_window.attributes('-topmost','true')
         self.aj_window.title("Add Job")
         # self.grid_columnconfigure(0, weight=1)
         # self.grid_columnconfigure(1, weight=1)
