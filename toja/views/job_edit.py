@@ -1,11 +1,12 @@
 import customtkinter
+from .theme import Theme
 
 
 class EditJob:
-    def __init__(self, root):
+    def __init__(self, root, theme: Theme):
         self.root = root
         self.ej_window = customtkinter.CTkToplevel(root)
-        self.ej_window.attributes('-topmost','true')
+        self.ej_window.attributes('-topmost', 'true')
 
         self.ej_window.title("Edit Job")
         # self.grid_columnconfigure(0, weight=1)
@@ -13,7 +14,7 @@ class EditJob:
         # self.grid_rowconfigure(0, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.ej_window)
-        self.main_frame.grid(row=0, column=0, padx=50, pady=50, sticky="nsew")
+        self.main_frame.grid(row=0, column=0, padx=50, pady=(50, 10), sticky="nsew")
 
         self.position_title_entry = customtkinter.CTkEntry(self.main_frame)
         self.position_title_entry.grid(row=0, column=1, padx=(5, 20), pady=2)
@@ -71,24 +72,11 @@ class EditJob:
                                                      text='Commitment')
         self.job_type_label.grid(row=9, column=0, padx=(20, 5), pady=2, sticky="e")
 
-        # self.job_frame = customtkinter.CTkFrame(self.ej_window)
-        # self.job_frame.grid(row=1,column=0)
-        # self.job_description_label = customtkinter.CTkLabel(self.job_frame, text='Job Description')
-        # self.job_description_label.grid(row=0, column=0)
-        #
-        # self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_frame, width=702,
-        #                                                                height=300)
-        # self.job_description_scroll.grid(row=1, column=0, padx=10, pady=10)
-        # self.job_description_label_edit = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700)
-        # self.job_description_label_edit.grid(row=0, column=0)
-
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.ej_window)
-        self.button_frame.grid(row=0,column=1)
-        self.submit_edit_button = customtkinter.CTkButton(self.button_frame, text="Submit")
-        self.submit_edit_button.grid(row=0, column=0, padx=20, pady=20)
-
-
-
-
-
+        self.button_frame.grid(row=1, column=0)
+        self.submit_edit_button = customtkinter.CTkButton(self.button_frame, text="Submit",
+                                                          fg_color=theme.button_color,
+                                                          text_color=theme.button_text_color
+                                                          )
+        self.submit_edit_button.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')

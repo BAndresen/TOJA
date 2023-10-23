@@ -10,6 +10,7 @@ from toja.views.theme import Theme
 
 class Config:
     def __init__(self, theme: Theme):
+        self.appearance_mode = None
         self.system_platform = None
         self.theme = theme
         self.base_dir = Path(__file__).resolve().parent
@@ -20,6 +21,9 @@ class Config:
         self.config_file = os.path.join(self.base_dir, constant.CONFIG_FILE)
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
+        self.set_theme()
+
+    def set_theme(self):    
         self.appearance_mode = self.get_appearance_mode()
         self.set_appearance_mode()
         self.set_font()
@@ -79,7 +83,7 @@ class Config:
 
     def set_icon_color(self):
         icon_color = self.get_icon_color()
-        self.theme.set_button_text_color(icon_color)
+        self.set_button_text_color(icon_color)
         if icon_color == 'Light':
             self.theme.icon_contact = constant.CONTACT_WHITE
             self.theme.icon_delete = constant.DELETE_WHITE
@@ -87,6 +91,11 @@ class Config:
             self.theme.icon_pencil = constant.PENCIL_WHITE
             self.theme.icon_plus = constant.PLUS_WHITE
             self.theme.icon_writing = constant.WRITING_WHITE
+
+            self.theme.icon_home = constant.HOME_WHITE
+            self.theme.icon_keyword = constant.KEYWORD_WHITE
+            self.theme.icon_questions = constant.QUESTIONS_WHITE
+            self.theme.icon_visible = constant.VISIBLE_WHITE
 
         elif icon_color == 'Dark':
             self.theme.icon_contact = constant.CONTACT
@@ -96,9 +105,31 @@ class Config:
             self.theme.icon_plus = constant.PLUS
             self.theme.icon_writing = constant.WRITING
 
+            self.theme.icon_home = constant.HOME
+            self.theme.icon_keyword = constant.KEYWORD
+            self.theme.icon_questions = constant.QUESTIONS
+            self.theme.icon_visible = constant.VISIBLE
+
     def set_appearance_mode(self):
         customtkinter.set_appearance_mode(self.appearance_mode)
         if self.appearance_mode == "Dark":
-            self.theme.set_dark_mode()
+            self.set_dark_mode()
         else:
-            self.theme.set_light_mode()
+            self.set_light_mode()
+    
+    def set_dark_mode(self):
+        self.theme.frame1_color = 'grey15'
+        self.theme.text_color = 'grey86'
+        self.theme.listbox_bg = 'grey17'
+
+    def set_light_mode(self):
+        self.theme.frame1_color = 'grey90'
+        self.theme.text_color = 'grey17'
+        self.theme.listbox_bg = 'grey86'
+
+    def set_button_text_color(self, mode: str):
+        if mode == 'Light':
+            self.theme.button_text_color = 'grey86'
+        elif mode == 'Dark':
+            self.theme.button_text_color = 'grey17'
+

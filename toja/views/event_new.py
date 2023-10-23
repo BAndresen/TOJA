@@ -3,14 +3,15 @@ from tkcalendar import DateEntry
 import tkinter
 
 import toja.constants as constant
+from .theme import Theme
 
 
 class NewEvent:
-    def __init__(self, root):
+    def __init__(self, root, theme: Theme):
         self.root = root
 
         self.event_window = customtkinter.CTkToplevel(root)
-        self.event_window.attributes('-topmost','true')
+        self.event_window.attributes('-topmost', 'true')
         self.event_window.title("Event")
 
         self.event_info_frame = customtkinter.CTkFrame(self.event_window)
@@ -46,5 +47,8 @@ class NewEvent:
         self.note_label = customtkinter.CTkLabel(self.event_info_frame, text='Notes')
         self.note_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.submit_event_button = customtkinter.CTkButton(self.event_info_frame, text="Submit")
+        self.submit_event_button = customtkinter.CTkButton(self.event_info_frame, text="Submit",
+                                                           fg_color=theme.button_color,
+                                                           text_color=theme.button_text_color
+                                                           )
         self.submit_event_button.grid(row=6, column=1, pady=5)

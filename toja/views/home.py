@@ -13,12 +13,22 @@ class HomeView(customtkinter.CTk):
     def __init__(self, theme: Theme):
         super().__init__()
 
+        self.theme = theme
+
         # image icons
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), constant.ICON_FILE_DIRECTORY)
         plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_plus)),
                                            size=(20, 20))
         delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_delete)),
                                              size=(22, 22))
+        home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_home)),
+                                             size=(22, 22))
+        keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_keyword)),
+                                           size=(22, 22))
+        event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_event)),
+                                           size=(22, 22))
+        network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_contact)),
+                                           size=(22, 22))
 
         # Configure Window
         self.frame = "home"
@@ -35,23 +45,23 @@ class HomeView(customtkinter.CTk):
         self.navigation_frame = customtkinter.CTkFrame(self, fg_color=theme.frame1_color)
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
-        self.home_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
+        self.home_button = customtkinter.CTkButton(self.navigation_frame, image=home_icon,corner_radius=0, height=40,
                                                    border_spacing=10,
                                                    text="Home",
-                                                   fg_color="transparent", text_color=("gray10", "gray90"),
+                                                   fg_color='grey86', text_color=("gray10", "gray90"),
                                                    hover_color=("gray70", "gray30"),
                                                    anchor="w")
         self.home_button.grid(row=0, column=0, pady=(50, 0))
 
-        self.analytics_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
-                                                        border_spacing=10,
-                                                        text="Keywords",
-                                                        fg_color="transparent", text_color=("gray10", "gray90"),
-                                                        hover_color=("gray70", "gray30"),
-                                                        anchor="w")
-        self.analytics_button.grid(row=1, column=0)
+        self.keyword_button = customtkinter.CTkButton(self.navigation_frame, image=keyword_icon, corner_radius=0, height=40,
+                                                      border_spacing=10,
+                                                      text="Keywords",
+                                                      fg_color="transparent", text_color=("gray10", "gray90"),
+                                                      hover_color=("gray70", "gray30"),
+                                                      anchor="w")
+        self.keyword_button.grid(row=1, column=0)
 
-        self.events_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
+        self.events_button = customtkinter.CTkButton(self.navigation_frame, image=event_icon, corner_radius=0, height=40,
                                                      border_spacing=10,
                                                      text="Events",
                                                      fg_color="transparent", text_color=("gray10", "gray90"),
@@ -59,7 +69,7 @@ class HomeView(customtkinter.CTk):
                                                      anchor="w")
         self.events_button.grid(row=2, column=0)
 
-        self.network_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
+        self.network_button = customtkinter.CTkButton(self.navigation_frame, image=network_icon, corner_radius=0, height=40,
                                                       border_spacing=10,
                                                       text="Network",
                                                       fg_color="transparent", text_color=("gray10", "gray90"),
@@ -221,7 +231,8 @@ class HomeView(customtkinter.CTk):
                                                            fg_color=theme.accent_color)
         self.radio_button_2.grid(row=2, column=0, pady=5, padx=(20, 0))
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.search_jd_frame, variable=self.radio_var,
-                                                           value=2, text='Position', border_width_checked=4,
+                                                           value=2, text='Position',
+                                                           border_width_checked=4,
                                                            fg_color=theme.accent_color)
         self.radio_button_3.grid(row=3, column=0, pady=(5, 43), padx=(20, 0))
 
@@ -232,7 +243,8 @@ class HomeView(customtkinter.CTk):
         self.job_id_entry = customtkinter.CTkEntry(self.search_jd_frame)
         self.position_entry = customtkinter.CTkEntry(self.search_jd_frame)
 
-        self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value)
+        self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value,
+                                                button_color=theme.accent_color)
         self.slider_1.set(80)
 
         start_val = customtkinter.Variable(self, 80)

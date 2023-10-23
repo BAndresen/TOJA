@@ -2,13 +2,14 @@ import customtkinter
 from tkcalendar import DateEntry
 
 import toja.constants as constant
+from .theme import Theme
 
 
 class NewJob:
-    def __init__(self, root):
+    def __init__(self, root, theme: Theme):
         self.root = root
         self.aj_window = customtkinter.CTkToplevel(root)
-        self.aj_window.attributes('-topmost','true')
+        self.aj_window.attributes('-topmost', 'true')
         self.aj_window.title("Add Job")
         # self.grid_columnconfigure(0, weight=1)
         # self.grid_columnconfigure(1, weight=1)
@@ -101,5 +102,8 @@ class NewJob:
         self.note_label = customtkinter.CTkLabel(self.event_info_frame, text='Notes')
         self.note_label.grid(row=5, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit")
+        self.submit_button = customtkinter.CTkButton(self.main_frame, text="Submit",
+                                                     fg_color=theme.button_color,
+                                                     text_color=theme.button_text_color
+                                                     )
         self.submit_button.grid(row=12, column=1, padx=20, pady=20)

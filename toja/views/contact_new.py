@@ -1,12 +1,13 @@
 import customtkinter
+from .theme import Theme
 
 
 class NewContact:
-    def __init__(self, root):
+    def __init__(self, root, theme: Theme):
         self.root = root
 
         self.contact_window = customtkinter.CTkToplevel(root)
-        self.contact_window.attributes('-topmost','true')
+        self.contact_window.attributes('-topmost', 'true')
         self.contact_window.title("Contact")
         self.contact_info_frame = customtkinter.CTkFrame(self.contact_window)
         self.contact_info_frame.grid(row=0, column=0, padx=20, pady=20)
@@ -39,5 +40,7 @@ class NewContact:
         self.position_label = customtkinter.CTkLabel(self.contact_info_frame, text='Position')
         self.position_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
 
-        self.submit_contact_button = customtkinter.CTkButton(self.contact_window, text="Submit")
+        self.submit_contact_button = customtkinter.CTkButton(self.contact_window, text="Submit",
+                                                             fg_color=theme.button_color,
+                                                             text_color=theme.button_text_color)
         self.submit_contact_button.grid(row=1, column=0, pady=20, padx=20, sticky="e")

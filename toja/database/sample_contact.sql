@@ -1,7 +1,7 @@
 INSERT INTO contact (first_name, last_name, email, phone, position, job_id, user_id)
 VALUES
     ("Mickie","Heppner","mheppner0@sciencedaily.com","276-611-1531","Tech Lead","1","1"),
-    ("Nevsa","Oneile","noneile1@nydailynews.com","977-717-5175","HR Manager","8","2"),
+    ("Nevsa","Oneile","noneile1@nydailynews.com","977-717-5175","HR Manager","8","1"),
     ("Randee","Fitzsymonds","rfitzsymonds2@aboutads.info","327-243-5964","HR Manager","3","1"),
     ("Celeste","Loughton","cloughton3@uol.com.br","434-562-8110","Technical Recruiter","4","1"),
     ("Cozmo","Chilcott","cchilcott4@sourceforge.net","199-843-1276","Chief Technology Officer","5","1"),

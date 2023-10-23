@@ -36,7 +36,7 @@ class Controller:
         # HomeView Button Commands
         self.view.events_button.configure(command=self.event_frame_button)
         self.view.home_button.configure(command=self.home_frame_button)
-        self.view.analytics_button.configure(command=self.analytics_frame_button)
+        self.view.keyword_button.configure(command=self.analytics_frame_button)
         self.view.network_button.configure(command=self.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete_job)
@@ -74,7 +74,7 @@ class Controller:
         self.view.file.add_command(label='Exit', command=self.view.destroy)
 
         if new_user:
-            self.welcome_window = WelcomeUser(self.view)
+            self.welcome_window = WelcomeUser(self.view, self.view.theme)
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
@@ -101,7 +101,7 @@ class Controller:
         self.update_home()
 
     def change_user(self):
-        self.user_select = UserSelect(self.view)
+        self.user_select = UserSelect(self.view, self.view.theme)
         self.user_select.submit_button.configure(command=self.switch_users)
         clean_list = []
         res = (self.model.get_all_users())
@@ -125,7 +125,7 @@ class Controller:
         open(constant.TOJA_GITHUB_URL)
 
     def create_user(self):
-        self.add_user = CreateUser(self.view)
+        self.add_user = CreateUser(self.view, self.view.theme)
         self.add_user.create_button.configure(command=self.submit_new_user)
 
     def submit_new_user(self):
@@ -227,17 +227,17 @@ class Controller:
         self.update_contact_listbox()
 
     def add_contact(self):
-        self.contact = NewContact(self.view)
+        self.contact = NewContact(self.view, self.view.theme)
         self.contact.submit_contact_button.configure(command=self.insert_contact)
 
     def add_contact_home(self):
-        self.contact = NewContact(self.view)
+        self.contact = NewContact(self.view, self.view.theme)
         self.contact.job_id_entry.grid(row=1, column=1, padx=(5, 20), pady=10)
         self.contact.job_id_label.grid(row=1, column=0, padx=(20, 5), pady=10, sticky="e")
         self.contact.submit_contact_button.configure(command=self.insert_contact_home)
 
     def edit_job(self):
-        self.edit = EditJob(self.view.home_frame)
+        self.edit = EditJob(self.view.home_frame, self.view.theme)
         self.edit.submit_edit_button.configure(command=self.submit_job_edit)
         self.edit.position_title_entry.configure(placeholder_text=self.jp_results[2])
         self.edit.company_name_entry.configure(placeholder_text=self.jp_results[0])
@@ -334,27 +334,38 @@ class Controller:
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.event_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.events_button.configure(fg_color=self.view.theme.accent_color)
+        self.view.home_button.configure(fg_color='transparent')
+
 
     def home_frame_button(self):
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.home_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.events_button.configure(fg_color='transparent')
 
     def analytics_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.event_frame.grid_forget()
         self.view.network_frame.grid_forget()
         self.view.analytics_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.events_button.configure(fg_color='transparent')
+        self.view.home_button.configure(fg_color='transparent')
+
 
     def network_frame_button(self):
         self.view.home_frame.grid_forget()
         self.view.event_frame.grid_forget()
         self.view.analytics_frame.grid_forget()
         self.view.network_frame.grid(row=0, column=1, sticky="nsew")
+        self.view.events_button.configure(fg_color='transparent')
+        self.view.home_button.configure(fg_color='transparent')
+
+
 
     def open_job_submit(self):
-        self.new_job = NewJob(self.view)
+        self.new_job = NewJob(self.view, self.view.theme)
         self.new_job.submit_button.configure(command=self.submit_new_job)
 
         current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
@@ -366,7 +377,7 @@ class Controller:
         current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
-        self.new_event = NewEvent(self.view)
+        self.new_event = NewEvent(self.view, self.view.theme)
         contacts = self.model.get_contacts(self.job_id)
         self.new_event.time_entry.configure(textvariable=self.current_time)
         contact_list = []
@@ -412,7 +423,7 @@ class Controller:
         current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
-        self.new_event = NewEvent(self.view)
+        self.new_event = NewEvent(self.view, self.view.theme)
         self.new_event.job_id_entry.grid(row=0, column=1, padx=(5, 20), pady=10)
         self.new_event.job_id_label.grid(row=0, column=0, padx=(20, 5), pady=10, sticky="e")
         contacts = self.model.get_all_contacts(self.user_id)
