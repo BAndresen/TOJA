@@ -19,7 +19,7 @@ class JobProfile:
         x_position = 450  # Start from the left edge
         y_position = 10  # Start from the top edge
 
-        self.jp_window.geometry(f'{screen_width - 1000}x{screen_height - 150}+{x_position}+{y_position}')
+        self.jp_window.geometry(f'{screen_width - 1040}x{screen_height - 150}+{x_position}+{y_position}')
 
         self.jp_window.grid_columnconfigure(0, weight=1)
 
@@ -99,28 +99,8 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.resume_user.grid(row=8, column=1, padx=5, pady=2, stick='w')
 
-        # buttons
-        self.button_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.button_frame.grid(row=2, column=3, sticky="n", pady=38)
-        self.edit_button = customtkinter.CTkButton(self.jp_all_frame, text="", image=pencil_white, width=35, height=35,
-                                                   fg_color=theme.button_color, hover_color='grey15')
-        self.edit_button.grid(row=0, column=2, padx=10, sticky='e')
-
-        self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="", image=contact_white, width=35,
-                                                          height=35,
-                                                          fg_color=theme.button_color, hover_color='grey15')
-        self.new_contact_button.grid(row=2, column=0, pady=5, padx=10)
-        self.new_event_button = customtkinter.CTkButton(self.button_frame, text="", image=add_event_white, width=35,
-                                                        height=35,
-                                                        fg_color=theme.button_color, hover_color='grey15')
-        self.new_event_button.grid(row=1, column=0, pady=5, padx=10)
-        self.edit_job_button = customtkinter.CTkButton(self.button_frame, text="", image=writing_white, width=35,
-                                                       height=35,
-                                                       fg_color=theme.button_color, hover_color='grey15')
-        self.edit_job_button.grid(row=0, column=0, pady=5, padx=10)
-
         # description
-        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.button_text_color,
+        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.text_color,
                                                     segmented_button_selected_color=theme.accent_color
                                                     )
         self.job_tabview.grid(row=2, column=0, columnspan=3, padx=(20, 5), pady=20, sticky='nsew')
@@ -157,3 +137,23 @@ class JobProfile:
         self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=701,
                                                                height=300)
         self.keyword_scroll.grid(row=0, column=0, padx=10, pady=10)
+
+        # buttons
+        self.button_frame = customtkinter.CTkFrame(self.jp_frame)
+        self.button_frame.grid(row=2, column=3, sticky="n", pady=38)
+        self.edit_button = customtkinter.CTkButton(self.jp_all_frame, text="", image=pencil_white, width=35, height=35,
+                                                   fg_color=theme.button_color, hover_color='grey15')
+        self.edit_button.grid(row=0, column=2, padx=10, sticky='e')
+
+        self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="", image=contact_white, width=35,
+                                                          height=35,
+                                                          fg_color=theme.button_color, hover_color='grey15')
+        self.new_contact_button.grid(row=2, column=0, pady=5, padx=10)
+        self.new_event_button = customtkinter.CTkButton(self.button_frame, text="", image=add_event_white, width=35,
+                                                        height=35,
+                                                        fg_color=theme.button_color, hover_color='grey15')
+        self.new_event_button.grid(row=1, column=0, pady=5, padx=10)
+        self.edit_job_button = customtkinter.CTkButton(self.button_frame, text="", image=writing_white, width=35,
+                                                       height=35,
+                                                       fg_color=theme.button_color, hover_color='grey15')
+        self.edit_job_button.grid(row=0, column=0, pady=5, padx=10)
