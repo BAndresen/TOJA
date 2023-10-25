@@ -27,7 +27,7 @@
   + Scan all jobs
   + Scan single job
   + Scan by position title.
-    + Use the threshold slider to include or isolate desired jobs.  100 threshold will only include exact matches, while decreasing the threshold will include jobs with similar titles (ie. Data Scientist, Data Engineer)
+    + Use the threshold slider to include or isolate desired jobs.  100 threshold will only include exact matches, while decreasing the threshold will include all jobs with similar titles (ie. Data Scientist, Data Engineer)
 + Upload your Resume
   + Discover your unique resume score
   + Gain insights and improve your resume         
