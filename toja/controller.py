@@ -9,7 +9,6 @@ from pathlib import Path
 import os
 from PIL import Image
 
-
 from views.job_new import NewJob
 from views.job_profile import JobProfile
 from views.home import HomeView
@@ -31,6 +30,12 @@ import toja.constants as constant
 
 class Controller:
     def __init__(self, view: HomeView, model: Model, new_user: bool = False):
+        self.plus_icon = None
+        self.delete_icon = None
+        self.home_icon = None
+        self.keyword_icon = None
+        self.event_icon = None
+        self.network_icon = None
         self.today = datetime.today().date()
         self.new_job = None
         self.view = view
@@ -169,27 +174,59 @@ class Controller:
     def update_icons(self):
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'views', constant.ICON_FILE_DIRECTORY)
         self.plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_plus)),
-                                           size=(20, 20))
-        self.delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_delete)),
-                                             size=(22, 22))
+                                                size=(20, 20))
+        self.delete_icon = customtkinter.CTkImage(
+            Image.open(os.path.join(icon_path, self.model.config.theme.icon_delete)),
+            size=(22, 22))
         self.home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_home)),
-                                             size=(22, 22))
-        self.keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_keyword)),
-                                           size=(22, 22))
-        self.event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_event)),
-                                            size=(22, 22))
-        self.network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_contact)),
-                                              size=(22, 22))
+                                                size=(22, 22))
+        self.keyword_icon = customtkinter.CTkImage(
+            Image.open(os.path.join(icon_path, self.model.config.theme.icon_keyword)),
+            size=(22, 22))
+        self.event_icon = customtkinter.CTkImage(
+            Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_event)),
+            size=(22, 22))
+        self.network_icon = customtkinter.CTkImage(
+            Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_contact)),
+            size=(22, 22))
 
     def update_home_theme(self):
         self.view.navigation_frame.configure(fg_color=self.model.config.theme.home_frame_background)
         self.view.home_button.configure(image=self.home_icon)
-        # self.view.keyword_button.configure(image=self.model.config.theme.icon_keyword)
-        # self.view.events_button.configure(image=self.model.config.theme.icon_event)
-        # self.view.network_button.configure(image=self.model.config.theme.icon_contact)
-
-
-
+        self.view.keyword_button.configure(image=self.keyword_icon)
+        self.view.events_button.configure(image=self.event_icon)
+        self.view.network_button.configure(image=self.network_icon)
+        self.view.home_frame.configure(fg_color=self.model.config.theme.main_frame)
+        self.view.job_list_box.configure(font=self.model.config.theme.main_font,
+                                         fg=self.model.config.theme.text_color,
+                                         bg=self.model.config.theme.listbox_bg,
+                                         selectbackground=self.model.config.theme.accent_color,
+                                         selectforeground=self.model.config.theme.text_color, )
+        self.view.past_events_listbox.configure(font=self.model.config.theme.main_font,
+                                                fg=self.model.config.theme.text_color,
+                                                bg=self.model.config.theme.listbox_bg,
+                                                selectbackground=self.model.config.theme.accent_color,
+                                                selectforeground=self.model.config.theme.text_color)
+        self.view.upcoming_events_listbox.configure(font=self.model.config.theme.main_font,
+                                                    fg=self.model.config.theme.text_color,
+                                                    bg=self.model.config.theme.listbox_bg,
+                                                    selectbackground=self.model.config.theme.accent_color,
+                                                    selectforeground=self.model.config.theme.text_color)
+        self.view.jd_search_listbox.configure(font=self.model.config.theme.main_font,
+                                              fg=self.model.config.theme.text_color,
+                                              bg=self.model.config.theme.listbox_bg,
+                                              selectbackground=self.model.config.theme.accent_color,
+                                              selectforeground=self.model.config.theme.text_color)
+        self.view.resume_search_listbox.configure(font=self.model.config.theme.main_font,
+                                                  fg=self.model.config.theme.text_color,
+                                                  bg=self.model.config.theme.listbox_bg,
+                                                  selectbackground=self.model.config.theme.accent_color,
+                                                  selectforeground=self.model.config.theme.text_color)
+        self.view.contact_listbox.configure(font=self.model.config.theme.main_font,
+                                            fg=self.model.config.theme.text_color,
+                                            bg=self.model.config.theme.listbox_bg,
+                                            selectbackground=self.model.config.theme.accent_color,
+                                            selectforeground=self.model.config.theme.text_color, )
 
         # self.view.events_button.configure(command=self.event_frame_button)
         # self.view.home_button.configure(command=self.home_frame_button)
