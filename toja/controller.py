@@ -162,9 +162,9 @@ class Controller:
             self.model.config.appearance_mode = 'Light'
         else:  # Dark mode
             self.model.config.appearance_mode = 'Dark'
-
         self.model.config.set_appearance_mode()
-        self.model.config.set_font()
+
+        # self.model.config.set_font()
         self.model.config.set_button_color()
         self.model.config.set_accent_color()
         self.model.config.set_icon_color()
@@ -191,42 +191,40 @@ class Controller:
             size=(22, 22))
 
     def update_home_theme(self):
+        home_frame_button_list = [
+            self.view.home_button,
+            self.view.home_button,
+            self.view.keyword_button,
+            self.view.events_button,
+            self.view.network_button,
+        ]
+
+        home_list_box_list = [
+            self.view.job_list_box,
+            self.view.past_events_listbox,
+            self.view.upcoming_events_listbox,
+            self.view.jd_search_listbox,
+            self.view.resume_search_listbox,
+            self.view.contact_listbox
+        ]
+
         self.view.navigation_frame.configure(fg_color=self.model.config.theme.home_frame_background)
         self.view.home_button.configure(image=self.home_icon)
         self.view.keyword_button.configure(image=self.keyword_icon)
         self.view.events_button.configure(image=self.event_icon)
         self.view.network_button.configure(image=self.network_icon)
         self.view.home_frame.configure(fg_color=self.model.config.theme.main_frame)
-        self.view.job_list_box.configure(font=self.model.config.theme.main_font,
-                                         fg=self.model.config.theme.text_color,
-                                         bg=self.model.config.theme.listbox_bg,
-                                         selectbackground=self.model.config.theme.accent_color,
-                                         selectforeground=self.model.config.theme.text_color, )
-        self.view.past_events_listbox.configure(font=self.model.config.theme.main_font,
-                                                fg=self.model.config.theme.text_color,
-                                                bg=self.model.config.theme.listbox_bg,
-                                                selectbackground=self.model.config.theme.accent_color,
-                                                selectforeground=self.model.config.theme.text_color)
-        self.view.upcoming_events_listbox.configure(font=self.model.config.theme.main_font,
-                                                    fg=self.model.config.theme.text_color,
-                                                    bg=self.model.config.theme.listbox_bg,
-                                                    selectbackground=self.model.config.theme.accent_color,
-                                                    selectforeground=self.model.config.theme.text_color)
-        self.view.jd_search_listbox.configure(font=self.model.config.theme.main_font,
-                                              fg=self.model.config.theme.text_color,
-                                              bg=self.model.config.theme.listbox_bg,
-                                              selectbackground=self.model.config.theme.accent_color,
-                                              selectforeground=self.model.config.theme.text_color)
-        self.view.resume_search_listbox.configure(font=self.model.config.theme.main_font,
-                                                  fg=self.model.config.theme.text_color,
-                                                  bg=self.model.config.theme.listbox_bg,
-                                                  selectbackground=self.model.config.theme.accent_color,
-                                                  selectforeground=self.model.config.theme.text_color)
-        self.view.contact_listbox.configure(font=self.model.config.theme.main_font,
-                                            fg=self.model.config.theme.text_color,
-                                            bg=self.model.config.theme.listbox_bg,
-                                            selectbackground=self.model.config.theme.accent_color,
-                                            selectforeground=self.model.config.theme.text_color, )
+
+        for buttons in home_frame_button_list:
+            if not buttons.cget('fg_color') == 'transparent':
+                buttons.configure(fg_color=self.model.config.theme.home_frame_selected)
+
+        for listbox in home_list_box_list:
+            listbox.configure(font=self.model.config.theme.main_font,
+                              fg=self.model.config.theme.text_color,
+                              bg=self.model.config.theme.listbox_bg,
+                              selectbackground=self.model.config.theme.accent_color,
+                              selectforeground=self.model.config.theme.text_color, )
 
         # self.view.events_button.configure(command=self.event_frame_button)
         # self.view.home_button.configure(command=self.home_frame_button)
