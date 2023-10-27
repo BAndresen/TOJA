@@ -30,22 +30,16 @@ import toja.constants as constant
 
 class Controller:
     def __init__(self, view: HomeView, model: Model, new_user: bool = False):
-        self.plus_icon = None
-        self.delete_icon = None
-        self.home_icon = None
-        self.keyword_icon = None
-        self.event_icon = None
-        self.network_icon = None
         self.today = datetime.today().date()
         self.new_job = None
         self.view = view
         self.model = model
 
         # HomeView Button Commands
-        self.view.events_button.configure(command=self.event_frame_button)
-        self.view.home_button.configure(command=self.home_frame_button)
-        self.view.keyword_button.configure(command=self.keyword_frame_button)
-        self.view.network_button.configure(command=self.network_frame_button)
+        self.view.events_button.configure(command=self.view.event_frame_button)
+        self.view.home_button.configure(command=self.view.home_frame_button)
+        self.view.keyword_button.configure(command=self.view.keyword_frame_button)
+        self.view.network_button.configure(command=self.view.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete_job)
 
@@ -103,7 +97,7 @@ class Controller:
             self.model.config.user_name = constant.SAMPLE_USER_NAME
             self.model.set_sample_data()
             points = 285
-        self.model.config.set_user_name(self.model.config.user_name)
+        self.model.config.update_user_name(self.model.config.user_name)
         self.model.insert_user_db(self.model.config.user_name, points)
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.config.user_name)
@@ -126,7 +120,7 @@ class Controller:
         name = self.user_select.user_entry.get()
         self.user_name = name
         self.user_id = self.model.get_user_id(name)
-        self.model.config.set_user_name(name)
+        self.model.config.update_user_name(name)
         self.user_select.user_window.destroy()
         self.update_home()
 
@@ -160,89 +154,17 @@ class Controller:
     def update_appearance_mode(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode
             self.model.config.appearance_mode = 'Light'
+            self.model.config.update_appearance_mode('Light')
         else:  # Dark mode
             self.model.config.appearance_mode = 'Dark'
+            self.model.config.update_appearance_mode('Dark')
         self.model.config.set_appearance_mode()
-
-        # self.model.config.set_font()
-        self.model.config.set_button_color()
-        self.model.config.set_accent_color()
-        self.model.config.set_icon_color()
-        self.update_icons()
-        self.update_home_theme()
-
-    def update_icons(self):
-        icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'views', constant.ICON_FILE_DIRECTORY)
-        self.plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_plus)),
-                                                size=(20, 20))
-        self.delete_icon = customtkinter.CTkImage(
-            Image.open(os.path.join(icon_path, self.model.config.theme.icon_delete)),
-            size=(22, 22))
-        self.home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_home)),
-                                                size=(22, 22))
-        self.keyword_icon = customtkinter.CTkImage(
-            Image.open(os.path.join(icon_path, self.model.config.theme.icon_keyword)),
-            size=(22, 22))
-        self.event_icon = customtkinter.CTkImage(
-            Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_event)),
-            size=(22, 22))
-        self.network_icon = customtkinter.CTkImage(
-            Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_contact)),
-            size=(22, 22))
-
-    def update_home_theme(self):
-        home_frame_button_list = [
-            self.view.home_button,
-            self.view.home_button,
-            self.view.keyword_button,
-            self.view.events_button,
-            self.view.network_button,
-        ]
-
-        home_list_box_list = [
-            self.view.job_list_box,
-            self.view.past_events_listbox,
-            self.view.upcoming_events_listbox,
-            self.view.jd_search_listbox,
-            self.view.resume_search_listbox,
-            self.view.contact_listbox
-        ]
-
-        self.view.navigation_frame.configure(fg_color=self.model.config.theme.home_frame_background)
-        self.view.home_button.configure(image=self.home_icon)
-        self.view.keyword_button.configure(image=self.keyword_icon)
-        self.view.events_button.configure(image=self.event_icon)
-        self.view.network_button.configure(image=self.network_icon)
-        self.view.home_frame.configure(fg_color=self.model.config.theme.main_frame)
-
-        for buttons in home_frame_button_list:
-            if not buttons.cget('fg_color') == 'transparent':
-                buttons.configure(fg_color=self.model.config.theme.home_frame_selected)
-
-        for listbox in home_list_box_list:
-            listbox.configure(font=self.model.config.theme.main_font,
-                              fg=self.model.config.theme.text_color,
-                              bg=self.model.config.theme.listbox_bg,
-                              selectbackground=self.model.config.theme.accent_color,
-                              selectforeground=self.model.config.theme.text_color, )
-
-        # self.view.events_button.configure(command=self.event_frame_button)
-        # self.view.home_button.configure(command=self.home_frame_button)
-        # self.view.keyword_button.configure(command=self.keyword_frame_button)
-        # self.view.network_button.configure(command=self.network_frame_button)
-        # self.view.new_job_button.configure(fg_color=self.model.config.theme.button_color)
-        # self.view.delete_job_button.configure(command=self.delete_job)
-        # self.view.network_new_contact_button.configure(command=self.add_contact_home)
-        # self.view.network_delete_job_button.configure(command=self.delete_contact)
-        # self.view.event_new_button.configure(command=self.new_event_home)
-        # self.view.event_delete_button.configure(command=self.delete_event)
-        # self.view.jd_search_button.configure(command=self.search_job_button)
-        # self.view.resume_browse_button.configure(command=self.browse_resume_button)
-        # self.view.resume_search_button.configure(fg_color=self.model.config.theme.button_color)
+        self.view.update_icons()
+        self.view.update_home_theme()
 
     def submit_new_user(self):
         new_name = self.add_user.database_name_entry.get()
-        self.model.config.set_user_name(new_name)
+        self.model.config.update_user_name(new_name)
         self.model.insert_user_db(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
@@ -440,46 +362,6 @@ class Controller:
 
     def run(self):
         self.view.mainloop()
-
-    def event_frame_button(self):
-        self.view.home_frame.grid_forget()
-        self.view.analytics_frame.grid_forget()
-        self.view.network_frame.grid_forget()
-        self.view.event_frame.grid(row=0, column=1, sticky="nsew")
-        self.view.events_button.configure(fg_color=self.view.theme.home_frame_selected)
-        self.view.home_button.configure(fg_color='transparent')
-        self.view.network_button.configure(fg_color='transparent')
-        self.view.keyword_button.configure(fg_color='transparent')
-
-    def home_frame_button(self):
-        self.view.event_frame.grid_forget()
-        self.view.analytics_frame.grid_forget()
-        self.view.network_frame.grid_forget()
-        self.view.home_frame.grid(row=0, column=1, sticky="nsew")
-        self.view.home_button.configure(fg_color=self.view.theme.home_frame_selected)
-        self.view.events_button.configure(fg_color='transparent')
-        self.view.network_button.configure(fg_color='transparent')
-        self.view.keyword_button.configure(fg_color='transparent')
-
-    def keyword_frame_button(self):
-        self.view.home_frame.grid_forget()
-        self.view.event_frame.grid_forget()
-        self.view.network_frame.grid_forget()
-        self.view.analytics_frame.grid(row=0, column=1, sticky="nsew")
-        self.view.keyword_button.configure(fg_color=self.view.theme.home_frame_selected)
-        self.view.events_button.configure(fg_color='transparent')
-        self.view.home_button.configure(fg_color='transparent')
-        self.view.network_button.configure(fg_color='transparent')
-
-    def network_frame_button(self):
-        self.view.home_frame.grid_forget()
-        self.view.event_frame.grid_forget()
-        self.view.analytics_frame.grid_forget()
-        self.view.network_frame.grid(row=0, column=1, sticky="nsew")
-        self.view.network_button.configure(fg_color=self.view.theme.home_frame_selected)
-        self.view.events_button.configure(fg_color='transparent')
-        self.view.home_button.configure(fg_color='transparent')
-        self.view.keyword_button.configure(fg_color='transparent')
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view, self.view.theme)

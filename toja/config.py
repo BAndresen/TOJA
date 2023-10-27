@@ -24,7 +24,7 @@ class Config:
         self.user_name = self.config_parser['user']['name']
         self.set_theme()
 
-    def set_theme(self):    
+    def set_theme(self):
         self.appearance_mode = self.get_appearance_mode()
         self.set_appearance_mode()
         self.set_font()
@@ -42,7 +42,7 @@ class Config:
         with open(self.config_file, "w") as file:
             self.config_parser.write(file)
 
-    def set_user_name(self, user_name: str):
+    def update_user_name(self, user_name: str):
         self.config_parser['user']['name'] = user_name
         with open(self.config_file, "w") as file:
             self.config_parser.write(file)
@@ -60,6 +60,11 @@ class Config:
 
     def get_appearance_mode(self) -> str:
         return self.config_parser['theme']['appearance_mode']
+
+    def update_appearance_mode(self, mode: str):
+        self.config_parser['theme']['appearance_mode'] = mode
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
 
     def get_font(self) -> str:
         return self.config_parser['theme']['font']
@@ -109,12 +114,11 @@ class Config:
             self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_appearance_mode(self):
-        customtkinter.set_appearance_mode(self.appearance_mode)
         if self.appearance_mode == "Dark":
             self.set_dark_mode()
         else:
             self.set_light_mode()
-    
+
     def set_dark_mode(self):
         self.theme.home_frame_background = 'grey20'
         self.theme.text_color = 'grey86'
@@ -122,6 +126,7 @@ class Config:
         self.theme.home_frame_selected = 'grey14'
 
         self.theme.main_frame = 'grey14'
+        self.theme.second_frame = 'grey17'
 
         self.theme.icon_home = constant.HOME_WHITE
         self.theme.icon_keyword = constant.KEYWORD_WHITE
@@ -135,6 +140,7 @@ class Config:
         self.theme.home_frame_selected = 'grey92'
 
         self.theme.main_frame = 'grey92'
+        self.theme.second_frame = 'grey86'
 
         self.theme.icon_home = constant.HOME
         self.theme.icon_keyword = constant.KEYWORD
@@ -146,4 +152,3 @@ class Config:
             self.theme.button_text_color = 'grey86'
         elif mode == 'Dark':
             self.theme.button_text_color = 'grey17'
-
