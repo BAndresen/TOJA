@@ -72,6 +72,9 @@ class Config:
     def set_button_color(self):
         self.theme.button_color = self.get_button_color()
 
+    def update_button_color(self, button_color):
+        pass
+
     def get_accent_color(self) -> str:
         return self.config_parser['theme']['accent_color']
 

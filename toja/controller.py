@@ -19,6 +19,7 @@ from views.user_welcome import WelcomeUser
 from views.user_select import UserSelect
 from views.user_new import CreateUser
 from views.event import Event
+from views.settings import Settings
 from views.contact_view import Contact
 from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
@@ -69,6 +70,7 @@ class Controller:
         self.view.help_.add_command(label='About Toja', command=self.about_page)
         self.view.file.add_command(label='New User', command=self.create_user)
         self.view.file.add_command(label='Change User', command=self.change_user)
+        self.view.file.add_command(label='Settings', command=self.open_settings)
         self.view.file.add_command(label='Export', command=self.export_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
@@ -127,6 +129,36 @@ class Controller:
     def create_user(self):
         self.add_user = CreateUser(self.view, self.view.theme)
         self.add_user.create_button.configure(command=self.submit_new_user)
+
+    def open_settings(self):
+        self.settings = Settings(self.view, self.view.theme)
+        self.settings.accent_color_entry.configure(placeholder_text=self.model.config.get_accent_color())
+        self.settings.button_color_entry.configure(placeholder_text=self.model.config.get_button_color())
+        self.settings.submit_button.configure(command=self.submit_settings)
+
+    def submit_settings(self):
+        print(self.settings.accent_color_entry.get())
+        print(self.settings.button_color_entry.get())
+        self.model.config.theme.button_color = self.settings.button_color_entry.get()
+        print(self.model.config.theme.button_color)
+        # self.model.config.set_dark_mode()
+        # self.view.update_idletasks()
+        self.model.config.appearance_mode = "Light"
+        self.model.config.set_appearance_mode()
+
+        # self.view.events_button.configure(command=self.event_frame_button)
+        # self.view.home_button.configure(command=self.home_frame_button)
+        # self.view.keyword_button.configure(command=self.keyword_frame_button)
+        # self.view.network_button.configure(command=self.network_frame_button)
+        self.view.new_job_button.configure(fg_color=self.model.config.theme.button_color)
+        # self.view.delete_job_button.configure(command=self.delete_job)
+        # self.view.network_new_contact_button.configure(command=self.add_contact_home)
+        # self.view.network_delete_job_button.configure(command=self.delete_contact)
+        # self.view.event_new_button.configure(command=self.new_event_home)
+        # self.view.event_delete_button.configure(command=self.delete_event)
+        # self.view.jd_search_button.configure(command=self.search_job_button)
+        # self.view.resume_browse_button.configure(command=self.browse_resume_button)
+        # self.view.resume_search_button.configure(fg_color=self.model.config.theme.button_color)
 
     def submit_new_user(self):
         new_name = self.add_user.database_name_entry.get()
@@ -368,9 +400,6 @@ class Controller:
         self.view.events_button.configure(fg_color='transparent')
         self.view.home_button.configure(fg_color='transparent')
         self.view.keyword_button.configure(fg_color='transparent')
-
-
-
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view, self.view.theme)
