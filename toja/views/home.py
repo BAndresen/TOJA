@@ -17,18 +17,18 @@ class HomeView(customtkinter.CTk):
 
         # image icons
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), constant.ICON_FILE_DIRECTORY)
-        plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_plus)),
-                                           size=(20, 20))
-        delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_delete)),
-                                             size=(22, 22))
-        home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_home)),
-                                             size=(22, 22))
-        keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_keyword)),
-                                           size=(22, 22))
-        event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_event)),
-                                            size=(22, 22))
-        network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_contact)),
-                                              size=(22, 22))
+        self.plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_plus)),
+                                                size=(20, 20))
+        self.delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_delete)),
+                                                  size=(22, 22))
+        self.home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_home)),
+                                                size=(22, 22))
+        self.keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_keyword)),
+                                                   size=(22, 22))
+        self.event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_event)),
+                                                 size=(22, 22))
+        self.network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, theme.icon_main_contact)),
+                                                   size=(22, 22))
 
         # Configure Window
         self.frame = "home"
@@ -45,7 +45,7 @@ class HomeView(customtkinter.CTk):
         self.navigation_frame = customtkinter.CTkFrame(self, fg_color=theme.home_frame_background)
         self.navigation_frame.grid(row=0, column=0, rowspan=3, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(4, weight=1)
-        self.home_button = customtkinter.CTkButton(self.navigation_frame, image=home_icon,corner_radius=0, height=40,
+        self.home_button = customtkinter.CTkButton(self.navigation_frame, image=self.home_icon, corner_radius=0, height=40,
                                                    border_spacing=10,
                                                    text="Home",
                                                    fg_color=theme.home_frame_selected,
@@ -54,7 +54,8 @@ class HomeView(customtkinter.CTk):
                                                    anchor="w")
         self.home_button.grid(row=0, column=0, pady=(50, 0))
 
-        self.keyword_button = customtkinter.CTkButton(self.navigation_frame, image=keyword_icon, corner_radius=0, height=40,
+        self.keyword_button = customtkinter.CTkButton(self.navigation_frame, image=self.keyword_icon, corner_radius=0,
+                                                      height=40,
                                                       border_spacing=10,
                                                       text="Keywords",
                                                       fg_color="transparent", text_color=("gray10", "gray90"),
@@ -62,7 +63,8 @@ class HomeView(customtkinter.CTk):
                                                       anchor="w")
         self.keyword_button.grid(row=1, column=0)
 
-        self.events_button = customtkinter.CTkButton(self.navigation_frame, image=event_icon, corner_radius=0, height=40,
+        self.events_button = customtkinter.CTkButton(self.navigation_frame, image=self.event_icon, corner_radius=0,
+                                                     height=40,
                                                      border_spacing=10,
                                                      text="Events",
                                                      fg_color="transparent", text_color=("gray10", "gray90"),
@@ -70,7 +72,8 @@ class HomeView(customtkinter.CTk):
                                                      anchor="w")
         self.events_button.grid(row=2, column=0)
 
-        self.network_button = customtkinter.CTkButton(self.navigation_frame, image=network_icon, corner_radius=0, height=40,
+        self.network_button = customtkinter.CTkButton(self.navigation_frame, image=self.network_icon, corner_radius=0,
+                                                      height=40,
                                                       border_spacing=10,
                                                       text="Network",
                                                       fg_color="transparent", text_color=("gray10", "gray90"),
@@ -104,12 +107,12 @@ class HomeView(customtkinter.CTk):
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame)
         self.button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="",
-                                                      image=plus_icon,
+                                                      image=self.plus_icon,
                                                       width=35, height=35,
                                                       fg_color=theme.button_color,
                                                       hover_color='grey15')
         self.new_job_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
-        self.delete_job_button = customtkinter.CTkButton(self.button_frame, text="", image=delete_icon, width=35,
+        self.delete_job_button = customtkinter.CTkButton(self.button_frame, text="", image=self.delete_icon, width=35,
                                                          height=35,
                                                          fg_color=theme.button_color, hover_color='grey15')
         self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
@@ -144,10 +147,10 @@ class HomeView(customtkinter.CTk):
 
         self.event_button_frame = customtkinter.CTkFrame(self.event_frame)
         self.event_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
-        self.event_new_button = customtkinter.CTkButton(self.event_button_frame, text="", image=plus_icon, width=35,
+        self.event_new_button = customtkinter.CTkButton(self.event_button_frame, text="", image=self.plus_icon, width=35,
                                                         height=35, fg_color=theme.button_color, hover_color='grey15')
         self.event_new_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
-        self.event_delete_button = customtkinter.CTkButton(self.event_button_frame, text="", image=delete_icon,
+        self.event_delete_button = customtkinter.CTkButton(self.event_button_frame, text="", image=self.delete_icon,
                                                            width=35, height=35,
                                                            fg_color=theme.button_color, hover_color='grey15')
         self.event_delete_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
@@ -310,11 +313,11 @@ class HomeView(customtkinter.CTk):
 
         self.network_button_frame = customtkinter.CTkFrame(self.network_frame)
         self.network_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
-        self.network_new_contact_button = customtkinter.CTkButton(self.network_button_frame, text="", image=plus_icon,
+        self.network_new_contact_button = customtkinter.CTkButton(self.network_button_frame, text="", image=self.plus_icon,
                                                                   width=35, height=35, fg_color=theme.button_color,
                                                                   hover_color='grey15')
         self.network_new_contact_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
-        self.network_delete_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=delete_icon,
+        self.network_delete_job_button = customtkinter.CTkButton(self.network_button_frame, text="", image=self.delete_icon,
                                                                  width=35, height=35,
                                                                  fg_color=theme.button_color, hover_color='grey15')
         self.network_delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")

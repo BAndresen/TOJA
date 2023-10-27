@@ -7,6 +7,8 @@ from tkinter import filedialog, messagebox
 import subprocess
 from pathlib import Path
 import os
+from PIL import Image
+
 
 from views.job_new import NewJob
 from views.job_profile import JobProfile
@@ -134,23 +136,66 @@ class Controller:
         self.settings = Settings(self.view, self.view.theme)
         self.settings.accent_color_entry.configure(placeholder_text=self.model.config.get_accent_color())
         self.settings.button_color_entry.configure(placeholder_text=self.model.config.get_button_color())
+        if self.model.config.icon_mode == "Dark":
+            self.settings.icon_mode_switch.select()
+        if self.model.config.appearance_mode == "Dark":
+            self.settings.appearance_mode_switch.select()
+
+        self.settings.job_keyword_results_entry.configure(
+            placeholder_text=self.model.config.get_num_keywords(job_description=True))
+        self.settings.resume_keyword_entry.configure(placeholder_text=self.model.config.get_num_keywords(resume=True))
+
         self.settings.submit_button.configure(command=self.submit_settings)
+        print(self.model.config.theme.button_color)
 
     def submit_settings(self):
-        print(self.settings.accent_color_entry.get())
-        print(self.settings.button_color_entry.get())
         self.model.config.theme.button_color = self.settings.button_color_entry.get()
-        print(self.model.config.theme.button_color)
-        # self.model.config.set_dark_mode()
-        # self.view.update_idletasks()
-        self.model.config.appearance_mode = "Light"
+        self.update_appearance_mode()
+
+    def update_appearance_mode(self):
+        if not self.settings.appearance_mode_switch.get():  # Light mode
+            self.model.config.appearance_mode = 'Light'
+        else:  # Dark mode
+            self.model.config.appearance_mode = 'Dark'
+
         self.model.config.set_appearance_mode()
+        self.model.config.set_font()
+        self.model.config.set_button_color()
+        self.model.config.set_accent_color()
+        self.model.config.set_icon_color()
+        self.update_icons()
+        self.update_home_theme()
+
+    def update_icons(self):
+        icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'views', constant.ICON_FILE_DIRECTORY)
+        self.plus_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_plus)),
+                                           size=(20, 20))
+        self.delete_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_delete)),
+                                             size=(22, 22))
+        self.home_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_home)),
+                                             size=(22, 22))
+        self.keyword_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_keyword)),
+                                           size=(22, 22))
+        self.event_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_event)),
+                                            size=(22, 22))
+        self.network_icon = customtkinter.CTkImage(Image.open(os.path.join(icon_path, self.model.config.theme.icon_main_contact)),
+                                              size=(22, 22))
+
+    def update_home_theme(self):
+        self.view.navigation_frame.configure(fg_color=self.model.config.theme.home_frame_background)
+        self.view.home_button.configure(image=self.home_icon)
+        # self.view.keyword_button.configure(image=self.model.config.theme.icon_keyword)
+        # self.view.events_button.configure(image=self.model.config.theme.icon_event)
+        # self.view.network_button.configure(image=self.model.config.theme.icon_contact)
+
+
+
 
         # self.view.events_button.configure(command=self.event_frame_button)
         # self.view.home_button.configure(command=self.home_frame_button)
         # self.view.keyword_button.configure(command=self.keyword_frame_button)
         # self.view.network_button.configure(command=self.network_frame_button)
-        self.view.new_job_button.configure(fg_color=self.model.config.theme.button_color)
+        # self.view.new_job_button.configure(fg_color=self.model.config.theme.button_color)
         # self.view.delete_job_button.configure(command=self.delete_job)
         # self.view.network_new_contact_button.configure(command=self.add_contact_home)
         # self.view.network_delete_job_button.configure(command=self.delete_contact)

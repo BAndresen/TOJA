@@ -10,6 +10,7 @@ from toja.views.theme import Theme
 
 class Config:
     def __init__(self, theme: Theme):
+        self.icon_mode = None
         self.appearance_mode = None
         self.system_platform = None
         self.theme = theme
@@ -81,13 +82,13 @@ class Config:
     def set_accent_color(self):
         self.theme.accent_color = self.get_accent_color()
 
-    def get_icon_color(self) -> str:
-        return self.config_parser['theme']['icon_color']
+    def get_icon_mode(self) -> str:
+        return self.config_parser['theme']['icon_mode']
 
     def set_icon_color(self):
-        icon_color = self.get_icon_color()
-        self.set_button_text_color(icon_color)
-        if icon_color == 'Light':
+        self.icon_mode = self.get_icon_mode()
+        self.set_button_text_color(self.icon_mode)
+        if self.icon_mode == 'Light':
             self.theme.icon_contact = constant.CONTACT_WHITE
             self.theme.icon_delete = constant.DELETE_WHITE
             self.theme.icon_event = constant.EVENT_WHITE
@@ -97,7 +98,7 @@ class Config:
             self.theme.icon_questions = constant.QUESTIONS
             self.theme.icon_visible = constant.VISIBLE
 
-        elif icon_color == 'Dark':
+        elif self.icon_mode == 'Dark':
             self.theme.icon_contact = constant.CONTACT
             self.theme.icon_delete = constant.DELETE
             self.theme.icon_event = constant.EVENT

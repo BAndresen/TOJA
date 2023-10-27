@@ -1,11 +1,14 @@
 import customtkinter
 from .theme import Theme
+from customtkinter.windows.widgets.font import ctk_font
+
 
 class Settings:
     def __init__(self, root, theme: Theme):
         self.root = root
         self.settings_window = customtkinter.CTkToplevel(root)
         self.settings_window.attributes('-topmost', 'true')
+        # bold_font = ctk_font.CTkFont(family="Helvetica", size=12, weight="bold")
 
         self.settings_window.title("Settings")
         # self.grid_columnconfigure(0, weight=1)
@@ -32,19 +35,24 @@ class Settings:
         self.accent_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Accent Color:')
         self.accent_color_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
-        self.icon_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Icon Mode:')
-        self.icon_color_label.grid(row=3, column=0)
-        self.icon_color = customtkinter.CTkSwitch(self.appearance_frame, text='Dark')
-        self.icon_color.grid(row=3, column=1)
+        self.icon_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Icon Mode:')
+        self.icon_mode_label.grid(row=3, column=0)
+        self.icon_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
+                                                        button_color=theme.button_color,
+                                                        progress_color=theme.accent_color)
+        self.icon_mode_switch.grid(row=3, column=1)
 
         self.appearance_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance Mode:')
         self.appearance_mode_label.grid(row=4, column=0)
-        self.appearance_mode = customtkinter.CTkSwitch(self.appearance_frame, text='Dark')
-        self.appearance_mode.grid(row=4, column=1)
+        self.appearance_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
+                                                              button_color=theme.button_color,
+                                                              progress_color=theme.accent_color
+                                                              )
+        self.appearance_mode_switch.grid(row=4, column=1)
 
         # --- Keyword
         self.keyword_frame = customtkinter.CTkFrame(self.main_frame)
-        self.keyword_frame.grid(row=1, column=0,padx=10, pady=10, sticky="nsew")
+        self.keyword_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
         self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Keywords')
         self.keyword_label.grid(row=1, column=0)
