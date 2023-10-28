@@ -203,7 +203,7 @@ class Controller:
         self.model.config.set_button_color()
 
     def submit_new_user(self):
-        new_name = self.add_user.database_name_entry.get()
+        new_name = self.add_user.user_name_entry.get()
         self.model.config.update_user_name(new_name)
         self.model.insert_user_db(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)

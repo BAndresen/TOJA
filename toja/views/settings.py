@@ -71,16 +71,26 @@ class Settings:
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.main_frame)
         self.button_frame.grid(row=2, column=0)
-        self.submit_button = customtkinter.CTkButton(self.button_frame, text="Submit",
+        self.submit_button = customtkinter.CTkButton(self.button_frame, text="OK",
                                                      fg_color=self.theme.button_color,
-                                                     text_color=self.theme.button_text_color
+                                                     text_color=self.theme.button_text_color,
+                                                     width=self.theme.main_button_width
                                                      )
-        self.submit_button.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
+        self.submit_button.grid(row=0, column=0, padx=20, pady=20,)
+
+        self.submit_button = customtkinter.CTkButton(self.button_frame, text="Cancel",
+                                                     fg_color=self.theme.button_color,
+                                                     text_color=self.theme.button_text_color,
+                                                     width=self.theme.main_button_width
+                                                     )
+        self.submit_button.grid(row=0, column=1, padx=20, pady=20,)
+
         self.apply_button = customtkinter.CTkButton(self.appearance_frame, text="Apply",
                                                     fg_color=self.theme.button_color,
-                                                    text_color=self.theme.button_text_color
+                                                    text_color=self.theme.button_text_color,
+                                                    width=self.theme.main_button_width
                                                     )
-        self.apply_button.grid(row=5, column=1, padx=20, pady=20, sticky='nsew')
+        self.apply_button.grid(row=5, column=1, padx=20, pady=20, )
 
     def update_icon_text(self):
         self.submit_button.configure(text_color=self.theme.button_text_color)
@@ -95,4 +105,3 @@ class Settings:
     def update_accent_color(self):
         self.icon_mode_switch.configure(progress_color=self.theme.accent_color)
         self.appearance_mode_switch.configure(progress_color=self.theme.accent_color)
-

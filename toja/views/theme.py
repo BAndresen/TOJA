@@ -17,6 +17,7 @@ class Theme:
         # button
         self.button_color = ''
         self.button_text_color = ''
+        self.main_button_width = 70
 
         # accent_color
         self.accent_color = ''
