@@ -565,4 +565,15 @@ class HomeView(customtkinter.CTk):
         self.resume_browse_button.configure(text_color=self.theme.button_text_color)
         self.resume_search_button.configure(text_color=self.theme.button_text_color)
 
+    def update_button_color(self):
+        self.new_job_button.configure(fg_color=self.theme.button_color)
+        self.delete_job_button.configure(fg_color=self.theme.button_color)
+        self.event_new_button.configure(fg_color=self.theme.button_color)
+        self.event_delete_button.configure(fg_color=self.theme.button_color)
+        self.network_new_contact_button.configure(fg_color=self.theme.button_color)
+        self.network_delete_job_button.configure(fg_color=self.theme.button_color)
+        self.jd_search_button.configure(fg_color=self.theme.button_color)
+        self.resume_browse_button.configure(fg_color=self.theme.button_color)
+        self.resume_search_button.configure(fg_color=self.theme.button_color)
+
 

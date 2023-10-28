@@ -85,3 +85,10 @@ class Settings:
     def update_icon_text(self):
         self.submit_button.configure(text_color=self.theme.button_text_color)
         self.apply_button.configure(text_color=self.theme.button_text_color)
+
+    def update_button_color(self):
+        self.submit_button.configure(fg_color=self.theme.button_color)
+        self.apply_button.configure(fg_color=self.theme.button_color)
+        self.icon_mode_switch.configure(button_color=self.theme.button_color)
+        self.appearance_mode_switch.configure(button_color=self.theme.button_color)
+

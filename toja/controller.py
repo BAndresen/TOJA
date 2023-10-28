@@ -149,6 +149,13 @@ class Controller:
     def apply_settings(self):
         self.update_icon_mode()
         self.update_appearance_mode()
+        self.update_button_color()
+
+    def update_button_color(self):
+        self.model.config.update_button_color(self.settings.button_color_entry.get())
+        self.model.config.set_button_color()
+        self.view.update_button_color()
+        self.settings.update_button_color()
 
     def update_icon_mode(self):
         if not self.settings.icon_mode_switch.get():  # Light mode
@@ -173,7 +180,6 @@ class Controller:
             customtkinter.set_appearance_mode('Dark')
         self.settings.settings_window.destroy()
         self.update_appearance_mode()
-        self.update_icon_mode()
 
     def update_appearance_mode(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode
