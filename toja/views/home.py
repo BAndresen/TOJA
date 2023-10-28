@@ -379,6 +379,15 @@ class HomeView(customtkinter.CTk):
         # --- Display Menu
         self.config(menu=self.menubar)
 
+        self.home_list_box_list = [
+            self.job_list_box,
+            self.past_events_listbox,
+            self.upcoming_events_listbox,
+            self.jd_search_listbox,
+            self.resume_search_listbox,
+            self.contact_listbox
+        ]
+
     def event_frame_button(self):
         self.home_frame.grid_forget()
         self.analytics_frame.grid_forget()
@@ -475,15 +484,6 @@ class HomeView(customtkinter.CTk):
             self.network_button,
         ]
 
-        home_list_box_list = [
-            self.job_list_box,
-            self.past_events_listbox,
-            self.upcoming_events_listbox,
-            self.jd_search_listbox,
-            self.resume_search_listbox,
-            self.contact_listbox
-        ]
-
         self.navigation_frame.configure(fg_color=self.theme.home_frame_background)
         self.home_button.configure(image=self.home_icon)
         self.keyword_button.configure(image=self.keyword_icon)
@@ -496,7 +496,7 @@ class HomeView(customtkinter.CTk):
             if not buttons.cget('fg_color') == 'transparent':
                 buttons.configure(fg_color=self.theme.home_frame_selected)
 
-        for listbox in home_list_box_list:
+        for listbox in self.home_list_box_list:
             listbox.configure(font=self.theme.main_font,
                               fg=self.theme.text_color,
                               bg=self.theme.listbox_bg,
@@ -575,5 +575,16 @@ class HomeView(customtkinter.CTk):
         self.jd_search_button.configure(fg_color=self.theme.button_color)
         self.resume_browse_button.configure(fg_color=self.theme.button_color)
         self.resume_search_button.configure(fg_color=self.theme.button_color)
+
+    def update_accent_color(self):
+        self.progress_bar.configure(progress_color=self.theme.accent_color)
+        self.radio_button_1.configure(fg_color=self.theme.accent_color)
+        self.radio_button_2.configure(fg_color=self.theme.accent_color)
+        self.radio_button_3.configure(fg_color=self.theme.accent_color)
+        self.slider_1.configure(button_color=self.theme.accent_color)
+        for listbox in self.home_list_box_list:
+            listbox.configure(selectbackground=self.theme.accent_color)
+
+
 
 

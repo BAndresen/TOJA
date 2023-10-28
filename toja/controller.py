@@ -150,12 +150,21 @@ class Controller:
         self.update_icon_mode()
         self.update_appearance_mode()
         self.update_button_color()
+        self.update_accent_color()
+
+    def update_accent_color(self):
+        if self.settings.accent_color_entry.get():
+            self.model.config.update_accent_color(self.settings.accent_color_entry.get())
+            self.model.config.set_accent_color()
+            self.view.update_accent_color()
+            self.settings.update_accent_color()
 
     def update_button_color(self):
-        self.model.config.update_button_color(self.settings.button_color_entry.get())
-        self.model.config.set_button_color()
-        self.view.update_button_color()
-        self.settings.update_button_color()
+        if self.settings.button_color_entry.get():
+            self.model.config.update_button_color(self.settings.button_color_entry.get())
+            self.model.config.set_button_color()
+            self.view.update_button_color()
+            self.settings.update_button_color()
 
     def update_icon_mode(self):
         if not self.settings.icon_mode_switch.get():  # Light mode

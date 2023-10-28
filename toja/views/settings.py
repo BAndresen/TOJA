@@ -92,3 +92,7 @@ class Settings:
         self.icon_mode_switch.configure(button_color=self.theme.button_color)
         self.appearance_mode_switch.configure(button_color=self.theme.button_color)
 
+    def update_accent_color(self):
+        self.icon_mode_switch.configure(progress_color=self.theme.accent_color)
+        self.appearance_mode_switch.configure(progress_color=self.theme.accent_color)
+

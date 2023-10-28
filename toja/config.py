@@ -93,6 +93,11 @@ class Config:
     def set_accent_color(self):
         self.theme.accent_color = self.get_accent_color()
 
+    def update_accent_color(self, color: str):
+        self.config_parser['theme']['accent_color'] = color
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
     def get_icon_mode(self) -> str:
         return self.config_parser['theme']['icon_mode']
 
