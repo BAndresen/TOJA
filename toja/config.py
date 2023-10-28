@@ -144,9 +144,9 @@ class Config:
             self.set_light_mode()
 
     def set_dark_mode(self):
-        self.theme.home_frame_background = 'grey20'
+        self.theme.home_frame_background = 'grey17'
         self.theme.text_color = 'grey86'
-        self.theme.listbox_bg = 'grey17'
+        self.theme.listbox_bg = 'grey20'
         self.theme.home_frame_selected = 'grey14'
 
         self.theme.main_frame = 'grey14'
@@ -158,13 +158,13 @@ class Config:
         self.theme.icon_main_contact = constant.CONTACT_HOME_WHITE
 
     def set_light_mode(self):
-        self.theme.home_frame_background = 'grey86'
+        self.theme.home_frame_background = 'grey85'
         self.theme.text_color = 'grey17'
-        self.theme.listbox_bg = 'grey86'
+        self.theme.listbox_bg = 'grey90'
         self.theme.home_frame_selected = 'grey92'
 
         self.theme.main_frame = 'grey92'
-        self.theme.second_frame = 'grey86'
+        self.theme.second_frame = 'grey85'
 
         self.theme.icon_home = constant.HOME
         self.theme.icon_keyword = constant.KEYWORD

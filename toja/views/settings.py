@@ -44,7 +44,7 @@ class Settings:
         self.icon_mode_switch.grid(row=3, column=1)
 
         self.appearance_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance Mode:')
-        self.appearance_mode_label.grid(row=4, column=0, sticky='e')
+        self.appearance_mode_label.grid(row=4, column=0, sticky='e', padx=(10,0))
         self.appearance_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
                                                               button_color=self.theme.button_color,
                                                               progress_color=self.theme.accent_color
