@@ -64,26 +64,27 @@ class Settings:
         self.job_keyword_results_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.resume_keyword_entry = customtkinter.CTkEntry(self.keyword_frame, width=45)
-        self.resume_keyword_entry.grid(row=3, column=1, padx=(5, 20), pady=2, sticky='w')
+        self.resume_keyword_entry.grid(row=3, column=1, padx=(5, 20), pady=(2,10), sticky='w')
         self.resume_keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Resume Results:')
-        self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=2, sticky="e")
+        self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=(2,10), sticky="e")
 
         # buttons
-        self.button_frame = customtkinter.CTkFrame(self.main_frame)
-        self.button_frame.grid(row=2, column=0)
+        self.button_frame = customtkinter.CTkFrame(self.main_frame, corner_radius=0)
+        self.button_frame.grid(row=2, column=0, sticky='ew')
+        self.button_frame.grid_columnconfigure(0, weight=1)
         self.submit_button = customtkinter.CTkButton(self.button_frame, text="OK",
                                                      fg_color=self.theme.button_color,
                                                      text_color=self.theme.button_text_color,
                                                      width=self.theme.main_button_width
                                                      )
-        self.submit_button.grid(row=0, column=0, padx=20, pady=20,)
+        self.submit_button.grid(row=0, column=1, padx=10, pady=10,)
 
-        self.submit_button = customtkinter.CTkButton(self.button_frame, text="Cancel",
+        self.cancel_button = customtkinter.CTkButton(self.button_frame, text="Cancel",
                                                      fg_color=self.theme.button_color,
                                                      text_color=self.theme.button_text_color,
                                                      width=self.theme.main_button_width
                                                      )
-        self.submit_button.grid(row=0, column=1, padx=20, pady=20,)
+        self.cancel_button.grid(row=0, column=2, padx=10, pady=10,)
 
         self.apply_button = customtkinter.CTkButton(self.appearance_frame, text="Apply",
                                                     fg_color=self.theme.button_color,

@@ -4,7 +4,7 @@ import datetime
 import os
 
 
-def date_change(unit: int, day=False, hour=False, add=False, date_format = '%Y-%m-%d', time_format = '%I:%M%p') -> str:
+def date_change(unit: int, day=False, hour=False, add=False, date_format='%Y-%m-%d', time_format='%I:%M%p') -> str:
     """
     Change day or hour by unit.
 

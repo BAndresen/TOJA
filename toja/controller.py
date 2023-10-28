@@ -187,8 +187,15 @@ class Controller:
             self.model.config.appearance_mode = 'Dark'
             self.model.config.update_appearance_mode('Dark')
             customtkinter.set_appearance_mode('Dark')
-        self.settings.settings_window.destroy()
+        self.update_keyword_settings()
         self.update_appearance_mode()
+        self.settings.settings_window.destroy()
+
+    def update_keyword_settings(self):
+        if self.settings.job_keyword_results_entry.get():
+            self.model.config.update_keywords(self.settings.job_keyword_results_entry.get(), job_description=True)
+        if self.settings.resume_keyword_entry.get():
+            self.model.config.update_keywords(self.settings.resume_keyword_entry.get(), resume=True)
 
     def update_appearance_mode(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode

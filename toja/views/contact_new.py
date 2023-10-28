@@ -5,6 +5,7 @@ from .theme import Theme
 class NewContact:
     def __init__(self, root, theme: Theme):
         self.root = root
+        self.theme = theme
 
         self.contact_window = customtkinter.CTkToplevel(root)
         self.contact_window.attributes('-topmost', 'true')
@@ -41,6 +42,7 @@ class NewContact:
         self.position_label.grid(row=6, column=0, padx=(20, 5), pady=10, sticky="e")
 
         self.submit_contact_button = customtkinter.CTkButton(self.contact_window, text="Submit",
-                                                             fg_color=theme.button_color,
-                                                             text_color=theme.button_text_color)
+                                                             fg_color=self.theme.button_color,
+                                                             text_color=self.theme.button_text_color,
+                                                             width=self.theme.main_button_width)
         self.submit_contact_button.grid(row=1, column=0, pady=20, padx=20, sticky="e")

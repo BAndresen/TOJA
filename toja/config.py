@@ -62,6 +62,14 @@ class Config:
         if resume:
             return int(self.config_parser['global_settings']['num_keyword_resume'])
 
+    def update_keywords(self, keyword_num: str, job_description: bool = False, resume: bool = False):
+        if job_description:
+            self.config_parser['global_settings']['num_keyword_job_description'] = keyword_num
+        if resume:
+            self.config_parser['global_settings']['num_keyword_resume'] = keyword_num
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
     def get_appearance_mode(self) -> str:
         return self.config_parser['theme']['appearance_mode']
 

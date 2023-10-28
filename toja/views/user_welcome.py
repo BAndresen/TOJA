@@ -8,6 +8,7 @@ import toja.constants as constant
 class WelcomeUser:
     def __init__(self, root, theme: Theme):
         self.root = root
+        self.theme = theme
         self.welcome_window = customtkinter.CTkToplevel(root)
         self.welcome_window.attributes('-topmost', 'true')
         self.welcome_window.title("Welcome")
@@ -27,13 +28,13 @@ class WelcomeUser:
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var,
                                                            value=0, text="Sample User",
                                                            border_width_checked=4,
-                                                           fg_color=theme.accent_color
+                                                           fg_color=self.theme.accent_color
                                                            )
         self.radio_button_1.grid(row=1, column=1, pady=10, padx=20, sticky="n")
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var,
                                                            value=1, text='New User',
                                                            border_width_checked=4,
-                                                           fg_color=theme.accent_color
+                                                           fg_color=self.theme.accent_color
                                                            )
         self.radio_button_2.grid(row=2, column=1, pady=10, padx=20, sticky="n")
 
@@ -41,8 +42,10 @@ class WelcomeUser:
         self.radio_button_1.bind('<Button-1>', self.destroy)
 
         self.start_button = customtkinter.CTkButton(self.welcome_frame, text="Start",
-                                                    fg_color=theme.button_color,
-                                                    text_color=theme.button_text_color
+                                                    fg_color=self.theme.button_color,
+                                                    text_color=self.theme.button_text_color,
+                                                    width=self.theme.main_button_width
+
                                                     )
         self.start_button.grid(row=3, column=0, padx=20, pady=(65, 19))
 
