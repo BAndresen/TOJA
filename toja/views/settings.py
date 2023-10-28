@@ -6,6 +6,7 @@ from customtkinter.windows.widgets.font import ctk_font
 class Settings:
     def __init__(self, root, theme: Theme):
         self.root = root
+        self.theme = theme
         self.settings_window = customtkinter.CTkToplevel(root)
         self.settings_window.attributes('-topmost', 'true')
         # bold_font = ctk_font.CTkFont(family="Helvetica", size=12, weight="bold")
@@ -36,17 +37,17 @@ class Settings:
         self.accent_color_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.icon_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Icon Mode:')
-        self.icon_mode_label.grid(row=3, column=0)
+        self.icon_mode_label.grid(row=3, column=0, sticky='e')
         self.icon_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
-                                                        button_color=theme.button_color,
-                                                        progress_color=theme.accent_color)
+                                                        button_color=self.theme.button_color,
+                                                        progress_color=self.theme.accent_color)
         self.icon_mode_switch.grid(row=3, column=1)
 
         self.appearance_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance Mode:')
-        self.appearance_mode_label.grid(row=4, column=0)
+        self.appearance_mode_label.grid(row=4, column=0, sticky='e')
         self.appearance_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
-                                                              button_color=theme.button_color,
-                                                              progress_color=theme.accent_color
+                                                              button_color=self.theme.button_color,
+                                                              progress_color=self.theme.accent_color
                                                               )
         self.appearance_mode_switch.grid(row=4, column=1)
 
@@ -71,12 +72,16 @@ class Settings:
         self.button_frame = customtkinter.CTkFrame(self.main_frame)
         self.button_frame.grid(row=2, column=0)
         self.submit_button = customtkinter.CTkButton(self.button_frame, text="Submit",
-                                                     fg_color=theme.button_color,
-                                                     text_color=theme.button_text_color
+                                                     fg_color=self.theme.button_color,
+                                                     text_color=self.theme.button_text_color
                                                      )
         self.submit_button.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
         self.apply_button = customtkinter.CTkButton(self.appearance_frame, text="Apply",
-                                                    fg_color=theme.button_color,
-                                                    text_color=theme.button_text_color
+                                                    fg_color=self.theme.button_color,
+                                                    text_color=self.theme.button_text_color
                                                     )
         self.apply_button.grid(row=5, column=1, padx=20, pady=20, sticky='nsew')
+
+    def update_icon_text(self):
+        self.submit_button.configure(text_color=self.theme.button_text_color)
+        self.apply_button.configure(text_color=self.theme.button_text_color)

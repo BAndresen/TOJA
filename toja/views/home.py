@@ -449,7 +449,7 @@ class HomeView(customtkinter.CTk):
         v = customtkinter.Variable(self, int(value))
         self.threshold_entry.configure(textvariable=v)
 
-    def update_icons(self):
+    def update_icon_paths(self):
         self.plus_icon = customtkinter.CTkImage(Image.open(os.path.join(self.icon_path, self.theme.icon_plus)),
                                                 size=(20, 20))
         self.delete_icon = customtkinter.CTkImage(
@@ -505,7 +505,6 @@ class HomeView(customtkinter.CTk):
 
         second_frame_list = [
             self.job_list_frame,
-            self.button_frame,
             self.stat_board_frame,
             self.calendar_frame,
             self.event_button_frame,
@@ -527,6 +526,7 @@ class HomeView(customtkinter.CTk):
             self.network_frame,
             self.jd_frame,
             self.resume_frame,
+            self.button_frame,
 
         ]
         for frame in main_frame_list:
@@ -552,4 +552,17 @@ class HomeView(customtkinter.CTk):
 
         for label in label_list:
             label.configure(text_color=self.theme.text_color)
+
+    def update_icon_mode(self):
+        self.update_icon_paths()
+        self.new_job_button.configure(image=self.plus_icon)
+        self.delete_job_button.configure(image=self.delete_icon)
+        self.event_new_button.configure(image=self.plus_icon)
+        self.event_delete_button.configure(image=self.delete_icon)
+        self.network_new_contact_button.configure(image=self.plus_icon)
+        self.network_delete_job_button.configure(image=self.delete_icon)
+        self.jd_search_button.configure(text_color=self.theme.button_text_color)
+        self.resume_browse_button.configure(text_color=self.theme.button_text_color)
+        self.resume_search_button.configure(text_color=self.theme.button_text_color)
+
 

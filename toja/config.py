@@ -34,7 +34,7 @@ class Config:
         self.set_font()
         self.set_button_color()
         self.set_accent_color()
-        self.set_icon_color()
+        self.set_icon_mode()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -94,7 +94,12 @@ class Config:
     def get_icon_mode(self) -> str:
         return self.config_parser['theme']['icon_mode']
 
-    def set_icon_color(self):
+    def update_icon_mode(self, mode):
+        self.config_parser['theme']['icon_mode'] = mode
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
+    def set_icon_mode(self):
         self.icon_mode = self.get_icon_mode()
         self.set_button_text_color(self.icon_mode)
         if self.icon_mode == 'Light':

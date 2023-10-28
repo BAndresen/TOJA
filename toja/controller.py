@@ -143,17 +143,26 @@ class Controller:
         self.settings.job_keyword_results_entry.configure(
             placeholder_text=self.model.config.get_num_keywords(job_description=True))
         self.settings.resume_keyword_entry.configure(placeholder_text=self.model.config.get_num_keywords(resume=True))
-
         self.settings.apply_button.configure(command=self.apply_settings)
         self.settings.submit_button.configure(command=self.submit_settings)
-        print(self.model.config.theme.button_color)
 
     def apply_settings(self):
-        self.model.config.theme.button_color = self.settings.button_color_entry.get()
+        self.update_icon_mode()
         self.update_appearance_mode()
 
+    def update_icon_mode(self):
+        if not self.settings.icon_mode_switch.get():  # Light mode
+            self.model.config.icon_mode = 'Light'
+            self.model.config.update_icon_mode('Light')
+        else:  # Dark mode
+            self.model.config.icon_mode = 'Dark'
+            self.model.config.update_icon_mode('Dark')
+        self.model.config.set_icon_mode()
+        self.view.update_icon_mode()
+        self.model.config.set_button_text_color(self.model.config.icon_mode)
+        self.settings.update_icon_text()
+
     def submit_settings(self):
-        self.model.config.theme.button_color = self.settings.button_color_entry.get()
         if not self.settings.appearance_mode_switch.get():  # Light mode
             self.model.config.appearance_mode = 'Light'
             self.model.config.update_appearance_mode('Light')
@@ -163,8 +172,8 @@ class Controller:
             self.model.config.update_appearance_mode('Dark')
             customtkinter.set_appearance_mode('Dark')
         self.settings.settings_window.destroy()
-
         self.update_appearance_mode()
+        self.update_icon_mode()
 
     def update_appearance_mode(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode
@@ -174,7 +183,7 @@ class Controller:
             self.model.config.appearance_mode = 'Dark'
             self.model.config.update_appearance_mode('Dark')
         self.model.config.set_appearance_mode()
-        self.view.update_icons()
+        self.view.update_icon_paths()
         self.view.update_home_theme()
         self.model.config.set_button_color()
 
