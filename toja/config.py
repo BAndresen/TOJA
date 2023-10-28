@@ -23,6 +23,10 @@ class Config:
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
         self.set_theme()
+        if self.get_appearance_mode() == "Light":
+            customtkinter.set_appearance_mode('Light')
+        else:
+            customtkinter.set_appearance_mode('Dark')
 
     def set_theme(self):
         self.appearance_mode = self.get_appearance_mode()

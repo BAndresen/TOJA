@@ -75,3 +75,8 @@ class Settings:
                                                      text_color=theme.button_text_color
                                                      )
         self.submit_button.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
+        self.apply_button = customtkinter.CTkButton(self.appearance_frame, text="Apply",
+                                                    fg_color=theme.button_color,
+                                                    text_color=theme.button_text_color
+                                                    )
+        self.apply_button.grid(row=5, column=1, padx=20, pady=20, sticky='nsew')

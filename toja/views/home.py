@@ -12,7 +12,6 @@ from .theme import Theme
 class HomeView(customtkinter.CTk):
     def __init__(self, theme: Theme):
         super().__init__()
-
         self.theme = theme
 
         # image icons
@@ -125,19 +124,24 @@ class HomeView(customtkinter.CTk):
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
         self.stat_board_frame.grid(row=0, column=2, padx=20, pady=20, sticky="nsew")
 
-        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:")
+        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:",
+                                                         text_color=self.theme.text_color)
         self.total_points_label.grid(row=0, column=0, padx=(20, 5), pady=(20, 5), sticky="e")
-        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="")
+        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="",
+                                                   text_color=self.theme.text_color)
         self.total_points.grid(row=0, column=1, padx=(5, 20), pady=(20, 5), sticky="w")
 
-        self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level")
+        self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level",
+                                                 text_color=self.theme.text_color)
         self.next_level.grid(row=1, column=0, padx=(20, 5), pady=5, sticky="e")
         self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame, progress_color=self.theme.accent_color)
         self.progress_bar.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="ew")
 
-        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:")
+        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:",
+                                                          text_color=self.theme.text_color)
         self.current_level_label.grid(row=2, column=0, padx=(20, 5), pady=5, sticky="e")
-        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="")
+        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="",
+                                                    text_color=self.theme.text_color)
         self.current_level.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="w")
 
         # Graph - Days vs Events
@@ -151,13 +155,21 @@ class HomeView(customtkinter.CTk):
 
         self.event_button_frame = customtkinter.CTkFrame(self.event_frame, fg_color=self.theme.second_frame)
         self.event_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
-        self.event_new_button = customtkinter.CTkButton(self.event_button_frame, text="", image=self.plus_icon,
+        self.event_new_button = customtkinter.CTkButton(self.event_button_frame,
+                                                        text="",
+                                                        image=self.plus_icon,
                                                         width=35,
-                                                        height=35, fg_color=self.theme.button_color, hover_color='grey15')
+                                                        height=35,
+                                                        fg_color=self.theme.button_color,
+                                                        hover_color='grey15')
         self.event_new_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
-        self.event_delete_button = customtkinter.CTkButton(self.event_button_frame, text="", image=self.delete_icon,
-                                                           width=35, height=35,
-                                                           fg_color=self.theme.button_color, hover_color='grey15')
+        self.event_delete_button = customtkinter.CTkButton(self.event_button_frame,
+                                                           text="",
+                                                           image=self.delete_icon,
+                                                           width=35,
+                                                           height=35,
+                                                           fg_color=self.theme.button_color,
+                                                           hover_color='grey15')
         self.event_delete_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
 
         # Recent Events
@@ -215,7 +227,7 @@ class HomeView(customtkinter.CTk):
         self.resume_title.grid(row=0, column=1)
 
         # Job Description search
-        self.jd_frame = customtkinter.CTkFrame(self.keywords_frame)
+        self.jd_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
         self.jd_frame.grid(row=1, column=0, padx=50, pady=(5, 20), sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
@@ -225,7 +237,7 @@ class HomeView(customtkinter.CTk):
                                                         text_color=self.theme.button_text_color)
         self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
-        self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame)
+        self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame, fg_color= self.theme.second_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
         # self.search_jd_frame.grid_columnconfigure(1, weight=1)
         # self.search_jd_frame.grid_columnconfigure(0, weight=1)
@@ -281,7 +293,7 @@ class HomeView(customtkinter.CTk):
         self.jd_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
 
         # Resume search
-        self.resume_frame = customtkinter.CTkFrame(self.keywords_frame)
+        self.resume_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
         self.resume_frame.grid(row=1, column=1, padx=50, pady=(5, 20), sticky='nsew')
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
@@ -291,7 +303,7 @@ class HomeView(customtkinter.CTk):
                                                             text_color=self.theme.button_text_color)
         self.resume_search_button.grid(row=2, column=0, pady=(0, 20))
 
-        self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame)
+        self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame, fg_color=self.theme.second_frame)
         self.search_resume_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
 
         self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume',
@@ -458,7 +470,6 @@ class HomeView(customtkinter.CTk):
     def update_home_theme(self):
         home_frame_button_list = [
             self.home_button,
-            self.home_button,
             self.keyword_button,
             self.events_button,
             self.network_button,
@@ -498,7 +509,6 @@ class HomeView(customtkinter.CTk):
             self.stat_board_frame,
             self.calendar_frame,
             self.event_button_frame,
-            self.event_new_button,
             self.past_events_frame,
             self.upcoming_events_frame,
             self.search_resume_frame,
@@ -533,6 +543,11 @@ class HomeView(customtkinter.CTk):
             self.upload_resume,
             self.resume_score_label,
             self.resume_score,
+            self.total_points_label,
+            self.next_level,
+            self.current_level_label,
+            self.current_level,
+            self.total_points
         ]
 
         for label in label_list:
