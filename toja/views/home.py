@@ -185,7 +185,8 @@ class HomeView(customtkinter.CTk):
                                                    selectbackground=self.theme.accent_color,
                                                    selectforeground=self.theme.text_color,
                                                    activestyle='none',
-                                                   borderwidth=0)
+                                                   borderwidth=0,
+                                                   height=25)
         self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
 
         # Upcoming Events

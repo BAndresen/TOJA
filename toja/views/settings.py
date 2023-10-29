@@ -1,6 +1,7 @@
 import customtkinter
 from .theme import Theme
 from customtkinter.windows.widgets.font import ctk_font
+from CTkColorPicker import *
 
 
 class Settings:
@@ -106,3 +107,15 @@ class Settings:
     def update_accent_color(self):
         self.icon_mode_switch.configure(progress_color=self.theme.accent_color)
         self.appearance_mode_switch.configure(progress_color=self.theme.accent_color)
+
+
+    # def ask_color(self):
+    #     pick_color = AskColor()  # open the color picker
+    #     color = pick_color.get()  # get the color string
+    #     button.configure(fg_color=color)
+    #
+    # root = ctk.CTk()
+    #
+    # button = ctk.CTkButton(master=root, text="CHOOSE COLOR", text_color="black", command=ask_color)
+    # button.pack(padx=30, pady=20)
+    # root.mainloop()
