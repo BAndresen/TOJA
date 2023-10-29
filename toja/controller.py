@@ -133,8 +133,8 @@ class Controller:
 
     def open_settings(self):
         self.settings = Settings(self.view, self.view.theme)
-        self.settings.accent_color_entry.configure(placeholder_text=self.model.config.get_accent_color())
-        self.settings.button_color_entry.configure(placeholder_text=self.model.config.get_button_color())
+        self.settings.accent_color_button.configure(fg_color=self.model.config.get_accent_color())
+        self.settings.button_color_button.configure(fg_color=self.model.config.get_button_color())
         if self.model.config.icon_mode == "Dark":
             self.settings.icon_mode_switch.select()
         if self.model.config.appearance_mode == "Dark":
@@ -153,15 +153,15 @@ class Controller:
         self.update_accent_color()
 
     def update_accent_color(self):
-        if self.settings.accent_color_entry.get():
-            self.model.config.update_accent_color(self.settings.accent_color_entry.get())
+        if self.settings.accent_color_button.cget('fg_color'):
+            self.model.config.update_accent_color(self.settings.accent_color_button.cget('fg_color'))
             self.model.config.set_accent_color()
             self.view.update_accent_color()
             self.settings.update_accent_color()
 
     def update_button_color(self):
-        if self.settings.button_color_entry.get():
-            self.model.config.update_button_color(self.settings.button_color_entry.get())
+        if self.settings.button_color_button.cget('fg_color') != self.model.config.theme.button_color:
+            self.model.config.update_button_color(self.settings.button_color_button.cget('fg_color'))
             self.model.config.set_button_color()
             self.view.update_button_color()
             self.settings.update_button_color()

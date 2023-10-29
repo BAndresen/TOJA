@@ -27,13 +27,22 @@ class Settings:
         self.appearance_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance')
         self.appearance_label.grid(row=0, column=0)
 
-        self.button_color_entry = customtkinter.CTkEntry(self.appearance_frame)
-        self.button_color_entry.grid(row=1, column=1, padx=(5, 20), pady=2)
+        self.button_color_button = customtkinter.CTkButton(self.appearance_frame, text='',
+                                                           width=22,
+                                                           height=22,
+                                                           corner_radius=10,
+                                                           command=self.get_button_color)
+        self.button_color_button.grid(row=1, column=1, padx=(5, 20), pady=2)
         self.button_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Button Color:')
         self.button_color_label.grid(row=1, column=0, padx=(20, 5), pady=2, sticky="e")
 
-        self.accent_color_entry = customtkinter.CTkEntry(self.appearance_frame)
-        self.accent_color_entry.grid(row=2, column=1, padx=(5, 20), pady=2)
+        self.accent_color_button = customtkinter.CTkButton(self.appearance_frame, text='',
+                                                           width=22,
+                                                           height=22,
+                                                           corner_radius=10,
+                                                           command=self.get_accent_color
+                                                           )
+        self.accent_color_button.grid(row=2, column=1, padx=(5, 20), pady=2)
         self.accent_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Accent Color:')
         self.accent_color_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
@@ -45,7 +54,7 @@ class Settings:
         self.icon_mode_switch.grid(row=3, column=1)
 
         self.appearance_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance Mode:')
-        self.appearance_mode_label.grid(row=4, column=0, sticky='e', padx=(10,0))
+        self.appearance_mode_label.grid(row=4, column=0, sticky='e', padx=(10, 0))
         self.appearance_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
                                                               button_color=self.theme.button_color,
                                                               progress_color=self.theme.accent_color
@@ -65,9 +74,9 @@ class Settings:
         self.job_keyword_results_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
         self.resume_keyword_entry = customtkinter.CTkEntry(self.keyword_frame, width=45)
-        self.resume_keyword_entry.grid(row=3, column=1, padx=(5, 20), pady=(2,10), sticky='w')
+        self.resume_keyword_entry.grid(row=3, column=1, padx=(5, 20), pady=(2, 10), sticky='w')
         self.resume_keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Resume Results:')
-        self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=(2,10), sticky="e")
+        self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
 
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.main_frame, corner_radius=0)
@@ -78,14 +87,14 @@ class Settings:
                                                      text_color=self.theme.button_text_color,
                                                      width=self.theme.main_button_width
                                                      )
-        self.submit_button.grid(row=0, column=1, padx=10, pady=10,)
+        self.submit_button.grid(row=0, column=1, padx=10, pady=10, )
 
         self.cancel_button = customtkinter.CTkButton(self.button_frame, text="Cancel",
                                                      fg_color=self.theme.button_color,
                                                      text_color=self.theme.button_text_color,
                                                      width=self.theme.main_button_width
                                                      )
-        self.cancel_button.grid(row=0, column=2, padx=10, pady=10,)
+        self.cancel_button.grid(row=0, column=2, padx=10, pady=10, )
 
         self.apply_button = customtkinter.CTkButton(self.appearance_frame, text="Apply",
                                                     fg_color=self.theme.button_color,
@@ -97,25 +106,29 @@ class Settings:
     def update_icon_text(self):
         self.submit_button.configure(text_color=self.theme.button_text_color)
         self.apply_button.configure(text_color=self.theme.button_text_color)
+        self.cancel_button.configure(text_color=self.theme.button_text_color)
 
     def update_button_color(self):
         self.submit_button.configure(fg_color=self.theme.button_color)
         self.apply_button.configure(fg_color=self.theme.button_color)
         self.icon_mode_switch.configure(button_color=self.theme.button_color)
         self.appearance_mode_switch.configure(button_color=self.theme.button_color)
+        self.cancel_button.configure(fg_color=self.theme.button_color)
 
     def update_accent_color(self):
         self.icon_mode_switch.configure(progress_color=self.theme.accent_color)
         self.appearance_mode_switch.configure(progress_color=self.theme.accent_color)
 
+    def get_button_color(self):
+        pick_color = AskColor()
+        pick_color.attributes('-topmost', True)
+        color = pick_color.get()
+        if color:
+            self.button_color_button.configure(fg_color=color)
 
-    # def ask_color(self):
-    #     pick_color = AskColor()  # open the color picker
-    #     color = pick_color.get()  # get the color string
-    #     button.configure(fg_color=color)
-    #
-    # root = ctk.CTk()
-    #
-    # button = ctk.CTkButton(master=root, text="CHOOSE COLOR", text_color="black", command=ask_color)
-    # button.pack(padx=30, pady=20)
-    # root.mainloop()
+    def get_accent_color(self):
+        pick_color = AskColor()
+        pick_color.attributes('-topmost', True)
+        color = pick_color.get()
+        if color:
+            self.accent_color_button.configure(fg_color=color)
