@@ -32,7 +32,7 @@ class Settings:
                                                            height=22,
                                                            corner_radius=10,
                                                            command=self.get_button_color)
-        self.button_color_button.grid(row=1, column=1, padx=(5, 20), pady=2)
+        self.button_color_button.grid(row=1, column=1, pady=2, padx=10, stick='w')
         self.button_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Button Color:')
         self.button_color_label.grid(row=1, column=0, padx=(20, 5), pady=2, sticky="e")
 
@@ -42,7 +42,7 @@ class Settings:
                                                            corner_radius=10,
                                                            command=self.get_accent_color
                                                            )
-        self.accent_color_button.grid(row=2, column=1, padx=(5, 20), pady=2)
+        self.accent_color_button.grid(row=2, column=1,padx=10, stick='w', pady=2)
         self.accent_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Accent Color:')
         self.accent_color_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
@@ -51,7 +51,7 @@ class Settings:
         self.icon_mode_switch = customtkinter.CTkSwitch(self.appearance_frame, text='Dark',
                                                         button_color=self.theme.button_color,
                                                         progress_color=self.theme.accent_color)
-        self.icon_mode_switch.grid(row=3, column=1)
+        self.icon_mode_switch.grid(row=3, column=1, pady=2)
 
         self.appearance_mode_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance Mode:')
         self.appearance_mode_label.grid(row=4, column=0, sticky='e', padx=(10, 0))
@@ -59,7 +59,7 @@ class Settings:
                                                               button_color=self.theme.button_color,
                                                               progress_color=self.theme.accent_color
                                                               )
-        self.appearance_mode_switch.grid(row=4, column=1)
+        self.appearance_mode_switch.grid(row=4, column=1, pady=2)
 
         # --- Keyword
         self.keyword_frame = customtkinter.CTkFrame(self.main_frame)
@@ -92,7 +92,8 @@ class Settings:
         self.cancel_button = customtkinter.CTkButton(self.button_frame, text="Cancel",
                                                      fg_color=self.theme.button_color,
                                                      text_color=self.theme.button_text_color,
-                                                     width=self.theme.main_button_width
+                                                     width=self.theme.main_button_width,
+                                                     command=self.cancel
                                                      )
         self.cancel_button.grid(row=0, column=2, padx=10, pady=10, )
 
@@ -132,3 +133,6 @@ class Settings:
         color = pick_color.get()
         if color:
             self.accent_color_button.configure(fg_color=color)
+
+    def cancel(self):
+        self.settings_window.destroy()
