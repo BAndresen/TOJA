@@ -246,7 +246,6 @@ class HomeView(customtkinter.CTk):
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
         # self.search_jd_frame.grid_columnconfigure(5, weight=1)
 
-
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:",
                                                       text_color=self.theme.text_color)
         self.search_by_label.grid(row=0, column=0)
@@ -490,6 +489,8 @@ class HomeView(customtkinter.CTk):
         self.network_icon = customtkinter.CTkImage(
             Image.open(os.path.join(self.icon_path, self.theme.icon_main_contact)),
             size=(22, 22))
+        self.view_icon = customtkinter.CTkImage(Image.open(os.path.join(self.icon_path, self.theme.icon_visible)),
+                                                size=(22, 22))
 
     def update_home_theme(self):
         home_frame_button_list = [
@@ -505,6 +506,8 @@ class HomeView(customtkinter.CTk):
         self.events_button.configure(image=self.event_icon)
         self.network_button.configure(image=self.network_icon)
         self.home_frame.configure(fg_color=self.theme.main_frame)
+        self.view_position.configure(fg_color=self.theme.second_frame, image=self.view_icon)
+        self.position_tooltip.configure(bg_color=self.theme.listbox_bg)
 
         for buttons in home_frame_button_list:
             buttons.configure(text_color=self.theme.text_color)
