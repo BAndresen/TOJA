@@ -15,7 +15,7 @@ from views.home import HomeView
 from views.event_new import NewEvent
 from views.contact_new import NewContact
 from views.job_edit import EditJob
-from views.job_description import JobDescription
+from views.job_description import JobDescriptionView
 from views.user_welcome import WelcomeUser
 from views.user_select import UserSelect
 from views.user_new import CreateUser
@@ -49,9 +49,11 @@ class Controller:
         self.view.event_new_button.configure(command=self.new_event_home)
         self.view.event_delete_button.configure(command=self.delete_event)
 
+        #  Keywords
         self.view.jd_search_button.configure(command=self.search_job_button)
         self.view.resume_browse_button.configure(command=self.browse_resume_button)
         self.view.resume_search_button.configure(command=self.search_resume_button)
+        self.view.view_position.configure(command=self.display_position)
 
         # HomeView ListBox Bind
         self.view.job_list_box.bind('<Double-Button-1>', self.double_click_job)
@@ -565,7 +567,7 @@ class Controller:
             else:
                 print("Unsupported operating system.")
         else:
-            self.new_job_description = JobDescription(self.view)
+            self.new_job_description = JobDescriptionView(self.view)
             self.new_job_description.submit_job_description.configure(command=self.save_job_description)
 
     def save_job_description(self):
@@ -593,28 +595,43 @@ class Controller:
         self.view.progress_bar.set(progress_value)
 
     def search_job_button(self):
-        list_of_jobs = None
+        self.list_of_jobs = None
         if self.view.radio_var.get() == 0:
-            list_of_jobs = self.model.get_filenames(self.user_id)
+            self.list_of_jobs = self.model.get_filenames(self.user_id)
         elif self.view.radio_var.get() == 1:
             job_entry = self.view.job_id_entry.get()
-            list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
+            self.list_of_jobs = self.model.get_filenames(self.user_id, job_id=job_entry, single_job=True)
         elif self.view.radio_var.get() == 2:
             position = self.view.position_entry.get()
             if self.view.threshold_entry.get():
                 threshold = int(self.view.threshold_entry.get())
             else:
                 threshold = 80
-            list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position, threshold=threshold)
+            self.list_of_jobs = self.model.get_filenames_fuzzy(self.user_id, position, threshold=threshold)
         self.job_description = JobDescription()
-        self.job_description.num_of_jobs = len(list_of_jobs)
-        text = utils.load_job_file(list_of_jobs, self.model.config.job_description_parent)
+        self.job_description.num_of_jobs = len(self.list_of_jobs)
+        text = utils.load_job_file(self.list_of_jobs, self.model.config.job_description_parent)
         self.jd_keywords = KeywordExtractor()
         self.extracted_keywords = self.jd_keywords.extract_keywords(text,
                                                                     num_keywords=self.model.config.get_num_keywords(
                                                                         job_description=True))
         self.update_jd_keyword_listbox()
         self.job_description.keywords = self.extracted_keywords
+
+    def get_position_fuzzy(self):
+        if self.view.threshold_entry.get():
+            threshold = int(self.view.threshold_entry.get())
+        else:
+            threshold = 80
+        return self.model.get_position_fuzzy(self.user_id, self.view.position_entry.get(),threshold=threshold)
+
+    def display_position(self):
+        results = self.get_position_fuzzy()
+        display_results = ''
+        for position in results:
+            display_results += str(position)
+            display_results += '\n'
+        self.view.position_tooltip.configure(message=display_results)
 
     def update_jd_keyword_listbox(self):
         self.view.jd_search_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)

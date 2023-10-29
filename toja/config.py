@@ -156,6 +156,7 @@ class Config:
         self.theme.icon_keyword = constant.KEYWORD_WHITE
         self.theme.icon_main_event = constant.EVENT_HOME_WHITE
         self.theme.icon_main_contact = constant.CONTACT_HOME_WHITE
+        self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_light_mode(self):
         self.theme.home_frame_background = 'grey85'
@@ -170,6 +171,7 @@ class Config:
         self.theme.icon_keyword = constant.KEYWORD
         self.theme.icon_main_event = constant.EVENT_HOME
         self.theme.icon_main_contact = constant.CONTACT_HOME
+        self.theme.icon_visible = constant.VISIBLE
 
     def set_button_text_color(self, mode: str):
         if mode == 'Light':

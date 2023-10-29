@@ -35,5 +35,3 @@ class Theme:
         self.icon_visible = ''
         self.icon_main_contact = ''
         self.icon_main_event = ''
-
-

@@ -1,7 +1,7 @@
 import customtkinter
 
 
-class JobDescription:
+class JobDescriptionView:
     def __init__(self, root):
         self.root = root
         self.jd_window = customtkinter.CTkToplevel(root)

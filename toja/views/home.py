@@ -26,8 +26,11 @@ class HomeView(customtkinter.CTk):
                                                    size=(22, 22))
         self.event_icon = customtkinter.CTkImage(Image.open(os.path.join(self.icon_path, self.theme.icon_main_event)),
                                                  size=(22, 22))
-        self.network_icon = customtkinter.CTkImage(Image.open(os.path.join(self.icon_path, self.theme.icon_main_contact)),
-                                                   size=(22, 22))
+        self.network_icon = customtkinter.CTkImage(
+            Image.open(os.path.join(self.icon_path, self.theme.icon_main_contact)),
+            size=(22, 22))
+        self.view_icon = customtkinter.CTkImage(Image.open(os.path.join(self.icon_path, self.theme.icon_visible)),
+                                                size=(22, 22))
 
         # Configure Window
         self.frame = "home"
@@ -229,20 +232,20 @@ class HomeView(customtkinter.CTk):
 
         # Job Description search
         self.jd_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.jd_frame.grid(row=1, column=0, padx=50, pady=(5, 20), sticky='nsew')
+        self.jd_frame.grid(row=1, column=0, padx=20, pady=(5, 20), sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
         self.jd_search_button = customtkinter.CTkButton(self.jd_frame, text='Search',
                                                         fg_color=self.theme.button_color,
                                                         text_color=self.theme.button_text_color,
-                                                        width = self.theme.main_button_width)
+                                                        width=self.theme.main_button_width)
         self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
-        self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame, fg_color= self.theme.second_frame)
+        self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame, fg_color=self.theme.second_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
-        # self.search_jd_frame.grid_columnconfigure(1, weight=1)
-        # self.search_jd_frame.grid_columnconfigure(0, weight=1)
+        # self.search_jd_frame.grid_columnconfigure(5, weight=1)
+
 
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:",
                                                       text_color=self.theme.text_color)
@@ -271,6 +274,11 @@ class HomeView(customtkinter.CTk):
 
         self.job_id_entry = customtkinter.CTkEntry(self.search_jd_frame)
         self.position_entry = customtkinter.CTkEntry(self.search_jd_frame)
+        self.view_position = customtkinter.CTkButton(self.search_jd_frame, text='', image=self.view_icon,
+                                                     fg_color=self.theme.second_frame,
+                                                     width=35)
+
+        self.position_tooltip = CTkToolTip(self.view_position, delay=0.01, message='',bg_color=self.theme.listbox_bg)
 
         self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value,
                                                 button_color=self.theme.accent_color)
@@ -315,7 +323,7 @@ class HomeView(customtkinter.CTk):
         self.resume_browse_button = customtkinter.CTkButton(self.search_resume_frame, text='Browse',
                                                             fg_color=self.theme.button_color,
                                                             text_color=self.theme.button_text_color,
-                                                            width = self.theme.main_button_width)
+                                                            width=self.theme.main_button_width)
         self.resume_browse_button.grid(row=1, column=0, padx=10, pady=(0, 10))
 
         self.resume_score_label = customtkinter.CTkLabel(self.search_resume_frame, text='Resume Score:',
@@ -393,9 +401,9 @@ class HomeView(customtkinter.CTk):
         ]
 
     def event_frame_button(self):
-        self.home_frame.grid_forget()
-        self.analytics_frame.grid_forget()
-        self.network_frame.grid_forget()
+        self.home_frame.grid_remove()
+        self.analytics_frame.grid_remove()
+        self.network_frame.grid_remove()
         self.event_frame.grid(row=0, column=1, sticky="nsew")
         self.events_button.configure(fg_color=self.theme.home_frame_selected)
         self.home_button.configure(fg_color='transparent')
@@ -403,9 +411,9 @@ class HomeView(customtkinter.CTk):
         self.keyword_button.configure(fg_color='transparent')
 
     def home_frame_button(self):
-        self.event_frame.grid_forget()
-        self.analytics_frame.grid_forget()
-        self.network_frame.grid_forget()
+        self.event_frame.grid_remove()
+        self.analytics_frame.grid_remove()
+        self.network_frame.grid_remove()
         self.home_frame.grid(row=0, column=1, sticky="nsew")
         self.home_button.configure(fg_color=self.theme.home_frame_selected)
         self.events_button.configure(fg_color='transparent')
@@ -413,9 +421,9 @@ class HomeView(customtkinter.CTk):
         self.keyword_button.configure(fg_color='transparent')
 
     def keyword_frame_button(self):
-        self.home_frame.grid_forget()
-        self.event_frame.grid_forget()
-        self.network_frame.grid_forget()
+        self.home_frame.grid_remove()
+        self.event_frame.grid_remove()
+        self.network_frame.grid_remove()
         self.analytics_frame.grid(row=0, column=1, sticky="nsew")
         self.keyword_button.configure(fg_color=self.theme.home_frame_selected)
         self.events_button.configure(fg_color='transparent')
@@ -423,9 +431,10 @@ class HomeView(customtkinter.CTk):
         self.network_button.configure(fg_color='transparent')
 
     def network_frame_button(self):
-        self.home_frame.grid_forget()
-        self.event_frame.grid_forget()
-        self.analytics_frame.grid_forget()
+        self.home_frame.grid_remove()
+        self.event_frame.grid_remove()
+        self.analytics_frame.grid_remove()
+        self.view_position.grid_remove()
         self.network_frame.grid(row=0, column=1, sticky="nsew")
         self.network_button.configure(fg_color=self.theme.home_frame_selected)
         self.events_button.configure(fg_color='transparent')
@@ -436,6 +445,7 @@ class HomeView(customtkinter.CTk):
         self.position_entry.grid_remove()
         self.threshold_entry.grid_remove()
         self.threshold_label.grid_remove()
+        self.view_position.grid_remove()
         self.slider_1.grid_remove()
         self.job_id_entry.grid(row=2, column=1, padx=0, sticky='w')
         self.job_id_entry.configure(placeholder_text='Enter Job ID')
@@ -443,12 +453,13 @@ class HomeView(customtkinter.CTk):
 
     def display_position(self, event):
         self.job_id_entry.grid_remove()
-        self.position_entry.grid(row=3, column=1, padx=0, sticky='w')
+        self.position_entry.grid(row=3, column=1, padx=0, sticky='ew')
         self.position_entry.configure(placeholder_text='Enter Position')
         self.threshold_entry.grid(row=4, column=2, padx=0, pady=5, sticky='w')
         self.threshold_label.grid(row=4, column=0, sticky="e", padx=3)
         self.slider_1.grid(row=4, column=1, sticky="w")
         self.radio_button_3.grid(pady=5)
+        self.view_position.grid(row=3, column=2, sticky='w')
 
     def destroy_entry(self, event):
         self.job_id_entry.grid_remove()
@@ -588,7 +599,3 @@ class HomeView(customtkinter.CTk):
         self.slider_1.configure(button_color=self.theme.accent_color)
         for listbox in self.home_list_box_list:
             listbox.configure(selectbackground=self.theme.accent_color)
-
-
-
-

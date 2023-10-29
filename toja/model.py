@@ -265,7 +265,7 @@ class Model:
         return results
 
     def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
-        job_file = os.path.join(self.config.job_description_parent,job_file)
+        job_file = os.path.join(self.config.job_description_parent, job_file)
         try:
             with open(job_file, "r", encoding='utf-8') as file:
                 results = file.read()
@@ -495,7 +495,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_filenames_fuzzy(self, user_id, position: str, threshold: int):
+    def get_filenames_fuzzy(self, user_id, position: str, threshold: int) -> list:
         query = f'''
             SELECT
                 position,
@@ -505,9 +505,24 @@ class Model:
             '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()
+
         matching_rows = []
         for row in results:
             if fuzz.token_sort_ratio(row[0], position) >= threshold:
                 matching_rows.append(row[1])
         return matching_rows
 
+    def get_position_fuzzy(self, user_id, position: str, threshold: int) -> set:
+        query = f'''
+            SELECT
+                position
+            FROM job
+            WHERE user_id = {user_id}        
+            '''
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        matching_rows = set()
+        for row in results:
+            if fuzz.token_sort_ratio(row[0], position) >= threshold:
+                matching_rows.add(row[0])
+        return matching_rows
