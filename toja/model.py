@@ -168,6 +168,7 @@ class Model:
             position
         FROM job
         WHERE user_id = ?
+        ORDER BY job_id DESC
         '''
         self.cursor.execute(query, (user_id,))
         results = self.cursor.fetchall()
@@ -351,7 +352,7 @@ class Model:
         FROM event e
            JOIN status s USING(status_id)
         WHERE e.date {symbol} '{today}' AND e.user_id = {user}
-        ORDER BY e.date
+        ORDER BY e.date DESC
         '''
         self.cursor.execute(query)
         results = self.cursor.fetchall()

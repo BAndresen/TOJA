@@ -34,7 +34,7 @@ class HomeView(customtkinter.CTk):
 
         # Configure Window
         self.frame = "home"
-        self.title("Track and Optimize your Job Application Process")
+        self.title("Track and Optimize your Job Applications")
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
         x_position = 0  # Start from the left edge
@@ -465,6 +465,7 @@ class HomeView(customtkinter.CTk):
         self.position_entry.grid_remove()
         self.threshold_entry.grid_remove()
         self.threshold_label.grid_remove()
+        self.view_position.grid_remove()
         self.slider_1.grid_remove()
         self.radio_button_3.grid(pady=(5, 43))
 
