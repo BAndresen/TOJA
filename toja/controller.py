@@ -415,7 +415,7 @@ class Controller:
 
     def open_job_submit(self):
         self.new_job = NewJob(self.view, self.view.theme)
-        self.new_job.submit_button.configure(command=self.submit_new_job)
+        self.new_job.submit_button.configure(command=self.validate_new_job)
 
         current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
         self.current_time = customtkinter.StringVar()
@@ -483,10 +483,16 @@ class Controller:
         self.new_event.contact_entry.configure(values=contact_list)
         self.new_event.submit_event_button.configure(command=self.submit_new_event_home)
 
-    def submit_new_job(self):
+    def validate_new_job(self):
         self.company = self.new_job.company_name_entry.get()
         self.position = self.new_job.position_title_entry.get()
-        self.job_file = f'{self.model.config.user_name}_{self.new_job.company_name_entry.get()}_{self.new_job.position_title_entry.get()}.txt',
+        if utils.validate_file_name(f'{self.company}{self.position}'):
+            self.submit_new_job()
+        else:
+            utils.showerror(self.new_job.aj_window, 'Invalid character in Position or Company')
+
+    def submit_new_job(self):
+        self.job_file = f'{self.model.config.user_name}_{self.company}_{self.position}.txt',
         job_text = self.new_job.job_description_textbox.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX)
         self.job_file = self.check_job_file(self.job_file, job_text)
         self.model.add_new_job(
@@ -624,7 +630,7 @@ class Controller:
             threshold = int(self.view.threshold_entry.get())
         else:
             threshold = 80
-        return self.model.get_position_fuzzy(self.user_id, self.view.position_entry.get(),threshold=threshold)
+        return self.model.get_position_fuzzy(self.user_id, self.view.position_entry.get(), threshold=threshold)
 
     def display_position(self):
         results = self.get_position_fuzzy()

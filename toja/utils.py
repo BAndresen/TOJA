@@ -1,7 +1,29 @@
+import tkinter
 from typing import Union
 from pathlib import Path
 import datetime
 import os
+import string
+from tkinter import messagebox, Toplevel
+
+
+def validate_file_name(file_name: str) -> bool:
+    """
+    Checks string for non-valid file name characters
+    :param file_name:
+    :return:
+    """
+    valid_char = set(string.ascii_letters + string.digits + ' -_.')
+    for char in file_name:
+        if char not in valid_char:
+            return False
+    return True
+
+
+def showerror(window: tkinter.Toplevel, error_message: str):
+    window.attributes('-alpha', 0.5)
+    messagebox.showerror(message=error_message)
+    window.attributes('-alpha', 1)
 
 
 def date_change(unit: int, day=False, hour=False, add=False, date_format='%Y-%m-%d', time_format='%I:%M%p') -> str:
@@ -58,3 +80,6 @@ def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
             print(f'Opened with Unicode utf-8 {f} {e}')
 
     return text.lower()
+
+
+
