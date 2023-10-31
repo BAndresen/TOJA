@@ -116,7 +116,8 @@ class Controller:
 
     def export_database(self):
         path = filedialog.askdirectory()
-        self.model.export_database(self.user_id, path)
+        if path:
+            self.model.export_database(self.user_id, path)
 
     def switch_users(self):
         name = self.user_select.user_entry.get()

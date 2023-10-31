@@ -89,7 +89,13 @@ class Model:
         '''
         self.cursor.execute(query, (user_name,))
         results = self.cursor.fetchall()
-        return results[0][0]
+        user_id = None
+        try:
+            user_id = results[0][0]
+        except IndexError:
+            print('no user found')
+        return user_id
+
 
     def get_all_users(self) -> list:
         query = '''
@@ -129,6 +135,8 @@ class Model:
         self.conn.commit()
 
     def get_total_points(self, user_id: int) -> int:
+        if not user_id:
+            return 0
         query = '''
         SELECT total_points
         FROM user
@@ -340,6 +348,8 @@ class Model:
     def get_all_event(self, user: int, future=False) -> list:
         today = datetime.today().strftime(constant.CURRENT_DATE_FORMAT)
         symbol = '<='
+        if not user:
+            return []
         if future:
             symbol = '>'
         query = f'''
