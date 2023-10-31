@@ -492,9 +492,11 @@ class Controller:
             utils.showerror(self.new_job.aj_window, 'Invalid character in Position or Company')
 
     def submit_new_job(self):
-        self.job_file = f'{self.model.config.user_name}_{self.company}_{self.position}.txt',
+        self.job_file = None
         job_text = self.new_job.job_description_textbox.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX)
-        self.job_file = self.check_job_file(self.job_file, job_text)
+        if job_text:
+            self.job_file = f'{self.model.config.user_name}_{self.company}_{self.position}.txt'
+
         self.model.add_new_job(
             self.position,
             self.company,
@@ -518,12 +520,6 @@ class Controller:
             self.model.save_job_description(self.job_file, job_text)
         self.update_home()
         self.new_job.aj_window.destroy()
-
-    def check_job_file(self, job_file, job_text) -> Union[str, None]:
-        if job_text == "":
-            return None
-        else:
-            return job_file[0]
 
     def update_event_listbox(self):
         self.job_profile.event_scroll.bind('<Double-Button-1>', self.double_click_event_job_profile)
@@ -578,15 +574,15 @@ class Controller:
             self.new_job_description.submit_job_description.configure(command=self.save_job_description)
 
     def save_job_description(self):
-        self.job_file_only = f'{self.model.config.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt',
+        self.job_file_only = None
         job_text = self.new_job_description.job_description_textbox_only.get(
             constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX)
-        self.job_file_only = self.check_job_file(self.job_file_only, job_text)
-        if self.job_file_only:
+
+        if job_text:
+            self.job_file_only = f'{self.model.config.user_name}_{self.jp_results[0]}_{self.jp_results[2]}.txt'
             self.model.save_job_description(self.job_file_only, job_text)
 
         self.new_job_description.jd_window.destroy()
-
         self.model.update_job(self.job_id, 'job_description_file', self.job_file_only)
         self.update_job_description()
 
