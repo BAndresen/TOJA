@@ -190,7 +190,7 @@ class HomeView(customtkinter.CTk):
                                                    activestyle='none',
                                                    borderwidth=0,
                                                    height=25)
-        self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
+        self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame, fg_color=self.theme.second_frame)
@@ -207,7 +207,7 @@ class HomeView(customtkinter.CTk):
                                                        selectforeground=self.theme.text_color,
                                                        activestyle='none',
                                                        borderwidth=0)
-        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=20)
+        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
 
         # --------------- Keywords -------------- #
 
@@ -244,7 +244,7 @@ class HomeView(customtkinter.CTk):
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame, fg_color=self.theme.second_frame)
         self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
-        # self.search_jd_frame.grid_columnconfigure(5, weight=1)
+        # self.search_jd_frame.grid_columnconfigure(3, weight=1)
 
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:",
                                                       text_color=self.theme.text_color)
@@ -299,7 +299,7 @@ class HomeView(customtkinter.CTk):
                                                  activestyle='none',
                                                  borderwidth=0,
                                                  )
-        self.jd_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
+        self.jd_search_listbox.grid(row=1, column=0, padx=20, pady=(5, 20), sticky='nsew')
 
         # Resume search
         self.resume_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
@@ -342,7 +342,7 @@ class HomeView(customtkinter.CTk):
                                                      activestyle='none',
                                                      borderwidth=0,
                                                      )
-        self.resume_search_listbox.grid(row=1, column=0, padx=50, pady=(5, 50), sticky='nsew')
+        self.resume_search_listbox.grid(row=1, column=0, padx=20, pady=(5, 20), sticky='nsew')
 
         # --------------- Network -------------- #
 
@@ -376,7 +376,7 @@ class HomeView(customtkinter.CTk):
                                                selectforeground=self.theme.text_color,
                                                activestyle='none',
                                                borderwidth=0, height=15)
-        self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=10)
+        self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
 
         # -------------- File Menu -------------- #
         self.menubar = Menu(self)
@@ -454,11 +454,11 @@ class HomeView(customtkinter.CTk):
         self.job_id_entry.grid_remove()
         self.position_entry.grid(row=3, column=1, padx=0, sticky='ew')
         self.position_entry.configure(placeholder_text='Enter Position')
-        self.threshold_entry.grid(row=4, column=2, padx=0, pady=5, sticky='w')
+        self.threshold_entry.grid(row=4, column=2, padx=0, pady=5,)
         self.threshold_label.grid(row=4, column=0, sticky="e", padx=3)
         self.slider_1.grid(row=4, column=1, sticky="w")
         self.radio_button_3.grid(pady=5)
-        self.view_position.grid(row=3, column=2, sticky='w')
+        self.view_position.grid(row=3, column=2,)
 
     def destroy_entry(self, event):
         self.job_id_entry.grid_remove()

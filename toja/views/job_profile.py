@@ -101,7 +101,9 @@ class JobProfile:
 
         # description
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.text_color,
-                                                    segmented_button_selected_color=theme.accent_color
+                                                    segmented_button_selected_color=theme.accent_color,
+                                                    segmented_button_fg_color=theme.main_frame,
+                                                    segmented_button_unselected_color=theme.main_frame
                                                     )
         self.job_tabview.grid(row=2, column=0, columnspan=3, padx=(20, 5), pady=20, sticky='nsew')
         self.job_tabview.add("Description")
