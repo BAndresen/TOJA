@@ -2,7 +2,7 @@ import tkinter
 import customtkinter
 
 from .theme import Theme
-import toja.constants as constant
+import constants as constant
 
 
 class WelcomeUser:

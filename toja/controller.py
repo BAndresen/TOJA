@@ -24,8 +24,8 @@ from views.settings import Settings
 from views.contact_view import Contact
 from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
-import toja.utils as utils
-import toja.constants as constant
+import utils as utils
+import constants as constant
 
 
 class Controller:

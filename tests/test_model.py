@@ -6,22 +6,23 @@ from pathlib import Path
 import sys
 import os
 
-current_dir = os.getcwd()
-sys.path.append(current_dir)
+import toja.constants as constant
+parent_dir = Path(__file__).resolve().parents[1]
+sys.path.append(os.path.join(parent_dir, constant.APPLICATION_DIRECTORY))
 
 from toja.database.create_database import create_toja_database
 from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
 from toja.model import Model
 from toja.model import Config
-import toja.constants as constant
-from .fake_data import FakeData
+from tests.fake_data import FakeData
 
 
 class TestModel(unittest.TestCase):
 
     def setUp(self):
         self.config_mock = Mock()
-        self.config_mock.base_dir = Path(__file__).resolve().parent
+        self.parent_dir = Path(__file__).resolve().parents[1]
+        self.config_mock.base_dir = os.path.join(parent_dir, constant.APPLICATION_DIRECTORY)
         self.config_mock.job_description_parent = os.path.join(self.config_mock.base_dir,
                                                                constant.JOB_DESCRIPTION_DIRECTORY)
         self.config_mock.user_name = 'test_user'

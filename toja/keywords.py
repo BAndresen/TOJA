@@ -4,7 +4,7 @@ import subprocess
 from PyPDF2 import PdfReader
 from collections import Counter
 
-import toja.constants as constant
+import constants as constant
 
 
 class JobDescription:

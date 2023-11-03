@@ -2,7 +2,8 @@ import customtkinter
 
 from views.home import HomeView
 from views.theme import Theme
-from model import Model, Config
+from model import Model
+from config import Config
 from controller import Controller
 
 

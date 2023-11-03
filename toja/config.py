@@ -4,8 +4,8 @@ import platform
 import os
 import customtkinter
 
-import toja.constants as constant
-from toja.views.theme import Theme
+import constants as constant
+from views.theme import Theme
 
 
 class Config:

@@ -3,8 +3,8 @@ import customtkinter
 import os
 from PIL import Image
 
-from toja.views.theme import Theme
-import toja.constants as constant
+from views.theme import Theme
+import constants as constant
 
 
 class JobProfile:

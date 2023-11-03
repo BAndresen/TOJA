@@ -7,15 +7,11 @@ import csv
 import sys
 from fuzzywuzzy import fuzz
 
-current_directory = os.getcwd()
-parent = os.path.dirname(current_directory)
-sys.path.append(parent)
-
-from toja.config import Config
-from toja.database.create_database import create_toja_database
-from toja.database.sample_event import events_applied, insert_future_events, insert_past_events
-from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
-import toja.constants as constant
+from config import Config
+from database.create_database import create_toja_database
+from database.sample_event import events_applied, insert_future_events, insert_past_events
+from database.sample_event import event_applied_notes, events_past_notes, events_future_notes
+import constants as constant
 
 
 class Model:
@@ -36,16 +32,11 @@ class Model:
         self.conn.close()
 
     def set_sample_data(self):
-        relative_path_job = 'database/sample_job.sql'
-        relative_path_contact = 'database/sample_contact.sql'
-        file_path_job = os.path.join(current_directory, relative_path_job)
-        file_path_contact = os.path.join(current_directory, relative_path_contact)
-
-        if not os.path.exists(file_path_job):
-            relative_path_job = 'toja/database/sample_job.sql'
-            relative_path_contact = 'toja/database/sample_contact.sql'
-            file_path_job = os.path.join(current_directory, relative_path_job)
-            file_path_contact = os.path.join(current_directory, relative_path_contact)
+        relative_path_job = os.path.join(constant.DATABASE_DIRECTORY,
+                                         constant.SAMPLE_JOB)
+        relative_path_contact = os.path.join(constant.DATABASE_DIRECTORY, constant.SAMPLE_CONTACT)
+        file_path_job = os.path.join(self.config.base_dir, relative_path_job)
+        file_path_contact = os.path.join(self.config.base_dir, relative_path_contact)
 
         with open(file_path_job, 'r') as file:
             sql_query = file.read()
@@ -272,8 +263,8 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def open_job_description(self, job_file: Union[Path, tuple[str]]) -> str:
-        job_file = os.path.join(self.config.job_description_parent, job_file)
+    def open_job_description(self, description_file: Union[Path, tuple[str]]) -> str:
+        job_file = os.path.join(self.config.job_description_parent, description_file)
         try:
             with open(job_file, "r", encoding='utf-8') as file:
                 results = file.read()

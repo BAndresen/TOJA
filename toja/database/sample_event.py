@@ -1,4 +1,5 @@
-from toja.utils import date_change
+
+from utils import date_change
 from random import randrange
 
 event_applied_notes = [

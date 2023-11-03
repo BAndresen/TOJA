@@ -1,7 +1,7 @@
 import customtkinter
 from tkcalendar import DateEntry
 
-import toja.constants as constant
+import constants as constant
 from .theme import Theme
 
 

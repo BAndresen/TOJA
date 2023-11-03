@@ -3,9 +3,11 @@
 CONFIG_FILE = 'config.ini'
 DATABASE_DIRECTORY = 'database'
 DATABASE_NAME = 'toja_database.db'
+APPLICATION_DIRECTORY = 'toja'
 JOB_DESCRIPTION_DIRECTORY = 'job_descriptions'
 SAMPLE_USER_NAME = 'Sample'
-
+SAMPLE_JOB = 'sample_job.sql'
+SAMPLE_CONTACT = 'sample_contact.sql'
 
 # Job Entry Variables
 EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
