@@ -96,7 +96,6 @@ class Model:
             print('no user found')
         return user_id
 
-
     def get_all_users(self) -> list:
         query = '''
         SELECT name

@@ -10,6 +10,7 @@ current_dir = os.getcwd()
 sys.path.append(current_dir)
 
 from toja.database.create_database import create_toja_database
+from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
 from toja.model import Model
 from toja.model import Config
 import toja.constants as constant
@@ -19,10 +20,9 @@ from .fake_data import FakeData
 class TestModel(unittest.TestCase):
 
     def setUp(self):
-        # self.user_config = Config()
         config_mock = Mock()
         config_mock.base_dir = Path(__file__).resolve().parent
-        config_mock.job_description_parent = os.path.join(config_mock.base_dir,constant.JOB_DESCRIPTION_DIRECTORY)
+        config_mock.job_description_parent = os.path.join(config_mock.base_dir, constant.JOB_DESCRIPTION_DIRECTORY)
         config_mock.user_name = 'test_user'
         config_mock.database_path = ':memory:'
 
@@ -31,6 +31,27 @@ class TestModel(unittest.TestCase):
         self.model.cursor = self.model.conn.cursor()
 
         create_toja_database(self.model.cursor, self.model.conn)
+
+    def test_sample_data(self):
+        # populate database with sample data
+        self.model.set_sample_data()
+
+        # get random event note and all events and check if randon event note is in all event notes
+        random_event_note = (self.model.get_event(random.randint(1, 34), event=True))[0][7]
+        past_events = self.model.get_all_event(1)
+        future_events = self.model.get_all_event(1, future=True)
+        all_events = past_events + future_events
+
+        found = False
+        for events in all_events:
+            if events[3] == random_event_note:
+                self.assertEqual(random_event_note, events[3])
+                found = True
+
+        if not found:
+            for events in all_events:
+                print(events[3])
+            self.fail(f'Random event note not found: {random_event_note}')
 
     def test_user(self):
         user_1 = FakeData()
