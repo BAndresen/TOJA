@@ -47,10 +47,7 @@ class TestModel(unittest.TestCase):
             if events[3] == random_event_note:
                 self.assertEqual(random_event_note, events[3])
                 found = True
-
         if not found:
-            for events in all_events:
-                print(events[3])
             self.fail(f'Random event note not found: {random_event_note}')
 
     def test_user(self):
@@ -102,6 +99,7 @@ class TestModel(unittest.TestCase):
         self.assertEqual(past_events2[1], fake2.current_date)
         self.assertEqual(past_events2[2], fake2.current_time)
         self.assertEqual(past_events2[3], fake2.event_note)
+        self.assertEqual(self.model.get_all_event(None), [])
 
         # test get_event
         past_event3 = self.model.get_event(1, job=True)[0]
@@ -125,6 +123,7 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results[3], fake1.email)
         self.assertEqual(results[4], fake1.phone)
         self.assertEqual(results[5], fake1.position)
+        self.assertEqual((self.model.get_contacts(1, get_contact_by_id=True)[0][1]), fake1.first_name)
 
         # get all contacts
         results_all = self.model.get_all_contacts(1)[1]
