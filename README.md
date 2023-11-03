@@ -1,5 +1,5 @@
 # TOJA
-### A Desktop Tool to Track &amp; Optimize your Job Applications.
+### A Desktop Program to Track &amp; Optimize your Job Applications.
 
 <div align="center">
 <img src="assets/home_screenshot.png" width=800>
@@ -69,7 +69,7 @@ Export your data anytime.
 
 ## Installation 
 
-**Option A)** Clone Repository and Run with Python
+**Option A)** Run source code. Clone Repository with Git and run with Python
 
 1. Download Git
 https://git-scm.com/downloads
@@ -94,6 +94,6 @@ OR optionally create a virtual environment
   + `venv\Scripts\activate`
   + `pip install -r requirements.txt`
 
-7. Open Toja application using the terminal. While in TOJA directory use command `python toja/toja_app.py`
+7. Open Toja application using the terminal. While in TOJA directory use command `python toja`
   + *If using a virtual environment you need to activate each time* `venv\Scripts\activate`
 
