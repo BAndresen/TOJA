@@ -1,7 +1,7 @@
 import random
 import unittest
 import sqlite3
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, mock_open
 from pathlib import Path
 import sys
 import os
@@ -20,13 +20,14 @@ from .fake_data import FakeData
 class TestModel(unittest.TestCase):
 
     def setUp(self):
-        config_mock = Mock()
-        config_mock.base_dir = Path(__file__).resolve().parent
-        config_mock.job_description_parent = os.path.join(config_mock.base_dir, constant.JOB_DESCRIPTION_DIRECTORY)
-        config_mock.user_name = 'test_user'
-        config_mock.database_path = ':memory:'
+        self.config_mock = Mock()
+        self.config_mock.base_dir = Path(__file__).resolve().parent
+        self.config_mock.job_description_parent = os.path.join(self.config_mock.base_dir,
+                                                               constant.JOB_DESCRIPTION_DIRECTORY)
+        self.config_mock.user_name = 'test_user'
+        self.config_mock.database_path = ':memory:'
 
-        self.model = Model(config_mock)
+        self.model = Model(self.config_mock)
         self.model.conn = sqlite3.connect(':memory:')
         self.model.cursor = self.model.conn.cursor()
 
@@ -49,6 +50,16 @@ class TestModel(unittest.TestCase):
                 found = True
         if not found:
             self.fail(f'Random event note not found: {random_event_note}')
+
+    def test_save_job_description(self):
+        fake_job = FakeData()
+
+        # test file is create and the contents is written
+        with patch('builtins.open', mock_open()) as mock_file:
+            self.model.save_job_description(f'{fake_job.company}.txt', fake_job.job_note)
+            mock_file.assert_called_with(
+                os.path.join(self.config_mock.job_description_parent, f'{fake_job.company}.txt'), 'w', encoding='utf-8')
+            mock_file().write.assert_called_once_with(fake_job.job_note)
 
     def test_user(self):
         user_1 = FakeData()
