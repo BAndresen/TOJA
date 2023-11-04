@@ -7,6 +7,7 @@ class EditJob:
         self.root = root
         self.ej_window = customtkinter.CTkToplevel(root)
         self.ej_window.attributes('-topmost', 'true')
+        self.ej_window.grab_set()
 
         self.ej_window.title("Edit Job")
         # self.grid_columnconfigure(0, weight=1)

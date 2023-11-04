@@ -155,6 +155,8 @@ class HomeView(customtkinter.CTk):
 
         self.event_frame = customtkinter.CTkFrame(self, fg_color=self.theme.main_frame)
         self.event_frame.grid_columnconfigure(0, weight=1)
+        self.event_frame.grid_rowconfigure(0, weight=2)
+        self.event_frame.grid_rowconfigure(1, weight=1)
 
         self.event_button_frame = customtkinter.CTkFrame(self.event_frame, fg_color=self.theme.second_frame)
         self.event_button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
@@ -178,6 +180,7 @@ class HomeView(customtkinter.CTk):
         # Recent Events
         self.past_events_frame = customtkinter.CTkFrame(self.event_frame, fg_color=self.theme.second_frame)
         self.past_events_frame.grid_columnconfigure(0, weight=1)
+
         self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events")
         self.past_events_label.grid(row=0, column=0)

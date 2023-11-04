@@ -312,6 +312,7 @@ class Controller:
 
     def add_contact(self):
         self.contact = NewContact(self.view, self.view.theme)
+        self.contact.contact_window.grab_set()
         self.contact.submit_contact_button.configure(command=self.insert_contact)
 
     def add_contact_home(self):
