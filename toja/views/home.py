@@ -232,7 +232,7 @@ class HomeView(customtkinter.CTk):
 
         # Job Description search
         self.jd_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.jd_frame.grid(row=1, column=0, padx=20, pady=(5, 20), sticky='nsew')
+        self.jd_frame.grid(row=1, column=0, padx=20, pady=20, sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
@@ -243,7 +243,7 @@ class HomeView(customtkinter.CTk):
         self.jd_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_jd_frame = customtkinter.CTkFrame(self.jd_frame, fg_color=self.theme.second_frame)
-        self.search_jd_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
+        self.search_jd_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
         # self.search_jd_frame.grid_columnconfigure(3, weight=1)
 
         self.search_by_label = customtkinter.CTkLabel(self.search_jd_frame, text="Search By:",
@@ -303,7 +303,7 @@ class HomeView(customtkinter.CTk):
 
         # Resume search
         self.resume_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.resume_frame.grid(row=1, column=1, padx=50, pady=(5, 20), sticky='nsew')
+        self.resume_frame.grid(row=1, column=1, padx=20, pady=20, sticky='nsew')
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
 
@@ -314,7 +314,7 @@ class HomeView(customtkinter.CTk):
         self.resume_search_button.grid(row=2, column=0, pady=(0, 20))
 
         self.search_resume_frame = customtkinter.CTkFrame(self.resume_frame, fg_color=self.theme.second_frame)
-        self.search_resume_frame.grid(row=0, column=0, padx=50, pady=50, sticky='nsew')
+        self.search_resume_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
 
         self.upload_resume = customtkinter.CTkLabel(self.search_resume_frame, text='Upload Resume',
                                                     text_color=self.theme.text_color)
