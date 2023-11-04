@@ -63,3 +63,5 @@ CONTACT_HOME_WHITE = 'contact_home_white.png'
 
 WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Application Process"
 
+DARK_MODE = 'Dark'
+LIGHT_MODE = 'Light'

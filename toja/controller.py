@@ -138,9 +138,9 @@ class Controller:
         self.settings = Settings(self.view, self.view.theme)
         self.settings.accent_color_button.configure(fg_color=self.model.config.get_accent_color())
         self.settings.button_color_button.configure(fg_color=self.model.config.get_button_color())
-        if self.model.config.icon_mode == "Dark":
+        if self.model.config.icon_mode == constant.DARK_MODE:
             self.settings.icon_mode_switch.select()
-        if self.model.config.appearance_mode == "Dark":
+        if self.model.config.appearance_mode == constant.DARK_MODE:
             self.settings.appearance_mode_switch.select()
 
         self.settings.job_keyword_results_entry.configure(
@@ -171,11 +171,11 @@ class Controller:
 
     def update_icon_mode(self):
         if not self.settings.icon_mode_switch.get():  # Light mode
-            self.model.config.icon_mode = 'Light'
-            self.model.config.update_icon_mode('Light')
+            self.model.config.icon_mode = constant.LIGHT_MODE
+            self.model.config.update_icon_mode(constant.LIGHT_MODE)
         else:  # Dark mode
-            self.model.config.icon_mode = 'Dark'
-            self.model.config.update_icon_mode('Dark')
+            self.model.config.icon_mode = constant.DARK_MODE
+            self.model.config.update_icon_mode(constant.DARK_MODE)
         self.model.config.set_icon_mode()
         self.view.update_icon_mode()
         self.model.config.set_button_text_color(self.model.config.icon_mode)
@@ -183,13 +183,13 @@ class Controller:
 
     def submit_settings(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode
-            self.model.config.appearance_mode = 'Light'
-            self.model.config.update_appearance_mode('Light')
-            customtkinter.set_appearance_mode("light")
+            self.model.config.appearance_mode = constant.LIGHT_MODE
+            self.model.config.update_appearance_mode(constant.LIGHT_MODE)
+            customtkinter.set_appearance_mode(constant.LIGHT_MODE)
         else:  # Dark mode
-            self.model.config.appearance_mode = 'Dark'
-            self.model.config.update_appearance_mode('Dark')
-            customtkinter.set_appearance_mode('Dark')
+            self.model.config.appearance_mode = constant.DARK_MODE
+            self.model.config.update_appearance_mode(constant.DARK_MODE)
+            customtkinter.set_appearance_mode(constant.DARK_MODE)
         self.update_keyword_settings()
         self.update_appearance_mode()
         self.settings.settings_window.destroy()
@@ -202,11 +202,11 @@ class Controller:
 
     def update_appearance_mode(self):
         if not self.settings.appearance_mode_switch.get():  # Light mode
-            self.model.config.appearance_mode = 'Light'
-            self.model.config.update_appearance_mode('Light')
+            self.model.config.appearance_mode = constant.LIGHT_MODE
+            self.model.config.update_appearance_mode(constant.LIGHT_MODE)
         else:  # Dark mode
-            self.model.config.appearance_mode = 'Dark'
-            self.model.config.update_appearance_mode('Dark')
+            self.model.config.appearance_mode = constant.DARK_MODE
+            self.model.config.update_appearance_mode(constant.DARK_MODE)
         self.model.config.set_appearance_mode()
         self.view.update_icon_paths()
         self.view.update_home_theme()

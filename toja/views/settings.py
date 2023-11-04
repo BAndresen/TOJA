@@ -10,12 +10,8 @@ class Settings:
         self.theme = theme
         self.settings_window = customtkinter.CTkToplevel(root)
         self.settings_window.attributes('-topmost', 'true')
-        # bold_font = ctk_font.CTkFont(family="Helvetica", size=12, weight="bold")
 
         self.settings_window.title("Settings")
-        # self.grid_columnconfigure(0, weight=1)
-        # self.grid_columnconfigure(1, weight=1)
-        # self.grid_rowconfigure(0, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.settings_window)
         self.main_frame.grid(row=0, column=0, padx=50, pady=(50, 10), sticky="nsew")
