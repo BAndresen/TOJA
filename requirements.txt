@@ -54,3 +54,5 @@ urllib3==2.0.6
 wasabi==1.1.2
 weasel==0.3.2
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.0/en_core_web_sm-3.7.0.tar.gz
+
+CTkColorPicker~=0.8.0

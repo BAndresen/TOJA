@@ -1,4 +1,3 @@
-import customtkinter
 
 from views.home import HomeView
 from views.theme import Theme
