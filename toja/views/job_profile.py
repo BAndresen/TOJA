@@ -37,9 +37,10 @@ class JobProfile:
         self.jp_frame = customtkinter.CTkFrame(self.jp_window)
         self.jp_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
         self.jp_frame.grid_columnconfigure(0, weight=1)
+        self.jp_frame.grid_columnconfigure(1, weight=1)
 
         self.jp_all_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.jp_all_frame.grid(row=0, column=0, padx=20, pady=20, sticky="w")
+        self.jp_all_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         # company website
         self.company_frame = customtkinter.CTkFrame(self.jp_all_frame)
         self.company_frame.grid(row=0, column=0, columnspan=2, padx=(20, 5), pady=20, sticky='nsew')
@@ -99,43 +100,54 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.resume_user.grid(row=8, column=1, padx=5, pady=2, stick='w')
 
-        # description
-        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.text_color,
-                                                    segmented_button_selected_color=theme.accent_color,
-                                                    segmented_button_fg_color=theme.main_frame,
-                                                    segmented_button_unselected_color=theme.main_frame
-                                                    )
-        self.job_tabview.grid(row=2, column=0, columnspan=3, padx=(20, 5), pady=20, sticky='nsew')
-        self.job_tabview.add("Description")
-        self.job_tabview.add("Events")
-        self.job_tabview.add('Contacts')
-        self.job_tabview.add('Key Words')
+        self.event_contact_tabview = customtkinter.CTkTabview(self.jp_frame, text_color=theme.text_color,
+                                                              segmented_button_selected_color=theme.accent_color,
+                                                              segmented_button_fg_color=theme.main_frame,
+                                                              segmented_button_unselected_color=theme.main_frame
+                                                              )
+        self.event_contact_tabview.grid(row=0, column=1, columnspan=1, padx=5, pady=20, sticky='nsew')
+        self.event_contact_tabview.add("Events")
+        self.event_contact_tabview.add('Contacts')
 
-        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=701,
-                                                                       height=300)
-
-        self.event_scroll = tkinter.Listbox(self.job_tabview.tab('Events'), width=103, height=19,
+        self.event_scroll = tkinter.Listbox(self.event_contact_tabview.tab('Events'),
                                             font=theme.main_font,
                                             fg=theme.text_color,
                                             bg=theme.listbox_bg,
                                             selectbackground=theme.accent_color,
                                             selectforeground=theme.text_color,
                                             activestyle='none',
+                                            width=40,
                                             borderwidth=0)
-        self.event_scroll.grid(row=0, column=0, padx=10, pady=10)
-        self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
-        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700, justify='left')
-        self.job_description_label.grid(row=0, column=0)
+        self.event_scroll.grid(row=0, column=0, padx=10, pady=10, sticky= 'ew')
 
-        self.contact_listbox = tkinter.Listbox(self.job_tabview.tab('Contacts'), width=103, height=19,
+        self.contact_listbox = tkinter.Listbox(self.event_contact_tabview.tab('Contacts'),
                                                font=theme.main_font,
                                                fg=theme.text_color,
                                                bg=theme.listbox_bg,
                                                selectbackground=theme.accent_color,
                                                selectforeground=theme.text_color,
                                                activestyle='none',
+                                               width=40,
                                                borderwidth=0)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
+
+        # description
+        self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.text_color,
+                                                    segmented_button_selected_color=theme.accent_color,
+                                                    segmented_button_fg_color=theme.main_frame,
+                                                    segmented_button_unselected_color=theme.main_frame
+                                                    )
+        self.job_tabview.grid(row=2, column=0, columnspan=2, padx=(20, 5), pady=20, sticky='nsew')
+        self.job_tabview.add("Description")
+        self.job_tabview.add('Key Words')
+
+        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=701,
+                                                                       height=300)
+
+        self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
+        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700, justify='left')
+        self.job_description_label.grid(row=0, column=0)
+
         self.keyword_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Key Words'), width=701,
                                                                height=300)
         self.keyword_scroll.grid(row=0, column=0, padx=10, pady=10)
@@ -143,6 +155,11 @@ class JobProfile:
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.jp_frame)
         self.button_frame.grid(row=2, column=3, sticky="n", pady=38)
+
+        # self.event_contact_button_frame = customtkinter.CTkFrame(self.jp_frame)
+        # self.event_contact_button_frame.grid(row=0, column=3, sticky="n", pady=38)
+
+
         self.edit_button = customtkinter.CTkButton(self.jp_all_frame, text="", image=pencil_white, width=35, height=35,
                                                    fg_color=theme.button_color, hover_color='grey15')
         self.edit_button.grid(row=0, column=2, padx=10, sticky='e')

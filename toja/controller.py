@@ -261,6 +261,7 @@ class Controller:
 
     def open_event(self):
         self.event = Event(self.view)
+        self.event.event_window.grab_set()
         event_results = self.model.get_event(self.event_id, event=True)[0]
         self.event.event_id.configure(text=self.event_id)
         self.event.event_status.configure(text=event_results[2])
@@ -273,6 +274,7 @@ class Controller:
 
     def open_contact(self):
         self.contact = Contact(self.view)
+        self.contact.contact_window.grab_set()
         contact_results = self.model.get_contacts(self.contact_id, get_contact_by_id=True)[0]
         self.contact.contact_id.configure(text=self.contact_id)
         self.contact.first_name.configure(text=contact_results[1])
@@ -323,6 +325,7 @@ class Controller:
 
     def edit_job(self):
         self.edit = EditJob(self.view.home_frame, self.view.theme)
+        self.edit.ej_window.grab_set()
         self.edit.submit_edit_button.configure(command=self.submit_job_edit)
         self.edit.position_title_entry.configure(placeholder_text=self.jp_results[2])
         self.edit.company_name_entry.configure(placeholder_text=self.jp_results[0])
@@ -428,6 +431,7 @@ class Controller:
         self.current_time = customtkinter.StringVar()
         self.current_time.set(current_time)
         self.new_event = NewEvent(self.view, self.view.theme)
+        self.new_event.event_window.grab_set()
         contacts = self.model.get_contacts(self.job_id)
         self.new_event.time_entry.configure(textvariable=self.current_time)
         contact_list = []
@@ -528,7 +532,7 @@ class Controller:
         event_listbox = self.model.get_event(self.job_id, job=True)
         for item in event_listbox:
             self.job_profile.event_scroll.insert(tkinter.END,
-                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]} | {item[3]} ")
+                                                 f"{item[0]} | {item[1]} | {item[2]} | {item[4]} ")
 
     def update_home_event_listbox(self):
         self.view.past_events_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
