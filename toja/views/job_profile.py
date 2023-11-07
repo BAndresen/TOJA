@@ -19,7 +19,7 @@ class JobProfile:
         x_position = 450  # Start from the left edge
         y_position = 10  # Start from the top edge
 
-        self.jp_window.geometry(f'{screen_width - 1020}x{screen_height - 175}+{x_position}+{y_position}')
+        self.jp_window.geometry(f'{screen_width - 1020}x{screen_height - 180}+{x_position}+{y_position}')
         self.jp_window.grid_columnconfigure(0, weight=1)
 
         icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), constant.ICON_FILE_DIRECTORY)
@@ -43,16 +43,15 @@ class JobProfile:
         self.company_frame.grid_columnconfigure(2, weight=1)
 
         self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='', font=theme.title_font)
-        self.company_name_user.grid(row=0, column=0, padx=15, pady=(6, 0), sticky='w')
+        self.company_name_user.grid(row=0, column=0, padx=20, pady=(6, 0), sticky='w')
         self.position_user = customtkinter.CTkLabel(self.company_frame, text='', font=theme.header_font)
-        self.position_user.grid(row=1, column=0, padx=15, pady=(0, 10), stick='w')
+        self.position_user.grid(row=1, column=0, padx=20, pady=(0, 10), stick='w')
 
         # job info
         self.job_info_frame = customtkinter.CTkFrame(self.jp_frame)
         self.job_info_frame.grid(row=1, column=0, padx=20, pady=5, sticky='nsew')
         self.job_info_frame.grid_columnconfigure(0, weight=1)
         self.job_info_frame.grid_columnconfigure(1, weight=4)
-
         self.company_button_frame = customtkinter.CTkFrame(self.company_frame)
         self.company_button_frame.grid(row=0, column=2, sticky="e", pady=10, padx=10)
 
@@ -62,48 +61,48 @@ class JobProfile:
         self.edit_button.grid(row=0, column=0, padx=6, pady=6)
 
         self.job_id = customtkinter.CTkLabel(self.job_info_frame, text="job_id:")
-        self.job_id.grid(row=0, column=0, padx=5, pady=(10, 2), stick='e')
+        self.job_id.grid(row=0, column=0, padx=5, pady=(10, 1), stick='e')
         self.job_id_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.job_id_user.grid(row=0, column=1, padx=5, pady=(10, 2), stick='w')
+        self.job_id_user.grid(row=0, column=1, padx=5, pady=(10, 1), stick='w')
         self.company_web = customtkinter.CTkLabel(self.job_info_frame, text="Website:")
-        self.company_web.grid(row=1, column=0, padx=5, pady=2, sticky='e')
+        self.company_web.grid(row=1, column=0, padx=5, pady=1, sticky='e')
         self.company_web_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.company_web_user.grid(row=1, column=1, padx=5, pady=2, sticky='w')
+        self.company_web_user.grid(row=1, column=1, padx=5, pady=1, sticky='w')
 
         self.location = customtkinter.CTkLabel(self.job_info_frame, text="Location:")
-        self.location.grid(row=2, column=0, padx=5, pady=2, stick='e')
+        self.location.grid(row=2, column=0, padx=5, pady=1, stick='e')
         self.location_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.location_user.grid(row=2, column=1, padx=5, pady=2, stick='w')
+        self.location_user.grid(row=2, column=1, padx=5, pady=1, stick='w')
 
         self.commitment = customtkinter.CTkLabel(self.job_info_frame, text="Commitment:")
-        self.commitment.grid(row=3, column=0, padx=5, pady=2, stick='e')
+        self.commitment.grid(row=3, column=0, padx=5, pady=1, stick='e')
         self.commitment_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.commitment_user.grid(row=3, column=1, padx=5, pady=2, stick='w')
+        self.commitment_user.grid(row=3, column=1, padx=5, pady=1, stick='w')
 
         self.work_type = customtkinter.CTkLabel(self.job_info_frame, text="Work Type:")
-        self.work_type.grid(row=4, column=0, padx=5, pady=2, stick='e')
+        self.work_type.grid(row=4, column=0, padx=5, pady=1, stick='e')
         self.work_type_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.work_type_user.grid(row=4, column=1, padx=5, pady=2, stick='w')
+        self.work_type_user.grid(row=4, column=1, padx=5, pady=1, stick='w')
 
         self.salary_top = customtkinter.CTkLabel(self.job_info_frame, text="Salary Top:")
-        self.salary_top.grid(row=5, column=0, padx=5, pady=2, stick='e')
+        self.salary_top.grid(row=5, column=0, padx=5, pady=1, stick='e')
         self.salary_top_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.salary_top_user.grid(row=5, column=1, padx=5, pady=2, stick='w')
+        self.salary_top_user.grid(row=5, column=1, padx=5, pady=1, stick='w')
 
         self.salary_bottom = customtkinter.CTkLabel(self.job_info_frame, text="Salary Bottom:")
-        self.salary_bottom.grid(row=6, column=0, padx=5, pady=2, stick='e')
+        self.salary_bottom.grid(row=6, column=0, padx=5, pady=1, stick='e')
         self.salary_bottom_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.salary_bottom_user.grid(row=6, column=1, padx=5, pady=2, stick='w')
+        self.salary_bottom_user.grid(row=6, column=1, padx=5, pady=1, stick='w')
 
         self.salary_type = customtkinter.CTkLabel(self.job_info_frame, text="Salary Type:")
-        self.salary_type.grid(row=7, column=0, padx=5, pady=2, stick='e')
+        self.salary_type.grid(row=7, column=0, padx=5, pady=1, stick='e')
         self.salary_type_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.salary_type_user.grid(row=7, column=1, padx=5, pady=2, stick='w')
+        self.salary_type_user.grid(row=7, column=1, padx=5, pady=1, stick='w')
 
         self.resume = customtkinter.CTkLabel(self.job_info_frame, text="Resume Version:")
-        self.resume.grid(row=8, column=0, padx=5, pady=(2, 10), stick='e')
+        self.resume.grid(row=8, column=0, padx=5, pady=(1, 10), stick='e')
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.profile_info_font)
-        self.resume_user.grid(row=8, column=1, padx=5, pady=(2, 10), stick='w')
+        self.resume_user.grid(row=8, column=1, padx=5, pady=(1, 10), stick='w')
 
         self.event_contact_frame = customtkinter.CTkFrame(self.jp_frame)
         self.event_contact_frame.grid(row=1, column=1, stick='nsew', padx=(0, 20), pady=5)
@@ -138,6 +137,7 @@ class JobProfile:
                                             selectforeground=theme.text_color,
                                             activestyle='none',
                                             width=40,
+                                            height=10,
                                             borderwidth=0)
         self.event_scroll.grid(row=0, column=0, padx=10, pady=10, sticky='ew')
 
@@ -149,6 +149,7 @@ class JobProfile:
                                                selectforeground=theme.text_color,
                                                activestyle='none',
                                                width=40,
+                                               height=10,
                                                borderwidth=0)
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
 
