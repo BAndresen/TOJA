@@ -35,35 +35,43 @@ class JobProfile:
 
         # job_profile
         self.jp_frame = customtkinter.CTkFrame(self.jp_window)
-        self.jp_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
+        self.jp_frame.grid(row=0, column=0, padx=20, pady=10, sticky='nsew')
         self.jp_frame.grid_columnconfigure(0, weight=1)
         self.jp_frame.grid_columnconfigure(1, weight=1)
 
-        self.jp_all_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.jp_all_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        # self.jp_all_frame = customtkinter.CTkFrame(self.jp_frame)
+        # self.jp_all_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+
+        # self.title_frame = customtkinter.CTkFrame(self.jp_frame)
+        # self.title_frame.grid(row=0,column=0 ,columspan = 2, sticky="nsew")
+
         # company website
-        self.company_frame = customtkinter.CTkFrame(self.jp_all_frame)
-        self.company_frame.grid(row=0, column=0, columnspan=2, padx=(20, 5), pady=20, sticky='nsew')
-        self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company:")
-        self.company_name.grid(row=0, column=0, padx=5, pady=2, sticky='e')
-        self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='')
-        self.company_name_user.grid(row=0, column=1, padx=5, sticky='w')
-        self.company_web = customtkinter.CTkLabel(self.company_frame, text="Website:")
-        self.company_web.grid(row=1, column=0, padx=5, pady=2, sticky='e')
-        self.company_web_user = customtkinter.CTkLabel(self.company_frame, text='')
-        self.company_web_user.grid(row=1, column=1, padx=5, pady=2, sticky='w')
+        self.company_frame = customtkinter.CTkFrame(self.jp_frame)
+        self.company_frame.grid(row=0, column=0, columnspan=2, padx=(20, 5), pady=10, sticky='nsew')
+        # self.company_name = customtkinter.CTkLabel(self.company_frame, text="Company:")
+        # self.company_name.grid(row=0, column=0, padx=5, pady=2, sticky='e')
+        self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='', font=theme.title_font)
+        self.company_name_user.grid(row=0, column=0, padx=10, pady=(6,0), sticky='w')
+        # self.position = customtkinter.CTkLabel(self.company_frame, text="Position:")
+        # self.position.grid(row=1, column=0, padx=5, pady=2, stick='e')
+        self.position_user = customtkinter.CTkLabel(self.company_frame, text='', font=theme.header_font)
+        self.position_user.grid(row=1, column=0, padx=10, pady=(5,10), stick='w')
+
+
 
         # job info
-        self.job_info_frame = customtkinter.CTkFrame(self.jp_all_frame)
-        self.job_info_frame.grid(row=1, column=0, padx=20, pady=20, sticky='nsew')
+        self.job_info_frame = customtkinter.CTkFrame(self.jp_frame)
+        self.job_info_frame.grid(row=1, column=0, padx=20, pady=10, sticky='nsew')
+
         self.job_id = customtkinter.CTkLabel(self.job_info_frame, text="job_id:")
         self.job_id.grid(row=0, column=0, padx=5, pady=2, stick='e')
         self.job_id_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.job_id_user.grid(row=0, column=1, padx=5, pady=2, stick='w')
-        self.position = customtkinter.CTkLabel(self.job_info_frame, text="Position:")
-        self.position.grid(row=1, column=0, padx=5, pady=2, stick='e')
-        self.position_user = customtkinter.CTkLabel(self.job_info_frame, text='')
-        self.position_user.grid(row=1, column=1, padx=5, pady=2, stick='w')
+        self.company_web = customtkinter.CTkLabel(self.job_info_frame, text="Website:")
+        self.company_web.grid(row=1, column=0, padx=5, pady=2, sticky='e')
+        self.company_web_user = customtkinter.CTkLabel(self.job_info_frame, text='')
+        self.company_web_user.grid(row=1, column=1, padx=5, pady=2, sticky='w')
+
 
         self.location = customtkinter.CTkLabel(self.job_info_frame, text="Location:")
         self.location.grid(row=2, column=0, padx=5, pady=2, stick='e')
@@ -100,14 +108,30 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='')
         self.resume_user.grid(row=8, column=1, padx=5, pady=2, stick='w')
 
-        self.event_contact_tabview = customtkinter.CTkTabview(self.jp_frame, text_color=theme.text_color,
+        self.event_contact_frame = customtkinter.CTkFrame(self.jp_frame)
+        self.event_contact_frame.grid(row=1, column=1, stick='nsew', padx=10, pady=10)
+
+        self.event_contact_tabview = customtkinter.CTkTabview(self.event_contact_frame, text_color=theme.text_color,
                                                               segmented_button_selected_color=theme.accent_color,
                                                               segmented_button_fg_color=theme.main_frame,
                                                               segmented_button_unselected_color=theme.main_frame
                                                               )
-        self.event_contact_tabview.grid(row=0, column=1, columnspan=1, padx=5, pady=20, sticky='nsew')
+        self.event_contact_tabview.grid(row=0, column=0, padx=10, pady=10, rowspan=2, sticky='nsew')
         self.event_contact_tabview.add("Events")
         self.event_contact_tabview.add('Contacts')
+
+        self.contact_event_button_frame = customtkinter.CTkFrame(self.event_contact_frame)
+        self.contact_event_button_frame.grid(row=0, column=1, pady=30, sticky='n')
+        self.new_contact_button = customtkinter.CTkButton(self.contact_event_button_frame, text="", image=contact_white,
+                                                          width=35,
+                                                          height=35,
+                                                          fg_color=theme.button_color, hover_color='grey15')
+        self.new_contact_button.grid(row=1, column=1, pady=(0,6), padx=6, sticky='n')
+        self.new_event_button = customtkinter.CTkButton(self.contact_event_button_frame, text="", image=add_event_white,
+                                                        width=35,
+                                                        height=35,
+                                                        fg_color=theme.button_color, hover_color='grey15')
+        self.new_event_button.grid(row=0, column=1, pady=6, padx=6, stick='n')
 
         self.event_scroll = tkinter.Listbox(self.event_contact_tabview.tab('Events'),
                                             font=theme.main_font,
@@ -132,6 +156,7 @@ class JobProfile:
         self.contact_listbox.grid(row=0, column=0, padx=10, pady=10)
 
         # description
+
         self.job_tabview = customtkinter.CTkTabview(self.jp_frame, width=500, text_color=theme.text_color,
                                                     segmented_button_selected_color=theme.accent_color,
                                                     segmented_button_fg_color=theme.main_frame,
@@ -159,19 +184,13 @@ class JobProfile:
         # self.event_contact_button_frame = customtkinter.CTkFrame(self.jp_frame)
         # self.event_contact_button_frame.grid(row=0, column=3, sticky="n", pady=38)
 
+        self.job_info_frame.grid_columnconfigure(2, weight=1)
 
-        self.edit_button = customtkinter.CTkButton(self.jp_all_frame, text="", image=pencil_white, width=35, height=35,
+        self.edit_button = customtkinter.CTkButton(self.job_info_frame, text="", image=pencil_white, width=35, height=35,
                                                    fg_color=theme.button_color, hover_color='grey15')
-        self.edit_button.grid(row=0, column=2, padx=10, sticky='e')
+        self.edit_button.grid(row=0, column=2, sticky='e', padx=4, pady=4)
 
-        self.new_contact_button = customtkinter.CTkButton(self.button_frame, text="", image=contact_white, width=35,
-                                                          height=35,
-                                                          fg_color=theme.button_color, hover_color='grey15')
-        self.new_contact_button.grid(row=2, column=0, pady=5, padx=10)
-        self.new_event_button = customtkinter.CTkButton(self.button_frame, text="", image=add_event_white, width=35,
-                                                        height=35,
-                                                        fg_color=theme.button_color, hover_color='grey15')
-        self.new_event_button.grid(row=1, column=0, pady=5, padx=10)
+
         self.edit_job_button = customtkinter.CTkButton(self.button_frame, text="", image=writing_white, width=35,
                                                        height=35,
                                                        fg_color=theme.button_color, hover_color='grey15')

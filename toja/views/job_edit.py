@@ -74,8 +74,9 @@ class EditJob:
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.ej_window)
         self.button_frame.grid(row=1, column=0)
-        self.submit_edit_button = customtkinter.CTkButton(self.button_frame, text="Submit",
+        self.submit_edit_button = customtkinter.CTkButton(self.button_frame, text="Update",
                                                           fg_color=theme.button_color,
-                                                          text_color=theme.button_text_color
+                                                          text_color=theme.button_text_color,
+                                                          width=theme.main_button_width
                                                           )
         self.submit_edit_button.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
