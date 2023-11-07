@@ -1,3 +1,9 @@
+# testing
+ESCAPE_CHAR = ['\n', '\r', '\t', '\\', '\'', '\"', '\a', '\b', '\f', '\v', '\0', '\ooo', ]
+NOT_ASCII = ['À', 'ñ', 'Ç', 'β', 'Ω', 'Д', 'ж', 'Я', '你', '世', 'こんにちは', 'テスト', '😁', '🌍', '∑', '∫', '€', '¥',
+             '₽', '→', '⇨', '◆', '△', '✂', '✈', '♪', '♫']
+EDGE_CHAR = [0, '0', '', ' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '}', '[', ']',
+             '|', ':', ';', '"', "'", '<', '>', ',', '.', '?', '/', '~', '`']
 
 # Config
 CONFIG_FILE = 'config.ini'
@@ -13,7 +19,8 @@ SAMPLE_CONTACT = 'sample_contact.sql'
 EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
 WORK_TYPE = ['Remote', 'Hybrid', 'Onsite', 'None']
 SALARY_TYPE = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
-EVENT_TYPE = ['applied', 'prospect','follow up', 'workshop', 'meeting', 'networking', 'interview', 'offer', 'portfolio_project',
+EVENT_TYPE = ['applied', 'prospect', 'follow up', 'workshop', 'meeting', 'networking', 'interview', 'offer',
+              'portfolio_project',
               'rejected']
 
 # Listbox and Textbox ranges
@@ -64,6 +71,3 @@ WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Appli
 # theme
 DARK_MODE = 'Dark'
 LIGHT_MODE = 'Light'
-
-# testing
-
