@@ -100,7 +100,7 @@ class Controller:
             self.model.set_sample_data()
             points = 285
         self.model.config.update_user_name(self.model.config.user_name)
-        self.model.insert_user_db(self.model.config.user_name, points)
+        self.model.add_user(self.model.config.user_name, points)
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.config.user_name)
         self.update_home()
@@ -215,7 +215,7 @@ class Controller:
     def submit_new_user(self):
         new_name = self.add_user.user_name_entry.get()
         self.model.config.update_user_name(new_name)
-        self.model.insert_user_db(new_name, 0)
+        self.model.add_user(new_name, 0)
         self.user_id = self.model.get_user_id(new_name)
         self.add_user.window.destroy()
         self.update_home()

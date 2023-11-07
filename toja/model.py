@@ -96,7 +96,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def insert_user_db(self, user_name: str, points: int):
+    def add_user(self, user_name: str, points: int):
         query = '''
         INSERT INTO user(
         name,

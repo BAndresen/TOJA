@@ -7,6 +7,7 @@ import sys
 import os
 
 import toja.constants as constant
+
 parent_dir = Path(__file__).resolve().parents[1]
 sys.path.append(os.path.join(parent_dir, constant.APPLICATION_DIRECTORY))
 
@@ -14,7 +15,7 @@ from toja.database.create_database import create_toja_database
 from toja.database.sample_event import event_applied_notes, events_past_notes, events_future_notes
 from toja.model import Model
 from toja.model import Config
-from tests.fake_data import FakeData
+from tests.fake_data import FakeData, ChaosData
 
 
 class TestModel(unittest.TestCase):
@@ -66,8 +67,8 @@ class TestModel(unittest.TestCase):
         user_1 = FakeData()
         user_2 = FakeData()
         # insert users & points
-        self.model.insert_user_db(user_1.first_name, user_1.points)
-        self.model.insert_user_db(user_2.first_name, user_2.points)
+        self.model.add_user(user_1.first_name, user_1.points)
+        self.model.add_user(user_2.first_name, user_2.points)
 
         # get user id
         user1_id = self.model.get_user_id(user_1.first_name)
@@ -207,6 +208,24 @@ class TestModel(unittest.TestCase):
         self.assertEqual(results_updated[8], fake2.earning_type)
         self.assertEqual(results_updated[9], str(fake2.resume_version))
         self.assertEqual(results_updated[10], fake2.fake_file_name)
+
+    def test_edge_inputs(self):
+        chaos_data = ChaosData()
+        self.model.add_user(chaos_data.string, None)
+        self.assertEqual(self.model.get_all_users()[0][0], chaos_data.string)
+        self.model.add_contact(chaos_data.string, chaos_data.string, chaos_data.string,
+                               chaos_data.string, chaos_data.string, chaos_data.positive_int,
+                               chaos_data.positive_int)
+        self.assertEqual(self.model.get_contacts(chaos_data.positive_int)[0][1], chaos_data.string)
+        self.assertEqual(self.model.get_contacts(chaos_data.positive_int)[0][6], chaos_data.positive_int)
+        self.model.add_event(chaos_data.string, chaos_data.string, None, random.randint(1, 9), None,
+                             chaos_data.positive_int, chaos_data.positive_int)
+        self.assertEqual(self.model.get_event(chaos_data.positive_int, job=True)[0][1], chaos_data.string)
+        self.model.add_new_job(chaos_data.string, chaos_data.string, chaos_data.string, chaos_data.string, None, None,
+                               chaos_data.chaos_monkey, chaos_data.chaos_monkey, None, chaos_data.chaos_monkey,
+                               chaos_data.chaos_monkey, chaos_data.positive_int, None, None, chaos_data.chaos_monkey,
+                               random.choice(constant.EVENT_TYPE), None)
+        self.assertEqual(self.model.get_job_data(1)[0], chaos_data.string)
 
     def tearDown(self) -> None:
         self.model.conn.close()
