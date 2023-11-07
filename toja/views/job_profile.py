@@ -53,7 +53,7 @@ class JobProfile:
         self.job_info_frame.grid_columnconfigure(0, weight=1)
         self.job_info_frame.grid_columnconfigure(1, weight=4)
         self.company_button_frame = customtkinter.CTkFrame(self.company_frame)
-        self.company_button_frame.grid(row=0, column=2, sticky="e", pady=10, padx=10)
+        self.company_button_frame.grid(row=0, column=2, sticky="e", pady=10, padx=10, rowspan=2)
 
         self.edit_button = customtkinter.CTkButton(self.company_button_frame, text="", image=pencil_white, width=35,
                                                    height=35,

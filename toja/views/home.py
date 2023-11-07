@@ -135,7 +135,7 @@ class HomeView(customtkinter.CTk):
         self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame, progress_color=self.theme.accent_color)
         self.progress_bar.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="ew")
 
-        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:",
+        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter:",
                                                           text_color=self.theme.text_color,
                                                           font=self.theme.header_two_font)
         self.current_level_label.grid(row=0, column=0, padx=(20, 5), pady=(20, 5), sticky="e")
@@ -184,8 +184,9 @@ class HomeView(customtkinter.CTk):
         self.past_events_frame.grid_columnconfigure(0, weight=1)
 
         self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events")
-        self.past_events_label.grid(row=0, column=0)
+        self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events",
+                                                        font=self.theme.header_two_font)
+        self.past_events_label.grid(row=0, column=0, pady=(10,0))
         self.past_events_listbox = tkinter.Listbox(self.past_events_frame,
                                                    font=self.theme.main_font,
                                                    fg=self.theme.text_color,
@@ -202,8 +203,9 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_frame.grid_columnconfigure(0, weight=1)
 
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
-        self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events")
-        self.upcoming_events_label.grid(row=0, column=0)
+        self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events",
+                                                            font=self.theme.header_two_font)
+        self.upcoming_events_label.grid(row=0, column=0,pady=(10,0))
         self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,
                                                        font=self.theme.main_font,
                                                        fg=self.theme.text_color,
@@ -229,15 +231,17 @@ class HomeView(customtkinter.CTk):
 
         # Keyword Title labels
         self.jd_title = customtkinter.CTkLabel(self.keywords_frame, text="Job Description Search",
-                                               text_color=self.theme.text_color)
-        self.jd_title.grid(row=0, column=0)
+                                               text_color=self.theme.text_color,
+                                               font=self.theme.header_two_font)
+        self.jd_title.grid(row=0, column=0, pady=(10,0))
         self.resume_title = customtkinter.CTkLabel(self.keywords_frame, text="Resume Search",
-                                                   text_color=self.theme.text_color)
-        self.resume_title.grid(row=0, column=1)
+                                                   text_color=self.theme.text_color,
+                                                   font=self.theme.header_two_font)
+        self.resume_title.grid(row=0, column=1, pady=(10,0))
 
         # Job Description search
         self.jd_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.jd_frame.grid(row=1, column=0, padx=20, pady=20, sticky='nsew')
+        self.jd_frame.grid(row=1, column=0, padx=(20,10), pady=(10,20), sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
@@ -308,7 +312,7 @@ class HomeView(customtkinter.CTk):
 
         # Resume search
         self.resume_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.resume_frame.grid(row=1, column=1, padx=20, pady=20, sticky='nsew')
+        self.resume_frame.grid(row=1, column=1, padx=(10,20), pady=(10,20), sticky='nsew')
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
 
@@ -371,8 +375,9 @@ class HomeView(customtkinter.CTk):
         self.contacts_frame.grid_columnconfigure(0, weight=1)
         self.contacts_frame.grid(row=0, column=0, padx=20, pady=20, sticky='nsew')
 
-        self.contact_label = customtkinter.CTkLabel(self.contacts_frame, text="Contacts")
-        self.contact_label.grid(row=0, column=0)
+        self.contact_label = customtkinter.CTkLabel(self.contacts_frame, text="Contacts",
+                                                    font=self.theme.header_two_font)
+        self.contact_label.grid(row=0, column=0, pady=(10,0))
         self.contact_listbox = tkinter.Listbox(self.contacts_frame,
                                                font=self.theme.main_font,
                                                fg=self.theme.text_color,
