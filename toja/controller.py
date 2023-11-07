@@ -301,6 +301,7 @@ class Controller:
             self.job_profile.job_description_label.configure(text=self.model.open_job_description(self.jp_results[10]))
         else:
             self.job_profile.job_description_label.configure(text='')
+        self.update_profile_keywords()
 
     def open_job_profile(self) -> None:
         self.job_profile = JobProfile(self.view, self.model.config.theme)
@@ -311,6 +312,13 @@ class Controller:
         self.update_job_profile()
         self.update_event_listbox()
         self.update_contact_listbox()
+
+    def update_profile_keywords(self):
+        self.profile_keywords = KeywordExtractor()
+        self.profile_keywords.text = self.job_profile.job_description_label.cget("text")
+        extracted_keywords = self.profile_keywords.extract_keywords(self.profile_keywords.text.lower())
+        for keywords in extracted_keywords:
+            self.job_profile.keyword_scroll.insert(tkinter.END, keywords)
 
     def add_contact(self):
         self.contact = NewContact(self.view, self.view.theme)
