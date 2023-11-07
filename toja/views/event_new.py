@@ -13,7 +13,7 @@ class NewEvent:
 
         self.event_window = customtkinter.CTkToplevel(root)
         self.event_window.attributes('-topmost', 'true')
-        self.event_window.title("Event")
+        self.event_window.title("New Event")
 
         self.event_info_frame = customtkinter.CTkFrame(self.event_window)
         self.event_info_frame.grid(row=0, column=0, padx=20, pady=20)

@@ -552,7 +552,7 @@ class Controller:
         contacts = self.model.get_contacts(self.job_id)
         for item in contacts:
             self.job_profile.contact_listbox.insert(tkinter.END,
-                                                    f'{item[0]} | {item[1]} {item[2]} | {item[5]}')
+                                                    f'{item[0]} | {item[1]} {item[2]} ')
 
     def update_contact_listbox_home(self):
         self.view.contact_listbox.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
