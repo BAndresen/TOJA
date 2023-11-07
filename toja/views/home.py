@@ -94,7 +94,7 @@ class HomeView(customtkinter.CTk):
         self.home_frame.grid_rowconfigure(0, weight=1)
 
         self.job_list_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
-        self.job_list_frame.grid(row=0, column=0, rowspan=2, padx=20, pady=20, sticky="nsew")
+        self.job_list_frame.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=(20, 5), sticky="nsew")
         self.job_list_frame.grid_columnconfigure(0, weight=1)
         self.job_list_frame.grid_rowconfigure(0, weight=1)
         # Job ListBox
@@ -111,7 +111,7 @@ class HomeView(customtkinter.CTk):
 
         # Add and Delete Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
-        self.button_frame.grid(row=0, column=1, padx=(5, 20), pady=20, sticky="ne")
+        self.button_frame.grid(row=0, column=1, padx=(5, 10), pady=20, sticky="ne")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="",
                                                       image=self.plus_icon,
                                                       width=35, height=35,
@@ -125,14 +125,9 @@ class HomeView(customtkinter.CTk):
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
-        self.stat_board_frame.grid(row=0, column=2, padx=20, pady=20, sticky="nsew")
-
-        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:",
-                                                         text_color=self.theme.text_color)
-        self.total_points_label.grid(row=0, column=0, padx=(20, 5), pady=(20, 5), sticky="e")
-        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="",
-                                                   text_color=self.theme.text_color)
-        self.total_points.grid(row=0, column=1, padx=(5, 20), pady=(20, 5), sticky="w")
+        self.stat_board_frame.grid(row=0, column=2, padx=(5, 20), pady=(20, 5), sticky="nsew")
+        self.stat_board_frame.grid_columnconfigure(0, weight=1)
+        self.stat_board_frame.grid_columnconfigure(1, weight=1)
 
         self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level",
                                                  text_color=self.theme.text_color)
@@ -141,15 +136,22 @@ class HomeView(customtkinter.CTk):
         self.progress_bar.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="ew")
 
         self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter Level:",
-                                                          text_color=self.theme.text_color)
-        self.current_level_label.grid(row=2, column=0, padx=(20, 5), pady=5, sticky="e")
-        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="",
+                                                          text_color=self.theme.text_color,
+                                                          font=self.theme.header_two_font)
+        self.current_level_label.grid(row=0, column=0, padx=(20, 5), pady=(20, 5), sticky="e")
+        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="", font=self.theme.header_two_font,
                                                     text_color=self.theme.text_color)
-        self.current_level.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="w")
+        self.current_level.grid(row=0, column=1, padx=(5, 20), pady=(20, 5), sticky="w")
+        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:",
+                                                         text_color=self.theme.text_color)
+        self.total_points_label.grid(row=2, column=0, padx=(20, 5), pady=5, sticky="e")
+        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="", font=self.theme.main_font_bold,
+                                                   text_color=self.theme.text_color)
+        self.total_points.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="w")
 
         # Graph - Days vs Events
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
-        self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=20, sticky="nsew")
+        self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=(5, 20), sticky="nsew")
 
         # --------------- Event -------------- #
 
@@ -193,7 +195,7 @@ class HomeView(customtkinter.CTk):
                                                    activestyle='none',
                                                    borderwidth=0,
                                                    height=25)
-        self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
+        self.past_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5, 20))
 
         # Upcoming Events
         self.upcoming_events_frame = customtkinter.CTkFrame(self.event_frame, fg_color=self.theme.second_frame)
@@ -210,7 +212,7 @@ class HomeView(customtkinter.CTk):
                                                        selectforeground=self.theme.text_color,
                                                        activestyle='none',
                                                        borderwidth=0)
-        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
+        self.upcoming_events_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5, 20))
 
         # --------------- Keywords -------------- #
 
@@ -280,7 +282,7 @@ class HomeView(customtkinter.CTk):
                                                      fg_color=self.theme.second_frame,
                                                      width=35)
 
-        self.position_tooltip = CTkToolTip(self.view_position, delay=0.01, message='',bg_color=self.theme.listbox_bg)
+        self.position_tooltip = CTkToolTip(self.view_position, delay=0.01, message='', bg_color=self.theme.listbox_bg)
 
         self.slider_1 = customtkinter.CTkSlider(self.search_jd_frame, from_=0, to=100, command=self.show_value,
                                                 button_color=self.theme.accent_color)
@@ -379,7 +381,7 @@ class HomeView(customtkinter.CTk):
                                                selectforeground=self.theme.text_color,
                                                activestyle='none',
                                                borderwidth=0, height=15)
-        self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5,20))
+        self.contact_listbox.grid(row=1, column=0, sticky='nsew', padx=20, pady=(5, 20))
 
         # -------------- File Menu -------------- #
         self.menubar = Menu(self)
@@ -457,11 +459,11 @@ class HomeView(customtkinter.CTk):
         self.job_id_entry.grid_remove()
         self.position_entry.grid(row=3, column=1, padx=0, sticky='ew')
         self.position_entry.configure(placeholder_text='Enter Position')
-        self.threshold_entry.grid(row=4, column=2, padx=0, pady=5,)
+        self.threshold_entry.grid(row=4, column=2, padx=0, pady=5, )
         self.threshold_label.grid(row=4, column=0, sticky="e", padx=3)
         self.slider_1.grid(row=4, column=1, sticky="w")
         self.radio_button_3.grid(pady=5)
-        self.view_position.grid(row=3, column=2,)
+        self.view_position.grid(row=3, column=2, )
 
     def destroy_entry(self, event):
         self.job_id_entry.grid_remove()

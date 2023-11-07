@@ -62,10 +62,14 @@ def date_change(unit: int, day=False, hour=False, add=False, date_format='%Y-%m-
 def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
     text = ''
     for files in file_list:
-        if len(files[0]) == 1:
-            f = files
-        else:
-            f = files[0]
+        try:
+            if len(files[0]) == 1:
+                f = files
+            else:
+                f = files[0]
+        except TypeError:
+            print('error loading job file')
+
         try:
             file_path = os.path.join(parent_directory, f)
             with open(file_path, 'r') as file:

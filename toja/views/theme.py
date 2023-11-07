@@ -15,7 +15,8 @@ class Theme:
         self.main_font = ''
         self.title_font = 'roboto', 32
         self.header_font = 'roboto', 24
-        self.profile_info_font = 'roboto', 12, 'bold'
+        self.header_two_font = 'roboto', 18
+        self.main_font_bold = 'roboto', 12, 'bold'
 
         # button
         self.button_color = ''
