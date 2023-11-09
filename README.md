@@ -14,7 +14,8 @@
 
 
 ## Description
-+ Easily add, view and edit job prospect
++ Easily add, view and edit job prospect by creating a Job Profile
+  + A Job Profile displays relevant information about each job
 <br>
 <div align="center">
 <img src="assets/job_profile_screenshot.png" width=600>
