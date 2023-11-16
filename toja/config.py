@@ -23,10 +23,10 @@ class Config:
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
         self.set_theme()
-        if self.get_appearance_mode() == "Light":
-            customtkinter.set_appearance_mode('Light')
+        if self.get_appearance_mode() == constant.LIGHT_MODE:
+            customtkinter.set_appearance_mode(constant.LIGHT_MODE)
         else:
-            customtkinter.set_appearance_mode('Dark')
+            customtkinter.set_appearance_mode(constant.DARK_MODE)
 
     def set_theme(self):
         self.appearance_mode = self.get_appearance_mode()
@@ -117,7 +117,7 @@ class Config:
     def set_icon_mode(self):
         self.icon_mode = self.get_icon_mode()
         self.set_button_text_color(self.icon_mode)
-        if self.icon_mode == 'Light':
+        if self.icon_mode == constant.LIGHT_MODE:
             self.theme.icon_contact = constant.CONTACT_WHITE
             self.theme.icon_delete = constant.DELETE_WHITE
             self.theme.icon_event = constant.EVENT_WHITE
@@ -127,7 +127,7 @@ class Config:
             self.theme.icon_questions = constant.QUESTIONS
             self.theme.icon_visible = constant.VISIBLE
 
-        elif self.icon_mode == 'Dark':
+        elif self.icon_mode == constant.DARK_MODE:
             self.theme.icon_contact = constant.CONTACT
             self.theme.icon_delete = constant.DELETE
             self.theme.icon_event = constant.EVENT
@@ -138,7 +138,7 @@ class Config:
             self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_appearance_mode(self):
-        if self.appearance_mode == "Dark":
+        if self.appearance_mode == constant.DARK_MODE:
             self.set_dark_mode()
         else:
             self.set_light_mode()
@@ -174,7 +174,7 @@ class Config:
         self.theme.icon_visible = constant.VISIBLE
 
     def set_button_text_color(self, mode: str):
-        if mode == 'Light':
+        if mode == constant.LIGHT_MODE:
             self.theme.button_text_color = 'grey86'
-        elif mode == 'Dark':
+        elif mode == constant.DARK_MODE:
             self.theme.button_text_color = 'grey17'
