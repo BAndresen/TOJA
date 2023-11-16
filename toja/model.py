@@ -432,7 +432,7 @@ class Model:
         '''
         self.cursor.execute(query, (user_id,))
         data = self.cursor.fetchall()
-        csv_job_file_path = os.path.join(path, 'exported_job_data.csv')
+        csv_job_file_path = os.path.join(path, constant.EXPORT_JOB_CSV)
 
         with open(csv_job_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
@@ -454,7 +454,7 @@ class Model:
         '''
         self.cursor.execute(query, (user_id,))
         data = self.cursor.fetchall()
-        csv_event_file_path = os.path.join(path, 'exported_event_data.csv')
+        csv_event_file_path = os.path.join(path, constant.EXPORT_EVENT_CSV)
 
         with open(csv_event_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
@@ -475,7 +475,7 @@ class Model:
         '''
         self.cursor.execute(query, (user_id,))
         data = self.cursor.fetchall()
-        csv_contact_file_path = os.path.join(path, 'exported_contact_data.csv')
+        csv_contact_file_path = os.path.join(path, constant.EXPORT_CONTACT_CSV)
 
         with open(csv_contact_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)

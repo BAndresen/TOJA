@@ -2,7 +2,7 @@
 ESCAPE_CHAR = ['\n', '\r', '\t', '\\', '\'', '\"', '\a', '\b', '\f', '\v', '\0', '\ooo', ]
 NOT_ASCII = ['À', 'ñ', 'Ç', 'β', 'Ω', 'Д', 'ж', 'Я', '你', '世', 'こんにちは', 'テスト', '😁', '🌍', '∑', '∫', '€', '¥',
              '₽', '→', '⇨', '◆', '△', '✂', '✈', '♪', '♫']
-EDGE_CHAR = [ '0', '', ' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '}', '[', ']',
+EDGE_CHAR = ['0', '', ' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '}', '[', ']',
              '|', ':', ';', '"', "'", '<', '>', ',', '.', '?', '/', '~', '`']
 
 # Config
@@ -14,6 +14,9 @@ JOB_DESCRIPTION_DIRECTORY = 'job_descriptions'
 SAMPLE_USER_NAME = 'Sample'
 SAMPLE_JOB = 'sample_job.sql'
 SAMPLE_CONTACT = 'sample_contact.sql'
+EXPORT_JOB_CSV = 'exported_job_data.csv'
+EXPORT_EVENT_CSV = 'exported_event_data.csv'
+EXPORT_CONTACT_CSV = 'exported_contact_data.csv'
 
 # Job Entry Variables
 EARNING_TYPE = ['Annual', 'Monthly', 'Hourly', 'Contract', 'None']
