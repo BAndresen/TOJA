@@ -19,7 +19,7 @@ Getting a Job is Hard. Download Toja to help you Succeed
   + A Job Profile displays relevant information about each job
 <br>
 <div align="center">
-<img src="assets/job_profile_screenshot.png" width=600>
+<img src="assets/job_profile_screenshot.png" width=500>
 </div>
 <br>
 
@@ -35,7 +35,7 @@ Getting a Job is Hard. Download Toja to help you Succeed
   + Gain insights and improve your resume         
 <br>
 <div align="center">
-<img src="assets/keyword_screenshot.png" width=800>
+<img src="assets/keyword_screenshot.png" width=700>
 </div>
 <br>
 
@@ -44,14 +44,14 @@ Getting a Job is Hard. Download Toja to help you Succeed
 + Earn points with each new event and level up as a Job Hunter. 
 <br>
 <div align="center">
-<img src="assets/event_screenshot.png" width=800>
+<img src="assets/event_screenshot.png" width=700>
 </div>
 <br>
 
 ### Network
 + Add contacts and grow your Network.  
 <div align="center">
-<img src="assets/contacts_screenshot.png" width=800>
+<img src="assets/contacts_screenshot.png" width=700>
 </div>
 <br>
 
@@ -61,17 +61,40 @@ Export your data anytime.
 *All user data shown is fake sample data*
 
 <div align="center">
-<img src="assets/export_screenshot.png" width=800>
+<img src="assets/export_screenshot.png" width=600>
 </div>
 <br>
 
-### Upcoming Features
-+ Analytics   
-+ Time-based points bonus (if user discovers spam or misleading job posting and reports it they earns community-enhancer points buff for 24hrs on future events) 
+## Installation
 
-## Installation 
+### Option A) Download Windows Installer
+1. Navigate to the <a href = "https://github.com/BAndresen/TOJA/releases">Releases</a> section of this repository and download and run the Toja.Windows.Installer.v1.0.exe.
+<br>
+<div align="center">
+<img src="assets/install_screenshot.png" width=650>
+</div>
+<br>
 
-**Option A)** Run source code. Clone Repository with Git and run with Python
+2. This is a small project and I didn't purchase a Windows publishers certificate.  You will likey be prompted about an unkown application and need to Run Away.
++ Use SHA-256 Hash for optional additional verifcation of download
+<br>
+<div align="center">
+<img src="assets/install_nocert.png" width=350>
+</div>
+<br>
+
+3. Complete the setup wizard
++ Choose if you would like a Desktop and/or Start Menu shortcut.
++ Toja is designed to run on the local user and saved to the USER/AppData/Local/ directory.
++ When done with Toja, included is an uninstaller found in the 'add and remove' section of the control panel. 
+<br>
+<div align="center">
+<img src="assets/install_welcome.png" width=350>
+</div>
+<br>
+<br>
+
+### Option B) Clone Repository and run Source Code
 
 1. Download Git
 https://git-scm.com/downloads
@@ -81,7 +104,7 @@ https://www.python.org/downloads
 
 *ensure python.exe added to PATH*
 <div align="center">
-<img src="assets/python_download_screenshot.png" width=600>
+<img src="assets/python_download_screenshot.png" width=350>
 </div>
 <br>
 
