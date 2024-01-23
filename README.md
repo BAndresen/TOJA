@@ -1,6 +1,5 @@
 # TOJA
 ### A Desktop Program to Track &amp; Optimize your Job Applications.
-Getting a Job is Hard. Download Toja to help you Succeed
 <br>
 <div align="center">
 <img src="assets/toja_gif.gif" width=600>
@@ -8,10 +7,26 @@ Getting a Job is Hard. Download Toja to help you Succeed
 <br>
 
 ## Why use TOJA?
-+ Make the job hunting process more organized, analytical and motivational.
-+ Own your data! Nothing is shared and everything is stored locally on your machine
-+ Open Source
-+ No Paywalls
+🌟 Getting a Job is Hard:<br>
+Organize your job prospects effortlessly with Toja. It helps keep you grounded, focused, and motivated.
+
+🧠 Personalized Data Insights:<br>
+Toja leverages Natural Language Processing to search your job database, finding and ranking keywords. Make informed decisions using personalized data.
+
+📄 Resume Optimization:<br>
+Upload your resume to receive a unique score, guiding you to enhance your job application.
+
+🚀 Stay Motivated:<br>
+Toja introduces a leveling system, allowing you to earn points with each step closer to landing your new job.
+
+🛡️ Own Your Data:<br>
+All your information is stored locally on your machine, ensuring your data remains private and secure.
+
+🌐 Open Source Software:<br>
+Toja is open-source, promoting transparency and collaboration.
+
+🚫 No Paywalls:<br>
+Toja is entirely free to use, with no hidden costs or paywalls.
 
 
 ## Description
