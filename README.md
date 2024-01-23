@@ -1,8 +1,9 @@
 # TOJA
 ### A Desktop Program to Track &amp; Optimize your Job Applications.
-
+Getting a Job is Hard. Download Toja to help you Succeed
+<br>
 <div align="center">
-<img src="assets/home_screenshot.png" width=800>
+<img src="assets/toja_gif.gif" width=600>
 </div>
 <br>
 
