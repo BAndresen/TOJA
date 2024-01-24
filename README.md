@@ -28,8 +28,14 @@ Toja is open-source, promoting transparency and collaboration.
 🚫 No Paywalls:<br>
 Toja is entirely free to use, with no hidden costs or paywalls.
 
+### Watch Video Overview 
+<div align="center">
+<a href="https://www.youtube.com/watch?v=q4UEy1XgcWg&t=196s"><img src = "assets/youtube_screenshot.png" width=600></a>
+</div>
 
 ## Description
+
+### Job Profile
 + Easily add, view and edit job prospect by creating a Job Profile
   + A Job Profile displays relevant information about each job
 <br>
