@@ -24,3 +24,7 @@ toja/.vscode/settings.json
 /toja_db_backup.ffs_batch
 /run_toja_db_backup.ffs_batch
 /.vscode/settings.json
+/__main__.spec
+/build/
+/dist/
+/env/
