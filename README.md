@@ -63,18 +63,9 @@ Toja is entirely free to use, with no hidden costs or paywalls.
 ### Events
 + Keep track of all your past and upcoming events
 + Earn points with each new event and level up as a Job Hunter. 
-<br>
-<div align="center">
-<img src="assets/event_screenshot.png" width=700>
-</div>
-<br>
 
 ### Network
 + Add contacts and grow your Network.  
-<div align="center">
-<img src="assets/contacts_screenshot.png" width=700>
-</div>
-<br>
 
 ### Export
 Export your data anytime.
