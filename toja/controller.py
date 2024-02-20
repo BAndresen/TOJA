@@ -26,7 +26,6 @@ from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import utils as utils
 import constants as constant
-from visualizations import DayEvent
 
 
 class Controller:
@@ -96,8 +95,10 @@ class Controller:
         self.update_points_view()
 
     def initialize_day_event_graph(self):
-        de_graph = DayEvent()
-        de_graph.day_event_graph(self.view.calendar_frame)
+        self.view.de_graph.categories = ['Monday', 'Tuesday', 'Wednesday']
+        self.view.de_graph.events1 = [0, 3, 2]
+        self.view.de_graph.events2 = [1, 0, 5]
+        self.view.de_graph.day_event_graph(self.view.calendar_frame)
 
     def set_user(self):
         points = 0
