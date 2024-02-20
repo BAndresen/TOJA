@@ -7,6 +7,7 @@ from CTkToolTip import *
 
 import constants as constant
 from .theme import Theme
+# from toja.visualizations import DayEvent
 
 
 class HomeView(customtkinter.CTk):

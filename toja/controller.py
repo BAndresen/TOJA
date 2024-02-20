@@ -26,6 +26,7 @@ from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import utils as utils
 import constants as constant
+from visualizations import DayEvent
 
 
 class Controller:
@@ -65,6 +66,9 @@ class Controller:
         self.view.upcoming_events_listbox.bind('<Double-Button-1>', self.double_click_event_upcoming)
         self.view.upcoming_events_listbox.bind('<Return>', self.double_click_event_upcoming)
 
+        # Initialize Day vs Events Graph
+        self.initialize_day_event_graph()
+
         # Contact Listbox Bind
         self.view.contact_listbox.bind('<Double-Button-1>', self.double_click_contact_home)
         self.view.contact_listbox.bind('<Return>', self.double_click_contact_home)
@@ -90,6 +94,10 @@ class Controller:
         self.update_home_listbox()
         self.update_home_event_listbox()
         self.update_points_view()
+
+    def initialize_day_event_graph(self):
+        de_graph = DayEvent()
+        de_graph.day_event_graph(self.view.calendar_frame)
 
     def set_user(self):
         points = 0
