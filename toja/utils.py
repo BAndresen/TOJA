@@ -56,15 +56,15 @@ def date_change(unit: int, day=False, hour=False, add=False, date_format='%Y-%m-
         The returned string is in '%Y-%m-%d' format if 'day' is True and in '%I:%M%p' format if 'hour' is True.
     """
     previous_time = None
-    current_time = datetime.datetime.now()
+    current_time = datetime.now()
     if day:
-        day_change = datetime.timedelta(days=unit)
+        day_change = timedelta(days=unit)
         if add:
             previous_time = (current_time + day_change).strftime(date_format)
         else:
             previous_time = (current_time - day_change).strftime(date_format)
     if hour:
-        day_change = datetime.timedelta(hours=unit)
+        day_change = timedelta(hours=unit)
         if add:
             previous_time = (current_time + day_change).strftime(time_format)
         else:
