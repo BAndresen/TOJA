@@ -128,6 +128,7 @@ class Controller:
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.config.user_name)
         self.update_home()
+        self.initialize_day_event_graph()
 
     def change_user(self):
         self.user_select = UserSelect(self.view, self.view.theme)
@@ -178,6 +179,7 @@ class Controller:
         self.update_appearance_mode()
         self.update_button_color()
         self.update_accent_color()
+        self.view.update_day_event_graph_color_scheme()
 
     def update_accent_color(self):
         if self.settings.accent_color_button.cget('fg_color'):

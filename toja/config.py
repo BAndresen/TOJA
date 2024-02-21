@@ -145,7 +145,7 @@ class Config:
 
     def set_dark_mode(self):
         self.theme.home_frame_background = constant.HF_BG_DARK
-        self.theme.text_color = 'grey86'
+        self.theme.text_color = constant.text_color_dark
         self.theme.listbox_bg = 'grey20'
         self.theme.home_frame_selected = 'grey14'
 
@@ -160,7 +160,7 @@ class Config:
 
     def set_light_mode(self):
         self.theme.home_frame_background = constant.HF_BG_LIGHT
-        self.theme.text_color = 'grey17'
+        self.theme.text_color = constant.text_color
         self.theme.listbox_bg = 'grey90'
         self.theme.home_frame_selected = 'grey92'
 

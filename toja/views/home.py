@@ -154,6 +154,7 @@ class HomeView(customtkinter.CTk):
         self.de_graph = DayEvent()
         self.de_graph.bg_color = self.theme.home_frame_background
         self.de_graph.face_color = self.theme.main_frame
+        self.de_graph.text_color = self.theme.text_color
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
         self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=(5, 20), sticky="nsew")
 
@@ -585,6 +586,15 @@ class HomeView(customtkinter.CTk):
 
         for label in label_list:
             label.configure(text_color=self.theme.text_color)
+
+    def update_day_event_graph_color_scheme(self):
+        self.de_graph.bg_color = self.theme.home_frame_background
+        self.de_graph.face_color = self.theme.main_frame
+        self.de_graph.text_color = self.theme.text_color
+        self.calendar_frame.destroy()
+        self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
+        self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=(5, 20), sticky="nsew")
+        self.de_graph.toggle_color_scheme(self.calendar_frame)
 
     def update_icon_mode(self):
         self.update_icon_paths()
