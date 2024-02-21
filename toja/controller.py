@@ -88,7 +88,6 @@ class Controller:
             self.initialize_day_event_graph()
             self.update_home()
 
-
     def update_home(self):
         self.update_contact_listbox_home()
         self.update_home_listbox()
