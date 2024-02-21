@@ -1,6 +1,6 @@
 import customtkinter
 import tkinter
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Union
 from webbrowser import open
 from tkinter import filedialog, messagebox
@@ -95,10 +95,14 @@ class Controller:
         self.update_points_view()
 
     def initialize_day_event_graph(self):
-        self.view.de_graph.categories = ['Monday', 'Tuesday', 'Wednesday']
-        self.view.de_graph.events1 = [0, 3, 2]
-        self.view.de_graph.events2 = [1, 0, 5]
-        self.view.de_graph.day_event_graph(self.view.calendar_frame)
+        today = datetime.today()
+        data = {}
+        days_of_the_week = utils.get_past_week_dates(today)
+        for day in days_of_the_week:
+            data[day] = self.model.get_event_count(day)
+        status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
+        events = set(status_values)
+        self.view.de_graph.day_event_graph(self.view.calendar_frame, data, events)
 
     def set_user(self):
         points = 0
