@@ -1,10 +1,23 @@
 import tkinter
 from typing import Union
 from pathlib import Path
-import datetime
+from datetime import datetime, timedelta
 import os
 import string
 from tkinter import messagebox, Toplevel
+
+
+def get_past_week_dates(today: datetime,) -> list:
+
+    # Calculate the date of the previous Sunday
+    previous_sunday = today - timedelta(days=today.weekday() + 1)
+
+    past_week_dates = [previous_sunday - timedelta(days=i) for i in range(11, -1, -1)]
+    past_week_dates.append(today - timedelta(days=1))
+    past_week_dates.append(today)
+    clean_format = [date.strftime('%Y-%m-%d') for date in past_week_dates]
+
+    return clean_format
 
 
 def validate_file_name(file_name: str) -> bool:
@@ -43,15 +56,15 @@ def date_change(unit: int, day=False, hour=False, add=False, date_format='%Y-%m-
         The returned string is in '%Y-%m-%d' format if 'day' is True and in '%I:%M%p' format if 'hour' is True.
     """
     previous_time = None
-    current_time = datetime.datetime.now()
+    current_time = datetime.now()
     if day:
-        day_change = datetime.timedelta(days=unit)
+        day_change = timedelta(days=unit)
         if add:
             previous_time = (current_time + day_change).strftime(date_format)
         else:
             previous_time = (current_time - day_change).strftime(date_format)
     if hour:
-        day_change = datetime.timedelta(hours=unit)
+        day_change = timedelta(hours=unit)
         if add:
             previous_time = (current_time + day_change).strftime(time_format)
         else:
@@ -84,6 +97,3 @@ def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
             print(f'Opened with Unicode utf-8 {f} {e}')
 
     return text.lower()
-
-
-

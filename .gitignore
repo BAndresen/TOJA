@@ -12,7 +12,6 @@
 /project_notes/
 /toja/database/toja_database.db
 /toja/database/sample_database.db
-/playground.py
 /toja/database/toja_database_old.db
 /run_tests.bat
 /toja/config.ini
@@ -28,3 +27,4 @@ toja/.vscode/settings.json
 /build/
 /dist/
 /env/
+/toja/playground.py

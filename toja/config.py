@@ -144,12 +144,12 @@ class Config:
             self.set_light_mode()
 
     def set_dark_mode(self):
-        self.theme.home_frame_background = 'grey17'
+        self.theme.home_frame_background = constant.HF_BG_DARK
         self.theme.text_color = 'grey86'
         self.theme.listbox_bg = 'grey20'
         self.theme.home_frame_selected = 'grey14'
 
-        self.theme.main_frame = 'grey14'
+        self.theme.main_frame = constant.MF_DARK
         self.theme.second_frame = 'grey17'
 
         self.theme.icon_home = constant.HOME_WHITE
@@ -159,12 +159,12 @@ class Config:
         self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_light_mode(self):
-        self.theme.home_frame_background = 'grey85'
+        self.theme.home_frame_background = constant.HF_BG_LIGHT
         self.theme.text_color = 'grey17'
         self.theme.listbox_bg = 'grey90'
         self.theme.home_frame_selected = 'grey92'
 
-        self.theme.main_frame = 'grey92'
+        self.theme.main_frame = constant.MF_LIGHT
         self.theme.second_frame = 'grey85'
 
         self.theme.icon_home = constant.HOME

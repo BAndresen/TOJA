@@ -1,6 +1,6 @@
 import customtkinter
 import tkinter
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Union
 from webbrowser import open
 from tkinter import filedialog, messagebox
@@ -32,6 +32,7 @@ class Controller:
     def __init__(self, view: HomeView, model: Model, new_user: bool = False):
         self.today = datetime.today().date()
         self.new_job = None
+        # self.user_id = None
         self.view = view
         self.model = model
 
@@ -83,6 +84,8 @@ class Controller:
             self.welcome_window.start_button.configure(command=self.set_user)
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
+            # Initialize Day vs Events Graph
+            self.initialize_day_event_graph()
             self.update_home()
 
     def update_home(self):
@@ -90,6 +93,27 @@ class Controller:
         self.update_home_listbox()
         self.update_home_event_listbox()
         self.update_points_view()
+        self.update_day_event_graph()
+
+    def initialize_day_event_graph(self):
+        today = datetime.today()
+        data = {}
+        days_of_the_week = utils.get_past_week_dates(today)
+        for day in days_of_the_week:
+            data[day] = self.model.get_event_count(day, self.user_id)
+        status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
+        events = set(status_values)
+        self.view.de_graph.day_event_graph(self.view.calendar_frame, data, events)
+
+    def update_day_event_graph(self):
+        today = datetime.today()
+        data = {}
+        days_of_the_week = utils.get_past_week_dates(today)
+        for day in days_of_the_week:
+            data[day] = self.model.get_event_count(day, self.user_id)
+        status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
+        events = set(status_values)
+        self.view.de_graph.update_graph(data, events)
 
     def set_user(self):
         points = 0

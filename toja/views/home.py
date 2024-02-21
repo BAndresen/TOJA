@@ -7,6 +7,7 @@ from CTkToolTip import *
 
 import constants as constant
 from .theme import Theme
+from .visualizations import DayEvent
 
 
 class HomeView(customtkinter.CTk):
@@ -150,6 +151,9 @@ class HomeView(customtkinter.CTk):
         self.total_points.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="w")
 
         # Graph - Days vs Events
+        self.de_graph = DayEvent()
+        self.de_graph.bg_color = self.theme.home_frame_background
+        self.de_graph.face_color = self.theme.main_frame
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
         self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=(5, 20), sticky="nsew")
 

@@ -74,3 +74,19 @@ WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Appli
 # theme
 DARK_MODE = 'Dark'
 LIGHT_MODE = 'Light'
+
+HF_BG_DARK = '#2b2b2b'  # 'grey17'
+text_color = '#dbdbdb'  # 'grey86'
+listbox_bg = 'grey20'
+home_frame_selected = 'grey14'
+MF_DARK = '#242424' #'grey14'
+second_frame = 'grey17'
+
+HF_BG_LIGHT = '#d9d9d9'  # grey85
+text_color = 'grey17'
+listbox_bg = 'grey90'
+home_frame_selected = 'grey92'
+MF_LIGHT = '#ebebeb' #'grey92'
+second_frame = 'grey85'
+button_text_color = 'grey86'
+button_text_color = 'grey17'

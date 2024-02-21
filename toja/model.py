@@ -527,3 +527,18 @@ class Model:
             if fuzz.token_sort_ratio(row[0], position) >= threshold:
                 matching_rows.add(row[0])
         return matching_rows
+
+    def get_event_count(self, day: str, user_id: int) -> list:
+        query = '''
+            SELECT
+                status,
+                COUNT(status) as event_count
+            FROM event
+            JOIN status USING (status_id)
+            WHERE date = ?
+            AND user_id = ?
+            GROUP BY status_id
+        '''
+        self.cursor.execute(query, (day, user_id))
+        results = self.cursor.fetchall()
+        return results
