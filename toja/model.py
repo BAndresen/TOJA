@@ -528,7 +528,7 @@ class Model:
                 matching_rows.add(row[0])
         return matching_rows
 
-    def get_event_count(self, day: str) -> list:
+    def get_event_count(self, day: str, user_id: int) -> list:
         query = '''
             SELECT
                 status,
@@ -536,8 +536,9 @@ class Model:
             FROM event
             JOIN status USING (status_id)
             WHERE date = ?
+            AND user_id = ?
             GROUP BY status_id
         '''
-        self.cursor.execute(query, (day,))
+        self.cursor.execute(query, (day, user_id))
         results = self.cursor.fetchall()
         return results

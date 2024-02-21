@@ -6,20 +6,54 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+
 class DayEvent:
     def __init__(self):
         self.dates = []
         self.data = []
         self.bg_color = ''
         self.face_color = ''
+        self.fig = None
+        self.ax = None
 
     def day_event_graph(self, frame: customtkinter.CTkFrame, data: dict, events: set):
+        self.fig, self.ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color)
+        self.ax.set_facecolor(self.face_color)
 
-        fig, ax = plt.subplots(figsize=(4, 4), facecolor=self.bg_color)
-        ax.set_facecolor(self.face_color)
+        self._plot_graph(data, events)
 
+        plt.xticks(rotation=25)
+        plt.legend(fontsize=9)
+        plt.tight_layout()
+
+        self._configure_spines()
+
+        plt.subplots_adjust(left=0.1, right=0.9)
+
+        self._draw_canvas(frame)
+
+    def update_graph(self, data: dict, events: set):
+        self.ax.clear()
+        self._plot_graph(data, events)
+
+        plt.xticks(rotation=30)
+        plt.legend(fontsize=9)
+        plt.tight_layout()
+
+        self._configure_spines()
+
+        plt.subplots_adjust(left=0.1, right=0.9)
+
+        self.fig.canvas.draw()
+        self.fig.canvas.flush_events()
+
+    def _plot_graph(self, data: dict, events: set):
         dates = list(data.keys())
         event_counts = {event: [0] * len(dates) for event in events}
+
+        plt.tick_params(axis='x', labelsize=8)
+
+        plt.tick_params(axis='y', labelsize=8)
 
         for i, date in enumerate(dates):
             for event, count in data[date]:
@@ -29,29 +63,71 @@ class DayEvent:
 
         for event in events:
             if bottom is None:
-                ax.bar(dates, event_counts[event], label=event, width=.5)
+                self.ax.bar(dates, event_counts[event], label=event, width=.5)
                 bottom = event_counts[event]
             else:
-                ax.bar(dates, event_counts[event], bottom=bottom, label=event, width=.5)
+                self.ax.bar(dates, event_counts[event], bottom=bottom, label=event, width=.5)
                 bottom = [bottom[i] + event_counts[event][i] for i in range(len(dates))]
 
-        plt.xticks(rotation=45)
-        plt.legend()
-        plt.tight_layout()
-        # Set font size for x-axis label
+    def _configure_spines(self):
+        self.ax.spines['top'].set_visible(False)
+        self.ax.spines['right'].set_visible(False)
+        self.ax.spines['bottom'].set_visible(False)
+        self.ax.spines['left'].set_visible(False)
 
-        # Set font size for tick labels on x-axis
-        plt.tick_params(axis='x', labelsize=8)
-
-        # Set font size for tick labels on y-axis
-        plt.tick_params(axis='y', labelsize=8)
-        # plt.set_facecolor(self.face_color)  # Light gray background color
-
-        ax.spines['top'].set_visible(False)
-        ax.spines['right'].set_visible(False)
-        ax.spines['bottom'].set_visible(False)
-        ax.spines['left'].set_visible(False)
-
-        canvas = FigureCanvasTkAgg(fig, master=frame)
+    def _draw_canvas(self, frame):
+        canvas = FigureCanvasTkAgg(self.fig, master=frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+# class DayEvent:
+#     def __init__(self):
+#         self.dates = []
+#         self.data = []
+#         self.bg_color = ''
+#         self.face_color = ''
+#
+#     def day_event_graph(self, frame: customtkinter.CTkFrame, data: dict, events: set):
+#
+#         fig, ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color)
+#         ax.set_facecolor(self.face_color)
+#
+#         dates = list(data.keys())
+#         event_counts = {event: [0] * len(dates) for event in events}
+#
+#         for i, date in enumerate(dates):
+#             for event, count in data[date]:
+#                 event_counts[event][i] += count
+#
+#         bottom = None
+#
+#         for event in events:
+#             if bottom is None:
+#                 ax.bar(dates, event_counts[event], label=event, width=.5)
+#                 bottom = event_counts[event]
+#             else:
+#                 ax.bar(dates, event_counts[event], bottom=bottom, label=event, width=.5)
+#                 bottom = [bottom[i] + event_counts[event][i] for i in range(len(dates))]
+#
+#         plt.xticks(rotation=30)
+#         plt.legend(fontsize=9)
+#         plt.tight_layout()
+#         # Set font size for x-axis label
+#
+#         # Set font size for tick labels on x-axis
+#         plt.tick_params(axis='x', labelsize=8)
+#
+#         # Set font size for tick labels on y-axis
+#         plt.tick_params(axis='y', labelsize=8)
+#         # plt.set_facecolor(self.face_color)  # Light gray background color
+#
+#         ax.spines['top'].set_visible(False)
+#         ax.spines['right'].set_visible(False)
+#         ax.spines['bottom'].set_visible(False)
+#         ax.spines['left'].set_visible(False)
+#
+#         plt.subplots_adjust(left=0.1, right=0.9)  # Adjust these values as needed
+#
+#         canvas = FigureCanvasTkAgg(fig, master=frame)
+#         canvas.draw()
+#         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
