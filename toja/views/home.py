@@ -112,34 +112,39 @@ class HomeView(customtkinter.CTk):
         self.job_list_box.grid(row=1, column=0, rowspan=2, padx=(20, 5), pady=(0, 20), sticky='nsew')
 
         # Job listbox title legend
-        self.job_title_legend_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.listbox_bg)
-        self.job_title_legend_frame.grid(column=0, row=0, sticky='nsew', pady=(20, 0))
+        self.job_title_legend_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.listbox_bg, corner_radius=0)
+        self.job_title_legend_frame.grid(column=0, row=0, sticky='nsew', pady=(20, 0),padx=(20, 5))
 
         self.job_id_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Job ID")
-        self.job_id_title.grid(column=0, row=0, padx=10)
-        self.company_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Company")
+        self.job_id_title.grid(column=0, row=0, padx=(2,10))
+        self.company_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="|  Company  |")
         self.company_title.grid(column=1, row=0, padx=10)
         self.position_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Position")
         self.position_title.grid(column=2, row=0, padx=10)
 
         # Add and Delete Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
-        self.button_frame.grid(row=1, column=1, padx=(5, 10), pady=20, sticky="ne")
+        self.button_frame.grid(row=0, rowspan=2, column=1, padx=10, pady=20, sticky="new")
+        self.button_frame.grid_columnconfigure(0, weight=1)
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="",
                                                       image=self.plus_icon,
                                                       width=35, height=35,
                                                       fg_color=self.theme.button_color,
                                                       hover_color='grey15')
-        self.new_job_button.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
+        self.new_job_button.grid(row=0, column=0, padx=10, pady=(10, 5), )
         self.delete_job_button = customtkinter.CTkButton(self.button_frame, text="", image=self.delete_icon, width=35,
                                                          height=35,
                                                          fg_color=self.theme.button_color, hover_color='grey15')
-        self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
+        self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), )
 
+        # Display Open switch Frame
         self.switch_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
-        self.switch_frame.grid(row=1,column=1)
+        self.switch_frame.grid(row=1, rowspan=2, column=1, padx=10, pady=80, sticky='n')
+        self.display_open_label = customtkinter.CTkLabel(self.switch_frame, text='Show Active',
+                                                         text_color=self.theme.text_color)
+        self.display_open_label.grid(row=0, column=0, padx=10)
         self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0)
-        self.open_jobs_switch.grid(row=0,column=0)
+        self.open_jobs_switch.grid(row=1, column=0, pady=(0,10))
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
@@ -646,4 +651,3 @@ class HomeView(customtkinter.CTk):
         self.slider_1.configure(button_color=self.theme.accent_color)
         for listbox in self.home_list_box_list:
             listbox.configure(selectbackground=self.theme.accent_color)
-

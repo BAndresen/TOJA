@@ -467,6 +467,7 @@ class Controller:
         if messagebox.askyesno("Delete Contact", message=f'Are you sure you want to delete event?'):
             self.model.delete_entry('event', 'event_id', event_id)
             self.update_home_event_listbox()
+            self.update_day_event_graph()
 
     def run(self):
         self.view.mainloop()
