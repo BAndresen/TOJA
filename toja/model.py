@@ -172,6 +172,30 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
+    def get_open_home_view_listbox(self, user_id) -> list:
+        query = '''
+        SELECT
+            job.job_id,
+            job.company,
+            job.position
+        FROM
+            job
+        WHERE
+            job.user_id = ?
+        AND
+            NOT EXISTS (
+                SELECT 1
+                FROM event
+                WHERE event.job_id = job.job_id
+                AND event.status_id = 1
+            )
+        ORDER BY job_id DESC
+
+        '''
+        self.cursor.execute(query, (user_id,))
+        results = self.cursor.fetchall()
+        return results
+
     def get_job_data(self, job_id: Union[str, int]) -> tuple:
         query = '''
          SELECT

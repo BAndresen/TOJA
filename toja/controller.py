@@ -43,6 +43,7 @@ class Controller:
         self.view.network_button.configure(command=self.view.network_frame_button)
         self.view.new_job_button.configure(command=self.open_job_submit)
         self.view.delete_job_button.configure(command=self.delete_job)
+        self.view.open_jobs_switch.configure(command=self.open_job_listbox_view)
 
         self.view.network_new_contact_button.configure(command=self.add_contact_home)
         self.view.network_delete_job_button.configure(command=self.delete_contact)
@@ -90,7 +91,8 @@ class Controller:
 
     def update_home(self):
         self.update_contact_listbox_home()
-        self.update_home_listbox()
+        self.open_job_listbox_view()
+        # self.update_home_listbox()
         self.update_home_event_listbox()
         self.update_points_view()
         self.update_day_event_graph()
@@ -246,13 +248,20 @@ class Controller:
         self.add_user.window.destroy()
         self.update_home()
 
-    def update_home_listbox(self):
-        self.current_user = self.model.get_user_id(self.model.config.user_name)
+    def update_home_listbox(self, home_listbox: list):
+        # self.current_user = self.model.get_user_id(self.model.config.user_name)
         self.view.job_list_box.delete(constant.START_RANGE_LISTBOX, constant.END_RANGE_LISTBOX)
 
-        home_listbox = self.model.get_home_view_listbox(self.current_user)
+        # home_listbox = self.model.get_home_view_listbox(self.user_id)
         for item in home_listbox:
-            self.view.job_list_box.insert(tkinter.END, f"{item[0]} | {item[1]} | {item[2]}")
+            self.view.job_list_box.insert(tkinter.END,
+                                          f"{item[0]}  |  {item[1]}  |  {item[2]}")
+
+    def open_job_listbox_view(self):
+        if self.view.open_jobs_switch.get() == 0:
+            self.update_home_listbox(self.model.get_home_view_listbox(self.user_id))
+        else:
+            self.update_home_listbox(self.model.get_open_home_view_listbox(self.user_id))
 
     def double_click_job(self, event):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))
@@ -388,7 +397,8 @@ class Controller:
 
         self.edit.ej_window.destroy()
         self.update_job_profile()
-        self.update_home_listbox()
+        self.open_job_listbox_view()
+        # self.update_home_listbox()
 
     def insert_contact(self):
         self.model.add_contact(

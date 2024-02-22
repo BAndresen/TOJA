@@ -97,7 +97,8 @@ class HomeView(customtkinter.CTk):
         self.job_list_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
         self.job_list_frame.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=(20, 5), sticky="nsew")
         self.job_list_frame.grid_columnconfigure(0, weight=1)
-        self.job_list_frame.grid_rowconfigure(0, weight=1)
+        self.job_list_frame.grid_rowconfigure(1, weight=1)
+
         # Job ListBox
         self.job_list_box = tkinter.Listbox(self.job_list_frame,
                                             font=self.theme.main_font,
@@ -108,11 +109,22 @@ class HomeView(customtkinter.CTk):
                                             activestyle='none',
                                             borderwidth=0, height=20)
 
-        self.job_list_box.grid(row=0, column=0, rowspan=2, padx=(20, 5), pady=20, sticky='nsew')
+        self.job_list_box.grid(row=1, column=0, rowspan=2, padx=(20, 5), pady=(0, 20), sticky='nsew')
+
+        # Job listbox title legend
+        self.job_title_legend_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.listbox_bg)
+        self.job_title_legend_frame.grid(column=0, row=0, sticky='nsew', pady=(20, 0))
+
+        self.job_id_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Job ID")
+        self.job_id_title.grid(column=0, row=0, padx=10)
+        self.company_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Company")
+        self.company_title.grid(column=1, row=0, padx=10)
+        self.position_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Position")
+        self.position_title.grid(column=2, row=0, padx=10)
 
         # Add and Delete Job Button
         self.button_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
-        self.button_frame.grid(row=0, column=1, padx=(5, 10), pady=20, sticky="ne")
+        self.button_frame.grid(row=1, column=1, padx=(5, 10), pady=20, sticky="ne")
         self.new_job_button = customtkinter.CTkButton(self.button_frame, text="",
                                                       image=self.plus_icon,
                                                       width=35, height=35,
@@ -123,6 +135,11 @@ class HomeView(customtkinter.CTk):
                                                          height=35,
                                                          fg_color=self.theme.button_color, hover_color='grey15')
         self.delete_job_button.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="nsew")
+
+        self.switch_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
+        self.switch_frame.grid(row=1,column=1)
+        self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0)
+        self.open_jobs_switch.grid(row=0,column=0)
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
@@ -193,7 +210,7 @@ class HomeView(customtkinter.CTk):
         self.past_events_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.past_events_label = customtkinter.CTkLabel(self.past_events_frame, text="Past Events",
                                                         font=self.theme.header_two_font)
-        self.past_events_label.grid(row=0, column=0, pady=(10,0))
+        self.past_events_label.grid(row=0, column=0, pady=(10, 0))
         self.past_events_listbox = tkinter.Listbox(self.past_events_frame,
                                                    font=self.theme.main_font,
                                                    fg=self.theme.text_color,
@@ -212,7 +229,7 @@ class HomeView(customtkinter.CTk):
         self.upcoming_events_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         self.upcoming_events_label = customtkinter.CTkLabel(self.upcoming_events_frame, text="Upcoming Events",
                                                             font=self.theme.header_two_font)
-        self.upcoming_events_label.grid(row=0, column=0,pady=(10,0))
+        self.upcoming_events_label.grid(row=0, column=0, pady=(10, 0))
         self.upcoming_events_listbox = tkinter.Listbox(self.upcoming_events_frame,
                                                        font=self.theme.main_font,
                                                        fg=self.theme.text_color,
@@ -240,15 +257,15 @@ class HomeView(customtkinter.CTk):
         self.jd_title = customtkinter.CTkLabel(self.keywords_frame, text="Job Description Search",
                                                text_color=self.theme.text_color,
                                                font=self.theme.header_two_font)
-        self.jd_title.grid(row=0, column=0, pady=(10,0))
+        self.jd_title.grid(row=0, column=0, pady=(10, 0))
         self.resume_title = customtkinter.CTkLabel(self.keywords_frame, text="Resume Search",
                                                    text_color=self.theme.text_color,
                                                    font=self.theme.header_two_font)
-        self.resume_title.grid(row=0, column=1, pady=(10,0))
+        self.resume_title.grid(row=0, column=1, pady=(10, 0))
 
         # Job Description search
         self.jd_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.jd_frame.grid(row=1, column=0, padx=(20,10), pady=(10,20), sticky='nsew')
+        self.jd_frame.grid(row=1, column=0, padx=(20, 10), pady=(10, 20), sticky='nsew')
         self.jd_frame.grid_columnconfigure(0, weight=1)
         self.jd_frame.grid_rowconfigure(1, weight=1)
 
@@ -319,7 +336,7 @@ class HomeView(customtkinter.CTk):
 
         # Resume search
         self.resume_frame = customtkinter.CTkFrame(self.keywords_frame, fg_color=self.theme.main_frame)
-        self.resume_frame.grid(row=1, column=1, padx=(10,20), pady=(10,20), sticky='nsew')
+        self.resume_frame.grid(row=1, column=1, padx=(10, 20), pady=(10, 20), sticky='nsew')
         self.resume_frame.grid_columnconfigure(0, weight=1)
         self.resume_frame.grid_rowconfigure(1, weight=1)
 
@@ -384,7 +401,7 @@ class HomeView(customtkinter.CTk):
 
         self.contact_label = customtkinter.CTkLabel(self.contacts_frame, text="Contacts",
                                                     font=self.theme.header_two_font)
-        self.contact_label.grid(row=0, column=0, pady=(10,0))
+        self.contact_label.grid(row=0, column=0, pady=(10, 0))
         self.contact_listbox = tkinter.Listbox(self.contacts_frame,
                                                font=self.theme.main_font,
                                                fg=self.theme.text_color,
