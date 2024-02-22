@@ -35,6 +35,7 @@ class Config:
         self.set_button_color()
         self.set_accent_color()
         self.set_icon_mode()
+        self.set_graph_scheme()
 
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
@@ -114,6 +115,24 @@ class Config:
         with open(self.config_file, "w") as file:
             self.config_parser.write(file)
 
+    def get_graph_scheme(self) -> dict:
+        event_data = {
+            'applied': self.config_parser['graph_theme']['applied'],
+            'prospect': self.config_parser['graph_theme']['prospect'],
+            'follow up': self.config_parser['graph_theme']['follow_up'],
+            'workshop': self.config_parser['graph_theme']['workshop'],
+            'meeting': self.config_parser['graph_theme']['meeting'],
+            'networking': self.config_parser['graph_theme']['networking'],
+            'interview': self.config_parser['graph_theme']['interview'],
+            'offer': self.config_parser['graph_theme']['offer'],
+            'portfolio_project': self.config_parser['graph_theme']['portfolio_project'],
+            'rejected': self.config_parser['graph_theme']['rejected'],
+        }
+        return event_data
+
+    def set_graph_scheme(self):
+        self.theme.event_data = self.get_graph_scheme()
+
     def set_icon_mode(self):
         self.icon_mode = self.get_icon_mode()
         self.set_button_text_color(self.icon_mode)
@@ -144,13 +163,13 @@ class Config:
             self.set_light_mode()
 
     def set_dark_mode(self):
-        self.theme.home_frame_background = constant.HF_BG_DARK
-        self.theme.text_color = constant.text_color_dark
-        self.theme.listbox_bg = 'grey20'
-        self.theme.home_frame_selected = 'grey14'
+        self.theme.home_frame_background = constant.HOME_FRAME_BG_DARK
+        self.theme.text_color = constant.TEXT_DARK
+        self.theme.listbox_bg = constant.LISTBOX_BG_DARK
+        self.theme.home_frame_selected = constant.MAIN_FRAME_DARK
 
-        self.theme.main_frame = constant.MF_DARK
-        self.theme.second_frame = 'grey17'
+        self.theme.main_frame = constant.MAIN_FRAME_DARK
+        self.theme.second_frame = constant.SECOND_FRAME_DARK
 
         self.theme.icon_home = constant.HOME_WHITE
         self.theme.icon_keyword = constant.KEYWORD_WHITE
@@ -159,13 +178,13 @@ class Config:
         self.theme.icon_visible = constant.VISIBLE_WHITE
 
     def set_light_mode(self):
-        self.theme.home_frame_background = constant.HF_BG_LIGHT
-        self.theme.text_color = constant.text_color
-        self.theme.listbox_bg = 'grey90'
-        self.theme.home_frame_selected = 'grey92'
+        self.theme.home_frame_background = constant.HOME_FRAME_BG
+        self.theme.text_color = constant.TEXT
+        self.theme.listbox_bg = constant.LISTBOX_BG
+        self.theme.home_frame_selected = constant.MAIN_FRAME
 
-        self.theme.main_frame = constant.MF_LIGHT
-        self.theme.second_frame = 'grey85'
+        self.theme.main_frame = constant.MAIN_FRAME
+        self.theme.second_frame = constant.SECOND_FRAME
 
         self.theme.icon_home = constant.HOME
         self.theme.icon_keyword = constant.KEYWORD
@@ -175,6 +194,6 @@ class Config:
 
     def set_button_text_color(self, mode: str):
         if mode == constant.LIGHT_MODE:
-            self.theme.button_text_color = 'grey86'
+            self.theme.button_text_color = constant.BUTTON_TEXT
         elif mode == constant.DARK_MODE:
-            self.theme.button_text_color = 'grey17'
+            self.theme.button_text_color = constant.BUTTON_TEXT_DARK

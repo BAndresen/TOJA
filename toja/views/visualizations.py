@@ -17,6 +17,7 @@ class DayEvent:
         self.text_color = ''
         self.fig = None
         self.ax = None
+        self.event_colors = {}
 
     def day_event_graph(self, frame: customtkinter.CTkFrame, data: dict, events: set):
         self.data = data
@@ -71,11 +72,14 @@ class DayEvent:
         bottom = None
 
         for event in events:
+            color = self.event_colors.get(event, None)
+            if color is None:
+                color = 'gray'  # Default color for events not in event_colors
             if bottom is None:
-                self.ax.bar(dates, event_counts[event], label=event, width=.5)
+                self.ax.bar(dates, event_counts[event], label=event, width=.5, color=color)
                 bottom = event_counts[event]
             else:
-                self.ax.bar(dates, event_counts[event], bottom=bottom, label=event, width=.5)
+                self.ax.bar(dates, event_counts[event], bottom=bottom, label=event, width=.5, color=color)
                 bottom = [bottom[i] + event_counts[event][i] for i in range(len(dates))]
 
     def _configure_spines(self):

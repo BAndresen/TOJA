@@ -26,6 +26,7 @@ EVENT_TYPE = ['applied', 'prospect', 'follow up', 'workshop', 'meeting', 'networ
               'portfolio_project',
               'rejected']
 
+
 # Listbox and Textbox ranges
 START_RANGE_LISTBOX = '0'
 END_RANGE_LISTBOX = 'end'
@@ -75,18 +76,16 @@ WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Appli
 DARK_MODE = 'Dark'
 LIGHT_MODE = 'Light'
 
-HF_BG_DARK = '#2b2b2b'  # 'grey17'
-text_color_dark = '#dbdbdb'  # 'grey86'
-listbox_bg = 'grey20'
-home_frame_selected = 'grey14'
-MF_DARK = '#242424' #'grey14'
-second_frame = 'grey17'
+HOME_FRAME_BG_DARK = '#2b2b2b'  # 'grey17'
+TEXT_DARK = '#dbdbdb'  # 'grey86'
+LISTBOX_BG_DARK = '#333333'  # 'grey20'
+MAIN_FRAME_DARK = '#242424'  # 'grey14'
+SECOND_FRAME_DARK = '#2b2b2b'  # 'grey17'
+BUTTON_TEXT_DARK = '#2b2b2b'  # 'grey86'
 
-HF_BG_LIGHT = '#d9d9d9'  # grey85
-text_color = '#2b2b2b'
-listbox_bg = 'grey90'
-home_frame_selected = 'grey92'
-MF_LIGHT = '#ebebeb' #'grey92'
-second_frame = 'grey85'
-button_text_color = 'grey86'
-button_text_color = 'grey17'
+HOME_FRAME_BG = '#d9d9d9'  # grey85
+TEXT = '#2b2b2b'
+LISTBOX_BG = '#e5e5e5'  # 'grey90'
+MAIN_FRAME = '#ebebeb'  # 'grey92'
+SECOND_FRAME = '#d9d9d9'  # 'grey85'
+BUTTON_TEXT = '#dbdbdb'  # 'grey17'

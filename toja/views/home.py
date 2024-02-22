@@ -153,8 +153,10 @@ class HomeView(customtkinter.CTk):
         # Graph - Days vs Events
         self.de_graph = DayEvent()
         self.de_graph.bg_color = self.theme.home_frame_background
-        self.de_graph.face_color = self.theme.main_frame
+        self.de_graph.face_color = self.theme.listbox_bg
         self.de_graph.text_color = self.theme.text_color
+        self.de_graph.event_colors = self.theme.event_data
+
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
         self.calendar_frame.grid(row=2, columnspan=3, column=0, padx=20, pady=(5, 20), sticky="nsew")
 
@@ -589,7 +591,7 @@ class HomeView(customtkinter.CTk):
 
     def update_day_event_graph_color_scheme(self):
         self.de_graph.bg_color = self.theme.home_frame_background
-        self.de_graph.face_color = self.theme.main_frame
+        self.de_graph.face_color = self.theme.listbox_bg
         self.de_graph.text_color = self.theme.text_color
         self.calendar_frame.destroy()
         self.calendar_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
