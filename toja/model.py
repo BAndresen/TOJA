@@ -187,7 +187,7 @@ class Model:
                 SELECT 1
                 FROM event
                 WHERE event.job_id = job.job_id
-                AND (event.status_id = 1 OR event.status_id = 11)
+                AND (event.status_id = 1 OR event.status_id = 11 OR event.status_id = 12)
             )
         ORDER BY job_id DESC
 

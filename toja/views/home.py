@@ -141,7 +141,7 @@ class HomeView(customtkinter.CTk):
         # Display Open switch Frame
         self.switch_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.main_frame)
         self.switch_frame.grid(row=1, rowspan=2, column=1, padx=10, pady=80, sticky='n')
-        self.display_open_label = customtkinter.CTkLabel(self.switch_frame, text='Show Active',
+        self.display_open_label = customtkinter.CTkLabel(self.switch_frame, text='Only Active',
                                                          text_color=self.theme.text_color)
         self.display_open_label.grid(row=0, column=0, padx=10)
         self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0)

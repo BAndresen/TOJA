@@ -24,7 +24,7 @@ WORK_TYPE = ['Remote', 'Hybrid', 'Onsite', 'None']
 SALARY_TYPE = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
 EVENT_TYPE = ['applied', 'prospect', 'follow up', 'workshop', 'meeting', 'networking', 'interview', 'offer',
               'portfolio_project',
-              'rejected', 'no response']
+              'rejected', 'no response', 'reported fake-spam']
 
 
 # Listbox and Textbox ranges

@@ -128,6 +128,7 @@ class Config:
             'portfolio_project': self.config_parser['graph_theme']['portfolio_project'],
             'rejected': self.config_parser['graph_theme']['rejected'],
             'no response': self.config_parser['graph_theme']['no_response'],
+            'reported fake-spam': self.config_parser['graph_theme']['reported_fake_spam']
         }
         return event_data
 
