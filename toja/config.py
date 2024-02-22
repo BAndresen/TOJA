@@ -127,6 +127,7 @@ class Config:
             'offer': self.config_parser['graph_theme']['offer'],
             'portfolio_project': self.config_parser['graph_theme']['portfolio_project'],
             'rejected': self.config_parser['graph_theme']['rejected'],
+            'no response': self.config_parser['graph_theme']['no_response'],
         }
         return event_data
 

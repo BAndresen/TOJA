@@ -504,7 +504,7 @@ class Controller:
             status_id,
             contact_id,
             self.job_id,
-            self.current_user)
+            self.user_id)
         self.update_home()
         self.update_event_listbox()
         self.new_event.event_window.destroy()
