@@ -112,11 +112,12 @@ class HomeView(customtkinter.CTk):
         self.job_list_box.grid(row=1, column=0, rowspan=2, padx=(20, 5), pady=(0, 20), sticky='nsew')
 
         # Job listbox title legend
-        self.job_title_legend_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.listbox_bg, corner_radius=0)
-        self.job_title_legend_frame.grid(column=0, row=0, sticky='nsew', pady=(20, 0),padx=(20, 5))
+        self.job_title_legend_frame = customtkinter.CTkFrame(self.job_list_frame, fg_color=self.theme.listbox_bg,
+                                                             corner_radius=0)
+        self.job_title_legend_frame.grid(column=0, row=0, sticky='nsew', pady=(20, 0), padx=(20, 5))
 
         self.job_id_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Job ID")
-        self.job_id_title.grid(column=0, row=0, padx=(2,10))
+        self.job_id_title.grid(column=0, row=0, padx=(2, 10))
         self.company_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="|  Company  |")
         self.company_title.grid(column=1, row=0, padx=10)
         self.position_title = customtkinter.CTkLabel(self.job_title_legend_frame, text="Position")
@@ -144,7 +145,7 @@ class HomeView(customtkinter.CTk):
                                                          text_color=self.theme.text_color)
         self.display_open_label.grid(row=0, column=0, padx=10)
         self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0)
-        self.open_jobs_switch.grid(row=1, column=0, pady=(0,10))
+        self.open_jobs_switch.grid(row=1, column=0, pady=(0, 10))
 
         # Motivational Stats Board
         self.stat_board_frame = customtkinter.CTkFrame(self.home_frame, fg_color=self.theme.second_frame)
@@ -152,25 +153,34 @@ class HomeView(customtkinter.CTk):
         self.stat_board_frame.grid_columnconfigure(0, weight=1)
         self.stat_board_frame.grid_columnconfigure(1, weight=1)
 
-        self.next_level = customtkinter.CTkLabel(self.stat_board_frame, text="Next Level",
-                                                 text_color=self.theme.text_color)
-        self.next_level.grid(row=1, column=0, padx=(20, 5), pady=5, sticky="e")
-        self.progress_bar = customtkinter.CTkProgressBar(self.stat_board_frame, progress_color=self.theme.accent_color)
-        self.progress_bar.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="ew")
+        # Users stats
+        self.user_stats_frame = customtkinter.CTkFrame(self.stat_board_frame, fg_color=self.theme.main_frame)
+        self.user_stats_frame.grid(column=0, row=0, padx=10, pady=20)
 
-        self.current_level_label = customtkinter.CTkLabel(self.stat_board_frame, text="Job Hunter:",
+        self.next_level = customtkinter.CTkLabel(self.user_stats_frame, text="Next Level",
+                                                 text_color=self.theme.text_color)
+        self.next_level.grid(row=2, column=0, padx=(20, 5), pady=5, sticky="e")
+
+        self.user_name_label = customtkinter.CTkLabel(self.user_stats_frame, text="", font=self.theme.header_font,
+                                                      text_color=self.theme.text_color)
+        self.user_name_label.grid(row=0, column=0, padx=(20, 5), pady=(20,10))
+
+        self.progress_bar = customtkinter.CTkProgressBar(self.user_stats_frame, progress_color=self.theme.accent_color)
+        self.progress_bar.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="ew")
+
+        self.current_level_label = customtkinter.CTkLabel(self.user_stats_frame, text="Job Hunter:",
                                                           text_color=self.theme.text_color,
                                                           font=self.theme.header_two_font)
-        self.current_level_label.grid(row=0, column=0, padx=(20, 5), pady=(20, 5), sticky="e")
-        self.current_level = customtkinter.CTkLabel(self.stat_board_frame, text="", font=self.theme.header_two_font,
+        self.current_level_label.grid(row=1, column=0, padx=(20, 5), pady=5, sticky="e")
+        self.current_level = customtkinter.CTkLabel(self.user_stats_frame, text="", font=self.theme.header_two_font,
                                                     text_color=self.theme.text_color)
-        self.current_level.grid(row=0, column=1, padx=(5, 20), pady=(20, 5), sticky="w")
-        self.total_points_label = customtkinter.CTkLabel(self.stat_board_frame, text="Total Points:",
+        self.current_level.grid(row=1, column=1, padx=(5, 20), pady=5, sticky="w")
+        self.total_points_label = customtkinter.CTkLabel(self.user_stats_frame, text="Total Points:",
                                                          text_color=self.theme.text_color)
-        self.total_points_label.grid(row=2, column=0, padx=(20, 5), pady=5, sticky="e")
-        self.total_points = customtkinter.CTkLabel(self.stat_board_frame, text="", font=self.theme.main_font_bold,
+        self.total_points_label.grid(row=3, column=0, padx=(20, 5), pady=(5,20), sticky="e")
+        self.total_points = customtkinter.CTkLabel(self.user_stats_frame, text="", font=self.theme.main_font_bold,
                                                    text_color=self.theme.text_color)
-        self.total_points.grid(row=2, column=1, padx=(5, 20), pady=5, sticky="w")
+        self.total_points.grid(row=3, column=1, padx=(5, 20), pady=(5,20), sticky="w")
 
         # Graph - Days vs Events
         self.de_graph = DayEvent()

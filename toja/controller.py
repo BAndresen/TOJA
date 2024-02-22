@@ -98,6 +98,7 @@ class Controller:
         # self.update_home_listbox()
         self.update_home_event_listbox()
         self.update_points_view()
+        self.display_user_name()
         self.update_day_event_graph()
 
     def initialize_day_event_graph(self):
@@ -656,6 +657,9 @@ class Controller:
         level, progress_value = divmod(progress, 1)
         self.view.current_level.configure(text=(int(level)))
         self.view.progress_bar.set(progress_value)
+
+    def display_user_name(self):
+        self.view.user_name_label.configure(text=self.model.config.user_name)
 
     def search_job_button(self):
         self.list_of_jobs = None
