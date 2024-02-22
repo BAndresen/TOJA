@@ -646,3 +646,4 @@ class HomeView(customtkinter.CTk):
         self.slider_1.configure(button_color=self.theme.accent_color)
         for listbox in self.home_list_box_list:
             listbox.configure(selectbackground=self.theme.accent_color)
+

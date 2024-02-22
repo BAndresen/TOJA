@@ -45,6 +45,9 @@ class Controller:
         self.view.delete_job_button.configure(command=self.delete_job)
         self.view.open_jobs_switch.configure(command=self.open_job_listbox_view)
 
+        # set switch from config
+        self.set_open_jobs_only_switch()
+
         self.view.network_new_contact_button.configure(command=self.add_contact_home)
         self.view.network_delete_job_button.configure(command=self.delete_contact)
 
@@ -260,8 +263,15 @@ class Controller:
     def open_job_listbox_view(self):
         if self.view.open_jobs_switch.get() == 0:
             self.update_home_listbox(self.model.get_home_view_listbox(self.user_id))
+            self.model.config.set_open_jobs_only(False)
         else:
             self.update_home_listbox(self.model.get_open_home_view_listbox(self.user_id))
+            self.model.config.set_open_jobs_only(True)
+
+    def set_open_jobs_only_switch(self):
+        switch = self.model.config.get_open_jobs_only()
+        if switch:
+            self.view.open_jobs_switch.select()
 
     def double_click_job(self, event):
         event_str = (self.view.job_list_box.get(self.view.job_list_box.curselection()))

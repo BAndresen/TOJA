@@ -133,6 +133,14 @@ class Config:
     def set_graph_scheme(self):
         self.theme.event_data = self.get_graph_scheme()
 
+    def get_open_jobs_only(self) -> bool:
+        return self.config_parser['global_settings'].getboolean('display_open_jobs_only')
+
+    def set_open_jobs_only(self, mode: bool):
+        self.config_parser.set('global_settings', 'display_open_jobs_only', str(mode))
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
     def set_icon_mode(self):
         self.icon_mode = self.get_icon_mode()
         self.set_button_text_color(self.icon_mode)
