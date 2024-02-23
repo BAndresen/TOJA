@@ -144,7 +144,9 @@ class HomeView(customtkinter.CTk):
         self.display_open_label = customtkinter.CTkLabel(self.switch_frame, text='Only Active',
                                                          text_color=self.theme.text_color)
         self.display_open_label.grid(row=0, column=0, padx=10)
-        self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0)
+        self.open_jobs_switch = customtkinter.CTkSwitch(self.switch_frame, text='', width=0,
+                                                        button_color=self.theme.button_color,
+                                                        progress_color=self.theme.accent_color)
         self.open_jobs_switch.grid(row=1, column=0, pady=(0, 10))
 
         # Motivational Stats Board
@@ -445,7 +447,7 @@ class HomeView(customtkinter.CTk):
             self.upcoming_events_listbox,
             self.jd_search_listbox,
             self.resume_search_listbox,
-            self.contact_listbox
+            self.contact_listbox,
         ]
 
     def event_frame_button(self):
@@ -570,6 +572,7 @@ class HomeView(customtkinter.CTk):
                               bg=self.theme.listbox_bg,
                               selectbackground=self.theme.accent_color,
                               selectforeground=self.theme.text_color, )
+        self.job_title_legend_frame.configure(fg_color=self.theme.listbox_bg)
 
         second_frame_list = [
             self.job_list_frame,
@@ -595,6 +598,8 @@ class HomeView(customtkinter.CTk):
             self.jd_frame,
             self.resume_frame,
             self.button_frame,
+            self.user_stats_frame,
+            self.switch_frame,
 
         ]
         for frame in main_frame_list:
@@ -615,7 +620,9 @@ class HomeView(customtkinter.CTk):
             self.next_level,
             self.current_level_label,
             self.current_level,
-            self.total_points
+            self.total_points,
+            self.user_name_label,
+            self.display_open_label,
         ]
 
         for label in label_list:
@@ -652,6 +659,7 @@ class HomeView(customtkinter.CTk):
         self.jd_search_button.configure(fg_color=self.theme.button_color)
         self.resume_browse_button.configure(fg_color=self.theme.button_color)
         self.resume_search_button.configure(fg_color=self.theme.button_color)
+        self.open_jobs_switch.configure(button_color=self.theme.button_color)
 
     def update_accent_color(self):
         self.progress_bar.configure(progress_color=self.theme.accent_color)
@@ -661,3 +669,4 @@ class HomeView(customtkinter.CTk):
         self.slider_1.configure(button_color=self.theme.accent_color)
         for listbox in self.home_list_box_list:
             listbox.configure(selectbackground=self.theme.accent_color)
+        self.open_jobs_switch.configure(progress_color=self.theme.accent_color)

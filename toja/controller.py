@@ -419,7 +419,7 @@ class Controller:
             self.contact.phone_entry.get(),
             self.contact.position_entry.get(),
             self.job_id,
-            self.current_user
+            self.user_id
         )
         self.update_contact_listbox()
         self.update_contact_listbox_home()
@@ -433,7 +433,7 @@ class Controller:
             self.contact.phone_entry.get(),
             self.contact.position_entry.get(),
             self.contact.job_id_entry.get(),
-            self.current_user
+            self.user_id
         )
         self.update_contact_listbox_home()
         self.contact.contact_window.destroy()
@@ -525,7 +525,7 @@ class Controller:
             status_id,
             contact_id,
             job_id,
-            self.current_user)
+            self.user_id)
         self.update_home()
         self.new_event.event_window.destroy()
 
@@ -570,7 +570,7 @@ class Controller:
             self.new_job.salary_type_entry.get(),
             self.new_job.resume_version_entry.get(),
             self.job_file,
-            self.current_user,
+            self.user_id,
             self.new_job.day_entry.get(),
             self.new_job.time_entry.get(),
             self.new_job.note_entry.get(constant.START_RANGE_TEXTBOX, constant.END_RANGE_TEXTBOX),
