@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 import os
 from PIL import Image
+from loguru import logger
 
 from views.job_new import NewJob
 from views.job_profile import JobProfile
@@ -93,6 +94,7 @@ class Controller:
             self.update_home()
 
     def update_home(self):
+        self.auto_close_events()
         self.update_contact_listbox_home()
         self.open_job_listbox_view()
         # self.update_home_listbox()
@@ -110,6 +112,25 @@ class Controller:
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
         events = set(status_values)
         self.view.de_graph.day_event_graph(self.view.calendar_frame, data, events)
+
+    def auto_close_events(self):
+        """auto close any jobs older the x-days"""
+        if self.model.config.get_auto_close_status():
+
+            old_jobs = self.model.get_old_open_jobs(user_id=self.user_id,
+                                                    days_since_last_event=self.model.config.get_auto_close_days())
+            if old_jobs:
+                for job in old_jobs:
+                    current_time = datetime.today().time().strftime(constant.CURRENT_TIME_FORMAT)
+                    logger.info(f'Auto no response event added to job:{job[0]}')
+                    self.model.add_event(date=self.today.strftime(constant.CURRENT_DATE_FORMAT),
+                                         time=current_time,
+                                         note=constant.AUTO_CLOSE_NOTE,
+                                         status_id=11,
+                                         contact_id=None,
+                                         job_id=job[0],
+                                         user_id=self.user_id
+                                         )
 
     def update_day_event_graph(self):
         today = datetime.today()
@@ -510,6 +531,11 @@ class Controller:
         self.update_home()
         self.update_event_listbox()
         self.new_event.event_window.destroy()
+
+    def auto_close_jobs(self):
+        """Add 'no-response' event to job after x-days defined by user"""
+        old_jobs = self.model.get_old_open_jobs(self.user_id, 30)
+        print(old_jobs)
 
     def submit_new_event_home(self):
         contact_id = (self.new_event.contact_entry.get().split("|")[0])

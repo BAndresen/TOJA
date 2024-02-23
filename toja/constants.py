@@ -70,7 +70,9 @@ EVENT_HOME_WHITE = 'event_home_white.png'
 CONTACT_HOME = 'contact_home.png'
 CONTACT_HOME_WHITE = 'contact_home_white.png'
 
+# message
 WELCOME_MESSAGE = "Welcome To TOJA! \n\n Let's Track and Optimize your Job Application Process"
+AUTO_CLOSE_NOTE = 'Auto event added'
 
 # theme
 DARK_MODE = 'Dark'

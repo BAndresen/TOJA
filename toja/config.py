@@ -22,6 +22,8 @@ class Config:
         self.config_file = os.path.join(self.base_dir, constant.CONFIG_FILE)
         self.config_parser.read(self.config_file)
         self.user_name = self.config_parser['user']['name']
+        self.auto_close = bool
+        self.auto_close_days = int
         self.set_theme()
         if self.get_appearance_mode() == constant.LIGHT_MODE:
             customtkinter.set_appearance_mode(constant.LIGHT_MODE)
@@ -44,6 +46,23 @@ class Config:
     def initialize_user(self) -> None:
         new_user = False
         self.config_parser.set('user', 'new_user', str(new_user))
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
+    def get_auto_close_status(self) -> bool:
+        if self.config_parser['global_settings'].getboolean('auto_close_job'):
+            return True
+
+    def set_auto_close_status(self, status: bool):
+        self.config_parser.set('global_settings', 'auto_close_job', str(status))
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
+    def get_auto_close_days(self) -> int:
+        return int(self.config_parser['global_settings']['auto_close_job_after'])
+
+    def set_auto_close_days(self, days: int):
+        self.config_parser['global_settings']['auto_close_job_after'] = str(days)
         with open(self.config_file, "w") as file:
             self.config_parser.write(file)
 

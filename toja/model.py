@@ -172,7 +172,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_open_home_view_listbox(self, user_id) -> list:
+    def get_open_home_view_listbox(self, user_id: int) -> list:
         query = '''
         SELECT
             job.job_id,
@@ -191,6 +191,31 @@ class Model:
             )
         ORDER BY job_id DESC
 
+        '''
+        self.cursor.execute(query, (user_id,))
+        results = self.cursor.fetchall()
+        return results
+
+    def get_old_open_jobs(self, user_id: int, days_since_last_event: int) -> list:
+        query = f'''
+        SELECT
+            job.job_id
+        FROM
+            job
+        LEFT JOIN (
+            SELECT job_id, MAX(date) AS max_date
+            FROM event
+            GROUP BY job_id
+        ) AS max_event ON job.job_id = max_event.job_id
+        WHERE
+            job.user_id = ?
+            AND (max_event.max_date IS NULL OR max_event.max_date < DATE('now', '-{days_since_last_event} days'))
+            AND NOT EXISTS (
+                SELECT 1
+                FROM event
+                WHERE event.job_id = job.job_id
+                AND (event.status_id = 1 OR event.status_id = 11 OR event.status_id = 12)
+            )
         '''
         self.cursor.execute(query, (user_id,))
         results = self.cursor.fetchall()
