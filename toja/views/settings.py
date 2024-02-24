@@ -14,7 +14,7 @@ class Settings:
         self.settings_window.title("Settings")
 
         self.main_frame = customtkinter.CTkFrame(self.settings_window)
-        self.main_frame.grid(row=0, column=0, padx=50, pady=(50, 10), sticky="nsew")
+        self.main_frame.grid(row=0, column=0, padx=40, pady=40, sticky="nsew")
 
         self.appearance_frame = customtkinter.CTkFrame(self.main_frame)
         self.appearance_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
@@ -38,7 +38,7 @@ class Settings:
                                                            corner_radius=10,
                                                            command=self.get_accent_color
                                                            )
-        self.accent_color_button.grid(row=2, column=1,padx=10, stick='w', pady=2)
+        self.accent_color_button.grid(row=2, column=1, padx=10, stick='w', pady=2)
         self.accent_color_label = customtkinter.CTkLabel(self.appearance_frame, text='Accent Color:')
         self.accent_color_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
 
@@ -74,9 +74,29 @@ class Settings:
         self.resume_keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Resume Results:')
         self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
 
+        # --- Auto Events
+        self.auto_frame = customtkinter.CTkFrame(self.main_frame)
+        self.auto_frame.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+
+        self.auto_label = customtkinter.CTkLabel(self.auto_frame, text='Auto Events')
+        self.auto_label.grid(row=1, column=0)
+
+        self.job_keyword_results_label = customtkinter.CTkLabel(self.auto_frame, text='Close Job: ')
+        self.job_keyword_results_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")
+        self.auto_close_switch = customtkinter.CTkSwitch(self.auto_frame, text='',
+                                                         button_color=self.theme.button_color,
+                                                         progress_color=self.theme.accent_color
+                                                         )
+        self.auto_close_switch.grid(row=2, column=1, pady=2)
+
+        self.auto_close_days_entry = customtkinter.CTkEntry(self.auto_frame, width=45)
+        self.auto_close_days_entry.grid(row=3, column=1, padx=(5, 20), pady=(2, 10), sticky='w')
+        self.auto_close_days_label = customtkinter.CTkLabel(self.auto_frame, text='After Days:')
+        self.auto_close_days_label.grid(row=3, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
+
         # buttons
         self.button_frame = customtkinter.CTkFrame(self.main_frame, corner_radius=0)
-        self.button_frame.grid(row=2, column=0, sticky='ew')
+        self.button_frame.grid(row=3, column=0, sticky='ew')
         self.button_frame.grid_columnconfigure(0, weight=1)
         self.submit_button = customtkinter.CTkButton(self.button_frame, text="OK",
                                                      fg_color=self.theme.button_color,
