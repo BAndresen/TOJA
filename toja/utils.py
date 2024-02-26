@@ -7,11 +7,11 @@ import string
 from tkinter import messagebox, Toplevel
 
 
-def get_past_week_dates(today: datetime, ) -> list:
+def get_past_dates(today: datetime, num_of_days:int) -> list:
     # Calculate the date of the previous Sunday
     previous_sunday = today - timedelta(days=today.weekday() + 1)
 
-    past_week_dates = [previous_sunday - timedelta(days=i) for i in range(11, -1, -1)]
+    past_week_dates = [previous_sunday - timedelta(days=i) for i in range(int(num_of_days), -1, -1)]
     past_week_dates.append(today - timedelta(days=1))
     past_week_dates.append(today)
     clean_format = [date.strftime('%Y-%m-%d') for date in past_week_dates]

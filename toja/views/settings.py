@@ -57,6 +57,11 @@ class Settings:
                                                               )
         self.appearance_mode_switch.grid(row=4, column=1, pady=2)
 
+        self.num_of_days_dv_graph_entry = customtkinter.CTkEntry(self.appearance_frame, width=45)
+        self.num_of_days_dv_graph_entry.grid(row=5, column=1, padx=(5, 20), pady=(2, 10), sticky='w')
+        self.num_of_days_dv_graph_label = customtkinter.CTkLabel(self.appearance_frame, text='Num of Days Graph:')
+        self.num_of_days_dv_graph_label.grid(row=5, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
+
         # --- Keyword
         self.keyword_frame = customtkinter.CTkFrame(self.main_frame)
         self.keyword_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
@@ -78,7 +83,7 @@ class Settings:
         self.auto_frame = customtkinter.CTkFrame(self.main_frame)
         self.auto_frame.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
-        self.auto_label = customtkinter.CTkLabel(self.auto_frame, text='Auto Events')
+        self.auto_label = customtkinter.CTkLabel(self.auto_frame, text='Automation')
         self.auto_label.grid(row=1, column=0)
 
         self.job_keyword_results_label = customtkinter.CTkLabel(self.auto_frame, text='Close Job: ')
@@ -118,7 +123,7 @@ class Settings:
                                                     text_color=self.theme.button_text_color,
                                                     width=self.theme.main_button_width
                                                     )
-        self.apply_button.grid(row=5, column=1, padx=20, pady=20, )
+        self.apply_button.grid(row=6, column=1, padx=20, pady=20, )
 
     def update_icon_text(self):
         self.submit_button.configure(text_color=self.theme.button_text_color)

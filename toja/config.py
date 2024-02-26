@@ -39,6 +39,15 @@ class Config:
         self.set_icon_mode()
         self.set_graph_scheme()
 
+    def get_num_of_days(self):
+        """Get num of days for day vs events graph"""
+        return self.config_parser['graph_theme']['num_of_days']
+
+    def set_num_of_days(self, num_of_days:int):
+        self.config_parser.set('graph_theme', 'num_of_days', str(num_of_days))
+        with open(self.config_file, "w") as file:
+            self.config_parser.write(file)
+
     def is_user_new(self) -> bool:
         if self.config_parser['user'].getboolean('new_user'):
             return True

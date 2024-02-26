@@ -101,12 +101,13 @@ class Controller:
         self.update_home_event_listbox()
         self.update_points_view()
         self.display_user_name()
-        self.update_day_event_graph()
+        self.update_day_event_graph(self.model.config.get_num_of_days())
 
     def initialize_day_event_graph(self):
         today = datetime.today()
         data = {}
-        days_of_the_week = utils.get_past_week_dates(today)
+        num_of_days = self.model.config.get_num_of_days()
+        days_of_the_week = utils.get_past_dates(today, num_of_days)
         for day in days_of_the_week:
             data[day] = self.model.get_event_count(day, self.user_id)
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
@@ -132,10 +133,10 @@ class Controller:
                                          user_id=self.user_id
                                          )
 
-    def update_day_event_graph(self):
+    def update_day_event_graph(self, num_of_days: int):
         today = datetime.today()
         data = {}
-        days_of_the_week = utils.get_past_week_dates(today)
+        days_of_the_week = utils.get_past_dates(today, num_of_days)
         for day in days_of_the_week:
             data[day] = self.model.get_event_count(day, self.user_id)
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
@@ -190,6 +191,7 @@ class Controller:
         self.settings = Settings(self.view, self.view.theme)
         self.settings.accent_color_button.configure(fg_color=self.model.config.get_accent_color())
         self.settings.button_color_button.configure(fg_color=self.model.config.get_button_color())
+        self.settings.num_of_days_dv_graph_entry.configure(placeholder_text=self.model.config.get_num_of_days())
         if self.model.config.icon_mode == constant.DARK_MODE:
             self.settings.icon_mode_switch.select()
         if self.model.config.appearance_mode == constant.DARK_MODE:
@@ -198,6 +200,9 @@ class Controller:
         self.settings.job_keyword_results_entry.configure(
             placeholder_text=self.model.config.get_num_keywords(job_description=True))
         self.settings.resume_keyword_entry.configure(placeholder_text=self.model.config.get_num_keywords(resume=True))
+        if self.model.config.get_auto_close_status():
+            self.settings.auto_close_switch.select()
+        self.settings.auto_close_days_entry.configure(placeholder_text=self.model.config.get_auto_close_days())
         self.settings.apply_button.configure(command=self.apply_settings)
         self.settings.submit_button.configure(command=self.submit_settings)
 
@@ -206,6 +211,9 @@ class Controller:
         self.update_appearance_mode()
         self.update_button_color()
         self.update_accent_color()
+        num_of_days = self.settings.num_of_days_dv_graph_entry.get()
+        if num_of_days:
+            self.update_day_event_graph(num_of_days)
         self.view.update_day_event_graph_color_scheme()
 
     def update_accent_color(self):
@@ -489,7 +497,7 @@ class Controller:
         if messagebox.askyesno("Delete Contact", message=f'Are you sure you want to delete event?'):
             self.model.delete_entry('event', 'event_id', event_id)
             self.update_home_event_listbox()
-            self.update_day_event_graph()
+            self.update_day_event_graph(self.model.config.get_num_of_days())
 
     def run(self):
         self.view.mainloop()
