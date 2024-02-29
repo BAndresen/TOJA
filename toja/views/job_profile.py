@@ -2,6 +2,7 @@ import tkinter
 import customtkinter
 import os
 from PIL import Image
+import webbrowser
 
 from views.theme import Theme
 import constants as constant
@@ -68,6 +69,8 @@ class JobProfile:
         self.company_web.grid(row=1, column=0, padx=5, pady=1, sticky='e')
         self.company_web_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.main_font_bold)
         self.company_web_user.grid(row=1, column=1, padx=5, pady=1, sticky='w')
+        self.company_web_user.bind("<Button-1>", self.open_link)
+        self.company_web_user.configure(cursor="hand2", text_color=theme.button_color)
 
         self.location = customtkinter.CTkLabel(self.job_info_frame, text="Location:")
         self.location.grid(row=2, column=0, padx=5, pady=1, stick='e')
@@ -192,3 +195,8 @@ class JobProfile:
                                                        height=35,
                                                        fg_color=theme.button_color, hover_color='grey15')
         self.edit_job_button.grid(row=0, column=0, pady=6, padx=6)
+
+    def open_link(self, event):
+        webbrowser.open(self.company_web_user.cget("text"))
+
+
