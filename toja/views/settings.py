@@ -13,14 +13,15 @@ class Settings:
 
         self.settings_window.title("Settings")
 
-        self.main_frame = customtkinter.CTkFrame(self.settings_window)
+        self.main_frame = customtkinter.CTkFrame(self.settings_window, fg_color=self.theme.second_frame)
         self.main_frame.grid(row=0, column=0, padx=40, pady=40, sticky="nsew")
 
-        self.appearance_frame = customtkinter.CTkFrame(self.main_frame)
-        self.appearance_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+        self.appearance_frame = customtkinter.CTkFrame(self.main_frame, fg_color=self.theme.main_frame)
+        self.appearance_frame.grid(row=0, column=0, padx=10, pady=(10,5), sticky="nsew")
 
         # --- Appearance
-        self.appearance_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance')
+        self.appearance_label = customtkinter.CTkLabel(self.appearance_frame, text='Appearance',
+                                                       font=self.theme.main_font_bold)
         self.appearance_label.grid(row=0, column=0)
 
         self.button_color_button = customtkinter.CTkButton(self.appearance_frame, text='',
@@ -63,10 +64,10 @@ class Settings:
         self.num_of_days_dv_graph_label.grid(row=5, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
 
         # --- Keyword
-        self.keyword_frame = customtkinter.CTkFrame(self.main_frame)
-        self.keyword_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+        self.keyword_frame = customtkinter.CTkFrame(self.main_frame, fg_color=self.theme.main_frame)
+        self.keyword_frame.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
 
-        self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Keywords')
+        self.keyword_label = customtkinter.CTkLabel(self.keyword_frame, text='Keywords', font=self.theme.main_font_bold)
         self.keyword_label.grid(row=1, column=0)
 
         self.job_keyword_results_entry = customtkinter.CTkEntry(self.keyword_frame, width=45)
@@ -80,11 +81,11 @@ class Settings:
         self.resume_keyword_label.grid(row=3, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
 
         # --- Auto Events
-        self.auto_frame = customtkinter.CTkFrame(self.main_frame)
-        self.auto_frame.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+        self.auto_frame = customtkinter.CTkFrame(self.main_frame, fg_color=self.theme.main_frame)
+        self.auto_frame.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
 
-        self.auto_label = customtkinter.CTkLabel(self.auto_frame, text='Automation')
-        self.auto_label.grid(row=1, column=0)
+        self.auto_label = customtkinter.CTkLabel(self.auto_frame, text='Automation', font=self.theme.main_font_bold)
+        self.auto_label.grid(row=1, column=0, padx=25)
 
         self.job_keyword_results_label = customtkinter.CTkLabel(self.auto_frame, text='Close Job: ')
         self.job_keyword_results_label.grid(row=2, column=0, padx=(20, 5), pady=2, sticky="e")

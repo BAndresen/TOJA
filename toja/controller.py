@@ -253,7 +253,19 @@ class Controller:
             customtkinter.set_appearance_mode(constant.DARK_MODE)
         self.update_keyword_settings()
         self.update_appearance_mode()
+        num_of_days = self.settings.num_of_days_dv_graph_entry.get()
+        if num_of_days:
+            self.model.config.set_num_of_days(num_of_days)
+            self.update_day_event_graph(num_of_days)
+        days_after = self.settings.auto_close_days_entry.get()
+        if days_after:
+            self.model.config.set_auto_close_days(days_after)
+        if self.settings.auto_close_switch.get():
+            self.model.config.set_auto_close_status(True)
+        else:
+            self.model.config.set_auto_close_status(False)
         self.settings.settings_window.destroy()
+
 
     def update_keyword_settings(self):
         if self.settings.job_keyword_results_entry.get():
