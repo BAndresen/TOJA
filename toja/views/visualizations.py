@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from loguru import logger
 
 import customtkinter
 import numpy as np
@@ -22,6 +23,10 @@ class DayEvent:
     def day_event_graph(self, frame: customtkinter.CTkFrame, data: dict, events: set):
         self.data = data
         self.events = events
+
+        logger.debug(f'data:{data}')
+        logger.debug(f'events:{events}')
+
         self.fig, self.ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color, layout='tight')
         self.ax.set_facecolor(self.face_color)
 
