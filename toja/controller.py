@@ -112,7 +112,7 @@ class Controller:
         num_of_days = self.model.config.get_num_of_days()
         days_of_the_week = utils.get_past_dates(today, num_of_days)
         for day in days_of_the_week:
-            data[day] = self.model.get_event_count(day, self.user_id)
+            data[day] = self.model.get_event_count_by_date(day, self.user_id)
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
         events = set(status_values)
         self.view.de_graph.day_event_graph(self.view.calendar_frame, data, events)
@@ -141,7 +141,7 @@ class Controller:
         data = {}
         days_of_the_week = utils.get_past_dates(today, num_of_days)
         for day in days_of_the_week:
-            data[day] = self.model.get_event_count(day, self.user_id)
+            data[day] = self.model.get_event_count_by_date(day, self.user_id)
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
         events = set(status_values)
         self.view.de_graph.update_graph(data, events)
@@ -160,10 +160,16 @@ class Controller:
         dates_inbetween = utils.get_dates_between(start_date, end_date)
         data = {}
         for day in dates_inbetween:
-            data[day] = self.model.get_event_count(day, self.user_id)
+            data[day] = self.model.get_event_count_by_date(day, self.user_id)
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
         events = set(status_values)
-        report.de_graph.day_event_graph(report.main_frame, data, events)
+        logger.debug(f'event_vs_day data:{data}')
+        report.de_graph.day_event_graph(report.days_vs_event_frame, data, events)
+
+        pie_list = self.model.get_event_total(start_date,end_date, self.user_id)
+        pie_data = dict(pie_list)
+        logger.debug(f'pie_dict:{pie_data}')
+        report.pie_graph.show_pie_chart(report.event_pie_frame, pie_data)
 
     def set_user(self):
         points = 0

@@ -101,3 +101,32 @@ class DayEvent:
 
     def toggle_color_scheme(self, frame):
         self.day_event_graph(frame, self.data, self.events)
+
+
+class PieEvent:
+    def __init__(self):
+        self.bg_color = ''
+        self.face_color = ''
+        self.text_color = ''
+        self.event_colors = {}
+
+    def show_pie_chart(self, frame: customtkinter.CTkFrame, data: dict):
+        fig, ax = plt.subplots(figsize=(6, 4), facecolor=self.bg_color)
+        ax.set_facecolor(self.face_color)
+
+        labels = list(data.keys())
+        values = list(data.values())
+
+        colors = [self.event_colors.get(label, 'gray') for label in labels]
+        explode = [0.1 for i in range(len(labels))]
+
+        ax.pie(values, labels=labels, labeldistance=1.3, autopct='%1.1f%%', colors=colors, explode=explode,
+               startangle=90,
+               textprops={'color': 'black', 'fontsize': 10},
+               wedgeprops={'edgecolor': 'black', 'linewidth': .8})
+
+        plt.subplots_adjust(left=0.1, right=0.9)
+
+        canvas = FigureCanvasTkAgg(fig, master=frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
