@@ -28,3 +28,4 @@ toja/.vscode/settings.json
 /dist/
 /env/
 /toja/playground.py
+/log.txt

@@ -23,6 +23,7 @@ from views.user_new import CreateUser
 from views.event import Event
 from views.settings import Settings
 from views.contact_view import Contact
+from views.generate_report import GenerateReport
 from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import utils as utils
@@ -80,6 +81,7 @@ class Controller:
         self.view.file.add_command(label='New User', command=self.create_user)
         self.view.file.add_command(label='Change User', command=self.change_user)
         self.view.file.add_command(label='Settings', command=self.open_settings)
+        self.view.file.add_command(label='Generate Report', command=self.generate_report)
         self.view.file.add_command(label='Export', command=self.export_database)
         self.view.file.add_separator()
         self.view.file.add_command(label='Exit', command=self.view.destroy)
@@ -142,6 +144,10 @@ class Controller:
         status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
         events = set(status_values)
         self.view.de_graph.update_graph(data, events)
+
+    def generate_report(self):
+        generate_report = GenerateReport(self.view,self.view.theme)
+
 
     def set_user(self):
         points = 0

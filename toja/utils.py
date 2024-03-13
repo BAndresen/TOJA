@@ -7,6 +7,8 @@ import string
 from tkinter import messagebox, Toplevel
 from loguru import logger
 
+logger.add('log.txt')
+
 
 def get_past_dates(today: datetime, num_of_days: int) -> list:
     past_week_dates = [today - timedelta(days=i) for i in range(int(num_of_days), -1, -1)]
