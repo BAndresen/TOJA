@@ -166,7 +166,7 @@ class Controller:
         logger.debug(f'event_vs_day data:{data}')
         report.de_graph.day_event_graph(report.days_vs_event_frame, data, events)
 
-        pie_list = self.model.get_event_total(start_date,end_date, self.user_id)
+        pie_list = self.model.get_event_total(start_date.strftime('%Y-%m-%d'),end_date.strftime('%Y-%m-%d'), self.user_id)
         pie_data = dict(pie_list)
         logger.debug(f'pie_dict:{pie_data}')
         report.pie_graph.show_pie_chart(report.event_pie_frame, pie_data)

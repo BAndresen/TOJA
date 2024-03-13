@@ -592,7 +592,7 @@ class Model:
         results = self.cursor.fetchall()
         return results
 
-    def get_event_total(self, start_date: datetime, end_date: datetime, user_id: int) -> list[tuple]:
+    def get_event_total(self, start_date: str, end_date: str, user_id: int) -> list[tuple]:
         query = '''
         SELECT
             status,
@@ -605,6 +605,9 @@ class Model:
         GROUP BY status_id
         '''
         self.cursor.execute(query, (start_date, end_date, user_id))
+        print(f'start_date: {start_date}')
+        print(f'end_date: {end_date}')
         results = self.cursor.fetchall()
         if results:
+            print(f'results: {results}')
             return results

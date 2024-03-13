@@ -48,9 +48,6 @@ class DayEvent:
         self.ax.clear()
         self._plot_graph(data, events)
 
-        plt.xticks(rotation=30)
-        # plt.tight_layout()
-
         self._configure_spines()
 
         plt.subplots_adjust(left=0.1, right=0.9)
@@ -65,6 +62,7 @@ class DayEvent:
         plt.tick_params(axis='x', labelsize=8)
         plt.yticks(color=self.text_color)
         plt.xticks(color=self.text_color)
+        plt.xticks(rotation=30)
         self.ax.tick_params(axis='x', colors=self.text_color)
         self.ax.tick_params(axis='y', colors=self.text_color)
 
