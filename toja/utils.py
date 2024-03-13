@@ -20,6 +20,12 @@ def get_past_dates(today: datetime, num_of_days: int) -> list:
     return clean_format
 
 
+def get_dates_between(start_date: datetime, end_date: datetime) -> list:
+    dates_between = [start_date + timedelta(days=i) for i in range((end_date - start_date).days + 1)]
+    clean_format = [date.strftime('%Y-%m-%d') for date in dates_between]
+    return clean_format
+
+
 def validate_file_name(file_name: str) -> bool:
     """
     Checks string for non-valid file name characters

@@ -24,6 +24,7 @@ from views.event import Event
 from views.settings import Settings
 from views.contact_view import Contact
 from views.generate_report import GenerateReport
+from views.report import Report
 from model import Model
 from keywords import JobDescription, KeywordExtractor, Resume, resume_score
 import utils as utils
@@ -146,8 +147,23 @@ class Controller:
         self.view.de_graph.update_graph(data, events)
 
     def generate_report(self):
-        generate_report = GenerateReport(self.view,self.view.theme)
+        self.generate_report = GenerateReport(self.view, self.view.theme)
+        self.generate_report.generate_button.configure(command=self.open_report)
 
+    def open_report(self):
+        start_date = datetime.strptime(self.generate_report.start_date.get(), '%Y-%m-%d')
+        end_date = datetime.strptime(self.generate_report.end_date.get(), '%Y-%m-%d')
+
+        self.generate_report.generate_report_window.destroy()
+        report = Report(self.view, self.view.theme)
+
+        dates_inbetween = utils.get_dates_between(start_date, end_date)
+        data = {}
+        for day in dates_inbetween:
+            data[day] = self.model.get_event_count(day, self.user_id)
+        status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
+        events = set(status_values)
+        report.de_graph.day_event_graph(report.main_frame, data, events)
 
     def set_user(self):
         points = 0
@@ -271,7 +287,6 @@ class Controller:
         else:
             self.model.config.set_auto_close_status(False)
         self.settings.settings_window.destroy()
-
 
     def update_keyword_settings(self):
         if self.settings.job_keyword_results_entry.get():
