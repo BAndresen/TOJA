@@ -144,20 +144,37 @@ class Config:
             self.config_parser.write(file)
 
     def get_graph_scheme(self) -> dict:
-        event_data = {
-            'applied': self.config_parser['graph_theme']['applied'],
-            'prospect': self.config_parser['graph_theme']['prospect'],
-            'follow up': self.config_parser['graph_theme']['follow_up'],
-            'workshop': self.config_parser['graph_theme']['workshop'],
-            'meeting': self.config_parser['graph_theme']['meeting'],
-            'networking': self.config_parser['graph_theme']['networking'],
-            'interview': self.config_parser['graph_theme']['interview'],
-            'offer': self.config_parser['graph_theme']['offer'],
-            'portfolio_project': self.config_parser['graph_theme']['portfolio_project'],
-            'rejected': self.config_parser['graph_theme']['rejected'],
-            'no response': self.config_parser['graph_theme']['no_response'],
-            'reported fake-spam': self.config_parser['graph_theme']['reported_fake_spam']
-        }
+        if self.get_appearance_mode() == constant.LIGHT_MODE:
+            event_data = {
+                'applied': self.config_parser['graph_theme']['applied'],
+                'prospect': self.config_parser['graph_theme']['prospect'],
+                'follow up': self.config_parser['graph_theme']['follow_up'],
+                'workshop': self.config_parser['graph_theme']['workshop'],
+                'meeting': self.config_parser['graph_theme']['meeting'],
+                'networking': self.config_parser['graph_theme']['networking'],
+                'interview': self.config_parser['graph_theme']['interview'],
+                'offer': self.config_parser['graph_theme']['offer'],
+                'portfolio_project': self.config_parser['graph_theme']['portfolio_project'],
+                'rejected': self.config_parser['graph_theme']['rejected'],
+                'no response': self.config_parser['graph_theme']['no_response'],
+                'reported fake-spam': self.config_parser['graph_theme']['reported_fake_spam']
+            }
+        else:
+            event_data = {
+                'applied': self.config_parser['graph_theme_dark']['applied'],
+                'prospect': self.config_parser['graph_theme_dark']['prospect'],
+                'follow up': self.config_parser['graph_theme_dark']['follow_up'],
+                'workshop': self.config_parser['graph_theme_dark']['workshop'],
+                'meeting': self.config_parser['graph_theme_dark']['meeting'],
+                'networking': self.config_parser['graph_theme_dark']['networking'],
+                'interview': self.config_parser['graph_theme_dark']['interview'],
+                'offer': self.config_parser['graph_theme_dark']['offer'],
+                'portfolio_project': self.config_parser['graph_theme_dark']['portfolio_project'],
+                'rejected': self.config_parser['graph_theme_dark']['rejected'],
+                'no response': self.config_parser['graph_theme_dark']['no_response'],
+                'reported fake-spam': self.config_parser['graph_theme_dark']['reported_fake_spam']
+            }
+
         return event_data
 
     def set_graph_scheme(self):

@@ -34,7 +34,6 @@ class DayEvent:
 
         plt.xticks(rotation=25)
         plt.legend(fontsize=9)
-        # plt.tight_layout()
 
         self._configure_spines()
 
@@ -51,6 +50,7 @@ class DayEvent:
         self._configure_spines()
 
         plt.subplots_adjust(left=0.1, right=0.9)
+        plt.xticks(rotation=30)
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
@@ -118,10 +118,14 @@ class PieEvent:
         colors = [self.event_colors.get(label, 'gray') for label in labels]
         explode = [0.1 for i in range(len(labels))]
 
-        ax.pie(values, labels=labels, labeldistance=1.3, autopct='%1.1f%%', colors=colors, explode=explode,
+        # Define a function to format the label with total count and percentage
+        def label_format(count, pct):
+            return f'{int(count)}\n({pct:.1f}%)'
+
+        ax.pie(values, labels=labels, labeldistance=1.1, autopct=lambda pct: label_format(sum(values) * pct / 100, pct), colors=colors, explode=explode,
                startangle=90,
-               textprops={'color': 'black', 'fontsize': 10},
-               wedgeprops={'edgecolor': 'black', 'linewidth': .8})
+               textprops={'color': self.text_color, 'fontsize': 10},
+               wedgeprops={'edgecolor': self.text_color, 'linewidth': .8})
 
         plt.subplots_adjust(left=0.1, right=0.9)
 
