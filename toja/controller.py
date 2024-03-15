@@ -100,7 +100,6 @@ class Controller:
         self.auto_close_events()
         self.update_contact_listbox_home()
         self.open_job_listbox_view()
-        # self.update_home_listbox()
         self.update_home_event_listbox()
         self.update_points_view()
         self.display_user_name()
