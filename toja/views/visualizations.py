@@ -134,3 +134,35 @@ class PieEvent:
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+
+class KeywordBar:
+    def __init__(self):
+        self.bg_color = ''
+        self.face_color = ''
+        self.text_color = ''
+
+    def show_keyword_chart(self, frame: customtkinter.CTkFrame, data: list):
+        fig, ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color)
+        ax.set_facecolor(self.face_color)
+
+        labels = [item[0] for item in data]
+        values = [item[1] for item in data]
+
+        # Create horizontal bar chart
+        ax.barh(labels, values, color='skyblue')
+
+        # Set axis labels and title
+        ax.set_title('Top Keywords')
+
+        # Invert y-axis to display categories from top to bottom
+        ax.invert_yaxis()
+        ax.tick_params(axis='both', which='major', labelsize=10)
+
+        # Adjust layout
+        plt.subplots_adjust(left=0.15, right=0.9)
+
+        # Draw canvas on tkinter frame
+        canvas = FigureCanvasTkAgg(fig, master=frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)

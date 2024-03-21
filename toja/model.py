@@ -605,9 +605,23 @@ class Model:
         GROUP BY status_id
         '''
         self.cursor.execute(query, (start_date, end_date, user_id))
-        print(f'start_date: {start_date}')
-        print(f'end_date: {end_date}')
         results = self.cursor.fetchall()
         if results:
-            print(f'results: {results}')
             return results
+
+    def get_active_filenames_date_range(self, start_date: str, end_date: str, user_id: int) -> list[tuple]:
+        """Return list of active filenames.txt for jobs with the last event within date range
+        Used to generate a text from a range to input into the keyword extractor"""
+
+        query = '''
+        SELECT 
+            job.job_description_file
+        FROM event
+        JOIN job USING(job_id)
+        WHERE event.date >= ? AND event.date <= ?
+            AND event.user_id = ?
+            AND event.status_id NOT IN (1, 11, 12)
+        GROUP BY event.job_id, job.job_description_file;
+        '''
+        self.cursor.execute(query, (start_date, end_date, user_id,))
+        return self.cursor.fetchall()

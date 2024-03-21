@@ -170,13 +170,16 @@ class Controller:
         pie_data = dict(pie_list)
         logger.debug(f'pie_dict:{pie_data}')
         report.pie_graph.show_pie_chart(report.event_pie_frame, pie_data)
+        keyword_results = self.keyword_report(start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
+        report.keyword_graph.show_keyword_chart(report.keyword_graph_frame, keyword_results )
 
-    def keyword_report(self):
-        list_of_jobs = self.model.get_filenames(self.user_id)
+    def keyword_report(self, start_date: str, end_date: str) -> list:
+        list_of_jobs = self.model.get_active_filenames_date_range(start_date, end_date, self.user_id)
         text = utils.load_job_file(list_of_jobs, self.model.config.job_description_parent)
-        self.keywords_reports = KeywordExtractor()
-        self.keywords_reports = self.keywords_reports.extract_keywords(text, num_keywords=10)
-        self.job_description.keywords = self.extracted_keywords
+        keywords_reports = KeywordExtractor()
+        keywords_text = keywords_reports.extract_keywords(text, num_keywords=10)
+        keywords_reports.keywords = keywords_text
+        return keywords_text
 
     def set_user(self):
         points = 0
