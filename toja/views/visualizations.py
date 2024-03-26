@@ -120,11 +120,13 @@ class PieEvent:
         colors = [self.event_colors.get(label, 'gray') for label in labels]
         explode = [0.1 for i in range(len(labels))]
 
-        # Define a function to format the label with total count and percentage
-        def label_format(count, pct):
-            return f'{int(count)}\n({pct:.1f}%)'
+        def label_format(pct, allvals):
+            absolute = int(pct / 100. * sum(allvals))
+            return absolute
 
-        ax.pie(values, labels=labels, labeldistance=1.1, autopct=lambda pct: label_format(sum(values) * pct / 100, pct), colors=colors, explode=explode,
+        ax.pie(values, labels=labels, labeldistance=1.1,
+               autopct=lambda pct: label_format(pct, values),
+               colors=colors, explode=explode,
                startangle=90,
                textprops={'color': self.text_color, 'fontsize': 10},
                wedgeprops={'edgecolor': self.text_color, 'linewidth': .8})
@@ -157,10 +159,10 @@ class KeywordBar:
 
         # Invert y-axis to display categories from top to bottom
         ax.invert_yaxis()
-        ax.tick_params(axis='both', which='major', labelsize=10)
+        ax.tick_params(axis='both', which='major', labelsize=9)
 
         # Adjust layout
-        plt.subplots_adjust(left=0.15, right=0.9)
+        plt.subplots_adjust(left=0.35, right=0.9)
 
         # Draw canvas on tkinter frame
         canvas = FigureCanvasTkAgg(fig, master=frame)
@@ -176,30 +178,33 @@ class ProgressEvent:
         self.event_colors = {}
 
     def show_bar_chart(self, frame: tk.Frame, data: dict):
-        fig, ax = plt.subplots(figsize=(6, 4), facecolor=self.bg_color)
+        fig, ax = plt.subplots(figsize=(4, 4), facecolor=self.bg_color)
         ax.set_facecolor(self.face_color)
 
         events = list(data.keys())
-        percent_changes = list(data.values())
+        changes = list(data.values())
 
         colors = [self.event_colors.get(event, 'gray') for event in events]
 
-        bars = ax.barh(events, percent_changes, color=colors)
+        bars = ax.barh(events,
+                       changes,
+                       color=colors)
+
+        # Calculate the maximum absolute change to set the limits of the x-axis symmetrically around 0
+        max_change = max(abs(change) for change in changes)
+        ax.set_xlim(-max_change, max_change)
 
         # Add zero line
-        ax.axvline(0, color='black', linewidth=0.5)
+        ax.axvline(0, color='black', linewidth=0.1)
 
-        # Add labels
-        for bar in bars:
-            width = bar.get_width()
-            ax.text(width, bar.get_y() + bar.get_height()/2, f'{width}%', ha='left' if width > 0 else 'right', va='center',
-                    color=self.text_color)
-
-        ax.set_xlabel('Percent Change')
-        ax.set_title('Percent Change of Events')
+        ax.set_xlabel('Change')
+        ax.set_title('Change of Events')
+        ax.tick_params(axis='both', labelsize=9)
         ax.grid(axis='x', linestyle='--', alpha=0.7)
 
-        plt.subplots_adjust(left=0.1, right=0.9)
+        plt.subplots_adjust(left=0.35,
+                            right=0.9
+                            )
 
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()

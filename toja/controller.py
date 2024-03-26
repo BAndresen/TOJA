@@ -154,14 +154,25 @@ class Controller:
         end_date = self.generate_report.end_date.get()
 
         # get event data for events vs days graph
+        previous_events = self.get_event_previous(
+            datetime.strptime(start_date, '%Y-%m-%d'),
+            datetime.strptime(end_date, '%Y-%m-%d')
+        )
+
         events_per_day = self.get_events_per_day_data(
             datetime.strptime(start_date, '%Y-%m-%d'),
             datetime.strptime(end_date, '%Y-%m-%d')
         )
         event_labels = self.get_event_labels(events_per_day)
 
-        pie_chart_events = self.model.get_event_total(start_date, end_date,
+        current_events = self.model.get_event_total(start_date, end_date,
                                                       self.user_id)
+        logger.info(f'current events {current_events}')
+
+        event_prograss = self.calculate_progress(previous_events,current_events)
+        print(f'previous events: {previous_events}')
+        print(f'current events: {current_events}')
+        print(f'progress: {event_prograss}')
 
         # Initialize report window and delete date selector window
         self.generate_report.generate_report_window.destroy()
@@ -169,9 +180,44 @@ class Controller:
 
         # Generate graphs
         self.show_event_vs_day_graph(self.report.days_vs_event_frame, events_per_day, event_labels)
-        self.show_event_pie_graph(self.report.event_pie_frame, dict(pie_chart_events))
+        self.show_event_pie_graph(self.report.event_pie_frame, dict(current_events))
         self.show_keyword_graph(self.report.keyword_graph_frame, start_date, end_date)
-        self.show_progress_graph(self.report.progress_bar_frame, dict(pie_chart_events))
+        self.show_progress_graph(self.report.progress_bar_frame, event_prograss)
+
+    def get_event_previous(self, start_date: datetime, end_date: datetime) -> list[tuple]:
+        time_delta = start_date - end_date
+        previous_time_window_start = (start_date + time_delta).strftime(constant.CURRENT_DATE_FORMAT)
+
+        previous_time_window_events = self.model.get_event_total(previous_time_window_start,
+                                                                 datetime.strftime(start_date,
+                                                                                   constant.CURRENT_DATE_FORMAT),
+                                                                 self.user_id)
+
+        logger.info(f'previous events {previous_time_window_events}')
+        return previous_time_window_events
+
+    def calculate_progress(self, previous_events, current_events):
+        progress_results = {}
+
+        # Calculate progress for previous events
+        for prev_event, prev_value in previous_events:
+            for curr_event, curr_value in current_events:
+                if prev_event == curr_event:
+                    progress = curr_value - prev_value
+                    progress_results[curr_event] = progress
+                    break
+            else:  # If event from previous data not found in current data
+                progress_results[prev_event] = -prev_value  # Consider it as a negative sum
+
+        # Calculate progress for current events
+        for curr_event, curr_value in current_events:
+            for prev_event, prev_value in previous_events:
+                if curr_event == prev_event:
+                    break
+            else:  # If event from current data not found in previous data
+                progress_results[curr_event] = curr_value  # Consider it as a positive sum
+
+        return progress_results
 
     def get_events_per_day_data(self, start_date: datetime, end_date: datetime):
         dates_inbetween = utils.get_dates_between(start_date, end_date)
@@ -201,7 +247,7 @@ class Controller:
         list_of_jobs = self.model.get_active_filenames_date_range(start_date, end_date, self.user_id)
         text = utils.load_job_file(list_of_jobs, self.model.config.job_description_parent)
         keywords_reports = KeywordExtractor()
-        keywords_text = keywords_reports.extract_keywords(text, num_keywords=10)
+        keywords_text = keywords_reports.extract_keywords(text, num_keywords=18)
         keywords_reports.keywords = keywords_text
         return keywords_text
 
