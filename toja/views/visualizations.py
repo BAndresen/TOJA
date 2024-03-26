@@ -32,7 +32,7 @@ class DayEvent:
 
         self._plot_graph(data, events)
 
-        plt.xticks(rotation=25)
+        # plt.xticks(rotation=25)
         plt.legend(fontsize=9)
 
         self._configure_spines()
@@ -50,9 +50,8 @@ class DayEvent:
         self._configure_spines()
 
         plt.subplots_adjust(left=0.1, right=0.9)
-        plt.xticks(rotation=25)
+        # plt.xticks(rotation=30)
         plt.legend(fontsize=9)
-
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
@@ -64,7 +63,7 @@ class DayEvent:
         plt.tick_params(axis='x', labelsize=8)
         plt.yticks(color=self.text_color)
         plt.xticks(color=self.text_color)
-        plt.xticks(rotation=30)
+        # plt.xticks(rotation=30)
         self.ax.tick_params(axis='x', colors=self.text_color)
         self.ax.tick_params(axis='y', colors=self.text_color)
 
@@ -92,6 +91,7 @@ class DayEvent:
         self.ax.spines['right'].set_visible(False)
         self.ax.spines['bottom'].set_visible(False)
         self.ax.spines['left'].set_visible(False)
+        plt.xticks(rotation=30)
         plt.legend(fontsize=9, facecolor=self.bg_color, edgecolor=self.face_color, labelcolor=self.text_color)
 
     def _draw_canvas(self, frame):
@@ -163,6 +163,44 @@ class KeywordBar:
         plt.subplots_adjust(left=0.15, right=0.9)
 
         # Draw canvas on tkinter frame
+        canvas = FigureCanvasTkAgg(fig, master=frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+
+class ProgressEvent:
+    def __init__(self):
+        self.bg_color = ''
+        self.face_color = ''
+        self.text_color = ''
+        self.event_colors = {}
+
+    def show_bar_chart(self, frame: tk.Frame, data: dict):
+        fig, ax = plt.subplots(figsize=(6, 4), facecolor=self.bg_color)
+        ax.set_facecolor(self.face_color)
+
+        events = list(data.keys())
+        percent_changes = list(data.values())
+
+        colors = [self.event_colors.get(event, 'gray') for event in events]
+
+        bars = ax.barh(events, percent_changes, color=colors)
+
+        # Add zero line
+        ax.axvline(0, color='black', linewidth=0.5)
+
+        # Add labels
+        for bar in bars:
+            width = bar.get_width()
+            ax.text(width, bar.get_y() + bar.get_height()/2, f'{width}%', ha='left' if width > 0 else 'right', va='center',
+                    color=self.text_color)
+
+        ax.set_xlabel('Percent Change')
+        ax.set_title('Percent Change of Events')
+        ax.grid(axis='x', linestyle='--', alpha=0.7)
+
+        plt.subplots_adjust(left=0.1, right=0.9)
+
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)

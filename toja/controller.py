@@ -150,30 +150,54 @@ class Controller:
         self.generate_report.generate_button.configure(command=self.open_report)
 
     def open_report(self):
-        start_date = datetime.strptime(self.generate_report.start_date.get(), '%Y-%m-%d')
-        end_date = datetime.strptime(self.generate_report.end_date.get(), '%Y-%m-%d')
+        start_date = self.generate_report.start_date.get()
+        end_date = self.generate_report.end_date.get()
 
+        # get event data for events vs days graph
+        events_per_day = self.get_events_per_day_data(
+            datetime.strptime(start_date, '%Y-%m-%d'),
+            datetime.strptime(end_date, '%Y-%m-%d')
+        )
+        event_labels = self.get_event_labels(events_per_day)
+
+        pie_chart_events = self.model.get_event_total(start_date, end_date,
+                                                      self.user_id)
+
+        # Initialize report window and delete date selector window
         self.generate_report.generate_report_window.destroy()
-        report = Report(self.view, self.view.theme)
+        self.report = Report(self.view, self.view.theme)
 
+        # Generate graphs
+        self.show_event_vs_day_graph(self.report.days_vs_event_frame, events_per_day, event_labels)
+        self.show_event_pie_graph(self.report.event_pie_frame, dict(pie_chart_events))
+        self.show_keyword_graph(self.report.keyword_graph_frame, start_date, end_date)
+        self.show_progress_graph(self.report.progress_bar_frame, dict(pie_chart_events))
+
+    def get_events_per_day_data(self, start_date: datetime, end_date: datetime):
         dates_inbetween = utils.get_dates_between(start_date, end_date)
-        data = {}
+        events_per_day = {}
         for day in dates_inbetween:
-            data[day] = self.model.get_event_count_by_date(day, self.user_id)
-        status_values = [status for date_statuses in data.values() for status, _ in date_statuses]
-        events = set(status_values)
-        logger.debug(f'event_vs_day data:{data}')
-        report.de_graph.day_event_graph(report.days_vs_event_frame, data, events)
+            events_per_day[day] = self.model.get_event_count_by_date(day, self.user_id)
+        return events_per_day
 
-        pie_list = self.model.get_event_total(start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'),
-                                              self.user_id)
-        pie_data = dict(pie_list)
-        logger.debug(f'pie_dict:{pie_data}')
-        report.pie_graph.show_pie_chart(report.event_pie_frame, pie_data)
-        keyword_results = self.keyword_report(start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
-        report.keyword_graph.show_keyword_chart(report.keyword_graph_frame, keyword_results )
+    def get_event_labels(self, events_per_day: dict):
+        status_values = [status for date_statuses in events_per_day.values() for status, _ in date_statuses]
+        return set(status_values)
 
-    def keyword_report(self, start_date: str, end_date: str) -> list:
+    def show_event_vs_day_graph(self, frame: customtkinter.CTkFrame, events_per_day: dict, event_labels: set):
+        self.report.de_graph.day_event_graph(frame, events_per_day, event_labels)
+
+    def show_event_pie_graph(self, frame: customtkinter.CTkFrame, events: dict):
+        self.report.pie_graph.show_pie_chart(frame, events)
+
+    def show_progress_graph(self, frame: customtkinter.CTkFrame, events: dict):
+        self.report.progress_graph.show_bar_chart(frame, events)
+
+    def show_keyword_graph(self, frame: customtkinter.CTkFrame, start_date: str, end_date: str):
+        keyword_results = self.get_keyword_report(start_date, end_date)
+        self.report.keyword_graph.show_keyword_chart(frame, keyword_results)
+
+    def get_keyword_report(self, start_date: str, end_date: str) -> list:
         list_of_jobs = self.model.get_active_filenames_date_range(start_date, end_date, self.user_id)
         text = utils.load_job_file(list_of_jobs, self.model.config.job_description_parent)
         keywords_reports = KeywordExtractor()
