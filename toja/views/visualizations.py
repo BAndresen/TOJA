@@ -120,18 +120,14 @@ class PieEvent:
         colors = [self.event_colors.get(label, 'gray') for label in labels]
         explode = [0.1 for i in range(len(labels))]
 
-        def label_format(pct, allvals):
-            absolute = int(pct / 100. * sum(allvals))
-            return absolute
-
         ax.pie(values, labels=labels, labeldistance=1.1,
-               autopct=lambda pct: label_format(pct, values),
+               autopct='%1.1f%%',
                colors=colors, explode=explode,
                startangle=90,
-               textprops={'color': self.text_color, 'fontsize': 10},
+               textprops={'color': self.text_color, 'fontsize': 9},
                wedgeprops={'edgecolor': self.text_color, 'linewidth': .8})
 
-        plt.subplots_adjust(left=0.1, right=0.9)
+        plt.subplots_adjust(left=0.2, right=0.85)
 
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
