@@ -124,6 +124,16 @@ class Model:
         self.cursor.execute(second_query, (user_id,))
         self.conn.commit()
 
+    def get_points(self, status: str) -> int:
+        query = '''
+        SELECT points
+        FROM status
+        WHERE status = ?
+        '''
+
+        if self.cursor.execute(query, (status,)):
+            return self.cursor.fetchall()[0][0]
+
     def get_total_points(self, user_id: int) -> int:
         if not user_id:
             return 0

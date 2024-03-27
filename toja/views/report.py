@@ -12,7 +12,7 @@ class Report:
 
         self.report_window.title("Report")
         self.report_window.grid_columnconfigure(0, weight=1)
-        self.report_window.grid_rowconfigure(0, weight=1)
+        self.report_window.grid_rowconfigure(1, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.report_window, fg_color=self.theme.second_frame)
         self.main_frame.grid(row=1, column=0, padx=40, pady=(0,40), sticky="nsew")
@@ -64,10 +64,11 @@ class Report:
         self.user_level.grid(row=2, column=1)
 
         self.report_range = customtkinter.CTkLabel(self.report_window, text='',
-                                                   font=self.theme.header_font)
-        self.report_range.grid(row=0, column=0)
+                                                   font=self.theme.header_font
+                                                   )
+        self.report_range.grid(row=0, column=0, padx=10, pady=10)
 
-        self.user_point_gain_label = customtkinter.CTkLabel(self.info_frame, text='Points Gained')
+        self.user_point_gain_label = customtkinter.CTkLabel(self.info_frame, text='Points Gained:')
         self.user_point_gain_label.grid(row=5, column=0)
         self.user_point_gain = customtkinter.CTkLabel(self.info_frame, text='')
         self.user_point_gain.grid(row=5, column=1)

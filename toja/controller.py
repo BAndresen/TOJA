@@ -35,7 +35,6 @@ class Controller:
     def __init__(self, view: HomeView, model: Model, new_user: bool = False):
         self.today = datetime.today().date()
         self.new_job = None
-        # self.user_id = None
         self.view = view
         self.model = model
 
@@ -177,7 +176,7 @@ class Controller:
         # Initialize report window and delete date selector window
         self.generate_report.generate_report_window.destroy()
         self.report = Report(self.view, self.view.theme)
-        self.update_report_user_info(start_date, end_date)
+        self.update_report_user_info(start_date, end_date, current_events)
 
         # Generate graphs
         self.show_event_vs_day_graph(self.report.days_vs_event_frame, events_per_day, event_labels)
@@ -197,10 +196,21 @@ class Controller:
         logger.info(f'previous events {previous_time_window_events}')
         return previous_time_window_events
 
-    def update_report_user_info(self, start_date: str, end_date: str):
+    def update_report_user_info(self, start_date: str, end_date: str, current_events:list[tuple]):
         self.report.user_name.configure(text=self.model.config.user_name)
         self.report.user_level.configure(text=self.user_level)
-        self.report.report_range.configure(text=f'Job Report: {start_date} - {end_date}')
+        self.report.report_range.configure(text=f'Progress Report: {start_date} - {end_date}')
+        points_gained = self.get_points_from_list(current_events)
+        self.report.user_point_gain.configure(text=points_gained)
+
+    def get_points_from_list(self, current_events:list[tuple])->int:
+        total_points = 0
+        for status, num in current_events:
+            points = self.model.get_points(status)
+            points_add = points * num
+            total_points += points_add
+        return total_points
+
 
     def calculate_progress(self, previous_events, current_events):
         progress_results = {}
@@ -244,7 +254,7 @@ class Controller:
 
     def show_progress_graph(self, frame: customtkinter.CTkFrame, events: dict, start_date: str):
         self.report.progress_graph.show_bar_chart(frame, events)
-        self.report.progress_graph.update_title(f'Previous {abs(self.time_delta.days)} Day Timeblock ')
+        self.report.progress_graph.update_title(f'Progress from Previous {abs(self.time_delta.days)} Day Report')
 
     def show_keyword_graph(self, frame: customtkinter.CTkFrame, start_date: str, end_date: str):
         keyword_results = self.get_keyword_report(start_date, end_date)
