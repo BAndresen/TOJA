@@ -166,10 +166,10 @@ class Controller:
         event_labels = self.get_event_labels(events_per_day)
 
         current_events = self.model.get_event_total(start_date, end_date,
-                                                      self.user_id)
+                                                    self.user_id)
         logger.info(f'current events {current_events}')
 
-        event_prograss = self.calculate_progress(previous_events,current_events)
+        event_prograss = self.calculate_progress(previous_events, current_events)
         print(f'previous events: {previous_events}')
         print(f'current events: {current_events}')
         print(f'progress: {event_prograss}')
@@ -177,24 +177,30 @@ class Controller:
         # Initialize report window and delete date selector window
         self.generate_report.generate_report_window.destroy()
         self.report = Report(self.view, self.view.theme)
+        self.update_report_user_info(start_date, end_date)
 
         # Generate graphs
         self.show_event_vs_day_graph(self.report.days_vs_event_frame, events_per_day, event_labels)
         self.show_event_pie_graph(self.report.event_pie_frame, dict(current_events))
         self.show_keyword_graph(self.report.keyword_graph_frame, start_date, end_date)
-        self.show_progress_graph(self.report.progress_bar_frame, event_prograss)
+        self.show_progress_graph(self.report.progress_bar_frame, event_prograss, start_date)
 
     def get_event_previous(self, start_date: datetime, end_date: datetime) -> list[tuple]:
-        time_delta = start_date - end_date
-        previous_time_window_start = (start_date + time_delta).strftime(constant.CURRENT_DATE_FORMAT)
+        self.time_delta = start_date - end_date
+        self.previous_time_window_start = (start_date + self.time_delta).strftime(constant.CURRENT_DATE_FORMAT)
 
-        previous_time_window_events = self.model.get_event_total(previous_time_window_start,
+        previous_time_window_events = self.model.get_event_total(self.previous_time_window_start,
                                                                  datetime.strftime(start_date,
                                                                                    constant.CURRENT_DATE_FORMAT),
                                                                  self.user_id)
 
         logger.info(f'previous events {previous_time_window_events}')
         return previous_time_window_events
+
+    def update_report_user_info(self, start_date: str, end_date: str):
+        self.report.user_name.configure(text=self.model.config.user_name)
+        self.report.user_level.configure(text=self.user_level)
+        self.report.report_range.configure(text=f'Job Report: {start_date} - {end_date}')
 
     def calculate_progress(self, previous_events, current_events):
         progress_results = {}
@@ -236,8 +242,9 @@ class Controller:
     def show_event_pie_graph(self, frame: customtkinter.CTkFrame, events: dict):
         self.report.pie_graph.show_pie_chart(frame, events)
 
-    def show_progress_graph(self, frame: customtkinter.CTkFrame, events: dict):
+    def show_progress_graph(self, frame: customtkinter.CTkFrame, events: dict, start_date: str):
         self.report.progress_graph.show_bar_chart(frame, events)
+        self.report.progress_graph.update_title(f'Previous {abs(self.time_delta.days)} Day Timeblock ')
 
     def show_keyword_graph(self, frame: customtkinter.CTkFrame, start_date: str, end_date: str):
         keyword_results = self.get_keyword_report(start_date, end_date)
@@ -808,7 +815,8 @@ class Controller:
         self.view.total_points.configure(text=total_points)
         progress = total_points / 50
         level, progress_value = divmod(progress, 1)
-        self.view.current_level.configure(text=(int(level)))
+        self.user_level = int(level)
+        self.view.current_level.configure(text=(self.user_level))
         self.view.progress_bar.set(progress_value)
 
     def display_user_name(self):

@@ -15,7 +15,7 @@ class Report:
         self.report_window.grid_rowconfigure(0, weight=1)
 
         self.main_frame = customtkinter.CTkFrame(self.report_window, fg_color=self.theme.second_frame)
-        self.main_frame.grid(row=0, column=0, padx=40, pady=40, sticky="nsew")
+        self.main_frame.grid(row=1, column=0, padx=40, pady=(0,40), sticky="nsew")
         self.main_frame.grid_columnconfigure(0, weight=1)
         self.main_frame.grid_columnconfigure(2, weight=1)
         self.main_frame.grid_rowconfigure(0, weight=1)
@@ -46,8 +46,34 @@ class Report:
         self.keyword_graph.face_color = self.theme.listbox_bg
         self.keyword_graph.text_color = self.theme.text_color
 
-        self.progress_bar_frame = customtkinter.CTkFrame(self.main_frame, fg_color=self.theme.main_frame)
-        self.progress_bar_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+        self.left_combo_frame = customtkinter.CTkFrame(self.main_frame, fg_color=self.theme.main_frame)
+        self.left_combo_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+        self.left_combo_frame.grid_columnconfigure(0,weight=1)
+
+        self.info_frame = customtkinter.CTkFrame(self.left_combo_frame, fg_color=self.theme.main_frame)
+        self.info_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        self.user_name_label = customtkinter.CTkLabel(self.info_frame, text='User:')
+        self.user_name_label.grid(row=1, column=0)
+        self.user_name = customtkinter.CTkLabel(self.info_frame, text='')
+        self.user_name.grid(row=1,column=1)
+
+        self.user_level_label = customtkinter.CTkLabel(self.info_frame, text='Job Hunter:')
+        self.user_level_label.grid(row=2, column=0)
+        self.user_level = customtkinter.CTkLabel(self.info_frame, text='')
+        self.user_level.grid(row=2, column=1)
+
+        self.report_range = customtkinter.CTkLabel(self.report_window, text='',
+                                                   font=self.theme.header_font)
+        self.report_range.grid(row=0, column=0)
+
+        self.user_point_gain_label = customtkinter.CTkLabel(self.info_frame, text='Points Gained')
+        self.user_point_gain_label.grid(row=5, column=0)
+        self.user_point_gain = customtkinter.CTkLabel(self.info_frame, text='')
+        self.user_point_gain.grid(row=5, column=1)
+
+        self.progress_bar_frame = customtkinter.CTkFrame(self.left_combo_frame, fg_color=self.theme.main_frame)
+        self.progress_bar_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
         self.progress_graph = ProgressEvent()
         self.progress_graph.bg_color = self.theme.home_frame_background

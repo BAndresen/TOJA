@@ -176,10 +176,12 @@ class ProgressEvent:
         self.face_color = ''
         self.text_color = ''
         self.event_colors = {}
+        self.ax = None
 
     def show_bar_chart(self, frame: tk.Frame, data: dict):
         fig, ax = plt.subplots(figsize=(4, 4), facecolor=self.bg_color)
         ax.set_facecolor(self.face_color)
+        self.ax= ax
 
         events = list(data.keys())
         changes = list(data.values())
@@ -198,7 +200,7 @@ class ProgressEvent:
         ax.axvline(0, color='black', linewidth=0.1)
 
         ax.set_xlabel('Change')
-        ax.set_title('Change of Events')
+        # ax.set_title('Change of Events')
         ax.tick_params(axis='both', labelsize=9)
         ax.grid(axis='x', linestyle='--', alpha=0.7)
 
@@ -209,3 +211,7 @@ class ProgressEvent:
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+
+    def update_title(self, title: str):
+        if self.ax:
+            self.ax.set_title(title)
