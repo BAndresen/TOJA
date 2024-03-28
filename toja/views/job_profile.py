@@ -180,7 +180,7 @@ class JobProfile:
 
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
 
-        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=687, justify='left')
+        self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=700, justify='left')
         self.job_description_label.grid(row=0, column=0)
 
         self.keyword_scroll = tkinter.Listbox(self.job_tabview.tab('Key Words'), width=101,
@@ -191,7 +191,7 @@ class JobProfile:
                                               selectforeground=theme.text_color,
                                               activestyle='none',
                                               borderwidth=0,
-                                              height=18)
+                                              height=21)
         self.keyword_scroll.grid(row=0, column=0, padx=10, pady=10)
 
         # buttons

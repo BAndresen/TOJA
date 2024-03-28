@@ -145,12 +145,12 @@ class Controller:
         self.view.de_graph.update_graph(data, events)
 
     def generate_report(self):
-        self.generate_report = GenerateReport(self.view, self.view.theme)
-        self.generate_report.generate_button.configure(command=self.open_report)
+        self.generate_report_window = GenerateReport(self.view, self.view.theme)
+        self.generate_report_window.generate_button.configure(command=self.open_report)
 
     def open_report(self):
-        start_date = self.generate_report.start_date.get()
-        end_date = self.generate_report.end_date.get()
+        start_date = self.generate_report_window.start_date.get()
+        end_date = self.generate_report_window.end_date.get()
 
         # get event data for events vs days graph
         previous_events = self.get_event_previous(
@@ -166,15 +166,19 @@ class Controller:
 
         current_events = self.model.get_event_total(start_date, end_date,
                                                     self.user_id)
-        logger.info(f'current events {current_events}')
 
-        event_prograss = self.calculate_progress(previous_events, current_events)
-        print(f'previous events: {previous_events}')
-        print(f'current events: {current_events}')
-        print(f'progress: {event_prograss}')
+        # Validate user date start < end
+        if not previous_events or not current_events:
+            logger.debug(f'previous:{previous_events}')
+            logger.debug(f'current:{current_events}')
+            utils.showerror(self.generate_report_window.generate_report_window, 'Date Error')
+            self.generate_report_window.generate_report_window.destroy()
+            return
+
+        event_progress = self.calculate_progress(previous_events, current_events)
 
         # Initialize report window and delete date selector window
-        self.generate_report.generate_report_window.destroy()
+        self.generate_report_window.generate_report_window.destroy()
         self.report = Report(self.view, self.view.theme)
         self.update_report_user_info(start_date, end_date, current_events)
 
@@ -182,7 +186,7 @@ class Controller:
         self.show_event_vs_day_graph(self.report.days_vs_event_frame, events_per_day, event_labels)
         self.show_event_pie_graph(self.report.event_pie_frame, dict(current_events))
         self.show_keyword_graph(self.report.keyword_graph_frame, start_date, end_date)
-        self.show_progress_graph(self.report.progress_bar_frame, event_prograss, start_date)
+        self.show_progress_graph(self.report.progress_bar_frame, event_progress, start_date)
 
     def get_event_previous(self, start_date: datetime, end_date: datetime) -> list[tuple]:
         self.time_delta = start_date - end_date
@@ -210,7 +214,6 @@ class Controller:
             points_add = points * num
             total_points += points_add
         return total_points
-
 
     def calculate_progress(self, previous_events, current_events):
         progress_results = {}
