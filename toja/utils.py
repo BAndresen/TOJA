@@ -86,8 +86,8 @@ def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
                 f = files
             else:
                 f = files[0]
-        except TypeError:
-            print('error loading job file')
+        except TypeError as e:
+            logger.error(e)
 
         try:
             file_path = os.path.join(parent_directory, f)
@@ -100,6 +100,9 @@ def load_job_file(file_list: list, parent_directory: Union[Path, str]) -> str:
             with open(file_path, 'r', encoding='utf-8') as file:
                 job = file.read()
             text += job
-            print(f'Opened with Unicode utf-8 {f} {e}')
+            logger.info(f'Opened with Unicode utf-8 {f} {e}')
+
+        except UnboundLocalError as e:
+            logger.error(f'Error Null File {e}')
 
     return text.lower()
