@@ -39,8 +39,8 @@ class JobProfile:
         self.jp_frame.grid_columnconfigure(0, weight=1)
 
         # company website
-        self.company_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.company_frame.grid(row=0, column=0, columnspan=2, padx=20, pady=(20, 5), sticky='nsew')
+        self.company_frame = customtkinter.CTkFrame(self.jp_frame, fg_color=theme.main_frame)
+        self.company_frame.grid(row=0, column=0, columnspan=2, padx=10, pady=(10, 5), sticky='nsew')
         self.company_frame.grid_columnconfigure(2, weight=1)
 
         self.company_name_user = customtkinter.CTkLabel(self.company_frame, text='', font=theme.title_font)
@@ -49,8 +49,8 @@ class JobProfile:
         self.position_user.grid(row=1, column=0, padx=20, pady=(0, 10), stick='w')
 
         # job info
-        self.job_info_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.job_info_frame.grid(row=1, column=0, padx=(20,10), pady=5, sticky='nsew')
+        self.job_info_frame = customtkinter.CTkFrame(self.jp_frame, fg_color=theme.main_frame)
+        self.job_info_frame.grid(row=1, column=0, padx=10, pady=5, sticky='nsew')
         self.job_info_frame.grid_columnconfigure(0, weight=1)
         self.job_info_frame.grid_columnconfigure(1, weight=4)
         self.company_button_frame = customtkinter.CTkFrame(self.company_frame)
@@ -107,8 +107,8 @@ class JobProfile:
         self.resume_user = customtkinter.CTkLabel(self.job_info_frame, text='', font=theme.main_font_bold)
         self.resume_user.grid(row=8, column=1, padx=5, pady=(1, 10), stick='w')
 
-        self.event_contact_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.event_contact_frame.grid(row=1, column=1, stick='nsew', padx=(0, 20), pady=5)
+        self.event_contact_frame = customtkinter.CTkFrame(self.jp_frame, fg_color=theme.main_frame)
+        self.event_contact_frame.grid(row=1, column=1, stick='nsew', padx=(0, 10), pady=5)
 
         self.event_contact_tabview = customtkinter.CTkTabview(self.event_contact_frame, text_color=theme.text_color,
                                                               segmented_button_selected_color=theme.accent_color,
@@ -158,8 +158,10 @@ class JobProfile:
 
         # description
 
-        self.job_tabview_frame = customtkinter.CTkFrame(self.jp_frame)
-        self.job_tabview_frame.grid(row=2, column=0, columnspan=2, padx=20, pady=(5, 10))
+        self.job_tabview_frame = customtkinter.CTkFrame(self.jp_frame, fg_color=theme.main_frame)
+        self.job_tabview_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=(5, 10), sticky='nsew')
+        self.job_tabview_frame.grid_columnconfigure(0, weight=1)
+
         self.job_tabview = customtkinter.CTkTabview(self.job_tabview_frame, width=500, text_color=theme.text_color,
                                                     segmented_button_selected_color=theme.accent_color,
                                                     segmented_button_fg_color=theme.main_frame,
@@ -169,10 +171,15 @@ class JobProfile:
         self.job_tabview.add("Description")
         self.job_tabview.add('Key Words')
 
-        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'), width=687,
-                                                                       height=297)
+        self.job_tabview.grid_columnconfigure(0, weight=1)
+        self.job_tabview.grid_rowconfigure(0, weight=1)
+
+        self.job_description_scroll = customtkinter.CTkScrollableFrame(self.job_tabview.tab('Description'),
+                                                                       width=700,
+                                                                       height=350, fg_color=theme.main_frame)
 
         self.job_description_scroll.grid(row=0, column=0, padx=10, pady=10)
+
         self.job_description_label = customtkinter.CTkLabel(self.job_description_scroll, wraplength=687, justify='left')
         self.job_description_label.grid(row=0, column=0)
 
@@ -198,5 +205,3 @@ class JobProfile:
 
     def open_link(self, event):
         webbrowser.open(self.company_web_user.cget("text"))
-
-

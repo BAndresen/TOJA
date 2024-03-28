@@ -127,7 +127,7 @@ class PieEvent:
                textprops={'color': self.text_color, 'fontsize': 9},
                wedgeprops={'edgecolor': self.text_color, 'linewidth': .8})
 
-        plt.subplots_adjust(left=0.2, right=0.85)
+        plt.subplots_adjust(left=0.2, right=0.8)
 
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
@@ -141,21 +141,21 @@ class KeywordBar:
         self.text_color = ''
 
     def show_keyword_chart(self, frame: customtkinter.CTkFrame, data: list):
-        fig, ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color)
+        fig, ax = plt.subplots(figsize=(4, 3), facecolor=self.bg_color,)
         ax.set_facecolor(self.face_color)
 
         labels = [item[0] for item in data]
         values = [item[1] for item in data]
 
         # Create horizontal bar chart
-        ax.barh(labels, values, color='skyblue')
+        ax.barh(labels, values, color='skyblue',)
 
         # Set axis labels and title
-        ax.set_title('Top Keywords')
+        ax.set_title('Top Keywords', color=self.text_color)
 
         # Invert y-axis to display categories from top to bottom
         ax.invert_yaxis()
-        ax.tick_params(axis='both', which='major', labelsize=9)
+        ax.tick_params(axis='both', which='major', labelsize=9, colors=self.text_color)
 
         # Adjust layout
         plt.subplots_adjust(left=0.35, right=0.9)
@@ -197,7 +197,7 @@ class ProgressEvent:
 
         ax.set_xlabel('Change')
         # ax.set_title('Change of Events')
-        ax.tick_params(axis='both', labelsize=9)
+        ax.tick_params(axis='both', labelsize=9, colors=self.text_color)
         ax.grid(axis='x', linestyle='--', alpha=0.7)
 
         plt.subplots_adjust(left=0.35,
@@ -210,4 +210,4 @@ class ProgressEvent:
 
     def update_title(self, title: str):
         if self.ax:
-            self.ax.set_title(title)
+            self.ax.set_title(title, fontsize=10, color=self.text_color)
