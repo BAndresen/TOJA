@@ -60,7 +60,11 @@ class DayEvent:
         dates = list(data.keys())
         event_counts = {event: [0] * len(dates) for event in events}
 
-        plt.tick_params(axis='x', labelsize=8)
+        if len(dates) > 90:
+            plt.tick_params(axis='x', labelsize=6)
+        else:
+            plt.tick_params(axis='x', labelsize=8)
+
         plt.yticks(color=self.text_color)
         plt.xticks(color=self.text_color)
         # plt.xticks(rotation=30)
@@ -91,7 +95,7 @@ class DayEvent:
         self.ax.spines['right'].set_visible(False)
         self.ax.spines['bottom'].set_visible(False)
         self.ax.spines['left'].set_visible(False)
-        plt.xticks(rotation=30)
+        plt.xticks(rotation=40)
         plt.legend(fontsize=9, facecolor=self.bg_color, edgecolor=self.face_color, labelcolor=self.text_color)
 
     def _draw_canvas(self, frame):
