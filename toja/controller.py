@@ -89,6 +89,7 @@ class Controller:
         if new_user:
             self.welcome_window = WelcomeUser(self.view, self.view.theme)
             self.welcome_window.start_button.configure(command=self.set_user)
+            self.initialize_day_event_graph()
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
             # Initialize Day vs Events Graph
