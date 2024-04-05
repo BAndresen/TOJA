@@ -89,7 +89,6 @@ class Controller:
         if new_user:
             self.welcome_window = WelcomeUser(self.view, self.view.theme)
             self.welcome_window.start_button.configure(command=self.set_user)
-            self.initialize_day_event_graph()
         else:
             self.user_id = self.model.get_user_id(self.model.config.user_name)
             # Initialize Day vs Events Graph
@@ -284,8 +283,8 @@ class Controller:
         self.model.add_user(self.model.config.user_name, points)
         self.welcome_window.welcome_window.destroy()
         self.user_id = self.model.get_user_id(self.model.config.user_name)
-        self.update_home()
         self.initialize_day_event_graph()
+        self.update_home()
 
     def change_user(self):
         self.user_select = UserSelect(self.view, self.view.theme)
