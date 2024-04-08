@@ -25,6 +25,9 @@ All your information is stored locally on your machine, ensuring your data remai
 📝 Log Your Job Hunting Activity:<br>
 Generate visual progress reports for custom date ranges or export all your data at any time
 
+🤖 Automation:<br>
+Save time managing and focus on your current job prospects. Set an automatic close date for prospects that haven't been active for a certain time 
+
 🌐 Open Source Software:<br>
 Toja is open-source, promoting transparency and collaboration.
 
