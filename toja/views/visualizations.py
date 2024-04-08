@@ -32,7 +32,6 @@ class DayEvent:
 
         self._plot_graph(data, events)
 
-        # plt.xticks(rotation=25)
         plt.legend(fontsize=9)
 
         self._configure_spines()
@@ -50,7 +49,7 @@ class DayEvent:
         self._configure_spines()
 
         plt.subplots_adjust(left=0.1, right=0.9)
-        # plt.xticks(rotation=30)
+        plt.xticks(rotation=30)
         plt.legend(fontsize=9)
 
         self.fig.canvas.draw()
