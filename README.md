@@ -2,7 +2,7 @@
 ### A Desktop Program to Track &amp; Optimize your Job Applications.
 <br>
 <div align="center">
-<img src="assets/toja_gif.gif" width=600>
+<img src="assets/toja_gif.gif" width=700>
 </div>
 <br>
 
@@ -22,6 +22,9 @@ Toja introduces a leveling system, allowing you to earn points with each step cl
 🛡️ Own Your Data:<br>
 All your information is stored locally on your machine, ensuring your data remains private and secure.
 
+📝 Log Your Job Hunting Activity:<br>
+Generate visual progress reports for custom date ranges or export all your data at any time
+
 🌐 Open Source Software:<br>
 Toja is open-source, promoting transparency and collaboration.
 
@@ -40,7 +43,19 @@ Toja is entirely free to use, with no hidden costs or paywalls.
   + A Job Profile displays relevant information about each job
 <br>
 <div align="center">
-<img src="assets/job_profile_screenshot.png" width=500>
+<img src="assets/job_profile_screenshot.png" width=600>
+</div>
+<br>
+
+### Generate Progress Reports
++ Generate Visual Progress Reports
+  + Select any date range 
+  + Compare progress to previous date range
+  + Top Keywords
+  + Event Breakdown and Log   
+<br>
+<div align="center">
+<img src="assets/progress_report_screenshot.png" width=950>
 </div>
 <br>
 
@@ -65,17 +80,8 @@ Toja is entirely free to use, with no hidden costs or paywalls.
 + Earn points with each new event and level up as a Job Hunter. 
 
 ### Network
-+ Add contacts and grow your Network.  
-
-### Export
-Export your data anytime.
-
-*All user data shown is fake sample data*
-
-<div align="center">
-<img src="assets/export_screenshot.png" width=600>
-</div>
-<br>
++ Add contacts and grow your Network.
++ Link your contacts to Events or Job prospects to keep more organized  
 
 ## Installation
 
