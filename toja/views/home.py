@@ -450,6 +450,14 @@ class HomeView(customtkinter.CTk):
             self.contact_listbox,
         ]
 
+        # Bind the on_closing function to the window's close event
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def on_closing(self):
+        # Clean up tasks or stop the process here
+        self.destroy()
+        self.quit()
+
     def event_frame_button(self):
         self.home_frame.grid_remove()
         self.analytics_frame.grid_remove()

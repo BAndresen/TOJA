@@ -84,7 +84,7 @@ class Controller:
         self.view.file.add_command(label='Generate Report', command=self.generate_report)
         self.view.file.add_command(label='Export', command=self.export_database)
         self.view.file.add_separator()
-        self.view.file.add_command(label='Exit', command=self.view.destroy)
+        self.view.file.add_command(label='Exit', command=self.view.on_closing)
 
         if new_user:
             self.welcome_window = WelcomeUser(self.view, self.view.theme)
