@@ -19,8 +19,11 @@ Upload your resume to receive a unique score, guiding you to enhance your job ap
 🚀 Stay Motivated:<br>
 Toja introduces a leveling system, allowing you to earn points with each step closer to landing your new job.
 
-🛡️ Own Your Data:<br>
+🔒 Own Your Data:<br>
 All your information is stored locally on your machine, ensuring your data remains private and secure.
+
+🛡️ Security:<br>
+Protect yourself from phishing attempts or false spam jobs by easily referencing your Toja prospects list. When applying for jobs, your contact info can get into the hands of bad actors, who can reach out to you pretending to be from a company you had applied to.
 
 📝 Log Your Job Hunting Activity:<br>
 Generate visual progress reports for custom date ranges or export all your data at any time
