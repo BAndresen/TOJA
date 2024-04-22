@@ -17,7 +17,7 @@
 
 🔒 Data Privacy:<br> Rest assured, all your information is stored locally on your machine, ensuring utmost privacy and security.
 
-🛡️ Enhanced Security:<br> Protect yourself from phishing attempts or false job listings by referencing your Toja prospects list. Safeguard your contact info from bad actors.
+🛡️ Enhanced Security:<br> Protect yourself from phishing attempts or false job listings by referencing your Toja prospects list.
 
 📝 Activity Logging:<br> Generate visual progress reports and export your data at any time, giving you complete control over your job hunting activity.
 
