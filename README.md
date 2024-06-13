@@ -7,35 +7,25 @@
 <br>
 
 ## Why use TOJA?
-🌟 Getting a Job is Hard:<br>
-Organize your job prospects effortlessly with Toja. It helps keep you grounded, focused, and motivated.
+🌟 Effortless Organization:<br> Keep track of all your job prospects effortlessly with Toja. Stay grounded, focused, and motivated throughout your job search journey.
 
-🧠 Personalized Data Insights:<br>
-Toja leverages Natural Language Processing to search your job database, finding and ranking keywords. Make informed decisions using personalized data.
+🧠 Personalized Insights:<br> Utilizing Natural Language Processing (NLP), Toja helps you search, find, and rank keywords in your job database. Make informed decisions with personalized data insights.
 
-📄 Resume Optimization:<br>
-Upload your resume to receive a unique score, guiding you to enhance your job application.
+📄 Resume Optimization:<br> Upload your resume and receive a unique score, guiding you to enhance your ATS (Applicant Tracking System) score for better visibility.
 
-🚀 Stay Motivated:<br>
-Toja introduces a leveling system, allowing you to earn points with each step closer to landing your new job.
+🚀 Stay Motivated:<br> Earn points and level up with each step closer to landing your dream job. Toja keeps you motivated throughout your job search process.
 
-🔒 Own Your Data:<br>
-All your information is stored locally on your machine, ensuring your data remains private and secure.
+🔒 Data Privacy:<br> Rest assured, all your information is stored locally on your machine, ensuring utmost privacy and security.
 
-🛡️ Security:<br>
-Protect yourself from phishing attempts or false spam jobs by easily referencing your Toja prospects list. When applying for jobs, your contact info can get into the hands of bad actors, who can reach out to you pretending to be from a company you had applied to.
+🛡️ Enhanced Security:<br> Protect yourself from phishing attempts or false job listings by referencing your Toja prospects list.
 
-📝 Log Your Job Hunting Activity:<br>
-Generate visual progress reports for custom date ranges or export all your data at any time
+📝 Activity Logging:<br> Generate visual progress reports and export your data at any time, giving you complete control over your job hunting activity.
 
-🤖 Automation:<br>
-Save time managing and focus on your current job prospects. Set an automatic close date for prospects that haven't been active for a certain time 
+🤖 Automation:<br> Save time and focus on your prospects by setting automatic close dates for inactive prospects.
 
-🌐 Open Source Software:<br>
-Toja is open-source, promoting transparency and collaboration.
+🌐 Open Source:<br> Toja is open-source software, promoting transparency and collaboration within the community.
 
-🚫 No Paywalls:<br>
-Toja is entirely free to use, with no hidden costs or paywalls.
+🚫 No Paywalls:<br> Enjoy the full functionality of Toja without any hidden costs or paywalls. It's completely free to use!
 
 ### Watch Video Overview 
 <div align="center">
