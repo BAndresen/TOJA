@@ -97,7 +97,7 @@ class Settings:
 
         self.auto_close_days_entry = customtkinter.CTkEntry(self.auto_frame, width=45)
         self.auto_close_days_entry.grid(row=3, column=1, padx=(5, 20), pady=(2, 10), sticky='w')
-        self.auto_close_days_label = customtkinter.CTkLabel(self.auto_frame, text='After Days:')
+        self.auto_close_days_label = customtkinter.CTkLabel(self.auto_frame, text='Inactive Days:')
         self.auto_close_days_label.grid(row=3, column=0, padx=(20, 5), pady=(2, 10), sticky="e")
 
         # buttons
