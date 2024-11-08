@@ -16,7 +16,7 @@
 	!define APP_NAME "Toja"
 
 # Output .exe file name
-	OutFile "Toja Windows Installer v1.0.exe"
+	OutFile "Toja Windows Installer v1.1.0.exe"
 
 	RequestExecutionLevel admin
 
